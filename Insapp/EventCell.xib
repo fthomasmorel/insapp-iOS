@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kEventCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kEventCell" rowHeight="130" id="gVo-OS-L4l" customClass="EventCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gVo-OS-L4l" id="qqf-8L-OHr">
+                <frame key="frameInset" width="375" height="129"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oyd-bC-G6p">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="114" id="CBU-Ve-zXD"/>
+                            <constraint firstAttribute="width" constant="114" id="YAK-yd-EpE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock n Solex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4E-5c-A9n">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="peM-I0-Umw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@rocknsolex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8y-Zu-5PR">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="5EN-vE-9r7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="234 participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fW-pE-4re">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="RkR-Jc-0CR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcw-JW-hMC">
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="0yy-hc-21P"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du 5 Mai au 8 Mai" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU0-iz-tyO">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="pZN-li-vAw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rcw-JW-hMC" firstAttribute="leading" secondItem="qqf-8L-OHr" secondAttribute="leading" constant="8" id="3Mm-BH-WdO"/>
+                    <constraint firstItem="Q8y-Zu-5PR" firstAttribute="top" secondItem="y4E-5c-A9n" secondAttribute="bottom" constant="4" id="5OZ-53-ymq"/>
+                    <constraint firstItem="0fW-pE-4re" firstAttribute="top" secondItem="HU0-iz-tyO" secondAttribute="bottom" constant="3" id="EdF-0K-JhA"/>
+                    <constraint firstAttribute="trailing" secondItem="y4E-5c-A9n" secondAttribute="trailing" constant="8" id="Lnt-Rd-fVd"/>
+                    <constraint firstItem="0fW-pE-4re" firstAttribute="leading" secondItem="Oyd-bC-G6p" secondAttribute="trailing" constant="8" id="Ltf-cF-zMd"/>
+                    <constraint firstAttribute="bottom" secondItem="rcw-JW-hMC" secondAttribute="bottom" constant="0.5" id="LwV-vC-nf5"/>
+                    <constraint firstAttribute="trailing" secondItem="HU0-iz-tyO" secondAttribute="trailing" constant="8" id="MmT-Xr-dPH"/>
+                    <constraint firstItem="Q8y-Zu-5PR" firstAttribute="leading" secondItem="Oyd-bC-G6p" secondAttribute="trailing" constant="8" id="NBH-JP-XQS"/>
+                    <constraint firstAttribute="trailing" secondItem="Q8y-Zu-5PR" secondAttribute="trailing" constant="8" id="Pue-Qu-AuJ"/>
+                    <constraint firstItem="y4E-5c-A9n" firstAttribute="leading" secondItem="Oyd-bC-G6p" secondAttribute="trailing" constant="8" id="QPP-VY-6uo"/>
+                    <constraint firstItem="HU0-iz-tyO" firstAttribute="leading" secondItem="Oyd-bC-G6p" secondAttribute="trailing" constant="8" id="Ub1-lf-2yk"/>
+                    <constraint firstItem="Oyd-bC-G6p" firstAttribute="leading" secondItem="qqf-8L-OHr" secondAttribute="leading" constant="8" id="Xhd-XB-Y9T"/>
+                    <constraint firstItem="HU0-iz-tyO" firstAttribute="top" secondItem="Q8y-Zu-5PR" secondAttribute="bottom" constant="4" id="cFV-bV-zGm"/>
+                    <constraint firstAttribute="trailing" secondItem="0fW-pE-4re" secondAttribute="trailing" constant="8" id="eeN-wB-u7w"/>
+                    <constraint firstAttribute="trailing" secondItem="rcw-JW-hMC" secondAttribute="trailing" constant="8" id="gNM-nd-1dO"/>
+                    <constraint firstItem="Oyd-bC-G6p" firstAttribute="top" secondItem="qqf-8L-OHr" secondAttribute="top" constant="8" id="kqU-zP-qBl"/>
+                    <constraint firstItem="y4E-5c-A9n" firstAttribute="top" secondItem="qqf-8L-OHr" secondAttribute="top" constant="8" id="w9A-07-PBZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="associationLabel" destination="Q8y-Zu-5PR" id="Wld-bc-Hfa"/>
+                <outlet property="attendeesLabel" destination="0fW-pE-4re" id="aTV-HX-ecG"/>
+                <outlet property="dateLabel" destination="HU0-iz-tyO" id="g6l-Aq-xOa"/>
+                <outlet property="eventImageView" destination="Oyd-bC-G6p" id="uKn-kB-J0G"/>
+                <outlet property="titleLabel" destination="y4E-5c-A9n" id="d6I-k8-MET"/>
+            </connections>
+            <point key="canvasLocation" x="43.5" y="-44"/>
+        </tableViewCell>
+    </objects>
+</document>

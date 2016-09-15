@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="kPostCell" rowHeight="430" id="AOg-P5-dbI" customClass="PostCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="432"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AOg-P5-dbI" id="CSS-YU-nuV">
+                <frame key="frameInset" width="375" height="431"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AWT-dF-cCB">
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="3ny-lW-XYV"/>
+                            <constraint firstAttribute="width" constant="40" id="qQO-iP-eEf"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auB-78-wBy">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="fN7-RE-U7s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHN-Ld-R3I">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="5x4-lR-kLa"/>
+                            <constraint firstAttribute="height" constant="40" id="ETY-H5-GJK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-O7-Es1">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="250" id="yoa-iD-Bar"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(123)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIv-w3-eUt">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="2rj-Kz-uy7"/>
+                            <constraint firstAttribute="width" constant="64" id="acf-Hf-Qti"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KcS-1Z-lvB">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="5Dg-tm-bVW"/>
+                            <constraint firstAttribute="width" constant="20" id="ek4-og-Cu9"/>
+                        </constraints>
+                        <state key="normal" image="bubble"/>
+                        <connections>
+                            <action selector="commentAction:" destination="AOg-P5-dbI" eventType="touchUpInside" id="fG2-yH-1OU"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekm-Qy-QeQ">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="4rd-C3-Svc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3jl-tc-4Or">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="61" id="6Q3-Nu-gqe"/>
+                        </constraints>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1O-Xc-ODh">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="81" id="iEk-NF-Qpb"/>
+                            <constraint firstAttribute="height" constant="21" id="yqZ-yy-Spo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-m9-jhI">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="61" id="p4p-WV-qDp"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUI-T1-o9o">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="5i1-Su-AUM"/>
+                            <constraint firstAttribute="width" constant="20" id="n0n-s9-NpK"/>
+                        </constraints>
+                        <state key="normal" image="like"/>
+                        <connections>
+                            <action selector="likeAction:" destination="AOg-P5-dbI" eventType="touchUpInside" id="VB6-lc-CK5"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-J9-CE9">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57" id="PB0-R1-z9X"/>
+                            <constraint firstAttribute="height" constant="57" id="rKv-3w-l3t"/>
+                        </constraints>
+                        <connections>
+                            <action selector="associationAction:" destination="AOg-P5-dbI" eventType="touchUpInside" id="op6-Sl-SVI"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QIv-w3-eUt" firstAttribute="leading" secondItem="GUI-T1-o9o" secondAttribute="trailing" constant="8" id="0IK-Za-Y6Q"/>
+                    <constraint firstAttribute="bottom" secondItem="cEW-m9-jhI" secondAttribute="bottom" id="2z3-fB-ZDj"/>
+                    <constraint firstItem="wHN-Ld-R3I" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" constant="8" id="486-r1-Xxp"/>
+                    <constraint firstItem="GUI-T1-o9o" firstAttribute="centerY" secondItem="KcS-1Z-lvB" secondAttribute="centerY" id="59Q-tG-7Sj"/>
+                    <constraint firstItem="wHN-Ld-R3I" firstAttribute="leading" secondItem="auB-78-wBy" secondAttribute="trailing" constant="8" id="9O5-KZ-eVl"/>
+                    <constraint firstItem="cEW-m9-jhI" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="CJx-V0-ua3"/>
+                    <constraint firstItem="3jl-tc-4Or" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="J8W-en-NXm"/>
+                    <constraint firstItem="GUI-T1-o9o" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="N9B-ZL-2s4"/>
+                    <constraint firstItem="KcS-1Z-lvB" firstAttribute="leading" secondItem="QIv-w3-eUt" secondAttribute="trailing" constant="2" id="NlE-Bz-ALR"/>
+                    <constraint firstItem="auB-78-wBy" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" constant="8" id="ORn-uw-XJd"/>
+                    <constraint firstItem="auB-78-wBy" firstAttribute="leading" secondItem="AWT-dF-cCB" secondAttribute="trailing" constant="8" id="Qm4-Xy-emH"/>
+                    <constraint firstItem="Ekm-Qy-QeQ" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="Qwd-zP-wd6"/>
+                    <constraint firstItem="YZ8-J9-CE9" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="R3g-Fy-Ob7"/>
+                    <constraint firstItem="3jl-tc-4Or" firstAttribute="top" secondItem="Ekm-Qy-QeQ" secondAttribute="bottom" constant="-5" id="RW8-cg-998"/>
+                    <constraint firstItem="AWT-dF-cCB" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" constant="8" id="Rez-Ix-jWZ"/>
+                    <constraint firstAttribute="trailing" secondItem="Ekm-Qy-QeQ" secondAttribute="trailing" constant="8" id="SQr-Hx-seE"/>
+                    <constraint firstAttribute="trailing" secondItem="3jl-tc-4Or" secondAttribute="trailing" constant="8" id="SVx-Ax-j6Q"/>
+                    <constraint firstItem="CZg-O7-Es1" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="V7B-8G-j6c"/>
+                    <constraint firstAttribute="trailing" secondItem="CZg-O7-Es1" secondAttribute="trailing" id="aYr-sN-iXj"/>
+                    <constraint firstItem="E1O-Xc-ODh" firstAttribute="leading" secondItem="KcS-1Z-lvB" secondAttribute="trailing" constant="8" id="bAx-VZ-LfE"/>
+                    <constraint firstItem="YZ8-J9-CE9" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" id="bBH-aU-BN9"/>
+                    <constraint firstAttribute="trailing" secondItem="cEW-m9-jhI" secondAttribute="trailing" id="goj-9e-Xkv"/>
+                    <constraint firstItem="AWT-dF-cCB" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="hJH-aT-l1q"/>
+                    <constraint firstItem="KcS-1Z-lvB" firstAttribute="top" secondItem="CZg-O7-Es1" secondAttribute="bottom" constant="8" id="hVo-r2-pnT"/>
+                    <constraint firstItem="E1O-Xc-ODh" firstAttribute="centerY" secondItem="KcS-1Z-lvB" secondAttribute="centerY" id="i2e-IY-CYM"/>
+                    <constraint firstItem="Ekm-Qy-QeQ" firstAttribute="top" secondItem="QIv-w3-eUt" secondAttribute="bottom" constant="4" id="mNN-fa-UUn"/>
+                    <constraint firstItem="GUI-T1-o9o" firstAttribute="centerY" secondItem="QIv-w3-eUt" secondAttribute="centerY" id="wxd-dx-Skd"/>
+                    <constraint firstItem="CZg-O7-Es1" firstAttribute="top" secondItem="auB-78-wBy" secondAttribute="bottom" constant="8" id="ymN-g4-dd1"/>
+                    <constraint firstAttribute="trailing" secondItem="wHN-Ld-R3I" secondAttribute="trailing" constant="8" id="z3x-BT-la8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="associationImageView" destination="AWT-dF-cCB" id="rPF-Nz-e0y"/>
+                <outlet property="associationLabel" destination="Ekm-Qy-QeQ" id="gxG-fo-TO7"/>
+                <outlet property="commentButton" destination="KcS-1Z-lvB" id="eTj-wG-2cg"/>
+                <outlet property="commentLabel" destination="E1O-Xc-ODh" id="LW5-6B-2c9"/>
+                <outlet property="descriptionTextView" destination="3jl-tc-4Or" id="NP4-mz-us2"/>
+                <outlet property="gradientView" destination="cEW-m9-jhI" id="0wQ-GQ-ryo"/>
+                <outlet property="likeButton" destination="GUI-T1-o9o" id="G6D-EK-2Ay"/>
+                <outlet property="likeLabel" destination="QIv-w3-eUt" id="tGo-gu-hEK"/>
+                <outlet property="postImageView" destination="CZg-O7-Es1" id="Nd5-EY-OTz"/>
+                <outlet property="postImageViewHeightConstraint" destination="yoa-iD-Bar" id="5fg-3R-7Mx"/>
+                <outlet property="timestampLabel" destination="wHN-Ld-R3I" id="Uox-qv-1sq"/>
+                <outlet property="titleLabel" destination="auB-78-wBy" id="fqw-GM-Fgr"/>
+            </connections>
+            <point key="canvasLocation" x="37.5" y="35"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bubble" width="28" height="29"/>
+        <image name="like" width="29" height="29"/>
+    </resources>
+</document>

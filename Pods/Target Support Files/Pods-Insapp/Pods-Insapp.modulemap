@@ -1,0 +1,6 @@
+framework module Pods_Insapp {
+  umbrella header "Pods-Insapp-umbrella.h"
+
+  export *
+  module * { export * }
+}

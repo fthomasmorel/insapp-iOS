@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="kCommentCell" rowHeight="227" id="qsj-L7-wbz" customClass="CommentCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qsj-L7-wbz" id="Q5L-V9-HPP">
+                <frame key="frameInset" width="375" height="226"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="garbage" translatesAutoresizingMaskIntoConstraints="NO" id="JeJ-S9-bWd">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="44R-nZ-DeR"/>
+                            <constraint firstAttribute="width" constant="30" id="uWn-GS-Ina"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv9-6P-afy">
+                        <connections>
+                            <action selector="deleteAction:" destination="qsj-L7-wbz" eventType="touchUpInside" id="eZq-Ka-URv"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13A-1G-GSI">
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l26-4k-xf4">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Shx-sd-Oim"/>
+                                    <constraint firstAttribute="height" constant="40" id="Vhv-t2-5US"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHo-Rr-AH5">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="06H-Ky-Gb4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpu-p1-PDZ">
+                                <frame key="frameInset" minX="56" minY="25" width="311" height="73"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGp-ZV-T9S">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="Ow5-Ka-xi1"/>
+                                    <constraint firstAttribute="height" constant="21" id="zPD-hB-4Pl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fpu-p1-PDZ" secondAttribute="trailing" constant="8" id="CR5-Ct-1iW"/>
+                            <constraint firstItem="l26-4k-xf4" firstAttribute="leading" secondItem="13A-1G-GSI" secondAttribute="leading" constant="8" id="NqE-Wf-1SC"/>
+                            <constraint firstItem="fpu-p1-PDZ" firstAttribute="top" secondItem="13A-1G-GSI" secondAttribute="top" constant="25" id="Ql4-Xg-IyH"/>
+                            <constraint firstItem="IHo-Rr-AH5" firstAttribute="top" secondItem="13A-1G-GSI" secondAttribute="top" constant="8" id="QzG-Qi-t6Q"/>
+                            <constraint firstAttribute="trailing" secondItem="jGp-ZV-T9S" secondAttribute="trailing" constant="8" id="cHR-Ox-FVS"/>
+                            <constraint firstItem="l26-4k-xf4" firstAttribute="top" secondItem="13A-1G-GSI" secondAttribute="top" constant="8" id="mv0-vK-0DL"/>
+                            <constraint firstItem="IHo-Rr-AH5" firstAttribute="leading" secondItem="l26-4k-xf4" secondAttribute="trailing" constant="8" id="p3r-Kh-Qt1"/>
+                            <constraint firstItem="jGp-ZV-T9S" firstAttribute="leading" secondItem="IHo-Rr-AH5" secondAttribute="trailing" constant="5" id="qRH-t9-8de"/>
+                            <constraint firstItem="jGp-ZV-T9S" firstAttribute="top" secondItem="13A-1G-GSI" secondAttribute="top" constant="8" id="r8n-sD-owG"/>
+                            <constraint firstItem="fpu-p1-PDZ" firstAttribute="leading" secondItem="l26-4k-xf4" secondAttribute="trailing" constant="8" id="uLl-dE-f6A"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.91096353529999996" green="0.36053669449999998" blue="0.33869665859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="13A-1G-GSI" firstAttribute="leading" secondItem="Q5L-V9-HPP" secondAttribute="leading" id="Gm3-z8-vZG"/>
+                    <constraint firstAttribute="trailing" secondItem="13A-1G-GSI" secondAttribute="trailing" id="HiA-LJ-cR7"/>
+                    <constraint firstAttribute="trailing" secondItem="Kv9-6P-afy" secondAttribute="trailing" id="LeS-vj-rGG"/>
+                    <constraint firstAttribute="bottom" secondItem="Kv9-6P-afy" secondAttribute="bottom" constant="-1" id="Sto-op-Vi2"/>
+                    <constraint firstItem="13A-1G-GSI" firstAttribute="top" secondItem="Q5L-V9-HPP" secondAttribute="top" id="Yc8-w0-obn"/>
+                    <constraint firstItem="Kv9-6P-afy" firstAttribute="leading" secondItem="Q5L-V9-HPP" secondAttribute="leading" id="cXf-dj-QtA"/>
+                    <constraint firstAttribute="bottom" secondItem="13A-1G-GSI" secondAttribute="bottom" id="eCo-9f-mX1"/>
+                    <constraint firstItem="JeJ-S9-bWd" firstAttribute="centerY" secondItem="Q5L-V9-HPP" secondAttribute="centerY" id="idK-fS-GfJ"/>
+                    <constraint firstAttribute="trailing" secondItem="JeJ-S9-bWd" secondAttribute="trailing" constant="26" id="kCR-AL-YDv"/>
+                    <constraint firstItem="Kv9-6P-afy" firstAttribute="top" secondItem="Q5L-V9-HPP" secondAttribute="top" id="wsI-Ct-l5U"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentTextView" destination="fpu-p1-PDZ" id="Mco-xR-eUx"/>
+                <outlet property="frontView" destination="13A-1G-GSI" id="89a-On-ncR"/>
+                <outlet property="timestampLabel" destination="jGp-ZV-T9S" id="jzN-Ws-vUH"/>
+                <outlet property="userImageView" destination="l26-4k-xf4" id="B0A-24-S35"/>
+                <outlet property="usernameLabel" destination="IHo-Rr-AH5" id="KVA-ad-k15"/>
+            </connections>
+            <point key="canvasLocation" x="136.5" y="139.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="garbage" width="128" height="128"/>
+    </resources>
+</document>
