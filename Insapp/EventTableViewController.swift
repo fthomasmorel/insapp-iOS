@@ -17,15 +17,30 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var events:[[Event]] = []
     var hasCurrentEvents = false
+    var tableViewController = UITableViewController()
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: kEventCell)
+        
+        self.addChildViewController(self.tableViewController)
+        self.tableViewController.tableView = self.tableView
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
+        self.refreshControl.addTarget(self, action: #selector(EventTableViewController.fetchEvents), for: UIControlEvents.valueChanged)
+        self.tableViewController.refreshControl = self.refreshControl
+        self.tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.refreshControl.beginRefreshing()
+        self.fetchEvents()
+    }
+    
+    func fetchEvents(){
         APIManager.fetchFutureEvents { (events) in
             let currentEvents = events.filter({ (event) -> Bool in
                 return event.dateStart!.timeIntervalSinceNow < 0
@@ -47,10 +62,9 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.events = [currentEvents, comingEvents]
                 self.hasCurrentEvents = true
             }
-            
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
-
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

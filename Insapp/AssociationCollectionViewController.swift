@@ -14,6 +14,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     let kAssociationCollectionCellView = "kAssociationCollectionCellView"
     let kMarginBubble = 30
     
+    var refreshControl:UIRefreshControl!
     var associations:[Association] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,8 +26,22 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kAssociationCollectionCellView)
         
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
+        self.refreshControl.addTarget(self, action: #selector(AssociationCollectionViewController.fetchAssociations), for: UIControlEvents.valueChanged)
+        self.collectionView.addSubview(refreshControl)
+        self.collectionView.alwaysBounceVertical = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.refreshControl.beginRefreshing()
+        self.fetchAssociations()
+    }
+    
+    func fetchAssociations(){
         APIManager.fetchAssociations { (associations) in
             self.associations = associations
+            self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
         }
     }

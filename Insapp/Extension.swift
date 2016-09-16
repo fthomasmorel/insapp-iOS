@@ -56,12 +56,17 @@ extension UIImageView {
                 let image = UIImage(data: data)
                 else { return }
             DispatchQueue.main.async() { () -> Void in
-                self.alpha = 0
-                self.image = image
-                if let ack = completion { ack() }
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.alpha = 1
-                })
+                if self.image == nil {
+                    self.alpha = 0
+                    self.image = image
+                    if let ack = completion { ack() }
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.alpha = 1
+                    })
+                }else{
+                    self.image = image
+                    if let ack = completion { ack() }
+                }
             }
             }.resume()
     }

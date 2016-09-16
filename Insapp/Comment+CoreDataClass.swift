@@ -48,12 +48,14 @@ public class Comment: NSManagedObject {
     
     static func parseJsonArray(_ array: [Dictionary<String, String>]) -> [Comment] {
         let commentsJson = array.filter({ (json) -> Bool in
-            if let _ = Comment.parseJson(json) {
+            if let post = Comment.parseJson(json) {
+                Comment.managedContext.delete(post)
                 return true
             }else{
                 return false
             }
         })
+        
         let comments = commentsJson.map { (json) -> Comment in
             return Comment.parseJson(json)!
         }

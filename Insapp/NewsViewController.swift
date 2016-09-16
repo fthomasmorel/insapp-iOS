@@ -27,7 +27,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableViewController.tableView = self.postTableView
         self.refreshControl = UIRefreshControl()
         self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
         self.tableViewController.refreshControl = self.refreshControl
         self.postTableView.addSubview(refreshControl)

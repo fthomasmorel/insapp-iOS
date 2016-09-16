@@ -31,7 +31,11 @@ extension APIManager{
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let credentialsJson = json["credentials"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let token = json["sessionToken"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
+            guard let user = json["user"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
+            guard let _ = User.parseJson(user) else { completion(.none) ; return }
+            
             APIManager.token = token["Token"] as! String
+            
             completion(Credentials.parseJson(credentialsJson))
         }
     }

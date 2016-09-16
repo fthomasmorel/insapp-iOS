@@ -25,6 +25,7 @@ public class User: NSManagedObject {
     
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static let entityDescription =  NSEntityDescription.entity(forEntityName: "User", in:managedContext)
+    static var userInstance: User?
     
     @objc
     private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
@@ -41,42 +42,22 @@ public class User: NSManagedObject {
         self.isEmailPublic = false
         self.promotion = ""
         self.events = []
-        //self.postsLiked = []
     }
     
     static func fetch() -> Optional<User>{
-        do {
-            let results = try User.managedContext.fetch(User.fetchRequest()) as! [User]
-            return results.first
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        return .none
+        return User.userInstance
     }
     
-    static func saveContext(){
-        do {
-            try User.managedContext.save()
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-    }
-    
-    static func delete(){
-        let results = try! User.managedContext.fetch(User.fetchRequest()) as! [User]
-        for user in results {
-            User.managedContext.delete(user)
-        }
-        User.saveContext()
-    }
     
     static func parseJson(_ json:Dictionary<String, AnyObject>) -> Optional<User>{
         guard let id            = json[kUserId] as? String          else { return .none }
         guard let username      = json[kUserUsername] as? String    else { return .none }
         
-        if Credentials.fetch()?.userId == id { User.delete() }
-        
         let user = User(user_id: id, username: username)
+        
+        if Credentials.fetch()!.userId == id {
+            User.userInstance = user
+        }
         
         guard let name          = json[kUserName] as? String        else { return user }
         guard let desc          = json[kUserDescription] as? String else { return user }
@@ -84,7 +65,6 @@ public class User: NSManagedObject {
         guard let isEmailPublic = json[kUserEmailIsPublic] as? Bool else { return user }
         guard let promotion     = json[kUserPromotion] as? String   else { return user }
         guard let events        = json[kUserEvents] as? [String]    else { return user }
-        //guard let postsLiked    = json[kUserPostLiked] as? [String] else { return user }
         
         user.name = name
         user.desc = desc
@@ -92,9 +72,6 @@ public class User: NSManagedObject {
         user.isEmailPublic = isEmailPublic
         user.promotion = promotion
         user.events = events
-        //user.postsLiked = postsLiked
-        
-        if Credentials.fetch()?.userId == user.id { User.saveContext() }
         
         return user
     }

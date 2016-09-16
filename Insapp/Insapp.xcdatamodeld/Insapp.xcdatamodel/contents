@@ -12,10 +12,10 @@
         <attribute name="profilePhotoURL" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName=".Comment" syncable="YES">
-        <attribute name="content" attributeType="String" syncable="YES"/>
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="user_id" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Credentials" representedClassName=".Credentials" syncable="YES">
         <attribute name="authToken" attributeType="String" syncable="YES"/>

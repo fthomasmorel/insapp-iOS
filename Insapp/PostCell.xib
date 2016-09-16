@@ -90,11 +90,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-m9-jhI">
-                        <constraints>
-                            <constraint firstAttribute="height" constant="61" id="p4p-WV-qDp"/>
-                        </constraints>
-                    </view>
                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUI-T1-o9o">
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="5i1-Su-AUM"/>
@@ -114,6 +109,11 @@
                             <action selector="associationAction:" destination="AOg-P5-dbI" eventType="touchUpInside" id="op6-Sl-SVI"/>
                         </connections>
                     </button>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-m9-jhI">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="68" id="p4p-WV-qDp"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QIv-w3-eUt" firstAttribute="leading" secondItem="GUI-T1-o9o" secondAttribute="trailing" constant="8" id="0IK-Za-Y6Q"/>

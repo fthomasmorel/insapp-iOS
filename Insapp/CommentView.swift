@@ -14,7 +14,7 @@ protocol CommentViewDelegate {
     func updateFrame(_ frame: CGRect)
 }
 
-let kCommentViewEmptyHeight = 16
+let kCommentViewEmptyHeight = CGFloat(16)
 let kCommentEmptyTextViewHeight = CGFloat(33)
 
 class CommentView: UIView, UITextViewDelegate {
@@ -37,14 +37,10 @@ class CommentView: UIView, UITextViewDelegate {
     
     func initFrame(keyboardFrame: CGRect){
         self.keyboardFrame = keyboardFrame
-        self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - kCommentEmptyTextViewHeight, width: keyboardFrame.width, height: kCommentEmptyTextViewHeight)
+        self.textView.delegate = self
+        self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
         self.checkTextView()
         self.computeNewSize()
-    }
-    
-    func triggerKeyboard(){
-        self.textView.delegate = self
-        self.textView.becomeFirstResponder()
     }
     
     func computeNewSize(){

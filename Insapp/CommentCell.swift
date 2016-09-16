@@ -25,8 +25,9 @@ class CommentCell: UITableViewCell {
     
     var deleteCompletion:((Comment) -> ())?
     var comment: Comment!
+    var user: User!
     
-    func initGestureRecognizer() {
+    func addGestureRecognizer() {
         let swipeGestureRight = UISwipeGestureRecognizer(target: self, action: #selector(CommentCell.handleSwipeGesture(_:)))
         swipeGestureRight.direction = .right
         self.frontView.addGestureRecognizer(swipeGestureRight)
@@ -35,7 +36,22 @@ class CommentCell: UITableViewCell {
         swipeGestureLeft.direction = .left
         self.frontView.addGestureRecognizer(swipeGestureLeft)
     }
-
+    
+    func removeGestureRecognizer() {
+        if let gestureRecognizers = self.frontView.gestureRecognizers {
+            for gestureRecognizer in gestureRecognizers {
+                self.frontView.removeGestureRecognizer(gestureRecognizer)
+            }
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+//        if self.user == nil {
+//            self.isUserInteractionEnabled = false
+//        }
+    }
+    
     func preloadUserComment(_ comment: Comment){
         self.usernameLabel.text = "@\(comment.user_id!.lowercased())"
         self.timestampLabel.text = comment.date!.timestamp()
@@ -65,25 +81,22 @@ class CommentCell: UITableViewCell {
         var newFrame = self.contentTextView.frame
         newFrame.size.height = height
         self.contentTextView.frame = newFrame
-        
         self.timestampLabel.text = comment.date!.timestamp()
+        self.comment = comment
         
-        if comment.user_id != User.fetch()!.id {
-            DispatchQueue.global().async {
-                APIManager.fetch(user_id: comment.user_id!) { (opt_user) in
-                    guard let user = opt_user else { return }
-                    //let promotion = user.promotion
-                    self.usernameLabel.text = "@\(user.username!.lowercased())"
-                    self.roundUserImage()
+        DispatchQueue.global().async {
+            APIManager.fetch(user_id: comment.user_id!) { (opt_user) in
+                guard let user = opt_user else { return }
+                //let promotion = user.promotion
+                self.usernameLabel.text = "@\(user.username!.lowercased())"
+                self.roundUserImage()
+                self.user = user
+                if user.id! == User.fetch()!.id! {
+                    self.addGestureRecognizer()
+                }else{
+                    self.removeGestureRecognizer()
                 }
             }
-        }else{
-            let user = User.fetch()!
-            //let promotion = user.promotion
-            self.usernameLabel.text = "@\(user.username!.lowercased())"
-            self.roundUserImage()
-            self.comment = comment
-            self.initGestureRecognizer()
         }
 
     }
@@ -100,6 +113,8 @@ class CommentCell: UITableViewCell {
         self.timestampLabel.text = post.date!.timestamp()
         self.userImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
         self.roundUserImage()
+        
+        self.removeGestureRecognizer()
     }
     
     func roundUserImage(){

@@ -29,13 +29,15 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        self.hideTabBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
         self.commentView = CommentView.instanceFromNib()
+        self.commentView.initFrame(keyboardFrame: frame)
         self.commentView.delegate = self
         self.view.addSubview(self.commentView)
-        self.commentView.triggerKeyboard()
         self.commentTableView.scrollToRow(at: IndexPath(row: self.post.comments!.count, section: 0), at: .top, animated: true)
     }
     
@@ -43,7 +45,17 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
     }
     
+    func hideTabBar(){
+        UIView.animate(withDuration: 0.25, animations: { 
+            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height
+        })
+    }
     
+    func showTabBar(){
+        UIView.animate(withDuration: 0.25, animations: {
+            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)!
+        })
+    }
     
     func keyboardWillShow(_ notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
@@ -106,6 +118,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func generateDescriptionCell(_ indexPath: IndexPath) -> UITableViewCell {
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.loadAssociationComment(association: self.association, forPost: self.post)
+        cell.deleteCompletion = nil
         return cell
     }
     
@@ -127,6 +140,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {
+        self.showTabBar()
         self.navigationController!.popViewController(animated: true)
     }
 }

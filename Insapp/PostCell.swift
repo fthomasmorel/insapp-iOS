@@ -81,18 +81,23 @@ class PostCell: UITableViewCell {
         self.commentLabel.text = "(\(post.comments!.count))"
         self.likeLabel.text = "(\(post.likes!.count))"
         self.descriptionTextView.text = post.desc
+        self.timestampLabel.text = post.date!.timestamp()
         
         let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
         self.likeButton.setImage(like_image, for: .normal)
         
         let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
-        self.gradientView.addGestureRecognizer(tapGesture1)
-
-        self.timestampLabel.text = self.post.date!.timestamp()
+        self.postImageView.isUserInteractionEnabled = true
+        self.postImageView.addGestureRecognizer(tapGesture1)
         
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(PostCell.handleTapGesture))
-        self.associationLabel.addGestureRecognizer(tapGesture2)
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
+        self.gradientView.addGestureRecognizer(tapGesture2)
+        
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(PostCell.handleTapGesture))
+        self.associationLabel.addGestureRecognizer(tapGesture3)
     }
+    
+    
     
     func computeGradientView(){
         let opaqueColor = UIColor.white

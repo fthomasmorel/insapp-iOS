@@ -710,7 +710,7 @@
                         <constraints>
                             <constraint firstItem="hnI-uZ-DSw" firstAttribute="leading" secondItem="I5L-Km-l2h" secondAttribute="leading" id="0O1-y8-2ik"/>
                             <constraint firstItem="Rhd-bp-fbS" firstAttribute="leading" secondItem="I5L-Km-l2h" secondAttribute="leading" constant="8" id="GOm-35-MUS"/>
-                            <constraint firstItem="Rhd-bp-fbS" firstAttribute="top" secondItem="hnI-uZ-DSw" secondAttribute="bottom" constant="8" id="Gf5-22-m62"/>
+                            <constraint firstItem="Rhd-bp-fbS" firstAttribute="top" secondItem="hnI-uZ-DSw" secondAttribute="bottom" id="Gf5-22-m62"/>
                             <constraint firstAttribute="trailing" secondItem="hnI-uZ-DSw" secondAttribute="trailing" id="QyT-bS-5AP"/>
                             <constraint firstItem="egq-rp-VmR" firstAttribute="top" secondItem="Rhd-bp-fbS" secondAttribute="bottom" constant="8" id="bkF-i0-G8Q"/>
                             <constraint firstItem="hnI-uZ-DSw" firstAttribute="top" secondItem="hAJ-yP-d0y" secondAttribute="bottom" constant="-20" id="p52-eK-zpp"/>
