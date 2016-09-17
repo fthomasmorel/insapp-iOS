@@ -55,7 +55,9 @@ class EventViewController: UIViewController {
         self.attendeesLabel.textColor = fontColor
         self.decisionControl.tintColor = fontColor
         self.descriptionTextView.textColor = fontColor
-        self.backButton.setTitleColor(fontColor, for: .normal)
+        
+        let arrow = (fontColor == UIColor.white ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
+        self.backButton.setImage(arrow, for: .normal)
 
     }
     

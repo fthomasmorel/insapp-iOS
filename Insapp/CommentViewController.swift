@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentViewDelegate {
+class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentViewDelegate, CommentCellDelegate {
     
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTableViewHeightConstraint: NSLayoutConstraint!
@@ -25,6 +25,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.delegate = self
         self.commentTableView.dataSource = self
         self.commentTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: kCommentCell)
+        self.commentTableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +119,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func generateDescriptionCell(_ indexPath: IndexPath) -> UITableViewCell {
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.loadAssociationComment(association: self.association, forPost: self.post)
-        cell.deleteCompletion = nil
+        cell.delegate = self
         return cell
     }
     
@@ -126,17 +127,35 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let comment = self.post.comments![indexPath.row-1]
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.loadUserComment(comment)
-        cell.deleteCompletion = { (comment:Comment) -> Void in
-            APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, completion: { (opt_post) in
-                guard let post = opt_post else { return }
-                self.post = post
-                DispatchQueue.main.async {
-                    self.commentTableView.reloadData()
-                    self.commentView.clearText()
-                }
-            })
-        }
+        cell.delegate = self
         return cell
+    }
+    
+    func delete(comment: Comment) {
+        APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, completion: { (opt_post) in
+            guard let post = opt_post else { return }
+            self.post = post
+            DispatchQueue.main.async {
+                self.commentTableView.reloadData()
+                self.commentView.clearText()
+            }
+        })
+    }
+    
+    func open(user: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        vc.user = user
+        vc.setEditable(false)
+        vc.canReturn(true)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func open(association: Association){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController
+        vc.association = association
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

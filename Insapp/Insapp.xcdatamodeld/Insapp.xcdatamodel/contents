@@ -52,6 +52,7 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="events" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="isEmailPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,7 +64,7 @@
         <element name="Credentials" positionX="-153" positionY="90" width="128" height="90"/>
         <element name="Event" positionX="-369" positionY="114" width="128" height="208"/>
         <element name="Post" positionX="-180" positionY="63" width="128" height="210"/>
-        <element name="User" positionX="-198" positionY="-90" width="128" height="165"/>
+        <element name="User" positionX="-198" positionY="-90" width="128" height="180"/>
         <element name="Comment" positionX="-180" positionY="63" width="128" height="105"/>
     </elements>
 </model>

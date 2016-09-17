@@ -14,6 +14,12 @@ let kCommentCell = "kCommentCell"
 let kCommentCellEmptyHeight = 41
 let kCommentCellEmptyWidth = 64
 
+protocol CommentCellDelegate {
+    func delete(comment: Comment)
+    func open(user: User)
+    func open(association: Association)
+}
+
 class CommentCell: UITableViewCell {
     
     
@@ -23,9 +29,10 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var frontView: UIView!
     
-    var deleteCompletion:((Comment) -> ())?
-    var comment: Comment!
-    var user: User!
+    var delegate: CommentCellDelegate?
+    var association: Association?
+    var comment: Comment?
+    var user: User?
     
     func addGestureRecognizer() {
         let swipeGestureRight = UISwipeGestureRecognizer(target: self, action: #selector(CommentCell.handleSwipeGesture(_:)))
@@ -47,9 +54,8 @@ class CommentCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        if self.user == nil {
-//            self.isUserInteractionEnabled = false
-//        }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CommentCell.handleTapGesture(_:)))
+        self.usernameLabel.addGestureRecognizer(tapGesture)
     }
     
     func preloadUserComment(_ comment: Comment){
@@ -87,7 +93,7 @@ class CommentCell: UITableViewCell {
         DispatchQueue.global().async {
             APIManager.fetch(user_id: comment.user_id!) { (opt_user) in
                 guard let user = opt_user else { return }
-                //let promotion = user.promotion
+                self.userImageView.image = user.avatar()
                 self.usernameLabel.text = "@\(user.username!.lowercased())"
                 self.roundUserImage()
                 self.user = user
@@ -102,7 +108,9 @@ class CommentCell: UITableViewCell {
     }
     
     func loadAssociationComment(association: Association, forPost post: Post){
+        self.association = association
         self.contentTextView.text = post.desc!
+        
         let height = self.contentTextView.contentSize.height
         var newFrame = self.contentTextView.frame
         newFrame.size.height = height
@@ -121,16 +129,10 @@ class CommentCell: UITableViewCell {
         DispatchQueue.main.async {
             self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width/2
             self.userImageView.layer.masksToBounds = true
+            self.userImageView.backgroundColor = kWhiteColor
+            self.userImageView.layer.borderColor = kDarkGreyColor.cgColor
+            self.userImageView.layer.borderWidth = 1
         }
-    }
-    
-    @IBAction func deleteAction(_ sender: AnyObject) {
-        self.deleteCompletion?(self.comment)
-    }
-    
-    static func heightForContent(_ content: String, forWidth width: CGFloat) -> CGFloat {
-        let res = UITextView.heightForContent(content, andWidth: width-CGFloat(kCommentCellEmptyWidth)) + CGFloat(kCommentCellEmptyHeight)
-        return res
     }
     
     func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
@@ -160,4 +162,18 @@ class CommentCell: UITableViewCell {
             })
         }
     }
+    
+    @IBAction func handleTapGesture(_ sender: AnyObject) {
+        if let user = self.user {
+            self.delegate?.open(user: user)
+        }
+        if let association = self.association {
+            self.delegate?.open(association: association)
+        }
+    }
+    
+    @IBAction func deleteAction(_ sender: AnyObject) {
+        self.delegate?.delete(comment: self.comment!)
+    }
+    
 }

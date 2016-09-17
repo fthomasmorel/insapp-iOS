@@ -47,8 +47,11 @@ class AssociationViewController: UIViewController, UITableViewDataSource, UITabl
         self.descriptionTextView.textColor = self.fontColor
         self.computeHeightForDescription()
         self.nextEventLabel.textColor = self.fontColor
-        self.backButton.setTitleColor(self.fontColor, for: .normal)
         self.view.backgroundColor = UIColor.hexToRGB(association.bgColor!)
+        
+        let arrow = (association.fgColor == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
+        self.backButton.setImage(arrow, for: .normal)
+        
     }
     
     func computeHeightForDescription(){
@@ -140,6 +143,10 @@ class AssociationViewController: UIViewController, UITableViewDataSource, UITabl
     func generateCell(_ cell: UITableViewCell, forEvent event:Event){
         cell.selectionStyle = .none
         cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0)
+        
+        for subview in cell.subviews {
+            subview.removeFromSuperview()
+        }
         
         let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 40, height: 40))
         imageView.downloadedFrom(link: kCDNHostname + event.photoURL!)

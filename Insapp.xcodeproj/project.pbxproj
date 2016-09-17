@@ -15,6 +15,7 @@
 		E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD11D8AD1A200B9F517 /* CommentView.swift */; };
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
+		E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
 		E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */; };
 		E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CC1D87F7E0006A66CF /* APIManager+Login.swift */; };
@@ -64,6 +65,7 @@
 		E19F7CD11D8AD1A200B9F517 /* CommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		E1C3F9CC1D87F7E0006A66CF /* APIManager+Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIManager+Login.swift"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
 				E1C3F9EF1D897142006A66CF /* NewsViewController.swift */,
 				E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */,
+				E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
+				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
 				E1C3F9EE1D8951D7006A66CF /* EventCell.swift in Sources */,

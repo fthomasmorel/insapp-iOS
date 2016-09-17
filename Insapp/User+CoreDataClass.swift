@@ -17,6 +17,7 @@ let kUserDescription    = "description"
 let kUserEmail          = "email"
 let kUserEmailIsPublic  = "emailpublic"
 let kUserPromotion      = "promotion"
+let kUserGender         = "gender"
 let kUserEvents         = "events"
 let kUserPostLiked      = "postsliked"
 let kUserPhotoURL       = "photourl"
@@ -41,13 +42,31 @@ public class User: NSManagedObject {
         self.email = ""
         self.isEmailPublic = false
         self.promotion = ""
+        self.gender = ""
         self.events = []
+    }
+    
+    func avatar() -> UIImage {
+        return User.avatarFor(gender: self.gender!, andPromotion: self.promotion!)
+    }
+    
+    static func avatarFor(gender: String, andPromotion promotion: String) -> UIImage{
+        if gender.characters.count == 0 && promotion.characters.count > 0 {
+            var promo = promotion
+            if !promo.contains("STPI") { promo.remove(at: promo.startIndex) }
+            return UIImage(named: "avatar-\(promo)-male")!
+        }else if gender.characters.count > 0 && promotion.characters.count > 0 {
+            var promo = promotion
+            if !promo.contains("STPI") { promo.remove(at: promo.startIndex) }
+            return UIImage(named: "avatar-\(promo)-\(gender)")!
+        }else{
+            return UIImage(named: "avatar-default")!
+        }
     }
     
     static func fetch() -> Optional<User>{
         return User.userInstance
     }
-    
     
     static func parseJson(_ json:Dictionary<String, AnyObject>) -> Optional<User>{
         guard let id            = json[kUserId] as? String          else { return .none }
@@ -65,6 +84,7 @@ public class User: NSManagedObject {
         guard let isEmailPublic = json[kUserEmailIsPublic] as? Bool else { return user }
         guard let promotion     = json[kUserPromotion] as? String   else { return user }
         guard let events        = json[kUserEvents] as? [String]    else { return user }
+        guard let gender        = json[kUserGender] as? String      else { return user }
         
         user.name = name
         user.desc = desc
@@ -72,6 +92,7 @@ public class User: NSManagedObject {
         user.isEmailPublic = isEmailPublic
         user.promotion = promotion
         user.events = events
+        user.gender = gender
         
         return user
     }
@@ -83,6 +104,7 @@ public class User: NSManagedObject {
             kUserUsername: user.username! as AnyObject,
             kUserEmail: user.email! as AnyObject,
             kUserPromotion: user.promotion! as AnyObject,
+            kUserGender: user.gender! as AnyObject,
             kUserEmailIsPublic: user.isEmailPublic as AnyObject,
             kUserDescription: user.desc! as AnyObject
         ]

@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
+let kAssociationCollectionCellView = "kAssociationCollectionCellView"
+let kMarginBubble = 30
+
 class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    let kAssociationCollectionCellView = "kAssociationCollectionCellView"
-    let kMarginBubble = 30
     
     var refreshControl:UIRefreshControl!
     var associations:[Association] = []
@@ -61,6 +61,10 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         cell.frame = self.frameForCollectionViewCell(indexPath.row)
         cell.backgroundColor = UIColor.white
         
+        for subview in cell.subviews{
+            subview.removeFromSuperview()
+        }
+        
         let size = cell.frame.size.width-CGFloat(kMarginBubble)
         let origin = CGFloat(kMarginBubble/2)
         
@@ -73,8 +77,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         imageView.downloadedFrom(link: photo_url)
         
         let label = UILabel(frame: CGRect(x: 0, y: cell.frame.size.width-CGFloat(kMarginBubble), width: cell.frame.size.width, height: CGFloat(kMarginBubble)))
-        label.text = association.name
-        label.font = UIFont(name: "Helvetica", size: 12)
+        label.text = "@\(association.name!.lowercased())"
+        label.font = UIFont(name: kNormalFont, size: 12)
         label.textColor = .black
         label.textAlignment = .center
         

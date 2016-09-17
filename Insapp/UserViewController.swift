@@ -11,6 +11,7 @@ import UIKit
 
 let kLightGreyColor = UIColor(colorLiteralRed: 238/255, green: 238/255, blue: 238/255, alpha: 1)
 let kDarkGreyColor = UIColor(colorLiteralRed: 180/255, green: 180/255, blue: 180/255, alpha: 1)
+let kRedColor = UIColor(colorLiteralRed: 232/255, green: 92/255, blue: 86/255, alpha: 1)
 let kWhiteColor = UIColor.white
 
 let kNormalFont = "KohinoorBangla-Regular"
@@ -18,6 +19,9 @@ let kBoldFont = "KohinoorBangla-Semibold"
 let kLightFont = "KohinoorBangla-Light"
 class UserViewController: UIViewController {
     
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var eventView: UIView!
+    @IBOutlet weak var eventViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -25,19 +29,35 @@ class UserViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var editButton: UIButton!
     
+    var eventListViewController: EventListViewController!
+    var isEditable:Bool = true
+    var canReturn:Bool = false
     var user:User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.eventListViewController = self.childViewControllers.last as? EventListViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.fetchUser(user_id: Credentials.fetch()!.userId)
+        self.editButton.isHidden = !self.isEditable
+        self.backButton.isHidden = !self.canReturn
         
-        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width/2
-        profilePictureImageView.layer.masksToBounds = true
-        profilePictureImageView.backgroundColor = kLightGreyColor
+        if self.user == nil {
+            self.fetchUser(user_id: Credentials.fetch()!.userId)
+        }else{
+            self.initView()
+            self.initEventView()
+        }
+        
+        DispatchQueue.main.async {
+            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2
+            self.profilePictureImageView.layer.masksToBounds = true
+            self.profilePictureImageView.backgroundColor = kWhiteColor
+            self.profilePictureImageView.layer.borderColor = kDarkGreyColor.cgColor
+            self.profilePictureImageView.layer.borderWidth = 1
+        }
         
         if self.user == nil {
             usernameLabel.backgroundColor = kLightGreyColor
@@ -47,16 +67,25 @@ class UserViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.user = nil
+    }
+    
     func fetchUser(user_id:String){
         APIManager.fetch(user_id: user_id) { (opt_user) in
             guard let user = opt_user else { self.triggerError("Error Fetching User") ; return }
             self.user = user
             self.initView()
+            self.initEventView()
         }
     }
     
     func setEditable(_ editable:Bool){
-        self.editButton.isHidden = !editable
+        self.isEditable = editable
+    }
+    
+    func canReturn(_ canReturn: Bool){
+        self.canReturn = canReturn
     }
     
     func initView(){
@@ -66,11 +95,29 @@ class UserViewController: UIViewController {
         promotionLabel.backgroundColor = kWhiteColor
         descriptionTextView.backgroundColor = kWhiteColor
         
-        //self.profilePictureImageView.image = imageForPromotion(user.promotion!)
+        self.profilePictureImageView.image = user.avatar()
         self.usernameLabel.text = "@\(user.username!)"
         self.nameLabel.text = user.name!
         self.promotionLabel.text = user.promotion
         self.descriptionTextView.text = user.desc!
+    }
+    
+    func initEventView(){
+        self.eventListViewController.user = self.user
+        self.eventListViewController.fetchEvents()
+        
+        switch self.user.events!.count {
+        case 0:
+            self.eventViewHeightConstraint.constant = 0
+            break
+        case let nbEvent where nbEvent < 3:
+            self.eventViewHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
+            break
+        default:
+            self.eventViewHeightConstraint.constant = 180
+            break
+        }
+        self.updateViewConstraints()
     }
     
     func imageForPromotion(_ promotion: String) -> UIImage {
@@ -86,4 +133,7 @@ class UserViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func dismissAction(_ sender: AnyObject) {
+        self.navigationController!.popViewController(animated: true)
+    }
 }

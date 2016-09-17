@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Insapp
 //
-//  Created by Florent THOMAS-MOREL on 9/15/16.
+//  Created by Florent THOMAS-MOREL on 9/16/16.
 //  Copyright © 2016 Florent THOMAS-MOREL. All rights reserved.
 //
 
@@ -18,11 +18,12 @@ extension User {
 
     @NSManaged public var desc: String?
     @NSManaged public var email: String?
-    @NSManaged public var events: [String]?
+    @NSManaged public var events: Array<String>?
     @NSManaged public var id: String?
     @NSManaged public var isEmailPublic: Bool
     @NSManaged public var name: String?
     @NSManaged public var promotion: String?
     @NSManaged public var username: String?
+    @NSManaged public var gender: String?
 
 }
