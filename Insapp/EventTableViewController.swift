@@ -37,6 +37,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         self.refreshControl.beginRefreshing()
+        self.lightStatusBar()
         self.fetchEvents()
     }
     
@@ -59,7 +60,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.events = [currentEvents]
                 self.hasCurrentEvents = true
             }else{
-                self.events = [currentEvents, comingEvents]
+                self.events = [Event.sort(events: currentEvents), Event.sort(events: comingEvents)]
                 self.hasCurrentEvents = true
             }
             self.refreshControl.endRefreshing()

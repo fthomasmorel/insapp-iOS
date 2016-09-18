@@ -13,6 +13,7 @@ let kLightGreyColor = UIColor(colorLiteralRed: 238/255, green: 238/255, blue: 23
 let kDarkGreyColor = UIColor(colorLiteralRed: 180/255, green: 180/255, blue: 180/255, alpha: 1)
 let kRedColor = UIColor(colorLiteralRed: 232/255, green: 92/255, blue: 86/255, alpha: 1)
 let kWhiteColor = UIColor.white
+let kClearColor = UIColor.clear
 
 let kNormalFont = "KohinoorBangla-Regular"
 let kBoldFont = "KohinoorBangla-Semibold"
@@ -25,6 +26,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var promotionLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var editButton: UIButton!
@@ -32,24 +34,22 @@ class UserViewController: UIViewController {
     var eventListViewController: EventListViewController!
     var isEditable:Bool = true
     var canReturn:Bool = false
+    var user_id:String!
     var user:User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.eventListViewController = self.childViewControllers.last as? EventListViewController
+        if self.user_id == nil {
+            self.user_id = Credentials.fetch()!.userId
+        }
+        self.fetchUser(user_id: user_id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         self.editButton.isHidden = !self.isEditable
         self.backButton.isHidden = !self.canReturn
-        
-        if self.user == nil {
-            self.fetchUser(user_id: Credentials.fetch()!.userId)
-        }else{
-            self.initView()
-            self.initEventView()
-        }
         
         DispatchQueue.main.async {
             self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2
@@ -63,15 +63,21 @@ class UserViewController: UIViewController {
             usernameLabel.backgroundColor = kLightGreyColor
             nameLabel.backgroundColor = kLightGreyColor
             promotionLabel.backgroundColor = kLightGreyColor
+            emailLabel.backgroundColor = kLightGreyColor
             descriptionTextView.backgroundColor = kLightGreyColor
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.user = nil
+        
+        self.lightStatusBar()
     }
     
     func fetchUser(user_id:String){
+        let user = User.fetch()!
+        if user.id == user_id {
+            self.user = user
+            self.initView()
+            self.initEventView()
+            return
+        }
         APIManager.fetch(user_id: user_id) { (opt_user) in
             guard let user = opt_user else { self.triggerError("Error Fetching User") ; return }
             self.user = user
@@ -90,20 +96,22 @@ class UserViewController: UIViewController {
     
     func initView(){
         
-        usernameLabel.backgroundColor = kWhiteColor
-        nameLabel.backgroundColor = kWhiteColor
-        promotionLabel.backgroundColor = kWhiteColor
-        descriptionTextView.backgroundColor = kWhiteColor
+        usernameLabel.backgroundColor = kClearColor
+        nameLabel.backgroundColor = kClearColor
+        promotionLabel.backgroundColor = kClearColor
+        emailLabel.backgroundColor = kClearColor
+        descriptionTextView.backgroundColor = kClearColor
         
         self.profilePictureImageView.image = user.avatar()
         self.usernameLabel.text = "@\(user.username!)"
         self.nameLabel.text = user.name!
+        self.emailLabel.text = user.email
         self.promotionLabel.text = user.promotion
         self.descriptionTextView.text = user.desc!
     }
     
     func initEventView(){
-        self.eventListViewController.user = self.user
+        self.eventListViewController.eventIds = self.user.events!
         self.eventListViewController.fetchEvents()
         
         switch self.user.events!.count {

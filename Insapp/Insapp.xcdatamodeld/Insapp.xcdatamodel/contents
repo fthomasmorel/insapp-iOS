@@ -35,6 +35,11 @@
         <attribute name="photoURL" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Image" representedClassName=".Image" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="lastUsed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Post" representedClassName=".Post" syncable="YES">
         <attribute name="association" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comments" optional="YES" attributeType="Transformable" customClassName="[Comment]" syncable="YES"/>
@@ -61,10 +66,11 @@
     </entity>
     <elements>
         <element name="Association" positionX="18" positionY="135" width="119" height="178"/>
+        <element name="Comment" positionX="-180" positionY="63" width="128" height="105"/>
         <element name="Credentials" positionX="-153" positionY="90" width="128" height="90"/>
-        <element name="Event" positionX="-369" positionY="114" width="128" height="208"/>
+        <element name="Event" positionX="-369" positionY="114" width="128" height="210"/>
         <element name="Post" positionX="-180" positionY="63" width="128" height="210"/>
         <element name="User" positionX="-198" positionY="-90" width="128" height="180"/>
-        <element name="Comment" positionX="-180" positionY="63" width="128" height="105"/>
+        <element name="Image" positionX="-180" positionY="63" width="128" height="90"/>
     </elements>
 </model>

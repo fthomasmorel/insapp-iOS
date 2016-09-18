@@ -56,9 +56,9 @@ class EventViewController: UIViewController {
         self.decisionControl.tintColor = fontColor
         self.descriptionTextView.textColor = fontColor
         
-        let arrow = (fontColor == UIColor.white ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
+        let arrow = (event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)
-
+        self.changeStatusBarForColor(colorStr: event.fgColor)
     }
     
     func computeGradient(){

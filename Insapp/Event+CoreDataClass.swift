@@ -71,4 +71,10 @@ public class Event: NSManagedObject {
         
         return event
     }
+    
+    static func sort(events: [Event]) -> [Event] {
+        return events.sorted { (a, b) -> Bool in
+            return a.dateStart!.timeIntervalSince(b.dateStart! as Date) < 0
+        }
+    }
 }

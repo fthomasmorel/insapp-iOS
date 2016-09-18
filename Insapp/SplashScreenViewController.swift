@@ -20,6 +20,10 @@ class SpashScreenViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.lightStatusBar()
+    }
+    
     func login(_ credentials:Credentials){
         APIManager.login(credentials, completion: { (opt_cred) in
             guard let creds = opt_cred else { self.signin() ; return }
@@ -36,10 +40,8 @@ class SpashScreenViewController: UIViewController {
     }
     
     func loadViewController(name: String){
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: name)
-            self.present(vc, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: name)
+        self.present(vc, animated: true, completion: nil)
     }
 }

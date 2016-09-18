@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+let kMaxDescriptionLength = 120
+
 let promotions = [
     "",
     "3EII", "3GM", "3GCU", "3GMA", "3INFO", "3SGM", "3SRC",
@@ -30,7 +33,7 @@ let convertGender = [
     "Masculin"  : "male"
 ]
 
-class EditUserTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class EditUserTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UILabel!
@@ -39,6 +42,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionLengthLabel: UILabel!
     
     var promotionPickerView:UIPickerView!
     var genderPickerView:UIPickerView!
@@ -66,9 +70,13 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             self.avatarImageView.backgroundColor = kWhiteColor
             self.avatarImageView.layer.borderColor = kDarkGreyColor.cgColor
             self.avatarImageView.layer.borderWidth = 1
+     
             
+            self.updateDescriptionLengthLabel(length: self.descriptionTextView.text.characters.count)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
+        
+        self.lightStatusBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -157,6 +165,22 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         }
         (self.parent as! EditUserViewController).updateSaveButton()
         return false
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let content = textView.text else { return true }
+        
+        let newLength = content.characters.count + text.characters.count - range.length
+        
+        if (newLength <= kMaxDescriptionLength){
+            self.updateDescriptionLengthLabel(length: newLength)
+        }
+        
+        return newLength <= kMaxDescriptionLength
+    }
+    
+    func updateDescriptionLengthLabel(length: Int){
+        self.descriptionLengthLabel.text = "\(kMaxDescriptionLength - length)"
     }
     
     @IBAction func handleTap(_ sender: AnyObject) {

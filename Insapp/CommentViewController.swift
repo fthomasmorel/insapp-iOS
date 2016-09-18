@@ -16,8 +16,6 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var post:Post!
     var association:Association!
-    
-    
     var commentView:CommentView!
     
     override func viewDidLoad() {
@@ -30,6 +28,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        self.lightStatusBar()
         self.hideTabBar()
     }
     
@@ -145,7 +144,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func open(user: User) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-        vc.user = user
+        vc.user_id = user.id
         vc.setEditable(false)
         vc.canReturn(true)
         self.navigationController?.pushViewController(vc, animated: true)

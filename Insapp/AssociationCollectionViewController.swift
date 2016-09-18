@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-let kAssociationCollectionCellView = "kAssociationCollectionCellView"
+let kAssociationCell = "kAssociationCell"
 let kMarginBubble = 30
 
-class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var refreshControl:UIRefreshControl!
     var associations:[Association] = []
@@ -23,8 +23,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kAssociationCollectionCellView)
+        self.collectionView.register(UINib(nibName: "AssociationCell", bundle: nil), forCellWithReuseIdentifier: kAssociationCell)
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
@@ -36,6 +35,17 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     override func viewWillAppear(_ animated: Bool) {
         self.refreshControl.beginRefreshing()
         self.fetchAssociations()
+        self.lightStatusBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let size = (self.collectionView.frame.size.width/3)
+        layout.itemSize = CGSize(width: size, height: size)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        self.collectionView.collectionViewLayout = layout
     }
     
     func fetchAssociations(){
@@ -54,36 +64,40 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         return associations.count
     }
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        <#code#>
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let association = self.associations[indexPath.row]
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCollectionCellView, for: indexPath as IndexPath)
-        cell.frame = self.frameForCollectionViewCell(indexPath.row)
-        cell.backgroundColor = UIColor.white
-        
-        for subview in cell.subviews{
-            subview.removeFromSuperview()
-        }
-        
-        let size = cell.frame.size.width-CGFloat(kMarginBubble)
-        let origin = CGFloat(kMarginBubble/2)
-        
-        let imageView = UIImageView(frame: CGRect(x: origin, y: 5, width: size, height: size))
-        imageView.backgroundColor = kLightGreyColor
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = size/2
-        
-        let photo_url = kCDNHostname + association.profilePhotoURL!
-        imageView.downloadedFrom(link: photo_url)
-        
-        let label = UILabel(frame: CGRect(x: 0, y: cell.frame.size.width-CGFloat(kMarginBubble), width: cell.frame.size.width, height: CGFloat(kMarginBubble)))
-        label.text = "@\(association.name!.lowercased())"
-        label.font = UIFont(name: kNormalFont, size: 12)
-        label.textColor = .black
-        label.textAlignment = .center
-        
-        cell.addSubview(label)
-        cell.addSubview(imageView)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath as IndexPath) as! AssociationCell
+        cell.load(association: association)
+//        cell.backgroundColor = UIColor.white
+//        
+//        for subview in cell.subviews{
+//            subview.removeFromSuperview()
+//        }
+//        
+//        let size = cell.frame.size.width-CGFloat(kMarginBubble)
+//        let origin = CGFloat(kMarginBubble/2)
+//        
+//        let imageView = UIImageView(frame: CGRect(x: origin, y: 5, width: size, height: size))
+//        imageView.backgroundColor = kLightGreyColor
+//        imageView.layer.masksToBounds = true
+//        imageView.layer.cornerRadius = size/2
+//        
+//        let photo_url = kCDNHostname + association.profilePhotoURL!
+//        imageView.downloadedFrom(link: photo_url)
+//        
+//        let label = UILabel(frame: CGRect(x: 0, y: cell.frame.size.width-CGFloat(kMarginBubble), width: cell.frame.size.width, height: CGFloat(kMarginBubble)))
+//        label.text = "@\(association.name!.lowercased())"
+//        label.font = UIFont(name: kNormalFont, size: 12)
+//        label.textColor = .black
+//        label.textAlignment = .center
+//        
+//        cell.addSubview(label)
+//        cell.addSubview(imageView)
         
         return cell
     }

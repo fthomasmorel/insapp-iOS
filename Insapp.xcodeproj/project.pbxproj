@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9AA51A7D696DE37EA2028636 /* Pods_Insapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */; };
+		E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C7051D8DA02D00CE3D5B /* EventListCell.xib */; };
+		E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7071D8DA11100CE3D5B /* EventListCell.swift */; };
+		E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */; };
+		E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */; };
+		E181C70E1D8DB9BA00CE3D5B /* AssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */; };
+		E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */; };
 		E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */; };
 		E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */; };
 		E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */; };
@@ -58,6 +64,12 @@
 /* Begin PBXFileReference section */
 		91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07F8504F090A6CA8BCC8915 /* Pods-Insapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E181C7051D8DA02D00CE3D5B /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
+		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
+		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationCell.xib; sourceTree = "<group>"; };
+		E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationCell.swift; sourceTree = "<group>"; };
 		E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -186,6 +198,8 @@
 				E1C3F9F71D89831E006A66CF /* PostCell.xib */,
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
+				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
+				E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -197,6 +211,8 @@
 				E1C3F9F91D8A88D0006A66CF /* PostCell.swift */,
 				E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */,
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
+				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
+				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -240,6 +256,8 @@
 		E1DC7F321D86F27C00284222 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */,
+				E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */,
 				E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */,
 				E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */,
 				E1C3F9F31D897609006A66CF /* Post+CoreDataClass.swift */,
@@ -319,6 +337,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
+				E181C70E1D8DB9BA00CE3D5B /* AssociationCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
 				E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */,
@@ -399,16 +419,19 @@
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
 				E1C3F9EE1D8951D7006A66CF /* EventCell.swift in Sources */,
+				E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */,
 				E1C3F9F01D897142006A66CF /* NewsViewController.swift in Sources */,
 				E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */,
 				E1C3F9F21D89722F006A66CF /* APIManager+Post.swift in Sources */,
 				E1C3F9FA1D8A88D0006A66CF /* PostCell.swift in Sources */,
+				E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */,
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,
 				E1DC7F681D86FBAB00284222 /* Association+CoreDataProperties.swift in Sources */,
 				E1C3F9D91D8837E7006A66CF /* EditUserViewController.swift in Sources */,
 				E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */,
 				E1C3F9E91D894E40006A66CF /* EventTableViewController.swift in Sources */,
+				E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */,
 				E1C3F9E11D8946C8006A66CF /* APIManager+Event.swift in Sources */,
 				E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */,
 				E1C3F9DB1D8855F8006A66CF /* AssociationCollectionViewController.swift in Sources */,
@@ -418,6 +441,7 @@
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
 				E1C3F9E31D8946FD006A66CF /* APIManager+Association.swift in Sources */,
+				E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,

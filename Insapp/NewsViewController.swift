@@ -34,6 +34,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         self.refreshControl.beginRefreshing()
+        self.lightStatusBar()
         self.fetchPosts()
     }
     

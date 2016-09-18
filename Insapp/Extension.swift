@@ -9,6 +9,25 @@
 import Foundation
 import UIKit
 
+extension UIViewController{
+    
+    func changeStatusBarForColor(colorStr: String? = "ffffff"){
+        if colorStr == "ffffff" {
+            self.lightStatusBar()
+        }else{
+            self.darkStatusBar()
+        }
+    }
+    
+    func darkStatusBar(){
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    func lightStatusBar(){
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+}
 
 extension UIColor{
     
@@ -43,32 +62,43 @@ extension UIImageView {
         }
         guard let url = URL(string: link) else { return }
         contentMode = mode
+        
+        if let image = Image.fetchImage(url: link){
+            self.displayImage(image, completion: completion)
+            return
+        }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            DispatchQueue.main.async {
-                if self.image == nil {
-                    loader.removeFromSuperview()
-                }
-            }
             guard
                 let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
                 let data = data , error == nil,
                 let image = UIImage(data: data)
                 else { return }
-            DispatchQueue.main.async() { () -> Void in
-                if self.image == nil {
-                    self.alpha = 0
-                    self.image = image
-                    if let ack = completion { ack() }
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.alpha = 1
-                    })
-                }else{
-                    self.image = image
-                    if let ack = completion { ack() }
+            Image.store(image: image, forUrl: link)
+            self.displayImage(image, completion: completion)
+            }.resume()
+    }
+    
+    func displayImage(_ image: UIImage, completion: Optional<() -> ()> = nil){
+        DispatchQueue.main.async() { () -> Void in
+            for subview in self.subviews{
+                if subview is UIActivityIndicatorView {
+                    subview.removeFromSuperview()
                 }
             }
-            }.resume()
+            if self.image == nil {
+                self.alpha = 0
+                self.image = image
+                if let ack = completion { ack() }
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.alpha = 1
+                })
+            }else{
+                self.image = image
+                if let ack = completion { ack() }
+            }
+        }
     }
 }
 

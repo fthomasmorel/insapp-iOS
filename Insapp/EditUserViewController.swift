@@ -33,6 +33,7 @@ class EditUserViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         self.updateSaveButton()
+        self.lightStatusBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

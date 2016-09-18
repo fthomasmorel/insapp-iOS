@@ -19,6 +19,10 @@ class SigninViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.lightStatusBar()
+    }
+    
     @IBAction func connectAction(_ sender: AnyObject) {
         guard let username = usernameTextField.text else { return }
         guard let password = passwordTextField.text else { return }

@@ -17,20 +17,22 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
 
     let fetchEventGroup = DispatchGroup()
     
-    var user: User!
-    var events: [Event]! = []
+    var fontColor: UIColor?
+    var eventIds: [String] = []
+    var events: [Event] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.eventTableView.delegate = self
         self.eventTableView.dataSource = self
-        self.eventTableView.register(UITableViewCell.self, forCellReuseIdentifier: kEventListCell)
+        self.eventTableView.register(UINib(nibName: "EventListCell", bundle: nil), forCellReuseIdentifier: kEventListCell)
+        self.eventTableView.tableFooterView = UIView()
     }
     
     func fetchEvents(){
         self.events = []
-        for eventId in self.user.events! {
+        for eventId in self.eventIds {
             DispatchQueue.global().async {
                 self.fetchEventGroup.enter()
                 APIManager.fetchEvent(event_id: eventId, completion: { (opt_event) in
@@ -47,6 +49,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func reloadEvents(){
         self.fetchEventGroup.wait()
+        self.events = Event.sort(events: self.events)
         DispatchQueue.main.async {
             self.eventTableView.reloadData()
         }
@@ -66,10 +69,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = self.events[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: kEventListCell, for: indexPath)
-        
-        self.generateCell(cell, forEvent: event)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: kEventListCell, for: indexPath) as! EventListCell
+        cell.load(event: event, withColor: self.fontColor)
         return cell
     }
     
@@ -80,34 +81,6 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         vc.event = event
         self.parent?.navigationController?.pushViewController(vc, animated: true)
         
-    }
-    
-    func generateCell(_ cell: UITableViewCell, forEvent event:Event){
-        cell.selectionStyle = .none
-        cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0)
-        
-        for subview in cell.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 40, height: 40))
-        imageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
-        imageView.clipsToBounds = true
-        
-        let nameLabel = UILabel(frame: CGRect(x: 70, y: 10, width: cell.frame.width-100, height: 20))
-        nameLabel.text = event.name
-        nameLabel.font = UIFont(name: kBoldFont, size: 15)
-        
-        let dateLabel = UILabel(frame: CGRect(x: 70, y: cell.frame.height-30, width: cell.frame.width-100, height: 20))
-        dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
-        dateLabel.font = UIFont(name: kNormalFont, size: 13)
-        
-        let separator = UIView(frame: CGRect(x: 10, y: cell.frame.size.height-0.5, width: cell.frame.size.width-20, height: 0.5))
-        
-        cell.addSubview(imageView)
-        cell.addSubview(nameLabel)
-        cell.addSubview(dateLabel)
-        cell.addSubview(separator)
     }
 
     

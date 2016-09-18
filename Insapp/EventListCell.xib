@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kEventListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kEventListCell" rowHeight="47" id="Tph-As-Fti" customClass="EventListCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tph-As-Fti" id="Z1S-E7-Xzw">
+                <frame key="frameInset" width="375" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wOo-ht-24m">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="b4D-YG-tq9"/>
+                            <constraint firstAttribute="width" constant="40" id="zJs-M4-ihQ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-NM-uxW">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="DHh-wN-IfK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJr-4w-1Zu">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Ux1-Os-IHB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUw-YD-EWI">
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="Haa-l8-fat"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="sUw-YD-EWI" firstAttribute="leading" secondItem="Z1S-E7-Xzw" secondAttribute="leading" constant="10" id="02F-jq-Lcz"/>
+                    <constraint firstItem="HTi-NM-uxW" firstAttribute="top" secondItem="wOo-ht-24m" secondAttribute="top" id="1oi-8p-rbN"/>
+                    <constraint firstItem="wOo-ht-24m" firstAttribute="leading" secondItem="Z1S-E7-Xzw" secondAttribute="leading" constant="10" id="VGJ-Ak-dXr"/>
+                    <constraint firstItem="BJr-4w-1Zu" firstAttribute="bottom" secondItem="wOo-ht-24m" secondAttribute="bottom" id="VcT-AI-zJ2"/>
+                    <constraint firstItem="BJr-4w-1Zu" firstAttribute="leading" secondItem="wOo-ht-24m" secondAttribute="trailing" constant="10" id="c9R-FQ-LUg"/>
+                    <constraint firstItem="wOo-ht-24m" firstAttribute="top" secondItem="Z1S-E7-Xzw" secondAttribute="top" constant="10" id="d1y-AJ-0gK"/>
+                    <constraint firstAttribute="trailing" secondItem="BJr-4w-1Zu" secondAttribute="trailing" constant="10" id="mmD-80-tQc"/>
+                    <constraint firstAttribute="trailing" secondItem="sUw-YD-EWI" secondAttribute="trailing" id="oFw-mr-C76"/>
+                    <constraint firstAttribute="trailing" secondItem="HTi-NM-uxW" secondAttribute="trailing" constant="10" id="sfG-GP-tlB"/>
+                    <constraint firstAttribute="bottom" secondItem="sUw-YD-EWI" secondAttribute="bottom" id="ydL-H4-ILt"/>
+                    <constraint firstItem="HTi-NM-uxW" firstAttribute="leading" secondItem="wOo-ht-24m" secondAttribute="trailing" constant="10" id="zEa-zu-8G0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="BJr-4w-1Zu" id="254-1t-Bjn"/>
+                <outlet property="eventImageView" destination="wOo-ht-24m" id="am6-w4-ipy"/>
+                <outlet property="nameLabel" destination="HTi-NM-uxW" id="4jb-Mc-Bdw"/>
+                <outlet property="separatorView" destination="sUw-YD-EWI" id="uRv-VA-Oyh"/>
+            </connections>
+            <point key="canvasLocation" x="-15.5" y="-11"/>
+        </tableViewCell>
+    </objects>
+</document>
