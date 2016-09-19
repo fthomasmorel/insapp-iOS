@@ -14,6 +14,7 @@
 		E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */; };
 		E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */; };
 		E192C1E41D90131500355512 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1E31D90131500355512 /* Constant.swift */; };
+		E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1E51D90277000355512 /* APIManager+Notification.swift */; };
 		E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */; };
 		E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */; };
 		E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */; };
@@ -70,6 +71,8 @@
 		E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationCell.swift; sourceTree = "<group>"; };
 		E192C1E31D90131500355512 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		E192C1E51D90277000355512 /* APIManager+Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIManager+Notification.swift"; sourceTree = "<group>"; };
+		E192C1E71D902CDE00355512 /* Insapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Insapp.entitlements; sourceTree = "<group>"; };
 		E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 				E1C3F9E01D8946C8006A66CF /* APIManager+Event.swift */,
 				E1C3F9E21D8946FD006A66CF /* APIManager+Association.swift */,
 				E1C3F9F11D89722F006A66CF /* APIManager+Post.swift */,
+				E192C1E51D90277000355512 /* APIManager+Notification.swift */,
 			);
 			name = APIManager;
 			sourceTree = "<group>";
@@ -239,6 +243,7 @@
 		E1DC7F081D86E2C900284222 /* Insapp */ = {
 			isa = PBXGroup;
 			children = (
+				E192C1E71D902CDE00355512 /* Insapp.entitlements */,
 				E1C3F9EC1D8951CC006A66CF /* Views */,
 				E1C3F9E71D894C00006A66CF /* XIB */,
 				E1C3F9E41D894BCF006A66CF /* Helpers */,
@@ -311,6 +316,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9JPSY4Q8SW;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -442,6 +452,7 @@
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
 				E1C3F9E31D8946FD006A66CF /* APIManager+Association.swift in Sources */,
 				E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */,
+				E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,
@@ -572,11 +583,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.Insapp;
+				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -587,10 +602,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.Insapp;
+				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
