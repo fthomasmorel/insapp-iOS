@@ -10,18 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-let kUserId             = "ID"
-let kUserName           = "name"
-let kUserUsername       = "username"
-let kUserDescription    = "description"
-let kUserEmail          = "email"
-let kUserEmailIsPublic  = "emailpublic"
-let kUserPromotion      = "promotion"
-let kUserGender         = "gender"
-let kUserEvents         = "events"
-let kUserPostLiked      = "postsliked"
-let kUserPhotoURL       = "photourl"
-
 public class User: NSManagedObject {
     
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

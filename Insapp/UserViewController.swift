@@ -9,15 +9,7 @@
 import Foundation
 import UIKit
 
-let kLightGreyColor = UIColor(colorLiteralRed: 238/255, green: 238/255, blue: 238/255, alpha: 1)
-let kDarkGreyColor = UIColor(colorLiteralRed: 180/255, green: 180/255, blue: 180/255, alpha: 1)
-let kRedColor = UIColor(colorLiteralRed: 232/255, green: 92/255, blue: 86/255, alpha: 1)
-let kWhiteColor = UIColor.white
-let kClearColor = UIColor.clear
 
-let kNormalFont = "KohinoorBangla-Regular"
-let kBoldFont = "KohinoorBangla-Semibold"
-let kLightFont = "KohinoorBangla-Light"
 class UserViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
@@ -43,7 +35,6 @@ class UserViewController: UIViewController {
         if self.user_id == nil {
             self.user_id = Credentials.fetch()!.userId
         }
-        self.fetchUser(user_id: user_id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +58,7 @@ class UserViewController: UIViewController {
             descriptionTextView.backgroundColor = kLightGreyColor
         }
         
+        self.fetchUser(user_id: user_id)
         self.lightStatusBar()
     }
     
@@ -78,8 +70,8 @@ class UserViewController: UIViewController {
             self.initEventView()
             return
         }
-        APIManager.fetch(user_id: user_id) { (opt_user) in
-            guard let user = opt_user else { self.triggerError("Error Fetching User") ; return }
+        APIManager.fetch(user_id: user_id, controller: self) { (opt_user) in
+            guard let user = opt_user else { return }
             self.user = user
             self.initView()
             self.initEventView()
@@ -117,12 +109,15 @@ class UserViewController: UIViewController {
         switch self.user.events!.count {
         case 0:
             self.eventViewHeightConstraint.constant = 0
+            self.eventListViewController.view.isHidden = true
             break
         case let nbEvent where nbEvent < 3:
+            self.eventListViewController.view.isHidden = false
             self.eventViewHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
             break
         default:
-            self.eventViewHeightConstraint.constant = 180
+            self.eventListViewController.view.isHidden = false
+            self.eventViewHeightConstraint.constant = 180 + CGFloat(30 + 10)
             break
         }
         self.updateViewConstraints()

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Result {
     case success
@@ -15,25 +16,25 @@ enum Result {
 
 extension APIManager{
     
-    static func fetch(user_id: String, completion:@escaping (_ user:Optional<User>) -> ()){
-        requestWithToken(url: "/user/\(user_id)", method: .get) { (result) in
+    static func fetch(user_id: String, controller: UIViewController, completion:@escaping (_ user:Optional<User>) -> ()){
+        requestWithToken(url: "/user/\(user_id)", method: .get, completion: { (result) in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(User.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func update(user: User, completion:@escaping (_ user:Optional<User>) -> ()){
+    static func update(user: User, controller: UIViewController, completion:@escaping (_ user:Optional<User>) -> ()){
         let params = User.toJson(user)
-        requestWithToken(url: "/user/\(user.id!)", method: .put, parameters: params) { (result) in
+        requestWithToken(url: "/user/\(user.id!)", method: .put, parameters: params, completion: { (result) in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(User.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func delete(user: User, completion:@escaping (_ user:Result) -> ()){
-        requestWithToken(url: "/user/\(user.id!)", method: .delete) { (result) in
+    static func delete(user: User, controller: UIViewController, completion:@escaping (_ user:Result) -> ()){
+        requestWithToken(url: "/user/\(user.id!)", method: .delete, completion: { (result) in
             guard let _ = result as? Dictionary<String, AnyObject> else { completion(.failure)  ; return }
             completion(.success)
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
 }

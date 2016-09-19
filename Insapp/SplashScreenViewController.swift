@@ -27,8 +27,7 @@ class SpashScreenViewController: UIViewController {
     func login(_ credentials:Credentials){
         APIManager.login(credentials, completion: { (opt_cred) in
             guard let creds = opt_cred else { self.signin() ; return }
-            Credentials.saveContext()
-            APIManager.fetch(user_id: creds.userId, completion: { (opt_user) in
+            APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
                 guard let _ = opt_user else { self.signin() ; return }
                 self.loadViewController(name: "TabViewController")
             })
@@ -36,7 +35,9 @@ class SpashScreenViewController: UIViewController {
     }
     
     func signin(){
-        self.loadViewController(name: "SigninViewController")
+        DispatchQueue.main.async {
+            self.loadViewController(name: "SigninViewController")
+        }
     }
     
     func loadViewController(name: String){

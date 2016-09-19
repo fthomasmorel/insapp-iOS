@@ -12,8 +12,8 @@
 		E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7071D8DA11100CE3D5B /* EventListCell.swift */; };
 		E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */; };
 		E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */; };
-		E181C70E1D8DB9BA00CE3D5B /* AssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */; };
 		E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */; };
+		E192C1E41D90131500355512 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1E31D90131500355512 /* Constant.swift */; };
 		E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */; };
 		E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */; };
 		E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */; };
@@ -68,8 +68,8 @@
 		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationCell.xib; sourceTree = "<group>"; };
 		E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationCell.swift; sourceTree = "<group>"; };
+		E192C1E31D90131500355512 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -185,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				E1C3F9E51D894BDB006A66CF /* Extension.swift */,
+				E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */,
+				E192C1E31D90131500355512 /* Constant.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -199,7 +201,6 @@
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
 				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
-				E181C70D1D8DB9BA00CE3D5B /* AssociationCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -248,7 +249,6 @@
 				E1DC7F131D86E2C900284222 /* Assets.xcassets */,
 				E1DC7F181D86E2C900284222 /* Info.plist */,
 				E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */,
-				E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */,
 			);
 			path = Insapp;
 			sourceTree = "<group>";
@@ -338,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
-				E181C70E1D8DB9BA00CE3D5B /* AssociationCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
 				E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */,
@@ -438,6 +437,7 @@
 				E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */,
 				E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */,
 				E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */,
+				E192C1E41D90131500355512 /* Constant.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
 				E1C3F9E31D8946FD006A66CF /* APIManager+Association.swift in Sources */,

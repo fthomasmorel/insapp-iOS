@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-let kAssociationCell = "kAssociationCell"
-let kMarginBubble = 30
-
 class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var refreshControl:UIRefreshControl!
@@ -23,7 +20,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: "AssociationCell", bundle: nil), forCellWithReuseIdentifier: kAssociationCell)
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
@@ -39,17 +35,14 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        let size = (self.collectionView.frame.size.width/3)
-        layout.itemSize = CGSize(width: size, height: size)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        self.collectionView.collectionViewLayout = layout
+        let layout: UICollectionViewFlowLayout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
     }
     
     func fetchAssociations(){
-        APIManager.fetchAssociations { (associations) in
+        APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
             self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
@@ -64,41 +57,16 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         return associations.count
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        <#code#>
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = (self.collectionView.frame.width-40)/3
+        return CGSize(width: size, height: size)
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let association = self.associations[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath as IndexPath) as! AssociationCell
         cell.load(association: association)
-//        cell.backgroundColor = UIColor.white
-//        
-//        for subview in cell.subviews{
-//            subview.removeFromSuperview()
-//        }
-//        
-//        let size = cell.frame.size.width-CGFloat(kMarginBubble)
-//        let origin = CGFloat(kMarginBubble/2)
-//        
-//        let imageView = UIImageView(frame: CGRect(x: origin, y: 5, width: size, height: size))
-//        imageView.backgroundColor = kLightGreyColor
-//        imageView.layer.masksToBounds = true
-//        imageView.layer.cornerRadius = size/2
-//        
-//        let photo_url = kCDNHostname + association.profilePhotoURL!
-//        imageView.downloadedFrom(link: photo_url)
-//        
-//        let label = UILabel(frame: CGRect(x: 0, y: cell.frame.size.width-CGFloat(kMarginBubble), width: cell.frame.size.width, height: CGFloat(kMarginBubble)))
-//        label.text = "@\(association.name!.lowercased())"
-//        label.font = UIFont(name: kNormalFont, size: 12)
-//        label.textColor = .black
-//        label.textAlignment = .center
-//        
-//        cell.addSubview(label)
-//        cell.addSubview(imageView)
-        
         return cell
     }
     
@@ -109,17 +77,5 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         vc.association = association
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func frameForCollectionViewCell(_ index:Int) -> CGRect {
-        var quotient = 18/7,
-        remainder = quotient % 1;
-        
-        quotient -= remainder;
-        let size = self.collectionView.frame.size.width/3
-        let xPosition = size * CGFloat(index % 3)
-        let yPosition = size * CGFloat(index/3 - ((index/3) % 1))
-        return CGRect(x: xPosition, y: yPosition, width: size, height: size)
-    }
-    
     
 }

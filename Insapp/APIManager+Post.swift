@@ -7,18 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 extension APIManager {
     
-//    Route{"GetPost", "GET", "/post/{id}", GetPostController},
-//    Route{"GetLastestPost", "GET", "/post", GetLastestPostsController},
-//    Route{"LikePost", "POST", "/post/{id}/like/{userID}", LikePostController},
-//    Route{"DislikePost", "DELETE", "/post/{id}/like/{userID}", DislikePostController},
-//    Route{"CommentPost", "POST", "/post/{id}/comment", CommentPostController},
-//    Route{"UncommentPost", "DELETE", "/post/{id}/comment/{commentID}", UncommentPostController},
-    
-    static func fetchLastestPosts(completion:@escaping (_ posts:[Post]) -> ()){
-        requestWithToken(url: "/post", method: .get) { result in
+    static func fetchLastestPosts(controller: UIViewController, completion:@escaping (_ posts:[Post]) -> ()){
+        requestWithToken(url: "/post", method: .get, completion: { result in
             guard let postJsonArray = result as? [Dictionary<String, AnyObject>] else { completion([]) ; return }
             let json = postJsonArray.filter({ (post_json) -> Bool in
                 if let _ = Post.parseJson(post_json) {
@@ -31,51 +25,51 @@ extension APIManager {
                 return Post.parseJson(post_json)!
             })
             completion(posts)
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func fetchPost(post_id: String, completion:@escaping (_ post:Optional<Post>) -> ()){
-        requestWithToken(url: "/post/\(post_id)", method: .get) { result in
+    static func fetchPost(post_id: String, controller: UIViewController, completion:@escaping (_ post:Optional<Post>) -> ()){
+        requestWithToken(url: "/post/\(post_id)", method: .get, completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(Post.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func likePost(post_id: String, completion:@escaping (_ post:Optional<Post>) -> ()){
+    static func likePost(post_id: String, controller: UIViewController, completion:@escaping (_ post:Optional<Post>) -> ()){
         let user_id = User.fetch()!.id!
-        requestWithToken(url: "/post/\(post_id)/like/\(user_id)", method: .post) { result in
+        requestWithToken(url: "/post/\(post_id)/like/\(user_id)", method: .post, completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let json_post = json["post"] as? Dictionary<String, AnyObject> else{ completion(.none) ; return }
             guard let json_user = json["user"] as? Dictionary<String, AnyObject> else{ completion(.none) ; return }
             let _ = User.parseJson(json_user)
             completion(Post.parseJson(json_post))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func dislikePost(post_id: String, completion:@escaping (_ post:Optional<Post>) -> ()){
+    static func dislikePost(post_id: String, controller: UIViewController, completion:@escaping (_ post:Optional<Post>) -> ()){
         let user_id = User.fetch()!.id!
-        requestWithToken(url: "/post/\(post_id)/like/\(user_id)", method: .delete) { result in
+        requestWithToken(url: "/post/\(post_id)/like/\(user_id)", method: .delete, completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let json_post = json["post"] as? Dictionary<String, AnyObject> else{ completion(.none) ; return }
             guard let json_user = json["user"] as? Dictionary<String, AnyObject> else{ completion(.none) ; return }
             let _ = User.parseJson(json_user)
             completion(Post.parseJson(json_post))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func comment(post_id: String, comment: Comment, completion:@escaping (_ post:Optional<Post>) -> ()){
+    static func comment(post_id: String, comment: Comment, controller: UIViewController, completion:@escaping (_ post:Optional<Post>) -> ()){
         let params = Comment.toJson(comment)
-        requestWithToken(url: "/post/\(post_id)/comment", method: .post, parameters: params as [String : AnyObject]) { result in
+        requestWithToken(url: "/post/\(post_id)/comment", method: .post, parameters: params as [String : AnyObject], completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(Post.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func uncomment(post_id: String, comment_id: String, completion:@escaping (_ post:Optional<Post>) -> ()){
-        requestWithToken(url: "/post/\(post_id)/comment/\(comment_id)", method: .delete) { result in
+    static func uncomment(post_id: String, comment_id: String, controller: UIViewController, completion:@escaping (_ post:Optional<Post>) -> ()){
+        requestWithToken(url: "/post/\(post_id)/comment/\(comment_id)", method: .delete, completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(Post.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
 

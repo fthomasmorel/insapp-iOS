@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let kEventCell = "kEventCell"
+
 
 class EventTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -42,7 +42,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func fetchEvents(){
-        APIManager.fetchFutureEvents { (events) in
+        APIManager.fetchFutureEvents(controller: self) { (events) in
             let currentEvents = events.filter({ (event) -> Bool in
                 return event.dateStart!.timeIntervalSinceNow < 0
             })
@@ -92,6 +92,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = self.events[indexPath.section][indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventCell, for: indexPath) as! EventCell
+        cell.parent = self
         cell.loadEvent(event)
         return cell
     }

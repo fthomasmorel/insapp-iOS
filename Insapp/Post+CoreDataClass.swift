@@ -11,18 +11,6 @@ import CoreData
 import UIKit
 
 
-let kPostId             = "ID"
-let kPostTitle          = "title"
-let kPostAssociation    = "association"
-let kPostDescription    = "description"
-let kPostEvent          = "event"
-let kPostDate           = "date"
-let kPostLikes          = "likes"
-let kPostComments       = "comments"
-let kPostPhotoURL       = "photourl"
-let kPostStatus         = "status"
-let kPostImageSize      = "imageSize"
-
 public class Post: NSManagedObject {
 
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

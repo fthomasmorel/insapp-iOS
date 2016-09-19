@@ -10,29 +10,6 @@ import Foundation
 import UIKit
 
 
-let kMaxDescriptionLength = 120
-
-let promotions = [
-    "",
-    "3EII", "3GM", "3GCU", "3GMA", "3INFO", "3SGM", "3SRC",
-    "4EII", "4GM", "4GCU", "4GMA", "4INFO", "4SGM", "4SRC",
-    "5EII", "5GM", "5GCU", "5GMA", "5INFO", "5SGM", "5SRC",
-    "1STPI", "2STPI"
-]
-
-let genders = [
-    "-", "Féminin", "Masculin"
-]
-
-let convertGender = [
-    ""          : "-",
-    "female"    : "Féminin",
-    "male"      : "Masculin",
-    "-"         : "",
-    "Féminin"   : "female",
-    "Masculin"  : "male"
-]
-
 class EditUserTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -142,14 +119,12 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     }
     
     func deleteUser(){
-        APIManager.delete(user: (self.parent as! EditUserViewController).user!, completion: { (result) in
+        APIManager.delete(user: (self.parent as! EditUserViewController).user!, controller: self.parent!, completion: { (result) in
             if result == .success {
                 Credentials.delete()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SigninViewController")
                 self.present(vc, animated: true, completion: nil)
-            }else{
-                self.triggerError("Error When Deleting User")
             }
         })
     }

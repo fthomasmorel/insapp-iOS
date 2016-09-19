@@ -68,7 +68,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func postComment(_ content: String) {
         let user_id = User.fetch()!.id!
         let comment = Comment(comment_id: "", user_id: user_id, content: content, date: NSDate())
-        APIManager.comment(post_id: self.post.id!, comment: comment) { (opt_post) in
+        APIManager.comment(post_id: self.post.id!, comment: comment, controller: self) { (opt_post) in
             guard let post = opt_post else { return }
             self.post = post
             DispatchQueue.main.async {
@@ -88,12 +88,13 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell) as! CommentCell
+            cell.parent = self
             cell.preloadAssociationComment(association: self.association, forPost: self.post)
             let textView = cell.viewWithTag(2) as! UITextView
             return (textView.contentSize.height + CGFloat(kCommentCellEmptyHeight))
-         
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell) as! CommentCell
+            cell.parent = self
             cell.preloadUserComment(self.post.comments![indexPath.row-1])
             let textView = cell.viewWithTag(2) as! UITextView
             return (textView.contentSize.height + CGFloat(kCommentCellEmptyHeight))
@@ -117,6 +118,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func generateDescriptionCell(_ indexPath: IndexPath) -> UITableViewCell {
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
+        cell.parent = self
         cell.loadAssociationComment(association: self.association, forPost: self.post)
         cell.delegate = self
         return cell
@@ -125,13 +127,14 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func generateCommentCell(_ indexPath: IndexPath) -> UITableViewCell {
         let comment = self.post.comments![indexPath.row-1]
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
+        cell.parent = self
         cell.loadUserComment(comment)
         cell.delegate = self
         return cell
     }
     
     func delete(comment: Comment) {
-        APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, completion: { (opt_post) in
+        APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, controller: self, completion: { (opt_post) in
             guard let post = opt_post else { return }
             self.post = post
             DispatchQueue.main.async {

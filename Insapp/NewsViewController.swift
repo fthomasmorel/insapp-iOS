@@ -39,11 +39,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func fetchPosts(){
-        APIManager.fetchLastestPosts { (posts) in
+        APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
             self.refreshControl.endRefreshing()
             self.posts = posts
             self.postTableView.reloadData()
-        }
+        })
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -64,8 +64,9 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = self.posts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: kPostCell, for: indexPath) as! PostCell
-        cell.loadPost(post)
+        cell.parent = self
         cell.delegate = self
+        cell.loadPost(post)
         return cell
     }
     
@@ -85,9 +86,9 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.reload(post: new_post)
         }
         if liked {
-            APIManager.dislikePost(post_id: post.id!, completion: completion)
+            APIManager.dislikePost(post_id: post.id!, controller: self, completion: completion)
         }else{
-            APIManager.likePost(post_id: post.id!, completion: completion)
+            APIManager.likePost(post_id: post.id!, controller: self, completion: completion)
         }
     }
     

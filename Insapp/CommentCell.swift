@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 
-let kCommentCell = "kCommentCell"
-let kCommentCellEmptyHeight = 41
-let kCommentCellEmptyWidth = 64
+
 
 protocol CommentCellDelegate {
     func delete(comment: Comment)
@@ -30,6 +28,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var frontView: UIView!
     
     var delegate: CommentCellDelegate?
+    var parent: UIViewController!
     var association: Association?
     var comment: Comment?
     var user: User?
@@ -91,7 +90,7 @@ class CommentCell: UITableViewCell {
         self.comment = comment
         
         DispatchQueue.global().async {
-            APIManager.fetch(user_id: comment.user_id!) { (opt_user) in
+            APIManager.fetch(user_id: comment.user_id!, controller: self.parent) { (opt_user) in
                 guard let user = opt_user else { return }
                 self.userImageView.image = user.avatar()
                 self.usernameLabel.text = "@\(user.username!.lowercased())"

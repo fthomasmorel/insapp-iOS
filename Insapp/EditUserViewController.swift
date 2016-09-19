@@ -54,8 +54,10 @@ class EditUserViewController: UIViewController {
         if let field = self.checkForm() {
             field.textColor = UIColor.red
         }else{
-            APIManager.update(user: self.user!, completion: { (opt_user) in
-                guard let _ = opt_user else { self.triggerError("Error Updating User") ; return }
+            self.startLoading()
+            APIManager.update(user: self.user!, controller: self, completion: { (opt_user) in
+                guard let _ = opt_user else { return }
+                self.stopLoading()
                 self.dismissAction(self)
             })
         }

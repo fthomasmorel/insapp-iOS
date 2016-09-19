@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-let kPostCell = "kPostCell"
-let kPostCellEmptyHeight = CGFloat(180)
+
 
 protocol PostCellDelegate {
     func commentAction(post: Post, forCell cell: PostCell)
@@ -38,11 +37,12 @@ class PostCell: UITableViewCell {
     
     var association:Association!
     var delegate: PostCellDelegate?
+    var parent: UIViewController!
     var post:Post!
     
     func loadPost(_ post: Post){
         self.post = post
-        APIManager.fetchAssociation(association_id: post.association!, completion: { (opt_asso) in
+        APIManager.fetchAssociation(association_id: post.association!, controller: self.parent, completion: { (opt_asso) in
             guard let association = opt_asso else { return }
             self.association = association
             self.associationLabel.text = "@\(association.name!.lowercased())"

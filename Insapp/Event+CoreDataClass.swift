@@ -10,17 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-let kEventId             = "ID"
-let kEventName           = "name"
-let kEventDescription    = "description"
-let kEventAssociation    = "association"
-let kEventAttendees      = "participants"
-let kEventDateStart      = "dateStart"
-let kEventDateEnd        = "dateEnd"
-let kEventBgColor        = "bgColor"
-let kEventFgColor        = "fgColor"
-let kEventPhotoURL       = "photoURL"
-let kEventStatus         = "status"
 
 public class Event: NSManagedObject {
     

@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 
-let kEventListCell = "kEventListCell"
-
 class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var eventTableView: UITableView!
-
+    @IBOutlet weak var eventLabel: UILabel!
+    
     let fetchEventGroup = DispatchGroup()
     
     var fontColor: UIColor?
@@ -30,12 +29,18 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         self.eventTableView.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let color = self.fontColor {
+            self.eventLabel.textColor = color
+        }
+    }
+    
     func fetchEvents(){
         self.events = []
         for eventId in self.eventIds {
             DispatchQueue.global().async {
                 self.fetchEventGroup.enter()
-                APIManager.fetchEvent(event_id: eventId, completion: { (opt_event) in
+                APIManager.fetchEvent(event_id: eventId, controller: self, completion: { (opt_event) in
                     guard let event = opt_event else { return }
                     self.events.append(event)
                     self.fetchEventGroup.leave()

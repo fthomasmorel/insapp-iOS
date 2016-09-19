@@ -10,12 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
-let kCommentId      = "ID"
-let kCommentUserId  = "user"
-let kCommentContent = "content"
-let kCommentDate    = "date"
-
-public class Comment: NSManagedObject {
+public class Comment: NSManagedObject, NSCoding {
 
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static let entityDescription = NSEntityDescription.entity(forEntityName: "Comment", in:managedContext)
@@ -25,6 +20,11 @@ public class Comment: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
+    public func encode(with aCoder: NSCoder) { }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(entity: Comment.entityDescription!, insertInto: Comment.managedContext)
+    }
     
     init(comment_id: String, user_id: String, content: String, date: NSDate){
         super.init(entity: Comment.entityDescription!, insertInto: Comment.managedContext)

@@ -17,10 +17,11 @@ class EventCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var attendeesLabel: UILabel!
     
+    var parent: UIViewController!
     
     func loadEvent(_ event: Event){
         self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
-        APIManager.fetchAssociation(association_id: event.association!) { (opt_asso) in
+        APIManager.fetchAssociation(association_id: event.association!, controller: self.parent) { (opt_asso) in
             guard let association = opt_asso else { return }
             self.associationLabel.text = "@\(association.name!.lowercased())"
         }

@@ -11,6 +11,21 @@ import UIKit
 
 extension UIViewController{
     
+    var loadingView:UIView {
+        let view = UIView(frame: self.view.frame)
+        view.backgroundColor = .black
+        view.alpha = 0.7
+        
+        let loader = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        loader.startAnimating()
+        loader.center = view.center
+        
+        view.addSubview(loader)
+        view.tag = 2
+        
+        return view
+    }
+    
     func changeStatusBarForColor(colorStr: String? = "ffffff"){
         if colorStr == "ffffff" {
             self.lightStatusBar()
@@ -25,6 +40,14 @@ extension UIViewController{
     
     func lightStatusBar(){
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    func startLoading(){
+        self.view.addSubview(self.loadingView)
+    }
+    
+    func stopLoading(){
+        self.view.viewWithTag(2)?.removeFromSuperview()
     }
     
 }

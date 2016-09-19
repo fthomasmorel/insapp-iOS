@@ -31,7 +31,7 @@ class EventViewController: UIViewController {
     func generateViewForEvent(){
         self.view.backgroundColor = UIColor.hexToRGB(event.bgColor!)
         
-        APIManager.fetchAssociation(association_id: event.association!) { (opt_asso) in
+        APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_asso) in
             guard let association = opt_asso else { return }
             self.associationLabel.text = "@\(association.name!.lowercased())"
         }
@@ -89,14 +89,14 @@ class EventViewController: UIViewController {
     
     @IBAction func decisionDidChange(_ sender: AnyObject) {
         if self.decisionControl.selectedSegmentIndex == 0 {
-            APIManager.participateToEvent(event_id: event.id!, completion: { (opt_event) in
-                guard let event = opt_event else { self.triggerError("Can't not update status event") ; return }
+            APIManager.participateToEvent(event_id: event.id!, controller: self, completion: { (opt_event) in
+                guard let event = opt_event else { return }
                 self.event = event
                 self.generateViewForEvent()
             })
         }else{
-            APIManager.dismissEvent(event_id: event.id!, completion: { (opt_event) in
-                guard let event = opt_event else { self.triggerError("Can't not update status event") ; return }
+            APIManager.dismissEvent(event_id: event.id!, controller: self, completion: { (opt_event) in
+                guard let event = opt_event else { return }
                 self.event = event
                 self.generateViewForEvent()
             })

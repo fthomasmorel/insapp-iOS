@@ -10,16 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-let kAssociationId             = "ID"
-let kAssociationName           = "name"
-let kAssociationEmail          = "email"
-let kAssociationDescription    = "description"
-let kAssociationEvents         = "events"
-let kAssociationPosts          = "posts"
-let kAssociationProfile        = "profile"
-let kAssociationCover          = "cover"
-let kAssociationBgColor        = "bgcolor"
-let kAssociationFgColor        = "fgcolor"
 
 public class Association: NSManagedObject {
 

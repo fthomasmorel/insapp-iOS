@@ -26,13 +26,15 @@ class SigninViewController: UIViewController {
     @IBAction func connectAction(_ sender: AnyObject) {
         guard let username = usernameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
+        
+        self.startLoading()
         APIManager.signin(username: username, password: password) { (opt_cred) in
-            guard let credentials = opt_cred else { self.triggerError("Wrong Credentials") ; return }
+            guard let credentials = opt_cred else { return }
             APIManager.login(credentials, completion: { (opt_cred) in
-                guard let creds = opt_cred else { self.triggerError("Wrong Credentials") ; return }
-                Credentials.saveContext()
-                APIManager.fetch(user_id: creds.userId, completion: { (opt_user) in
-                    guard let _ = opt_user else { self.triggerError("Error When Fetching User") ; return }
+                guard let creds = opt_cred else { return }
+                APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
+                    guard let _ = opt_user else { return }
+                    self.stopLoading()
                     DispatchQueue.main.async {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let vc = storyboard.instantiateViewController(withIdentifier: "TabViewController")

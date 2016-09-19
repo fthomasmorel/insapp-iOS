@@ -9,16 +9,43 @@
 import Foundation
 import Alamofire
 
-let kAPIHostname = "https://api.thomasmorel.io"
-let kCDNHostname = "https://cdn.thomasmorel.io/"
-let kLoginPassword = "password"
-let kLoginUsername = "username"
-
 class APIManager: AnyObject{
     
     static var token:String!
     
-    static func requestWithToken(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> ()){
+    static func process(request: URLRequestConvertible, completion: @escaping (Optional<AnyObject>) -> (), errorBlock: @escaping (String, Int) -> (Bool)){
+        let queue = DispatchQueue(label: "io.thomasmorel.insapp2")
+        let proc: () -> (Bool) = {
+            let group = DispatchGroup()
+            var retry = false
+            group.enter()
+            DispatchQueue.global().async {
+                Alamofire.request(request).responseJSON { response in
+                    guard let res = response.response else {
+                        retry = errorBlock(kErrorServer, -1)
+                        group.leave()
+                        return
+                    }
+                    retry = errorBlock(kErrorUnkown, res.statusCode)
+                    if !retry {
+                        completion(response.result.value as AnyObject)   
+                    }
+                    group.leave()
+                }
+            }
+            group.wait()
+            return retry
+        }
+        
+        queue.async {
+            let retry = proc()
+            if retry {
+                _ = proc()
+            }
+        }
+    }
+    
+    static func requestWithToken(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
         let token = APIManager.token!
         let url = URL(string: "\(kAPIHostname)\(url)?token=\(token)")!
         var req = URLRequest(url: url)
@@ -27,22 +54,18 @@ class APIManager: AnyObject{
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
-        Alamofire.request(req).responseJSON { response in
-            completion(response.result.value as AnyObject)
-        }
+        APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
     
-    static func requestWithToken(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> ()){
-        let token = APIManager.token!
+    static func requestWithToken(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
+        let token = APIManager.token!// + "fdsa"
         let url = URL(string: "\(kAPIHostname)\(url)?token=\(token)")!
         var req = URLRequest(url: url)
         
         req.httpMethod = method.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        Alamofire.request(req).responseJSON { response in
-            completion(response.result.value as AnyObject)
-        }
+        APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
     
     static func request(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> ()){
@@ -52,6 +75,7 @@ class APIManager: AnyObject{
         req.httpMethod = method.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
         
         Alamofire.request(req).responseJSON { response in
             completion(response.result.value as AnyObject)

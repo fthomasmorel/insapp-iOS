@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 import CoreData
 
-let kCredentialsAuthToken  = "authtoken"
-let kCredentialsUsername   = "username"
-let kCredentialsUserId     = "user"
-
 public class Credentials: NSManagedObject {
     
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -65,6 +61,9 @@ public class Credentials: NSManagedObject {
         Credentials.delete()
         
         let credentials = Credentials(username: username, userId: userId, authToken: authToken)
+        
+        Credentials.saveContext()
+        
         return credentials
     }
 }

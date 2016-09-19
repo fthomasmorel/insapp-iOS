@@ -10,8 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-let kMaxTimestampForImage = 864000
-
 public class Image: NSManagedObject {
 
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

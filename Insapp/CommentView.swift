@@ -14,9 +14,6 @@ protocol CommentViewDelegate {
     func updateFrame(_ frame: CGRect)
 }
 
-let kCommentViewEmptyHeight = CGFloat(16)
-let kCommentEmptyTextViewHeight = CGFloat(33)
-
 class CommentView: UIView, UITextViewDelegate {
     
     @IBOutlet weak var postButton: UIButton!

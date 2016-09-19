@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-let kAssociationEventCellView = "kAssociationEventCellView"
-
 class AssociationViewController: UIViewController
 {
     
@@ -81,8 +79,8 @@ class AssociationViewController: UIViewController
     }
     
     func initEventView(){
-        self.eventListViewController.eventIds = self.association.events!
         self.eventListViewController.fontColor = self.fontColor
+        self.eventListViewController.eventIds = self.association.events!
         self.eventListViewController.fetchEvents()
     }
 }
