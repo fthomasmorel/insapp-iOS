@@ -32,7 +32,14 @@ public class Image: NSManagedObject {
         results = results.filter { (image) -> Bool in
             return image.url! == url
         }
-        return (results.count == 0 ? .none : UIImage(data: results.first!.data as! Data, scale: 1.0))
+        
+        if results.count > 0 {
+            let image = results.first!
+            image.lastUsed = NSDate()
+            Image.saveContext()
+            return UIImage(data: image.data as! Data, scale: 1.0)
+        }
+        return .none
     }
     
     static func store(image: UIImage, forUrl url: String){

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import UserNotifications
 
 class SpashScreenViewController: UIViewController {
     
@@ -30,10 +29,8 @@ class SpashScreenViewController: UIViewController {
             guard let creds = opt_cred else { self.signin() ; return }
             APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
                 guard let _ = opt_user else { self.signin() ; return }
-                let application = UIApplication.shared
-                let center = UNUserNotificationCenter.current()
-                center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in }
-                application.registerForRemoteNotifications()
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                delegate.registerForNotification()
                 self.loadViewController(name: "TabViewController")
             })
         })
@@ -41,7 +38,7 @@ class SpashScreenViewController: UIViewController {
     
     func signin(){
         DispatchQueue.main.async {
-            self.loadViewController(name: "SigninViewController")
+            self.loadViewController(name: "TutorialViewController")
         }
     }
     

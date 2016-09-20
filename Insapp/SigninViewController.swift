@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SigninViewController: UIViewController {
+class SigninViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -20,7 +20,35 @@ class SigninViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.usernameTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.checkForm()
         self.lightStatusBar()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text {
+            textField.text = text + string
+            if string == "" {
+                textField.text = text.substring(to: text.index(before: text.endIndex))
+            }
+        }else{
+            textField.text = string
+        }
+        self.checkForm()
+        return false
+    }
+    
+    func checkForm(){
+        guard let username = usernameTextField.text, let password = passwordTextField.text else {
+            self.validateButton.isEnabled = false
+            return
+        }
+        if username.characters.count == 0 || password.characters.count == 0 {
+            self.validateButton.isEnabled = false
+            return
+        }
+        self.validateButton.isEnabled = true
     }
     
     @IBAction func connectAction(_ sender: AnyObject) {

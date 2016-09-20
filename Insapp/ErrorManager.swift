@@ -51,11 +51,7 @@ extension UIViewController{
         case 200:
             return false
         case 401:
-            let group = DispatchGroup()
-            group.enter()
-            APIManager.login(Credentials.fetch()!, completion: { (opt_cred) in group.leave() })
-            group.wait()
-            return true
+            return false
         default:
             return false
         }

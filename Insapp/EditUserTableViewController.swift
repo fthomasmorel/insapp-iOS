@@ -123,7 +123,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             if result == .success {
                 Credentials.delete()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "SigninViewController")
+                let vc = storyboard.instantiateViewController(withIdentifier: "SpashScreenViewController")
                 self.present(vc, animated: true, completion: nil)
             }
         })

@@ -37,7 +37,7 @@ class APIManager: AnyObject{
             return retry
         }
         
-        queue.async {
+        DispatchQueue.global().async {
             let retry = proc()
             if retry {
                 _ = proc()

@@ -13,6 +13,9 @@ import UIKit
 let kErrorServer = "Impossible de se connecter au serveur. Merci de réessayer plus tard!"
 let kErrorUnkown = "Une erreur est survenue. Merci de réessayer plus tard!"
 
+//TUTORIAL
+let kTutorialPages = ["TutorialAssociationViewController", "TutorialEventViewController", "TutorialNewsViewController", "TutorialNotificationViewController", "TutorialProfilViewController"]
+
 //COLOR
 let kLightGreyColor = UIColor(colorLiteralRed: 238/255, green: 238/255, blue: 238/255, alpha: 1)
 let kDarkGreyColor = UIColor(colorLiteralRed: 180/255, green: 180/255, blue: 180/255, alpha: 1)

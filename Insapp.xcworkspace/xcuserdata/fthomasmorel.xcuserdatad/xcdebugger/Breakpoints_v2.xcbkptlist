@@ -20,93 +20,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Insapp/ErrorManager.swift"
-            timestampString = "495983888.825323"
+            timestampString = "496056283.097144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "shouldRetry(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Insapp/AppDelegate.swift"
-            timestampString = "495988572.692994"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Insapp/AppDelegate.swift"
-            timestampString = "495988992.791972"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Insapp/AppDelegate.swift"
-            timestampString = "495988992.791972"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Insapp.AppDelegate.application (__ObjC.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken : Foundation.Data) -&gt; ()"
-                  moduleName = "Insapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/AppDelegate.swift"
-                  timestampString = "495988992.887293"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "488">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Insapp.AppDelegate.application (__ObjC.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken : Foundation.Data) -&gt; ()"
-                  moduleName = "Insapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/AppDelegate.swift"
-                  timestampString = "495988992.888578"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "516">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -132,7 +52,7 @@
                   moduleName = "Insapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/APIManager+Notification.swift"
-                  timestampString = "495988992.891247"
+                  timestampString = "496061708.215722"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -147,7 +67,7 @@
                   moduleName = "Insapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/APIManager+Notification.swift"
-                  timestampString = "495988992.892491"
+                  timestampString = "496061708.216894"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -162,7 +82,7 @@
                   moduleName = "Insapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/APIManager+Notification.swift"
-                  timestampString = "495988992.893678"
+                  timestampString = "496061708.218059"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -178,13 +98,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Insapp/APIManager.swift"
-            timestampString = "495988650.430523"
+            filePath = "Insapp/SplashScreenViewController.swift"
+            timestampString = "496059130.178599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "process(request:completion:errorBlock:)"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Insapp/SplashScreenViewController.swift"
+            timestampString = "496059135.706024"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "login(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Insapp.SpashScreenViewController.login (Insapp.Credentials) -&gt; ()"
+                  moduleName = "Insapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/SplashScreenViewController.swift"
+                  timestampString = "496061708.222642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Insapp.SpashScreenViewController.(login (Insapp.Credentials) -&gt; ()).(closure #1)"
+                  moduleName = "Insapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/SplashScreenViewController.swift"
+                  timestampString = "496061708.223782"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Insapp/SigninViewController.swift"
+            timestampString = "496061707.135984"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "checkForm()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
