@@ -72,7 +72,7 @@ let kPostEvent          = "event"
 let kPostDate           = "date"
 let kPostLikes          = "likes"
 let kPostComments       = "comments"
-let kPostPhotoURL       = "photourl"
+let kPostPhotoURL       = "image"
 let kPostStatus         = "status"
 let kPostImageSize      = "imageSize"
 
@@ -114,7 +114,7 @@ let kEventDateStart      = "dateStart"
 let kEventDateEnd        = "dateEnd"
 let kEventBgColor        = "bgColor"
 let kEventFgColor        = "fgColor"
-let kEventPhotoURL       = "photoURL"
+let kEventPhotoURL       = "image"
 let kEventStatus         = "status"
 
 //OTHER

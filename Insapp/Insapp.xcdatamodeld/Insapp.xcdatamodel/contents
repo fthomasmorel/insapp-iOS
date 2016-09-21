@@ -45,12 +45,10 @@
         <attribute name="comments" optional="YES" attributeType="Transformable" customClassName="[Comment]" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageSize" attributeType="Transformable" customClassName="Dictionary&lt;String,CGFloat&gt;" syncable="YES"/>
         <attribute name="likes" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
         <attribute name="photourl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
@@ -67,10 +65,10 @@
     <elements>
         <element name="Association" positionX="18" positionY="135" width="119" height="178"/>
         <element name="Comment" positionX="-180" positionY="63" width="128" height="105"/>
-        <element name="Credentials" positionX="-153" positionY="90" width="128" height="90"/>
+        <element name="Credentials" positionX="25" positionY="-27" width="128" height="90"/>
         <element name="Event" positionX="-369" positionY="114" width="128" height="210"/>
-        <element name="Post" positionX="-180" positionY="63" width="128" height="210"/>
-        <element name="User" positionX="-198" positionY="-90" width="128" height="180"/>
         <element name="Image" positionX="-180" positionY="63" width="128" height="90"/>
+        <element name="Post" positionX="-126" positionY="177" width="128" height="178"/>
+        <element name="User" positionX="-198" positionY="-90" width="128" height="180"/>
     </elements>
 </model>

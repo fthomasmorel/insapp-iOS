@@ -20,7 +20,6 @@ extension Post {
     @NSManaged public var title: String?
     @NSManaged public var association: String?
     @NSManaged public var desc: String?
-    @NSManaged public var event: String?
     @NSManaged public var date: NSDate?
     @NSManaged public var likes: Array<String>?
     @NSManaged public var comments: [Comment]?

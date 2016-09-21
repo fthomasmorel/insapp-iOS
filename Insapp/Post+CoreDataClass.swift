@@ -21,18 +21,16 @@ public class Post: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
-    init(post_id: String, title: String, association: String, description: String, event: String, date: NSDate, likes: [String], comments: [Comment], photoURL: String, status: String, size:Dictionary<String, CGFloat>){
+    init(post_id: String, title: String, association: String, description: String, date: NSDate, likes: [String], comments: [Comment], photoURL: String, size:Dictionary<String, CGFloat>){
         super.init(entity: Post.entityDescription!, insertInto: Post.managedContext)
         self.id = post_id
         self.title = title
         self.desc = description
         self.association = association
-        self.event = event
         self.date = date
         self.photourl = photoURL
         self.likes = likes
         self.comments = comments
-        self.status = status
         self.imageSize = size
     }
     
@@ -42,11 +40,9 @@ public class Post: NSManagedObject {
         guard let desc          = json[kPostDescription] as? String else { return .none }
         guard let association   = json[kPostAssociation] as? String else { return .none }
         guard let dateStr       = json[kPostDate] as? String        else { return .none }
-        guard let event         = json[kPostEvent] as? String       else { return .none }
         guard let likes         = json[kPostLikes] as? [String]     else { return .none }
         guard let commentsJson  = json[kPostComments] as? [Dictionary<String, String>] else { return .none }
         guard let photoURL      = json[kPostPhotoURL] as? String    else { return .none }
-        guard let status        = json[kPostStatus] as? String      else { return .none }
         guard let size          = json[kPostImageSize] as? Dictionary<String, CGFloat> else { return .none }
     
         guard let _             = size["width"]                     else { return .none }
@@ -55,6 +51,6 @@ public class Post: NSManagedObject {
         
         let comments = Comment.parseJsonArray(commentsJson)
         
-        return Post(post_id: id, title: title, association: association, description: desc, event: event, date: date, likes: likes, comments: comments, photoURL: photoURL, status: status, size: size)
+        return Post(post_id: id, title: title, association: association, description: desc, date: date, likes: likes, comments: comments, photoURL: photoURL, size: size)
     }
 }
