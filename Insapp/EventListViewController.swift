@@ -54,7 +54,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func reloadEvents(){
         self.fetchEventGroup.wait()
-        self.events = Event.sort(events: self.events)
+        self.events = Event.sortAndFilter(events: self.events)
         DispatchQueue.main.async {
             self.eventTableView.reloadData()
         }

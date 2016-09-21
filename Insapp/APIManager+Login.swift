@@ -7,27 +7,28 @@
 //
 
 import Foundation
+import UIKit
 
 extension APIManager{
     
-    static func signin(username: String, password: String, completion:@escaping (Optional<Credentials>) -> ()){
+    static func signin(username: String, password: String, controller: UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
         let params = [
             kLoginUsername: username,
             kLoginPassword: password
         ]
-        request(url: "/signin/user", method: .post, parameters: params as [String : AnyObject]) { result in
+        request(url: "/signin/user", method: .post, parameters: params as [String : AnyObject], completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(Credentials.parseJson(json))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func login(_ credentials: Credentials, completion:@escaping (Optional<Credentials>) -> ()){
+    static func login(_ credentials: Credentials, controller:UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
         let params = [
             kCredentialsUserId: credentials.userId,
             kCredentialsUsername: credentials.username,
             kCredentialsAuthToken: credentials.authToken
         ]
-        request(url: "/login/user", method: .post, parameters: params as [String : AnyObject]) { result in
+        request(url: "/login/user", method: .post, parameters: params as [String : AnyObject], completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let credentialsJson = json["credentials"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             guard let token = json["sessionToken"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
@@ -37,7 +38,7 @@ extension APIManager{
             APIManager.token = token["Token"] as! String
             
             completion(Credentials.parseJson(credentialsJson))
-        }
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
 }

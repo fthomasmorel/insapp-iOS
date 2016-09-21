@@ -14,7 +14,6 @@ class APIManager: AnyObject{
     static var token:String!
     
     static func process(request: URLRequestConvertible, completion: @escaping (Optional<AnyObject>) -> (), errorBlock: @escaping (String, Int) -> (Bool)){
-        let queue = DispatchQueue(label: "io.thomasmorel.insapp2")
         let proc: () -> (Bool) = {
             let group = DispatchGroup()
             var retry = false
@@ -26,6 +25,12 @@ class APIManager: AnyObject{
                         group.leave()
                         return
                     }
+                    //var error = kErrorUnkown
+//                    if let dict = response.result.value as? Dictionary<String, AnyObject>{
+//                        if let err = dict["error"] as? String {
+//                            error = err
+//                        }
+//                    }
                     retry = errorBlock(kErrorUnkown, res.statusCode)
                     if !retry {
                         completion(response.result.value as AnyObject)   
@@ -58,7 +63,7 @@ class APIManager: AnyObject{
     }
     
     static func requestWithToken(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
-        let token = APIManager.token!// + "fdsa"
+        let token = APIManager.token!
         let url = URL(string: "\(kAPIHostname)\(url)?token=\(token)")!
         var req = URLRequest(url: url)
         
@@ -68,7 +73,7 @@ class APIManager: AnyObject{
         APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
     
-    static func request(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> ()){
+    static func request(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
         let url = URL(string: "\(kAPIHostname)\(url)")!
         var req = URLRequest(url: url)
         
@@ -77,20 +82,17 @@ class APIManager: AnyObject{
         req.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         
-        Alamofire.request(req).responseJSON { response in
-            completion(response.result.value as AnyObject)
-        }
+        
+        APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
     
-    static func request(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> ()){
+    static func request(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
         let url = URL(string: "\(kAPIHostname)\(url)")!
         var req = URLRequest(url: url)
         
         req.httpMethod = method.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        Alamofire.request(req).responseJSON { response in
-            completion(response.result.value as AnyObject)
-        }
+        APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
 }

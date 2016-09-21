@@ -66,4 +66,26 @@ public class Event: NSManagedObject {
             return a.dateStart!.timeIntervalSince(b.dateStart! as Date) < 0
         }
     }
+    
+    static func filter(events: [Event]) -> [Event] {
+        return events.filter({ (event) -> Bool in
+            return event.dateEnd!.timeIntervalSinceNow > 0
+        })
+    }
+    
+    static func sortAndFilter(events: [Event]) -> [Event] {
+        return sort(events: filter(events: events))
+    }
+    
+    static func filterCurrent(events: [Event]) -> [Event] {
+        return sort(events: events.filter({ (event) -> Bool in
+            return event.dateStart!.timeIntervalSinceNow < 0 && event.dateEnd!.timeIntervalSinceNow > 0
+        }))
+    }
+    
+    static func filterComing(events: [Event]) -> [Event] {
+        return sort(events: events.filter({ (event) -> Bool in
+            return event.dateStart!.timeIntervalSinceNow > 0 && event.dateEnd!.timeIntervalSinceNow > 0
+        }))
+    }
 }

@@ -55,10 +55,12 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         guard let username = usernameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
+        self.usernameTextField.resignFirstResponder()
+        self.passwordTextField.resignFirstResponder()
         self.startLoading()
-        APIManager.signin(username: username, password: password) { (opt_cred) in
+        APIManager.signin(username: username, password: password, controller: self) { (opt_cred) in
             guard let credentials = opt_cred else { return }
-            APIManager.login(credentials, completion: { (opt_cred) in
+            APIManager.login(credentials, controller: self, completion: { (opt_cred) in
                 guard let creds = opt_cred else { return }
                 APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
                     guard let _ = opt_user else { return }

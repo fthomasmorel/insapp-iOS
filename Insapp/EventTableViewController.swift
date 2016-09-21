@@ -43,12 +43,8 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func fetchEvents(){
         APIManager.fetchFutureEvents(controller: self) { (events) in
-            let currentEvents = events.filter({ (event) -> Bool in
-                return event.dateStart!.timeIntervalSinceNow < 0
-            })
-            let comingEvents = events.filter({ (event) -> Bool in
-                return event.dateStart!.timeIntervalSinceNow > 0
-            })
+            let currentEvents = Event.filterCurrent(events: events)
+            let comingEvents = Event.filterComing(events: events)
             
             if currentEvents.count == 0 && comingEvents.count == 0{
                 self.events = []

@@ -13,7 +13,12 @@ import UIKit
 extension UIViewController{
     
     func triggerError(_ message: String, _ statusCode: Int) -> Bool {
-        if statusCode != 200 && statusCode != 401 {
+        if statusCode == 406 {
+            self.stopLoading()
+            self.displayError(message: kErrorUserExist)
+        }
+        else if statusCode != 200 && statusCode != 401 {
+            self.stopLoading()
             self.displayError(message: message)
         }
         return shouldRetry(statusCode)

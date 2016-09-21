@@ -25,7 +25,7 @@ class SpashScreenViewController: UIViewController {
     }
     
     func login(_ credentials:Credentials){
-        APIManager.login(credentials, completion: { (opt_cred) in
+        APIManager.login(credentials, controller: self, completion: { (opt_cred) in
             guard let creds = opt_cred else { self.signin() ; return }
             APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
                 guard let _ = opt_user else { self.signin() ; return }

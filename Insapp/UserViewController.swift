@@ -48,6 +48,10 @@ class UserViewController: UIViewController {
             self.profilePictureImageView.backgroundColor = kWhiteColor
             self.profilePictureImageView.layer.borderColor = kDarkGreyColor.cgColor
             self.profilePictureImageView.layer.borderWidth = 1
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(UserViewController.editAction(_:)))
+            self.profilePictureImageView.isUserInteractionEnabled = true
+            self.profilePictureImageView.addGestureRecognizer(tap)
         }
         
         if self.user == nil {
@@ -63,13 +67,6 @@ class UserViewController: UIViewController {
     }
     
     func fetchUser(user_id:String){
-        let user = User.fetch()!
-        if user.id == user_id {
-            self.user = user
-            self.initView()
-            self.initEventView()
-            return
-        }
         APIManager.fetch(user_id: user_id, controller: self) { (opt_user) in
             guard let user = opt_user else { return }
             self.user = user
@@ -130,6 +127,7 @@ class UserViewController: UIViewController {
     }
     
     @IBAction func editAction(_ sender: AnyObject) {
+        if !self.isEditable { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EditUserViewController") as! EditUserViewController
         vc.user = self.user

@@ -12,6 +12,7 @@ import UIKit
 //ERROR MESSAGE
 let kErrorServer = "Impossible de se connecter au serveur. Merci de réessayer plus tard!"
 let kErrorUnkown = "Une erreur est survenue. Merci de réessayer plus tard!"
+let kErrorUserExist = "Ce nom d'utilsateur est déjà utilisé!"
 
 //TUTORIAL
 let kTutorialPages = ["TutorialAssociationViewController", "TutorialEventViewController", "TutorialNewsViewController", "TutorialNotificationViewController", "TutorialProfilViewController"]
