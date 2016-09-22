@@ -32,7 +32,6 @@ class EditUserViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        self.updateSaveButton()
         self.lightStatusBar()
     }
     
@@ -81,16 +80,6 @@ class EditUserViewController: UIViewController {
         }
         
         return nil
-    }
-    
-    func updateSaveButton(){
-        guard let name = self.settingViewController!.nameTextField.text else { self.disableSabeButton() ; return }
-        if (name.characters.count < 1) { self.disableSabeButton() ; return }
-        self.saveButton.isEnabled = true
-    }
-    
-    func disableSabeButton(){
-        self.saveButton.isEnabled = false
     }
 }
 

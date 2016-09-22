@@ -15,6 +15,9 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     var associations:[Association] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noAssociationLabel: UILabel!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var reloadButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.refreshControl.beginRefreshing()
+        self.refreshUI()
         self.fetchAssociations()
         self.lightStatusBar()
     }
@@ -45,7 +48,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
             self.refreshControl.endRefreshing()
-            self.collectionView.reloadData()
+            self.refreshUI()
         }
     }
     
@@ -78,4 +81,25 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func refreshUI(){
+        if self.associations.count == 0 {
+            self.collectionView.isHidden = true
+            self.noAssociationLabel.isHidden = false
+            self.reloadButton.isHidden = false
+            self.loader.isHidden = true
+        }else{
+            self.collectionView.isHidden = false
+            self.noAssociationLabel.isHidden = true
+            self.reloadButton.isHidden = true
+            self.loader.isHidden = false
+            self.collectionView.reloadData()
+        }
+    }
+    
+    @IBAction func reloadAction(_ sender: AnyObject) {
+        self.loader.isHidden = false
+        self.reloadButton.isHidden = true
+        self.noAssociationLabel.isHidden = true
+        self.fetchAssociations()
+    }
 }

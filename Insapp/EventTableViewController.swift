@@ -14,6 +14,9 @@ import UIKit
 class EventTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var reloadButton: UIButton!
+    @IBOutlet weak var noEventLabel: UILabel!
     
     var events:[[Event]] = []
     var hasCurrentEvents = false
@@ -36,7 +39,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.refreshControl.beginRefreshing()
+        self.refreshUI()
         self.lightStatusBar()
         self.fetchEvents()
     }
@@ -60,7 +63,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.hasCurrentEvents = true
             }
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+            self.refreshUI()
         }
     }
 
@@ -99,5 +102,27 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
         vc.event = event
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func refreshUI(){
+        if self.events.count == 0 {
+            self.tableView.isHidden = true
+            self.noEventLabel.isHidden = false
+            self.reloadButton.isHidden = false
+            self.loader.isHidden = true
+        }else{
+            self.tableView.isHidden = false
+            self.noEventLabel.isHidden = true
+            self.reloadButton.isHidden = true
+            self.loader.isHidden = false
+            self.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func reloadAction(_ sender: AnyObject) {
+        self.loader.isHidden = false
+        self.reloadButton.isHidden = true
+        self.noEventLabel.isHidden = true
+        self.fetchEvents()
     }
 }

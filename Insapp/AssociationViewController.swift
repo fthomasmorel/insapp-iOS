@@ -15,7 +15,6 @@ class AssociationViewController: UIViewController
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var nextEventLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
     var eventListViewController: EventListViewController!

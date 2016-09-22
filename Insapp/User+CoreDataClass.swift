@@ -42,10 +42,12 @@ public class User: NSManagedObject {
         if gender.characters.count == 0 && promotion.characters.count > 0 {
             var promo = promotion
             if !promo.contains("STPI") { promo.remove(at: promo.startIndex) }
+            if !promo.contains("Personel/Enseignant") { promo = "worker" }
             return UIImage(named: "avatar-\(promo)-male")!
         }else if gender.characters.count > 0 && promotion.characters.count > 0 {
             var promo = promotion
             if !promo.contains("STPI") { promo.remove(at: promo.startIndex) }
+            if !promo.contains("Personel/Enseignant") { promo = "worker" }
             return UIImage(named: "avatar-\(promo)-\(gender)")!
         }else{
             return UIImage(named: "avatar-default")!

@@ -12,6 +12,9 @@ import UIKit
 class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate {
     
     @IBOutlet weak var postTableView: UITableView!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var noPostLabel: UILabel!
+    @IBOutlet weak var reloadButton: UIButton!
     
     private let tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
@@ -19,6 +22,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         self.postTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: kPostCell)
@@ -33,16 +37,16 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.refreshControl.beginRefreshing()
+        self.refreshUI()
         self.lightStatusBar()
         self.fetchPosts()
     }
     
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
-            self.refreshControl.endRefreshing()
             self.posts = posts
-            self.postTableView.reloadData()
+            self.refreshControl.endRefreshing()
+            self.refreshUI()
         })
     }
     
@@ -50,7 +54,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let post = self.posts[indexPath.row]
         let ratio = self.view.frame.size.width/post.imageSize!["width"]!
         return post.imageSize!["height"]! * ratio + kPostCellEmptyHeight
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,6 +71,21 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.delegate = self
         cell.loadPost(post)
         return cell
+    }
+    
+    func refreshUI(){
+        if self.posts.count == 0 {
+            self.postTableView.isHidden = true
+            self.noPostLabel.isHidden = false
+            self.reloadButton.isHidden = false
+            self.loader.isHidden = true
+        }else{
+            self.postTableView.isHidden = false
+            self.noPostLabel.isHidden = true
+            self.reloadButton.isHidden = true
+            self.loader.isHidden = false
+            self.postTableView.reloadData()
+        }
     }
     
     func commentAction(post: Post, forCell cell: PostCell) {
@@ -97,5 +115,12 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController
         vc.association = association
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func reloadAction(_ sender: AnyObject) {
+        self.loader.isHidden = false
+        self.reloadButton.isHidden = true
+        self.noPostLabel.isHidden = true
+        self.fetchPosts()
     }
 }
