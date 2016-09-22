@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Fabric
 import CoreData
+import Crashlytics
 import UserNotifications
 
 @UIApplicationMain
@@ -20,14 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = kRedColor
         
-        // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        // Optional: configure GAI options.
         let gai = GAI.sharedInstance()
         gai?.trackUncaughtExceptions = true  // report uncaught exceptions
+        
+        Fabric.with([Crashlytics.self])
         
         return true
     }

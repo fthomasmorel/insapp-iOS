@@ -9,4 +9,7 @@ target 'Insapp' do
   # Pods for Insapp
   pod 'Alamofire', '~> 4.0'
   pod 'Google/Analytics'
+  pod 'Fabric'
+  pod 'Crashlytics'
+
 end
