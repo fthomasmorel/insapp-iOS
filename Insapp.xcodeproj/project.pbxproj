@@ -17,6 +17,7 @@
 		E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1E51D90277000355512 /* APIManager+Notification.swift */; };
 		E192C1E91D9119C900355512 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1E81D9119C900355512 /* TutorialPageViewController.swift */; };
 		E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1EA1D911A2F00355512 /* TutorialViewController.swift */; };
+		E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1EC1D93C98C00355512 /* CreditViewController.swift */; };
 		E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */; };
 		E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */; };
 		E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */; };
@@ -77,6 +78,7 @@
 		E192C1E71D902CDE00355512 /* Insapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Insapp.entitlements; sourceTree = "<group>"; };
 		E192C1E81D9119C900355512 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		E192C1EA1D911A2F00355512 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		E192C1EC1D93C98C00355512 /* CreditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */,
 				E192C1E81D9119C900355512 /* TutorialPageViewController.swift */,
 				E192C1EA1D911A2F00355512 /* TutorialViewController.swift */,
+				E192C1EC1D93C98C00355512 /* CreditViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */,
 				E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
+				E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */,
 				E192C1E91D9119C900355512 /* TutorialPageViewController.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,

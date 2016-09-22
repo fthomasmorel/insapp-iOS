@@ -32,7 +32,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.refreshUI()
+        self.refreshUI(reload: true)
         self.fetchAssociations()
         self.lightStatusBar()
     }
@@ -81,12 +81,19 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func refreshUI(){
+    func refreshUI(reload:Bool = false){
         if self.associations.count == 0 {
-            self.collectionView.isHidden = true
-            self.noAssociationLabel.isHidden = false
-            self.reloadButton.isHidden = false
-            self.loader.isHidden = true
+            if reload {
+                self.collectionView.isHidden = true
+                self.noAssociationLabel.isHidden = true
+                self.reloadButton.isHidden = true
+                self.loader.isHidden = false
+            }else{
+                self.collectionView.isHidden = true
+                self.noAssociationLabel.isHidden = false
+                self.reloadButton.isHidden = false
+                self.loader.isHidden = true
+            }
         }else{
             self.collectionView.isHidden = false
             self.noAssociationLabel.isHidden = true
@@ -97,9 +104,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {
-        self.loader.isHidden = false
-        self.reloadButton.isHidden = true
-        self.noAssociationLabel.isHidden = true
+        self.refreshUI(reload: true)
         self.fetchAssociations()
     }
 }

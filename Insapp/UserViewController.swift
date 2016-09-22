@@ -22,6 +22,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var promotionLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var creditButton: UIButton!
     
     var eventListViewController: EventListViewController!
     var isEditable:Bool = true
@@ -37,10 +38,15 @@ class UserViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         self.editButton.isHidden = !self.isEditable
         self.backButton.isHidden = !self.canReturn
+        self.creditButton.isHidden = self.canReturn
         
         DispatchQueue.main.async {
             self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2
@@ -131,6 +137,13 @@ class UserViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EditUserViewController") as! EditUserViewController
         vc.user = self.user
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func creditAction(_ sender: AnyObject) {
+        if self.canReturn { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreditViewController")
         self.present(vc, animated: true, completion: nil)
     }
     

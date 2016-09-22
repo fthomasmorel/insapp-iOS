@@ -29,6 +29,10 @@ class AssociationViewController: UIViewController
         self.generateViewForAssociation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
+    }
+    
     func generateViewForAssociation(){
         self.coverImageView.downloadedFrom(link: kCDNHostname + self.association.coverPhotoURL!, contentMode: .scaleAspectFill, completion: { self.computeGradient() })
         self.view.backgroundColor = UIColor.hexToRGB(association.bgColor!)

@@ -37,7 +37,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.refreshUI()
+        self.refreshUI(reload: true)
         self.lightStatusBar()
         self.fetchPosts()
     }
@@ -73,12 +73,19 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func refreshUI(){
+    func refreshUI(reload:Bool = false){
         if self.posts.count == 0 {
-            self.postTableView.isHidden = true
-            self.noPostLabel.isHidden = false
-            self.reloadButton.isHidden = false
-            self.loader.isHidden = true
+            if reload {
+                self.postTableView.isHidden = true
+                self.noPostLabel.isHidden = true
+                self.reloadButton.isHidden = true
+                self.loader.isHidden = false
+            }else{
+                self.postTableView.isHidden = true
+                self.noPostLabel.isHidden = false
+                self.reloadButton.isHidden = false
+                self.loader.isHidden = true
+            }
         }else{
             self.postTableView.isHidden = false
             self.noPostLabel.isHidden = true
@@ -118,9 +125,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {
-        self.loader.isHidden = false
-        self.reloadButton.isHidden = true
-        self.noPostLabel.isHidden = true
+        self.refreshUI(reload: true)
         self.fetchPosts()
     }
 }

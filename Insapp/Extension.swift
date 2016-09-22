@@ -158,13 +158,13 @@ extension NSDate {
         
         let days = [ "Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi" ]
         
-        let startWeekDay = days[calendar.component(.weekday, from: start as Date)]
+        let startWeekDay = days[calendar.component(.weekday, from: start as Date)-1]
         let startDay = calendar.component(.day, from: start as Date)
         let startMonth = calendar.component(.month, from: start as Date)
         let startHour = calendar.component(.hour, from: start as Date)
         let startMinute = calendar.component(.minute, from: start as Date)
         
-        let endWeekDay = days[calendar.component(.weekday, from: end as Date)]
+        let endWeekDay = days[calendar.component(.weekday, from: end as Date)-1]
         let endDay = calendar.component(.day, from: end as Date)
         let endMonth = calendar.component(.month, from: end as Date)
         

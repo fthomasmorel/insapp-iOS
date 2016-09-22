@@ -28,6 +28,10 @@ class EventViewController: UIViewController {
         self.generateViewForEvent()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
+    }
+    
     func generateViewForEvent(){
         self.view.backgroundColor = UIColor.hexToRGB(event.bgColor!)
         
