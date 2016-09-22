@@ -29,6 +29,10 @@ class AssociationViewController: UIViewController
         self.generateViewForAssociation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }

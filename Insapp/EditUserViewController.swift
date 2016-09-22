@@ -22,6 +22,7 @@ class EditUserViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.settingViewController?.avatarImageView.image = user?.avatar()
         self.settingViewController?.usernameTextField.text = "@\(user!.username!)"
         self.settingViewController?.nameTextField.text = user!.name

@@ -32,6 +32,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.fetchAssociations()
         self.lightStatusBar()

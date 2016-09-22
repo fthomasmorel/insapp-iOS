@@ -18,20 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-aB-94T">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="insapp-logo" translatesAutoresizingMaskIntoConstraints="NO" id="S3Z-xZ-agm">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="kJL-cj-aby"/>
-                                    <constraint firstAttribute="width" constant="154" id="oHE-7y-6E6"/>
+                                    <constraint firstAttribute="height" constant="128" id="Ujc-iF-nuu"/>
+                                    <constraint firstAttribute="width" constant="128" id="sJo-17-1EG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="37"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.91096353530883789" green="0.36053669452667236" blue="0.33869665861129761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Rfd-aB-94T" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Yii-hS-Dcd"/>
-                            <constraint firstItem="Rfd-aB-94T" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="kCl-7C-qLk"/>
+                            <constraint firstItem="S3Z-xZ-agm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a4o-Ob-EQ7"/>
+                            <constraint firstItem="S3Z-xZ-agm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="gqg-Wr-Jq9"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -41,4 +38,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="insapp-logo" width="83" height="83"/>
+    </resources>
 </document>

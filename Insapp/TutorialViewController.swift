@@ -32,6 +32,7 @@ class TutorialViewController: UIPageViewController, UIPageViewControllerDataSour
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.setViewControllers([self.pageViewControllers.first!], direction: .forward, animated: false, completion: nil)
         self.view.backgroundColor = kRedColor
     }

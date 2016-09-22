@@ -39,6 +39,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
         self.fetchEvents()

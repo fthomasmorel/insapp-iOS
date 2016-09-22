@@ -11,6 +11,9 @@ import UIKit
 
 class SpashScreenViewController: UIViewController {
     
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let credentials = Credentials.fetch() {
@@ -22,6 +25,14 @@ class SpashScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.lightStatusBar()
+        self.loader.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.5) { 
+            self.imageView.frame.origin.y -= self.imageView.frame.width/2
+            self.loader.alpha = 1
+        }
     }
     
     func login(_ credentials:Credentials){

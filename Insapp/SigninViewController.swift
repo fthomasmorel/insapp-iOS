@@ -22,8 +22,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.usernameTextField.delegate = self
         self.passwordTextField.delegate = self
+        self.usernameTextField.becomeFirstResponder()
         self.checkForm()
         self.lightStatusBar()
+        self.notifyGoogleAnalytics()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -73,6 +75,18 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
                 })
             })
         }
-    }    
+    }
+    
+    @IBAction func creditAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreditViewController")
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func dismissAction(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
 

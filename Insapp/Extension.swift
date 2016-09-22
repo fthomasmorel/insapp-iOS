@@ -26,6 +26,22 @@ extension UIViewController{
         return view
     }
     
+    func notifyGoogleAnalytics(){
+        var name = NSStringFromClass(type(of: self)).replacingOccurrences(of: "ViewController", with: "")
+        if self is AssociationViewController {
+            name+="-\((self as! AssociationViewController).association.name!)"
+        }
+        if self is EventViewController {
+            name+="-\((self as! EventViewController).event.name!)"
+        }
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker?.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker?.send(builder!.build() as [NSObject : AnyObject])
+    }
+    
     func changeStatusBarForColor(colorStr: String? = "ffffff"){
         if colorStr == "ffffff" {
             self.lightStatusBar()
@@ -167,16 +183,18 @@ extension NSDate {
         let endWeekDay = days[calendar.component(.weekday, from: end as Date)-1]
         let endDay = calendar.component(.day, from: end as Date)
         let endMonth = calendar.component(.month, from: end as Date)
+        let endHour = calendar.component(.hour, from: end as Date)
+        let endMinute = calendar.component(.minute, from: end as Date)
         
         if end.timeIntervalSince(start as Date) < 86400 {
             if day {
-                return "\(startWeekDay) \(startDay)/\(startMonth) à \(startHour):\(startMinute)"
+                return "\(startWeekDay) \(startDay)/\(startMonth) de \(startHour):\(startMinute) à \(endHour):\(endMinute)"
             }else{
                 return "Le \(startDay)/\(startMonth) à \(startHour):\(startMinute)"
             }
         }else{
             if day {
-                return "Du \(startWeekDay) \(startDay)/\(startMonth) au \(endWeekDay) \(endDay)/\(endMonth)"
+                return "Du \(startWeekDay) \(startDay)/\(startMonth) à \(startHour):\(startMinute)\nAu \(endWeekDay) \(endDay)/\(endMonth) à \(endHour):\(endMinute)"
             }else{
                 return "Du \(startDay)/\(startMonth) au \(endDay)/\(endMonth)"
             }

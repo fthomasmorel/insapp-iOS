@@ -43,7 +43,7 @@ class UserViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.notifyGoogleAnalytics()
         self.editButton.isHidden = !self.isEditable
         self.backButton.isHidden = !self.canReturn
         self.creditButton.isHidden = self.canReturn

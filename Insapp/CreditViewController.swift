@@ -21,6 +21,7 @@ class CreditViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.lightStatusBar()
     }
     

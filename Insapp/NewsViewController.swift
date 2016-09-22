@@ -37,6 +37,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
         self.fetchPosts()

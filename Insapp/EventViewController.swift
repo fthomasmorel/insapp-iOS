@@ -19,6 +19,7 @@ class EventViewController: UIViewController {
     @IBOutlet weak var attendeesLabel: UILabel!
     @IBOutlet weak var decisionControl: UISegmentedControl!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var dateLabelHeightConstraint: NSLayoutConstraint!
     
     var event:Event!
     
@@ -26,6 +27,10 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.generateViewForEvent()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.notifyGoogleAnalytics()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +49,13 @@ class EventViewController: UIViewController {
         self.computeGradient()
         self.titleLabel.text = event.name
         self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!)
+        
+        if self.dateLabel.text!.contains("\n"){
+            self.dateLabelHeightConstraint.constant = 50
+        }else{
+            self.dateLabelHeightConstraint.constant = 25
+        }
+        
         self.attendeesLabel.text = "\(event.attendees!.count) participant\((event.attendees!.count > 1 ? "s" : ""))"
         self.descriptionTextView.text = event.desc
         self.decisionControl.selectedSegmentIndex = 1

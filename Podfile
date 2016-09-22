@@ -8,5 +8,5 @@ target 'Insapp' do
   source 'https://github.com/CocoaPods/Specs.git'
   # Pods for Insapp
   pod 'Alamofire', '~> 4.0'
-
+  pod 'Google/Analytics'
 end

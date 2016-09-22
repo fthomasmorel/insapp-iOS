@@ -28,6 +28,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        self.notifyGoogleAnalytics()
         self.lightStatusBar()
         self.hideTabBar()
     }
