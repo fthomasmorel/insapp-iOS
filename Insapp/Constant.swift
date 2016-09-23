@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //ERROR MESSAGE
-let kErrorServer = "Impossible de se connecter au serveur. Merci de réessayer plus tard!"
+let kErrorServer = "Impossible de se connecter au serveur. Verifie ta connection et réessaye plus tard!"
 let kErrorUnkown = "Une erreur est survenue. Merci de réessayer plus tard!"
 let kErrorUserExist = "Ce nom d'utilsateur est déjà utilisé!"
 

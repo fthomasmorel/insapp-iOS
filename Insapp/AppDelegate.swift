@@ -16,6 +16,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notification: [String: AnyObject]?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai?.trackUncaughtExceptions = true  // report uncaught exceptions
         
         Fabric.with([Crashlytics.self])
+        
+        self.notification = launchOptions?[.remoteNotification] as? [String: AnyObject]
         
         return true
     }

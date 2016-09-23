@@ -42,7 +42,7 @@ class SpashScreenViewController: UIViewController {
                 guard let _ = opt_user else { self.signin() ; return }
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 delegate.registerForNotification()
-                self.loadViewController(name: "TabViewController")
+                self.displayTabViewController()
             })
         })
     }
@@ -53,9 +53,37 @@ class SpashScreenViewController: UIViewController {
         }
     }
     
-    func loadViewController(name: String){
+    func displayTabViewController(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var completion: ((UIViewController) -> Void)? = nil
+        if let notification = appDelegate.notification {
+            completion = { viewController in
+                if let event_id = notification["id"] as? String {
+                    self.loadEventViewController(viewController as! UITabBarController, event_id: event_id)
+                }
+            }
+        }
+        self.loadViewController(name: "TabViewController", completion: completion)
+    }
+    
+    func loadEventViewController(_ controller: UITabBarController, event_id: String){
+        controller.selectedIndex = 1
+        let navigationController = (controller.selectedViewController as! UINavigationController)
+        let eventController = (navigationController.topViewController as! EventTableViewController)
+        APIManager.fetchEvent(event_id: event_id, controller: eventController, completion: { (opt_event) in
+            guard let event = opt_event else { return }
+            DispatchQueue.main.async {
+                eventController.loadEvent(event: event)
+            }
+        })
+    }
+    
+    func loadViewController(name: String, completion: ((_ vc: UIViewController) -> Void)? = nil){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: name)
-        self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true) {
+            guard let _ = completion else { return }
+            completion!(vc)
+        }
     }
 }

@@ -99,10 +99,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = self.events[indexPath.section][indexPath.row]
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
-        vc.event = event
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.loadEvent(event: event)
     }
     
     func refreshUI(reload:Bool = false){
@@ -125,6 +122,13 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
             self.loader.isHidden = false
             self.tableView.reloadData()
         }
+    }
+    
+    func loadEvent(event: Event){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+        vc.event = event
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {
