@@ -29,12 +29,13 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.refreshControl.addTarget(self, action: #selector(AssociationCollectionViewController.fetchAssociations), for: UIControlEvents.valueChanged)
         self.collectionView.addSubview(refreshControl)
         self.collectionView.alwaysBounceVertical = true
+        
+        self.fetchAssociations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
-        self.fetchAssociations()
         self.lightStatusBar()
     }
     

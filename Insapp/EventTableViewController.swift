@@ -19,6 +19,9 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var noEventLabel: UILabel!
     
     var events:[[Event]] = []
+    var currentEvents:[Event] = []
+    var todayEvents:[Event] = []
+    var comingEvents:[Event] = []
     var hasCurrentEvents = false
     var tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
@@ -47,22 +50,13 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func fetchEvents(){
         APIManager.fetchFutureEvents(controller: self) { (events) in
-            let currentEvents = Event.filterCurrent(events: events)
-            let comingEvents = Event.filterComing(events: events)
-            
-            if currentEvents.count == 0 && comingEvents.count == 0{
-                self.events = []
-                self.hasCurrentEvents = false
-            }else if currentEvents.count == 0 && comingEvents.count > 0 {
-                self.events = [comingEvents]
-                self.hasCurrentEvents = false
-            }else if currentEvents.count > 0 && comingEvents.count == 0 {
-                self.events = [currentEvents]
-                self.hasCurrentEvents = true
-            }else{
-                self.events = [Event.sort(events: currentEvents), Event.sort(events: comingEvents)]
-                self.hasCurrentEvents = true
-            }
+            self.currentEvents = Event.filterCurrent(events: events)
+            self.todayEvents = Event.filterToday(events: events)
+            self.comingEvents = Event.filterComing(events: events)
+            self.events = [Event.sort(events: self.currentEvents), Event.sort(events: self.todayEvents), Event.sort(events: self.comingEvents)]
+            self.events = self.events.filter({ (list) -> Bool in
+                return !list.isEmpty
+                })
             self.refreshControl.endRefreshing()
             self.refreshUI()
         }
@@ -81,9 +75,35 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return (self.hasCurrentEvents ? "En ce moment" : "À venir")
+        let hasCurrentEvent = self.currentEvents.count > 0
+        let hasTodayEvent = self.todayEvents.count > 0
+        let hasComingEvent = self.comingEvents.count > 0
+        
+        switch (section, hasCurrentEvent, hasTodayEvent, hasComingEvent) {
+        case (0, true, true, true):
+            return "En ce moment"
+        case (1, true, true, true):
+            return "Aujourd'hui"
+        case (2, true, true, true):
+            return "À venir"
+        case (0, true, false, true):
+            return "En ce moment"
+        case (1, true, false, true):
+            return "À venir"
+        case (0, false, true, true):
+            return "Aujourd'hui"
+        case (1, false, true, true):
+            return "À venir"
+        case (0, true, true, false):
+            return "En ce moment"
+        case (1, true, true, false):
+            return "Aujourd'hui"
+        case (_, true, false, false):
+            return "En ce moment"
+        case (_, false, true, false):
+            return "Aujourd'hui"
+        case (_, false, false, true):
+            return "À venir"
         default:
             return "À venir"
         }

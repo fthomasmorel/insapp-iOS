@@ -169,6 +169,21 @@ extension Date {
 }
 
 extension NSDate {
+    
+    func isToday() -> Bool {
+        let calendar = NSCalendar.current
+        let day = calendar.component(.day, from: self as Date)
+        let month = calendar.component(.month, from: self as Date)
+        let year = calendar.component(.year, from: self as Date)
+        
+        let today = NSDate()
+        let todayDay = calendar.component(.day, from: today as Date)
+        let todayMonth = calendar.component(.month, from: today as Date)
+        let todayYear = calendar.component(.year, from: today as Date)
+        
+        return todayDay == day && todayMonth == month && todayYear == year
+    }
+    
     static func stringForInterval(start: NSDate, end: NSDate, day: Bool = true) -> String {
         let calendar = NSCalendar.current
         
@@ -178,13 +193,13 @@ extension NSDate {
         let startDay = calendar.component(.day, from: start as Date)
         let startMonth = calendar.component(.month, from: start as Date)
         let startHour = calendar.component(.hour, from: start as Date)
-        let startMinute = calendar.component(.minute, from: start as Date)
+        let startMinute = String(format: "%02d", calendar.component(.minute, from: start as Date))
         
         let endWeekDay = days[calendar.component(.weekday, from: end as Date)-1]
         let endDay = calendar.component(.day, from: end as Date)
         let endMonth = calendar.component(.month, from: end as Date)
         let endHour = calendar.component(.hour, from: end as Date)
-        let endMinute = calendar.component(.minute, from: end as Date)
+        let endMinute = String(format: "%02d", calendar.component(.minute, from: end as Date))
         
         if end.timeIntervalSince(start as Date) < 86400 {
             if day {

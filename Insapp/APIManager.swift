@@ -81,8 +81,6 @@ class APIManager: AnyObject{
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
-        
-        
         APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
     }
     
@@ -94,5 +92,27 @@ class APIManager: AnyObject{
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         APIManager.process(request: req, completion: completion, errorBlock: errorBlock)
+    }
+    
+    static func requestCas(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Bool) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
+        let url = URL(string: "\(kCASHostname)\(url)")!
+        var req = URLRequest(url: url)
+
+        guard let username = parameters[kLoginUsername] else { completion(false) ; return }
+        guard let password = parameters[kLoginPassword] else { completion(false) ; return }
+        
+        let data = "username=\(username)&password=\(password)"
+        
+        req.httpMethod = method.rawValue
+        req.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+        req.httpBody = data.data(using: .utf8, allowLossyConversion: false)
+        
+        Alamofire.request(req).response { (response) in
+            guard let res = response.response, res.statusCode == 201 else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
 }

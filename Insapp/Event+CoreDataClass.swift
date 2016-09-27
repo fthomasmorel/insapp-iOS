@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-
 public class Event: NSManagedObject {
     
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -83,9 +82,15 @@ public class Event: NSManagedObject {
         }))
     }
     
+    static func filterToday(events: [Event]) -> [Event] {
+        return sort(events: events.filter({ (event) -> Bool in
+            return event.dateStart!.isToday() && event.dateStart!.timeIntervalSinceNow > 0
+        }))
+    }
+    
     static func filterComing(events: [Event]) -> [Event] {
         return sort(events: events.filter({ (event) -> Bool in
-            return event.dateStart!.timeIntervalSinceNow > 0 && event.dateEnd!.timeIntervalSinceNow > 0
+            return event.dateStart!.timeIntervalSinceNow > 0 && event.dateEnd!.timeIntervalSinceNow > 0 && !event.dateStart!.isToday()
         }))
     }
 }

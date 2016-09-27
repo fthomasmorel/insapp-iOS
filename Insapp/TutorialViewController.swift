@@ -72,7 +72,7 @@ class TutorialViewController: UIPageViewController, UIPageViewControllerDataSour
             }
         }else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "SigninViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
             self.present(vc, animated: true, completion: nil)
         }
     }

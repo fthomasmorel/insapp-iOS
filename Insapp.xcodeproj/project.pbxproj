@@ -27,6 +27,7 @@
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
 		E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */; };
+		E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
 		E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */; };
 		E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CC1D87F7E0006A66CF /* APIManager+Login.swift */; };
@@ -55,7 +56,6 @@
 		E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */; };
 		E1DC7F141D86E2C900284222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1DC7F131D86E2C900284222 /* Assets.xcassets */; };
 		E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DC7F151D86E2C900284222 /* LaunchScreen.storyboard */; };
-		E1DC7F1F1D86E8D000284222 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F1E1D86E8D000284222 /* SigninViewController.swift */; };
 		E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F5B1D86F52700284222 /* APIManager.swift */; };
 		E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F5D1D86FBAB00284222 /* User+CoreDataClass.swift */; };
 		E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F5E1D86FBAB00284222 /* User+CoreDataProperties.swift */; };
@@ -90,6 +90,7 @@
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		E1C3F9CC1D87F7E0006A66CF /* APIManager+Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIManager+Login.swift"; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		E1DC7F131D86E2C900284222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1DC7F161D86E2C900284222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1DC7F181D86E2C900284222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1DC7F1E1D86E8D000284222 /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		E1DC7F5B1D86F52700284222 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E1DC7F5D1D86FBAB00284222 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1DC7F5E1D86FBAB00284222 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -179,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				E1C3F9D11D87FC07006A66CF /* SplashScreenViewController.swift */,
-				E1DC7F1E1D86E8D000284222 /* SigninViewController.swift */,
 				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
 				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
 				E1C3F9D81D8837E7006A66CF /* EditUserViewController.swift */,
@@ -193,6 +192,7 @@
 				E192C1E81D9119C900355512 /* TutorialPageViewController.swift */,
 				E192C1EA1D911A2F00355512 /* TutorialViewController.swift */,
 				E192C1EC1D93C98C00355512 /* CreditViewController.swift */,
+				E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -449,7 +449,6 @@
 				E1C3F9D51D8803D2006A66CF /* UserViewController.swift in Sources */,
 				E1C3F9D21D87FC07006A66CF /* SplashScreenViewController.swift in Sources */,
 				E1C3F9DF1D8940D8006A66CF /* EventViewController.swift in Sources */,
-				E1DC7F1F1D86E8D000284222 /* SigninViewController.swift in Sources */,
 				E1C3F9F51D897609006A66CF /* Post+CoreDataClass.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
@@ -483,6 +482,7 @@
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
 				E1C3F9E31D8946FD006A66CF /* APIManager+Association.swift in Sources */,
 				E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */,
+				E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */,
 				E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
 				E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */,

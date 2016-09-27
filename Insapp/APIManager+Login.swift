@@ -11,10 +11,19 @@ import UIKit
 
 extension APIManager{
     
-    static func signin(username: String, password: String, controller: UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
+    static func verifyUser(username: String, password: String, controller: UIViewController, completion:@escaping (Bool) -> ()){
         let params = [
             kLoginUsername: username,
             kLoginPassword: password
+        ]
+        requestCas(url: "/cas/v1/tickets", method: .post, parameters: params as [String : AnyObject], completion: { result in
+            completion(result)
+        }) { (errorMessage, statusCode) in completion(false) ; return false }
+    }
+    
+    static func signin(username: String, controller: UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
+        let params = [
+            kLoginUsername: username,
         ]
         request(url: "/signin/user", method: .post, parameters: params as [String : AnyObject], completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }

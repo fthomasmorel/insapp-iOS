@@ -24,7 +24,7 @@ extension UIViewController{
         return shouldRetry(statusCode)
     }
     
-    private func displayError(message: String){
+    func displayError(message: String){
         let frame = CGRect(x: 0, y: -80, width: self.view.frame.width, height: 80)
         let view = UIView(frame: frame)
         view.backgroundColor = kDarkGreyColor
