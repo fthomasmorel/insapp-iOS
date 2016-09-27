@@ -24,7 +24,9 @@ extension APIManager {
         ]
         requestWithToken(url: "/notification", method: .post, parameters: params as [String : AnyObject], completion: { result in
             
-        }) { (errorMessage, statusCode) in return false }
+        }) { (errorMessage, statusCode) in
+            
+            return false }
     }
 }
 

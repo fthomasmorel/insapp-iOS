@@ -20,8 +20,10 @@ class CASViewController: UIViewController, UIWebViewDelegate{
         super.viewWillAppear(animated)
         let url = URL (string: "https://cas.insa-rennes.fr/cas/login?service=https://insapp.insa-rennes.fr/cas/login")
         let req = URLRequest(url: url!)
-        webView.loadRequest(req)
-        webView.delegate = self
+        
+        self.username = nil
+        self.webView.loadRequest(req)
+        self.webView.delegate = self
     }
  
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {

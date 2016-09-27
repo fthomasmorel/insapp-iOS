@@ -8,144 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Signin View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="SigninViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SigninViewController" customModule="Insapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm6-f0-aCj">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="1wZ-7a-wKZ"/>
-                                    <constraint firstAttribute="width" constant="154" id="WcX-Bu-Sdu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="37"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otO-jr-wK6">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="557-rn-b3W"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="Pour te connecter, rentre tes identifiants INSA">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" metaFont="cellTitle"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="nom d'utilisateur INSA" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rQU-SU-scE">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="4TK-UM-mXA"/>
-                                    <constraint firstAttribute="height" constant="30" id="YCc-pb-1zo"/>
-                                </constraints>
-                                <color key="textColor" red="0.994676975388601" green="0.994676975388601" blue="0.994676975388601" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2R-0o-afQ">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="N9D-eH-tbG"/>
-                                    <constraint firstAttribute="width" constant="200" id="SnW-tF-4M1"/>
-                                </constraints>
-                            </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="mot de passe" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LO7-Uz-14p">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="11s-nK-N4C"/>
-                                    <constraint firstAttribute="height" constant="30" id="Vrb-YK-1dW"/>
-                                </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjp-Lp-tVJ">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="4Do-T5-TTf"/>
-                                    <constraint firstAttribute="width" constant="200" id="sqf-qe-d2i"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nk-fm-ZC5">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="3sw-7l-nwa"/>
-                                    <constraint firstAttribute="width" constant="217" id="Kte-O7-zmP"/>
-                                </constraints>
-                                <state key="normal" image="connect_button"/>
-                                <connections>
-                                    <action selector="connectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pK5-e4-oP7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBt-gz-MRl">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="mae-ds-8qO"/>
-                                    <constraint firstAttribute="width" constant="30" id="vJG-Gm-eSP"/>
-                                </constraints>
-                                <state key="normal" image="cross">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissAction:" destination="yf0-RK-8jZ" eventType="touchUpInside" id="Mmv-bj-oxC"/>
-                                    <action selector="dismissAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xcJ-lV-HOH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-WZ-cqa">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="8yn-v6-pIR"/>
-                                    <constraint firstAttribute="height" constant="35" id="FOC-ni-OR2"/>
-                                </constraints>
-                                <state key="normal" image="question_mark">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="creditAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T1N-DF-XpK"/>
-                                    <action selector="dismissAction:" destination="yf0-RK-8jZ" eventType="touchUpInside" id="z7S-cC-dMZ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.92682152986526489" green="0.3643297553062439" blue="0.34221845865249634" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="otO-jr-wK6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3WP-E9-Eiv"/>
-                            <constraint firstItem="Hm6-f0-aCj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8IR-u3-qJl"/>
-                            <constraint firstItem="UBt-gz-MRl" firstAttribute="centerY" secondItem="Hm6-f0-aCj" secondAttribute="centerY" constant="-2" id="8gy-5P-uov"/>
-                            <constraint firstItem="MYG-WZ-cqa" firstAttribute="centerY" secondItem="Hm6-f0-aCj" secondAttribute="centerY" id="HUI-3X-HRz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="otO-jr-wK6" secondAttribute="trailing" id="Pp7-xo-gqA"/>
-                            <constraint firstItem="u2R-0o-afQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QhK-BF-iNz"/>
-                            <constraint firstItem="xjp-Lp-tVJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QoG-iF-MDF"/>
-                            <constraint firstItem="6Nk-fm-ZC5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ruc-Jo-wOz"/>
-                            <constraint firstItem="rQU-SU-scE" firstAttribute="top" secondItem="otO-jr-wK6" secondAttribute="bottom" constant="8" id="Tix-LY-hMD"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="UBt-gz-MRl" secondAttribute="leading" constant="-4" id="gMt-1D-4np"/>
-                            <constraint firstItem="Hm6-f0-aCj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="jag-Hz-ZC2"/>
-                            <constraint firstItem="LO7-Uz-14p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lDH-3o-V2g"/>
-                            <constraint firstItem="LO7-Uz-14p" firstAttribute="top" secondItem="rQU-SU-scE" secondAttribute="bottom" constant="16" id="moD-yy-mYn"/>
-                            <constraint firstItem="u2R-0o-afQ" firstAttribute="top" secondItem="rQU-SU-scE" secondAttribute="bottom" constant="-1" id="nee-fb-rYh"/>
-                            <constraint firstItem="otO-jr-wK6" firstAttribute="top" secondItem="Hm6-f0-aCj" secondAttribute="bottom" constant="8" id="qfk-TE-xFX"/>
-                            <constraint firstAttribute="trailing" secondItem="MYG-WZ-cqa" secondAttribute="trailing" constant="20" id="rWk-Dn-uX2"/>
-                            <constraint firstItem="rQU-SU-scE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uGa-dF-9ox"/>
-                            <constraint firstItem="xjp-Lp-tVJ" firstAttribute="top" secondItem="LO7-Uz-14p" secondAttribute="bottom" constant="-1" id="uKH-Zc-dcE"/>
-                            <constraint firstItem="6Nk-fm-ZC5" firstAttribute="top" secondItem="LO7-Uz-14p" secondAttribute="bottom" constant="20" id="x7r-qX-ogK"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="passwordTextField" destination="LO7-Uz-14p" id="xjh-mq-rcr"/>
-                        <outlet property="usernameTextField" destination="rQU-SU-scE" id="B7Z-i8-mef"/>
-                        <outlet property="validateButton" destination="6Nk-fm-ZC5" id="60x-JI-VhG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1047" y="-1025"/>
-        </scene>
         <!--User View Controller-->
         <scene sceneID="nNx-1N-NMf">
             <objects>
@@ -855,6 +717,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R3u-r4-Fsu"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="loader" destination="wAb-Lh-pov" id="pwQ-2T-dmD"/>
                         <outlet property="noPostLabel" destination="QI3-RA-26o" id="ISQ-sC-FCh"/>
@@ -1360,7 +1223,6 @@
                                         <connections>
                                             <action selector="dismissAction:" destination="yf0-RK-8jZ" eventType="touchUpInside" id="CHN-oC-K3P"/>
                                             <action selector="dismissAction:" destination="uvP-AU-jKJ" eventType="touchUpInside" id="Iky-u3-Cu2"/>
-                                            <action selector="dismissAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o1w-A9-mG0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZ4-v2-NSM">
@@ -1372,7 +1234,6 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="creditAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dCY-7x-rlT"/>
                                             <action selector="dismissAction:" destination="yf0-RK-8jZ" eventType="touchUpInside" id="fb6-cY-r8F"/>
                                             <action selector="showHelpAction:" destination="uvP-AU-jKJ" eventType="touchUpInside" id="byJ-J6-laR"/>
                                         </connections>
@@ -1494,7 +1355,7 @@ de l'INSA Rennes</string>
                                 <color key="textColor" red="0.9946769754" green="0.9946769754" blue="0.9946769754" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="XfY-aR-bmw"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assocation_tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="XfY-aR-bmw"/>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1766,7 +1627,7 @@ de l'INSA Rennes</string>
                                 <color key="textColor" red="0.9946769754" green="0.9946769754" blue="0.9946769754" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="Kes-ZG-f07"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="Kes-ZG-f07"/>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1822,7 +1683,7 @@ préférées grâce à la page des News</string>
                                 <color key="textColor" red="0.9946769754" green="0.9946769754" blue="0.9946769754" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="0z0-eT-zDO"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="post_tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="0z0-eT-zDO"/>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1949,7 +1810,7 @@ matheux, nouveau, ou bien d'autre</string>
                                     <action selector="completionAction:" destination="IJu-dt-nSE" eventType="touchUpInside" id="Jh8-HB-a6L"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification" translatesAutoresizingMaskIntoConstraints="NO" id="sVw-FY-cN9"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification_tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="sVw-FY-cN9"/>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1980,19 +1841,20 @@ matheux, nouveau, ou bien d'autre</string>
     </scenes>
     <resources>
         <image name="arrow_left_white" width="68" height="52"/>
+        <image name="assocation_tutorial" width="231" height="478"/>
         <image name="associations" width="30" height="27"/>
-        <image name="avatars" width="358" height="401"/>
+        <image name="avatars" width="356" height="401"/>
         <image name="calendar" width="27" height="27"/>
         <image name="check" width="73" height="54"/>
-        <image name="connect_button" width="217" height="57"/>
         <image name="cross" width="51" height="51"/>
+        <image name="event_tutorial" width="231" height="478"/>
         <image name="gear" width="68" height="68"/>
         <image name="go_button" width="147" height="56"/>
         <image name="insapp-logo" width="83" height="83"/>
-        <image name="iphone" width="243" height="478"/>
         <image name="news" width="27" height="27"/>
-        <image name="notification" width="243" height="302"/>
         <image name="notification_button" width="322" height="57"/>
+        <image name="notification_tutorial" width="243" height="302"/>
+        <image name="post_tutorial" width="231" height="478"/>
         <image name="question_mark" width="36" height="35"/>
         <image name="reload" width="62" height="55"/>
         <image name="user" width="27" height="27"/>
