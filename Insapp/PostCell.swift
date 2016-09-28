@@ -86,7 +86,9 @@ class PostCell: UITableViewCell {
         let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
         self.likeButton.setImage(like_image, for: .normal)
         
-        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
+        //let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.likeAction(_:)))
+        tapGesture1.numberOfTapsRequired = 2
         self.postImageView.isUserInteractionEnabled = true
         self.postImageView.addGestureRecognizer(tapGesture1)
         

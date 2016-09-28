@@ -20,6 +20,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionLengthLabel: UILabel!
+    @IBOutlet weak var avatarHelpLabel: UILabel!
     
     var promotionPickerView:UIPickerView!
     var genderPickerView:UIPickerView!
@@ -43,11 +44,16 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         
         DispatchQueue.main.async {
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width/2
-            self.avatarImageView.layer.masksToBounds = true
-            self.avatarImageView.backgroundColor = kWhiteColor
             self.avatarImageView.layer.borderColor = kDarkGreyColor.cgColor
+            self.avatarImageView.layer.masksToBounds = true
             self.avatarImageView.layer.borderWidth = 1
-     
+            
+            self.avatarImageView.backgroundColor = kWhiteColor
+            
+            let tap = UITapGestureRecognizer(target: self.promotionTextField, action: #selector(UIResponder.becomeFirstResponder))
+            self.avatarImageView.addGestureRecognizer(tap)
+            self.avatarImageView.isUserInteractionEnabled = true
+            
             
             self.updateDescriptionLengthLabel(length: self.descriptionTextView.text.characters.count)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
@@ -97,6 +103,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         let gender = self.genderTextField.text!
         let promotion = self.promotionTextField.text!
         self.avatarImageView.image = User.avatarFor(gender: convertGender[gender]!, andPromotion: promotion)
+        self.avatarHelpLabel.isHidden = self.avatarImageView.image != #imageLiteral(resourceName: "avatar-default")
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
