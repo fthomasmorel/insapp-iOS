@@ -74,6 +74,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         self.attendeesLabel.textColor = fontColor
         self.decisionControl.tintColor = fontColor
         self.descriptionTextView.textColor = fontColor
+        self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: fontColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         
         let arrow = (event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)

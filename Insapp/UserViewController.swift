@@ -103,6 +103,7 @@ class UserViewController: UIViewController, EventListDelegate {
         self.emailLabel.text = user.email
         self.promotionLabel.text = user.promotion
         self.descriptionTextView.text = user.desc!
+        self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
     }
     
     func initEventView(){

@@ -46,6 +46,7 @@ class AssociationViewController: UIViewController, EventListDelegate {
         self.nameLabel.textColor = self.fontColor
         self.descriptionTextView.text = association.desc
         self.descriptionTextView.textColor = self.fontColor
+        self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: self.fontColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         
         let arrow = (association.fgColor == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)

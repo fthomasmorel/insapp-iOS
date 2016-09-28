@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bk4-lh-SUX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11521.1" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bk4-lh-SUX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11517.1"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -338,11 +338,12 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="215" id="xrP-nb-ueB">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xrP-nb-ueB" id="ULx-2O-niN">
-                                            <frame key="frameInset" width="375" height="214"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="xrP-nb-ueB" id="ULx-2O-niN">
+                                            <frame key="frameInset" width="375" height="214.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4y-yN-sOb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4y-yN-sOb">
+                                                    <frame key="frameInset" width="1000" height="1000"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="SNW-AF-z2n"/>
                                                     </constraints>
@@ -350,13 +351,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKh-nz-UMG">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKh-nz-UMG">
+                                                    <frame key="frameInset" width="1000" height="1000"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="120" id="0sR-lg-gHV"/>
                                                         <constraint firstAttribute="width" constant="120" id="vUa-4C-YwV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisis une promo et un genre pour changer ton avatar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHG-O3-gg1">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Choisis une promo et un genre pour changer ton avatar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHG-O3-gg1">
+                                                    <frame key="frameInset" width="1000" height="1000"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="qQ8-Iv-ekl"/>
                                                     </constraints>
@@ -1003,6 +1006,7 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KL-rh-TzJ">
                                 <constraints>
@@ -1128,6 +1132,7 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-Vk-BoL">
                                 <constraints>
@@ -1246,7 +1251,8 @@
                                             <action selector="dismissAction:" destination="uvP-AU-jKJ" eventType="touchUpInside" id="Iky-u3-Cu2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZ4-v2-NSM">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZ4-v2-NSM">
+                                        <frame key="frameInset" minX="-55" minY="30" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="jZW-b3-Dd9"/>
                                             <constraint firstAttribute="width" constant="35" id="kH3-bD-uGg"/>
@@ -1275,11 +1281,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KDO-IJ-tir" firstAttribute="top" secondItem="2g8-0U-Zsj" secondAttribute="bottom" constant="-20" id="0hJ-1J-Wwh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KDO-IJ-tir" secondAttribute="trailing" constant="-16" id="GIf-cS-Abo"/>
-                            <constraint firstItem="KDO-IJ-tir" firstAttribute="leading" secondItem="MfI-fu-zAX" secondAttribute="leadingMargin" constant="-16" id="Kgd-wV-SPy"/>
                             <constraint firstItem="cjj-Qv-qyu" firstAttribute="leading" secondItem="MfI-fu-zAX" secondAttribute="leading" id="N9J-dF-bFh"/>
+                            <constraint firstItem="KDO-IJ-tir" firstAttribute="leading" secondItem="MfI-fu-zAX" secondAttribute="leading" id="OqH-rF-tCg"/>
                             <constraint firstItem="UEU-bx-vrc" firstAttribute="top" secondItem="cjj-Qv-qyu" secondAttribute="bottom" id="Q7A-cq-ocw"/>
                             <constraint firstAttribute="trailing" secondItem="cjj-Qv-qyu" secondAttribute="trailing" id="Su0-36-3oI"/>
+                            <constraint firstAttribute="trailing" secondItem="KDO-IJ-tir" secondAttribute="trailing" id="d7v-0T-Fe0"/>
                             <constraint firstItem="cjj-Qv-qyu" firstAttribute="top" secondItem="KDO-IJ-tir" secondAttribute="bottom" id="drw-3g-7M5"/>
                         </constraints>
                     </view>
@@ -1617,7 +1623,7 @@ de l'INSA Rennes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Whd-C1-rHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2990" y="1013"/>
+            <point key="canvasLocation" x="2988" y="936"/>
         </scene>
         <!--Tutorial Page View Controller-->
         <scene sceneID="neY-cF-fP5">
@@ -1882,6 +1888,6 @@ matheux, nouveau, ou bien d'autre</string>
         <image name="user" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lvi-fT-7g9"/>
+        <segue reference="vuv-RD-j6B"/>
     </inferredMetricsTieBreakers>
 </document>

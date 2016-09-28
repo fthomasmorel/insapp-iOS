@@ -29,7 +29,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.refreshControl.addTarget(self, action: #selector(AssociationCollectionViewController.fetchAssociations), for: UIControlEvents.valueChanged)
         self.collectionView.addSubview(refreshControl)
         self.collectionView.alwaysBounceVertical = true
-        
         self.fetchAssociations()
     }
     
@@ -63,7 +62,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (self.collectionView.frame.width-40)/3
+        let size = (self.collectionView.frame.width-41)/3
         return CGSize(width: size, height: size)
     }
     
