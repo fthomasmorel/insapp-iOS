@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import EventKitUI
+import EventKit
 import UIKit
 
-class EventViewController: UIViewController {
+class EventViewController: UIViewController, EKEventEditViewDelegate {
 
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UITextView!
     @IBOutlet weak var attendeesLabel: UILabel!
     @IBOutlet weak var decisionControl: UISegmentedControl!
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -31,10 +34,13 @@ class EventViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
+        self.changeStatusBarForColor(colorStr: event.fgColor)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.addToCalendarAction))
+        self.dateLabel.addGestureRecognizer(tap)
     }
     
     func generateViewForEvent(){
@@ -48,13 +54,10 @@ class EventViewController: UIViewController {
         self.coverImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
         self.computeGradient()
         self.titleLabel.text = event.name
-        self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!)
         
-        if self.dateLabel.text!.contains("\n"){
-            self.dateLabelHeightConstraint.constant = 50
-        }else{
-            self.dateLabelHeightConstraint.constant = 25
-        }
+        let dateString = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!)
+        self.dateLabelHeightConstraint.constant = dateString.contains("\n") ? 50 : 25
+        self.dateLabel.attributedText = NSAttributedString(string: dateString, attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         
         self.attendeesLabel.text = "\(event.attendees!.count) participant\((event.attendees!.count > 1 ? "s" : ""))"
         self.descriptionTextView.text = event.desc
@@ -74,7 +77,6 @@ class EventViewController: UIViewController {
         
         let arrow = (event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)
-        self.changeStatusBarForColor(colorStr: event.fgColor)
     }
     
     func computeGradient(){
@@ -98,6 +100,41 @@ class EventViewController: UIViewController {
         self.coverImageView.layer.insertSublayer(gradient, at: 0)
     }
     
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func addToCalendarAction(){
+        let eventController = EKEventEditViewController()
+        let store = EKEventStore()
+        eventController.eventStore = store
+        eventController.editViewDelegate = self
+        
+        let event = EKEvent(eventStore: store)
+        event.title = self.event.name!
+        event.startDate = self.event.dateStart! as Date
+        event.endDate = self.event.dateEnd! as Date
+        event.notes = self.event.desc!
+        eventController.event = event
+        
+        
+        let status = EKEventStore.authorizationStatus(for: .event)
+        switch status {
+        case .authorized:
+            DispatchQueue.main.async{
+                self.present(eventController, animated: true, completion: self.darkStatusBar)
+            }
+        case .notDetermined:
+            store.requestAccess(to: .event, completion: { (granted, error) -> Void in
+                if !granted { return }
+                DispatchQueue.main.async{
+                    self.present(eventController, animated: true, completion: self.darkStatusBar)
+                }
+            })
+        case .denied, .restricted:
+            return
+        }
+    }
     
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
