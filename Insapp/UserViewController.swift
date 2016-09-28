@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class UserViewController: UIViewController {
+class UserViewController: UIViewController, EventListDelegate {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var eventView: UIView!
@@ -107,29 +107,37 @@ class UserViewController: UIViewController {
     
     func initEventView(){
         self.eventListViewController.eventIds = self.user.events!
+        self.eventListViewController.delegate = self
         self.eventListViewController.fetchEvents()
-        
-        switch self.user.events!.count {
-        case 0:
-            self.eventViewHeightConstraint.constant = 0
-            self.eventListViewController.view.isHidden = true
-            break
-        case let nbEvent where nbEvent < 3:
-            self.eventListViewController.view.isHidden = false
-            self.eventViewHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
-            break
-        default:
-            self.eventListViewController.view.isHidden = false
-            self.eventViewHeightConstraint.constant = 180 + CGFloat(30 + 10)
-            break
-        }
-        self.updateViewConstraints()
     }
     
     func imageForPromotion(_ promotion: String) -> UIImage {
         var promo = promotion
         promo.remove(at: promo.startIndex)
         return UIImage(named: promo)!
+    }
+    
+    func updateHeightForEventListView(eventNumber: Int){
+        DispatchQueue.main.async {
+            switch eventNumber {
+            case 0:
+                self.eventViewHeightConstraint.constant = 0
+                self.eventListViewController.view.isHidden = true
+                self.eventListViewController.eventTableView.isScrollEnabled = false
+                break
+            case let nbEvent where nbEvent < 3:
+                self.eventListViewController.view.isHidden = false
+                self.eventViewHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = false
+                break
+            default:
+                self.eventListViewController.view.isHidden = false
+                self.eventViewHeightConstraint.constant = 180 + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = true
+                break
+            }
+            self.updateViewConstraints()
+        }
     }
     
     @IBAction func editAction(_ sender: AnyObject) {

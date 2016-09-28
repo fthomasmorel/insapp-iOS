@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
-class AssociationViewController: UIViewController
-{
+class AssociationViewController: UIViewController, EventListDelegate {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var eventListHeightConstraint: NSLayoutConstraint!
+    
     
     var eventListViewController: EventListViewController!
     var association: Association!
@@ -45,20 +46,12 @@ class AssociationViewController: UIViewController
         self.nameLabel.textColor = self.fontColor
         self.descriptionTextView.text = association.desc
         self.descriptionTextView.textColor = self.fontColor
-        self.computeHeightForDescription()
         
         let arrow = (association.fgColor == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)
         self.changeStatusBarForColor(colorStr: association.fgColor)
         
         self.initEventView()
-    }
-    
-    func computeHeightForDescription(){
-        let frame = self.descriptionTextView.frame
-        let height = self.descriptionTextView.contentSize.height
-        self.descriptionTextView.isScrollEnabled = false
-        self.descriptionTextView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
     }
     
     func computeGradient(){
@@ -81,6 +74,29 @@ class AssociationViewController: UIViewController
         self.coverImageView.layer.insertSublayer(gradient, at: 0)
     }
     
+    func updateHeightForEventListView(eventNumber: Int){
+        DispatchQueue.main.async {
+            switch eventNumber {
+            case 0:
+                self.eventListHeightConstraint.constant = 0
+                self.eventListViewController.view.isHidden = true
+                self.eventListViewController.eventTableView.isScrollEnabled = false
+                break
+            case let nbEvent where nbEvent < 3:
+                self.eventListViewController.view.isHidden = false
+                self.eventListHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = false
+                break
+            default:
+                self.eventListViewController.view.isHidden = false
+                self.eventListHeightConstraint.constant = 180 + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = true
+                break
+            }
+            self.updateViewConstraints()
+        }
+    }
+
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
     }
@@ -88,6 +104,7 @@ class AssociationViewController: UIViewController
     func initEventView(){
         self.eventListViewController.fontColor = self.fontColor
         self.eventListViewController.eventIds = self.association.events!
+        self.eventListViewController.delegate = self
         self.eventListViewController.fetchEvents()
     }
 }

@@ -35,27 +35,24 @@ public class Association: NSManagedObject {
     }
     
     static func parseJson(_ json:Dictionary<String, AnyObject>) -> Optional<Association>{
-        guard let id            = json[kAssociationId] as? String           else { return .none }
-        guard let name          = json[kAssociationName] as? String         else { return .none }
-        guard let email         = json[kAssociationEmail] as? String        else { return .none }
-        guard let desc          = json[kAssociationDescription] as? String  else { return .none }
+        guard let id        = json[kAssociationId] as? String           else { return .none }
+        guard let name      = json[kAssociationName] as? String         else { return .none }
+        guard let email     = json[kAssociationEmail] as? String        else { return .none }
+        guard let desc      = json[kAssociationDescription] as? String  else { return .none }
+        guard let profile   = json[kAssociationProfile] as? String      else { return .none }
+        guard let cover     = json[kAssociationCover] as? String        else { return .none }
+        guard let bgColor   = json[kAssociationBgColor] as? String      else { return .none }
+        guard let fgColor   = json[kAssociationFgColor] as? String      else { return .none }
         
         let association = Association(association_id: id, name: name, email: email, description: desc)
-        
-        guard let events        = json[kAssociationEvents] as? Array<String>else { return association }
-        //guard let posts         = json[kAssociationPosts] as? Array<String> else { return .none }
-        guard let profile       = json[kAssociationProfile] as? String      else { return association }
-        guard let cover         = json[kAssociationCover] as? String        else { return association }
-        guard let bgColor       = json[kAssociationBgColor] as? String      else { return association }
-        guard let fgColor       = json[kAssociationFgColor] as? String      else { return association }
-        
-        association.events = events
-        //association.posts = posts
         association.profilePhotoURL = profile
         association.coverPhotoURL = cover
         association.bgColor = bgColor
         association.fgColor = fgColor
         
+        guard let events    = json[kAssociationEvents] as? Array<String>else { return association }
+        association.events = events
+    
         return association
     }
     

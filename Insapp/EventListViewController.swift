@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol EventListDelegate {
+    func updateHeightForEventListView(eventNumber: Int)
+}
+
 class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var eventTableView: UITableView!
@@ -16,6 +20,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     let fetchEventGroup = DispatchGroup()
     
+    var delegate: EventListDelegate?
     var fontColor: UIColor?
     var eventIds: [String] = []
     var events: [Event] = []
@@ -55,6 +60,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     func reloadEvents(){
         self.fetchEventGroup.wait()
         self.events = Event.sortAndFilter(events: self.events)
+        self.delegate?.updateHeightForEventListView(eventNumber: self.events.count)
         DispatchQueue.main.async {
             self.eventTableView.reloadData()
         }

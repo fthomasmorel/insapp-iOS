@@ -985,8 +985,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OQt-B7-2pe">
-                                <frame key="frameInset" minX="16" minY="246" width="343" height="199"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OQt-B7-2pe">
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1004,8 +1003,10 @@
                                     <action selector="dismissAction:" destination="go4-qq-aKa" eventType="touchUpInside" id="CnJ-z2-aNG"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tvr-P6-s50">
-                                <frame key="frameInset" minX="16" height="204"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvr-P6-s50">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="e9K-Nf-Be0"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="Jyd-wY-poP" kind="embed" id="vuv-RD-j6B"/>
                                 </connections>
@@ -1017,16 +1018,16 @@
                             <constraint firstAttribute="trailing" secondItem="Lsm-53-BWy" secondAttribute="trailing" id="2qP-vo-WNY"/>
                             <constraint firstItem="cII-ob-Aal" firstAttribute="leading" secondItem="824-3F-8ib" secondAttribute="leading" constant="16" id="6I2-Bd-rlC"/>
                             <constraint firstItem="Lsm-53-BWy" firstAttribute="leading" secondItem="824-3F-8ib" secondAttribute="leading" id="6nw-Er-wpT"/>
-                            <constraint firstItem="Tvr-P6-s50" firstAttribute="top" secondItem="OQt-B7-2pe" secondAttribute="bottom" constant="10" id="Adk-JO-chf"/>
+                            <constraint firstItem="OQt-B7-2pe" firstAttribute="top" secondItem="Tvr-P6-s50" secondAttribute="bottom" constant="8" id="9QY-Gr-G3p"/>
+                            <constraint firstItem="IVT-Nw-gyn" firstAttribute="top" secondItem="OQt-B7-2pe" secondAttribute="bottom" constant="8" id="Brp-sr-R6r"/>
                             <constraint firstItem="Tvr-P6-s50" firstAttribute="leading" secondItem="824-3F-8ib" secondAttribute="leading" constant="16" id="HSY-PD-2hH"/>
                             <constraint firstItem="1KL-rh-TzJ" firstAttribute="top" secondItem="Fmo-ca-VHN" secondAttribute="bottom" constant="15" id="ThW-6S-osX"/>
                             <constraint firstAttribute="trailing" secondItem="Tvr-P6-s50" secondAttribute="trailing" constant="16" id="fDZ-6v-jmE"/>
-                            <constraint firstItem="IVT-Nw-gyn" firstAttribute="top" secondItem="Tvr-P6-s50" secondAttribute="bottom" constant="8" id="fdI-nU-T2T"/>
                             <constraint firstItem="Lsm-53-BWy" firstAttribute="top" secondItem="Fmo-ca-VHN" secondAttribute="bottom" constant="-20" id="i0n-YR-fcx"/>
+                            <constraint firstItem="Tvr-P6-s50" firstAttribute="top" secondItem="cII-ob-Aal" secondAttribute="bottom" constant="8" id="iw0-3v-6iL"/>
                             <constraint firstAttribute="trailing" secondItem="cII-ob-Aal" secondAttribute="trailing" constant="16" id="jpD-hM-hOf"/>
                             <constraint firstItem="1KL-rh-TzJ" firstAttribute="leading" secondItem="824-3F-8ib" secondAttribute="leading" constant="20" id="k23-Cz-fHF"/>
                             <constraint firstItem="OQt-B7-2pe" firstAttribute="leading" secondItem="824-3F-8ib" secondAttribute="leading" constant="16" id="nfR-jX-cRd"/>
-                            <constraint firstItem="OQt-B7-2pe" firstAttribute="top" secondItem="cII-ob-Aal" secondAttribute="bottom" constant="8" id="pYk-8S-AuA"/>
                             <constraint firstItem="cII-ob-Aal" firstAttribute="top" secondItem="Lsm-53-BWy" secondAttribute="bottom" constant="16" id="wLr-9V-wIJ"/>
                         </constraints>
                     </view>
@@ -1034,6 +1035,7 @@
                         <outlet property="backButton" destination="1KL-rh-TzJ" id="W8q-ZG-lph"/>
                         <outlet property="coverImageView" destination="Lsm-53-BWy" id="jOo-rx-7ES"/>
                         <outlet property="descriptionTextView" destination="OQt-B7-2pe" id="spW-Sc-aoP"/>
+                        <outlet property="eventListHeightConstraint" destination="e9K-Nf-Be0" id="1WU-hT-5t8"/>
                         <outlet property="nameLabel" destination="cII-ob-Aal" id="P5d-0f-9Jl"/>
                     </connections>
                 </viewController>
@@ -1866,6 +1868,6 @@ matheux, nouveau, ou bien d'autre</string>
         <image name="user" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lvi-fT-7g9"/>
+        <segue reference="vuv-RD-j6B"/>
     </inferredMetricsTieBreakers>
 </document>
