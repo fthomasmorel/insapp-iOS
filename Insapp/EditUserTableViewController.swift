@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 
 class EditUserTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate {
@@ -20,10 +21,12 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionLengthLabel: UILabel!
+    @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var avatarHelpLabel: UILabel!
     
     var promotionPickerView:UIPickerView!
     var genderPickerView:UIPickerView!
+    var isNotificationEnabled:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +57,6 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             self.avatarImageView.addGestureRecognizer(tap)
             self.avatarImageView.isUserInteractionEnabled = true
             
-            
             self.updateDescriptionLengthLabel(length: self.descriptionTextView.text.characters.count)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
@@ -65,6 +67,13 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     override func viewDidAppear(_ animated: Bool) {
         self.promotionPickerView.selectRow(promotions.index(of: self.promotionTextField.text!)!, inComponent: 0, animated: false)
         self.genderPickerView.selectRow(genders.index(of: self.genderTextField.text!)!, inComponent: 0, animated: false)
+        
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            self.isNotificationEnabled = settings.authorizationStatus == .authorized
+            DispatchQueue.main.async {
+                self.notificationSwitch.isOn = self.isNotificationEnabled
+            }
+        }
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -156,5 +165,29 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         self.descriptionTextView.becomeFirstResponder()
     }
     
+    @IBAction func notificationStatusAction(_ sender: AnyObject) {
+        if self.notificationSwitch.isOn {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+                if !granted {
+                    let alert = UIAlertController(title: "", message: "Pour activer les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(defaultAction)
+                    self.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        self.notificationSwitch.isOn = self.isNotificationEnabled
+                    }
+                }else{
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }else{
+            let alert = UIAlertController(title: "", message: "Pour désactiver les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+            self.notificationSwitch.isOn = self.isNotificationEnabled
+        }
+    }
 }
 

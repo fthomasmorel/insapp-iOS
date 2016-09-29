@@ -43,10 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func registerForNotification(completion: (() -> ())? = nil ){
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-        
+            UIApplication.shared.registerForRemoteNotifications()
+            completion?()
         }
-        UIApplication.shared.registerForRemoteNotifications()
-        completion?()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

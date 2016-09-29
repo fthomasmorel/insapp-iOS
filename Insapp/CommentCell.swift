@@ -41,6 +41,9 @@ class CommentCell: UITableViewCell {
         let swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(CommentCell.handleSwipeGesture(_:)))
         swipeGestureLeft.direction = .left
         self.frontView.addGestureRecognizer(swipeGestureLeft)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CommentCell.handleTapGesture(_:)))
+        self.usernameLabel.addGestureRecognizer(tapGesture)
     }
     
     func removeGestureRecognizer() {

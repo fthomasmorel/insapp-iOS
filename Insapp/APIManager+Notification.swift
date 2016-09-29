@@ -21,8 +21,16 @@ extension APIManager {
             kNotificationUserId: credentials.userId,
             kNotificationToken: token,
             kNotificationOs: "iOS",
-        ]
+            ]
         requestWithToken(url: "/notification", method: .post, parameters: params as [String : AnyObject], completion: { result in
+            
+        }) { (errorMessage, statusCode) in
+            
+            return false }
+    }
+    
+    static func disableNotification(credentials: Credentials){
+        requestWithToken(url: "/notification/\(credentials.userId)", method: .delete, completion: { result in
             
         }) { (errorMessage, statusCode) in
             

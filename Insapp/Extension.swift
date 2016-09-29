@@ -192,14 +192,23 @@ extension NSDate {
         let startWeekDay = days[calendar.component(.weekday, from: start as Date)-1]
         let startDay = calendar.component(.day, from: start as Date)
         let startMonth = calendar.component(.month, from: start as Date)
+        let startYear = calendar.component(.year, from: start as Date)
         let startHour = calendar.component(.hour, from: start as Date)
         let startMinute = String(format: "%02d", calendar.component(.minute, from: start as Date))
         
         let endWeekDay = days[calendar.component(.weekday, from: end as Date)-1]
         let endDay = calendar.component(.day, from: end as Date)
         let endMonth = calendar.component(.month, from: end as Date)
+        let endYear = calendar.component(.year, from: end as Date)
         let endHour = calendar.component(.hour, from: end as Date)
         let endMinute = String(format: "%02d", calendar.component(.minute, from: end as Date))
+        
+        var startYearStr = "\(startYear)"
+        var endYearStr = "\(endYear)"
+        startYearStr = startYearStr[startYearStr.index(startYearStr.startIndex, offsetBy: 2)..<startYearStr.endIndex]
+        endYearStr = endYearStr[endYearStr.index(endYearStr.startIndex, offsetBy: 2)..<endYearStr.endIndex]
+        startYearStr = (startYear != endYear ? "/\(startYearStr)" : "")
+        endYearStr = (startYear != endYear ? "/\(endYearStr)" : "")
         
         if end.timeIntervalSince(start as Date) < 86400 {
             if day {
@@ -209,9 +218,9 @@ extension NSDate {
             }
         }else{
             if day {
-                return "Du \(startWeekDay) \(startDay)/\(startMonth) à \(startHour):\(startMinute)\nAu \(endWeekDay) \(endDay)/\(endMonth) à \(endHour):\(endMinute)"
+                return "Du \(startWeekDay) \(startDay)/\(startMonth)\(startYearStr) à \(startHour):\(startMinute)\nAu \(endWeekDay) \(endDay)/\(endMonth)\(endYearStr) à \(endHour):\(endMinute)"
             }else{
-                return "Du \(startDay)/\(startMonth) au \(endDay)/\(endMonth)"
+                return "Du \(startDay)/\(startMonth)\(startYearStr) au \(endDay)/\(endMonth)\(startYearStr)"
             }
         }
     }
