@@ -38,6 +38,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.descriptionTextView.text = event.desc
         self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
         let tap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.addToCalendarAction))
         self.dateLabel.addGestureRecognizer(tap)
@@ -60,7 +61,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         self.dateLabel.attributedText = NSAttributedString(string: dateString, attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         
         self.attendeesLabel.text = "\(event.attendees!.count) participant\((event.attendees!.count > 1 ? "s" : ""))"
-        self.descriptionTextView.text = event.desc
         self.decisionControl.selectedSegmentIndex = 1
         if (User.fetch()!.events?.contains(self.event.id!))! {
             self.decisionControl.selectedSegmentIndex = 0

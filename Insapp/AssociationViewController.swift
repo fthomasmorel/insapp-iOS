@@ -35,6 +35,7 @@ class AssociationViewController: UIViewController, EventListDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.descriptionTextView.text = association.desc
         self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
@@ -44,7 +45,6 @@ class AssociationViewController: UIViewController, EventListDelegate {
         self.fontColor = UIColor.hexToRGB(association.fgColor!)
         self.nameLabel.text = "@\(association.name!.lowercased())"
         self.nameLabel.textColor = self.fontColor
-        self.descriptionTextView.text = association.desc
         self.descriptionTextView.textColor = self.fontColor
         self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: self.fontColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         
