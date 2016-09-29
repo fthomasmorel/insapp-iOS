@@ -80,7 +80,7 @@ class CommentCell: UITableViewCell {
     }
 
     
-    func loadUserComment(_ comment: Comment){
+    func loadUserComment(_ comment: Comment, user: User){
         self.contentTextView.text = comment.content!
         let height = self.contentTextView.contentSize.height
         var newFrame = self.contentTextView.frame
@@ -89,21 +89,15 @@ class CommentCell: UITableViewCell {
         self.timestampLabel.text = comment.date!.timestamp()
         self.comment = comment
         
-        DispatchQueue.global().async {
-            APIManager.fetch(user_id: comment.user_id!, controller: self.parent) { (opt_user) in
-                guard let user = opt_user else { return }
-                self.userImageView.image = user.avatar()
-                self.usernameLabel.text = "@\(user.username!.lowercased())"
-                self.roundUserImage()
-                self.user = user
-                if user.id! == User.fetch()!.id! {
-                    self.addGestureRecognizer()
-                }else{
-                    self.removeGestureRecognizer()
-                }
-            }
+        self.userImageView.image = user.avatar()
+        self.usernameLabel.text = "@\(user.username!.lowercased())"
+        self.roundUserImage()
+        self.user = user
+        if user.id! == User.fetch()!.id! {
+            self.addGestureRecognizer()
+        }else{
+            self.removeGestureRecognizer()
         }
-
     }
     
     func loadAssociationComment(association: Association, forPost post: Post){

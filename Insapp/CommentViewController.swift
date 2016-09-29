@@ -14,6 +14,9 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTableViewHeightConstraint: NSLayoutConstraint!
     
+    let fetchUserGroup = DispatchGroup()
+    
+    var users:[String:User]! = [:]
     var post:Post!
     var association:Association!
     var commentView:CommentView!
@@ -24,26 +27,66 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.dataSource = self
         self.commentTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: kCommentCell)
         self.commentTableView.tableFooterView = UIView()
+        self.commentTableView.keyboardDismissMode = .interactive;
+        
+        self.fetchUsers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
+        self.commentView = CommentView.instanceFromNib()
+        self.commentView.initFrame(keyboardFrame: frame)
+        self.commentView.delegate = self
+        self.view.addSubview(self.commentView)
+        
         self.notifyGoogleAnalytics()
         self.lightStatusBar()
         self.hideTabBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
-        self.commentView = CommentView.instanceFromNib()
-        self.commentView.initFrame(keyboardFrame: frame)
-        self.commentView.delegate = self
-        self.view.addSubview(self.commentView)
-        self.commentTableView.scrollToRow(at: IndexPath(row: self.post.comments!.count, section: 0), at: .top, animated: true)
+        self.scrollToBottom()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: self.view.window)
+    }
+    
+    func fetchUsers(){
+        let users = Array(Set(self.post.comments!.map({ (comment) -> String in return comment.user_id! })))
+        self.users = [:]
+        for userId in users {
+            DispatchQueue.global().async {
+                self.fetchUserGroup.enter()
+                APIManager.fetch(user_id: userId, controller: self, completion: { (opt_user) in
+                    self.users[userId] = opt_user!
+                    self.fetchUserGroup.leave()
+                })
+            }
+        }
+        DispatchQueue.global().async {
+            self.reload()
+        }
+    }
+    
+    func reload(){
+        self.fetchUserGroup.wait()
+        DispatchQueue.main.async {
+            self.commentTableView.reloadData()
+            self.scrollToBottom()
+        }
+    }
+
+    func scrollToBottom(){
+        let numberOfRows = self.commentTableView.numberOfRows(inSection: 0)
+        if numberOfRows > 0 {
+            let indexPath = IndexPath(row: numberOfRows-1, section: 0)
+            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        }
     }
     
     func hideTabBar(){
@@ -63,15 +106,24 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
         self.commentView.initFrame(keyboardFrame: keyboardFrame)
         self.commentView.isHidden = false
+        self.scrollToBottom()
+    }
+    
+    func keyboardWillChangeFrame(_ notification: NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let newOriginY = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.origin.y
+        if self.commentView.keyboardFrame != nil {
+            self.commentView.updateOrigin(newOriginY)
+        }
     }
 
-    
     func postComment(_ content: String) {
         let user_id = User.fetch()!.id!
         let comment = Comment(comment_id: "", user_id: user_id, content: content, date: NSDate())
         APIManager.comment(post_id: self.post.id!, comment: comment, controller: self) { (opt_post) in
             guard let post = opt_post else { return }
             self.post = post
+            self.fetchUsers()
             DispatchQueue.main.async {
                 self.commentTableView.reloadData()
                 self.commentView.clearText()
@@ -80,9 +132,11 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func updateFrame(_ frame: CGRect) {
-        self.commentView.frame = frame
         self.commentTableViewHeightConstraint.constant = self.view.frame.height - frame.origin.y - frame.size.height
         self.updateViewConstraints()
+        UIView.animate(withDuration: 0.25, animations: {
+            self.commentView.frame = frame
+            })
     }
     
     
@@ -107,7 +161,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.post.comments!.count+1
+        return (self.users.count == 0 ? 0 : self.post.comments!.count) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,9 +181,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func generateCommentCell(_ indexPath: IndexPath) -> UITableViewCell {
         let comment = self.post.comments![indexPath.row-1]
+        let user = self.users[comment.user_id!]!
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.parent = self
-        cell.loadUserComment(comment)
+        cell.loadUserComment(comment, user: user)
         cell.delegate = self
         return cell
     }

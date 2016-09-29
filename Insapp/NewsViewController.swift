@@ -34,13 +34,13 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.refreshControl.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
         self.tableViewController.refreshControl = self.refreshControl
         self.postTableView.addSubview(refreshControl)
+        self.fetchPosts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
-        self.fetchPosts()
     }
     
     func fetchPosts(){

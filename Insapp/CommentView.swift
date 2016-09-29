@@ -31,13 +31,18 @@ class CommentView: UIView, UITextViewDelegate {
         self.computeNewSize()
     }
     
-    
     func initFrame(keyboardFrame: CGRect){
         self.keyboardFrame = keyboardFrame
         self.textView.delegate = self
-        self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
+        self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
         self.checkTextView()
         self.computeNewSize()
+    }
+    
+    func updateOrigin(_ newY:CGFloat){
+        let frame = CGRect(x: 0, y: newY - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: self.frame.height)
+        delegate?.updateFrame(frame)
+        
     }
     
     func computeNewSize(){
