@@ -49,7 +49,8 @@ class CASViewController: UIViewController, UIWebViewDelegate{
                     self.stopLoading()
                     DispatchQueue.main.async {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "TabViewController")
+                        let vc = storyboard.instantiateViewController(withIdentifier: "TabViewController") as! UITabBarController
+                        vc.delegate = UIApplication.shared.delegate as! UITabBarControllerDelegate?
                         self.present(vc, animated: true, completion: nil)
                     }
                 })

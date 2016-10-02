@@ -13,11 +13,11 @@ import Crashlytics
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
     var notification: [String: AnyObject]?
-
+    var previousViewController:UIViewController? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UIApplication.shared.statusBarStyle = .lightContent
@@ -26,9 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         let gai = GAI.sharedInstance()
-        gai?.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai?.trackUncaughtExceptions = true
         
         Fabric.with([Crashlytics.self])
+        
         
         self.notification = launchOptions?[.remoteNotification] as? [String: AnyObject]
         
@@ -82,6 +83,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let navigationController = viewController as? UINavigationController, let vc = navigationController.topViewController {
+            if self.previousViewController == vc {
+                if vc.responds(to: Selector(("scrollToTop"))) {
+                    vc.perform(Selector(("scrollToTop")))
+                }
+            }
+            self.previousViewController = vc;
+        }else{
+            self.previousViewController = nil;
+        }
+    }
+    
 
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {

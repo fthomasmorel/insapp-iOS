@@ -17,7 +17,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
-    
     @IBOutlet weak var dateLabel: UITextView!
     @IBOutlet weak var attendeesLabel: UILabel!
     @IBOutlet weak var decisionControl: UISegmentedControl!
@@ -38,10 +37,12 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.descriptionTextView.text = event.desc
-        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
-        let tap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.addToCalendarAction))
-        self.dateLabel.addGestureRecognizer(tap)
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.addToCalendarAction))
+        self.dateLabel.addGestureRecognizer(tap1)
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.showAttendeesAction))
+        self.attendeesLabel.addGestureRecognizer(tap2)
+
     }
     
     func generateViewForEvent(){
@@ -51,22 +52,22 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
             guard let association = opt_asso else { return }
             self.associationLabel.text = "@\(association.name!.lowercased())"
         }
-        
-        self.coverImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+
+        self.coverImageView.downloadedFrom(link: kCDNHostname + self.event.photoURL!)
         self.computeGradient()
-        self.titleLabel.text = event.name
+        self.titleLabel.text = self.event.name
         
-        let dateString = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!)
+        let dateString = NSDate.stringForInterval(start: self.event.dateStart!, end: self.event.dateEnd!)
         self.dateLabelHeightConstraint.constant = dateString.contains("\n") ? 50 : 25
         self.dateLabel.attributedText = NSAttributedString(string: dateString, attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         
-        self.attendeesLabel.text = "\(event.attendees!.count) participant\((event.attendees!.count > 1 ? "s" : ""))"
+        self.attendeesLabel.text = "\(self.event.attendees!.count) participant\((self.event.attendees!.count > 1 ? "s" : ""))"
         self.decisionControl.selectedSegmentIndex = 1
         if (User.fetch()!.events?.contains(self.event.id!))! {
             self.decisionControl.selectedSegmentIndex = 0
         }
         
-        let fontColor = UIColor.hexToRGB(event.fgColor!)
+        let fontColor = UIColor.hexToRGB(self.event.fgColor!)
         
         self.titleLabel.textColor = fontColor
         self.associationLabel.textColor = fontColor
@@ -76,8 +77,13 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         self.descriptionTextView.textColor = fontColor
         self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: fontColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         
-        let arrow = (event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
+        let arrow = (self.event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
         self.backButton.setImage(arrow, for: .normal)
+        
+        self.descriptionTextView.text = self.event.desc
+        self.descriptionTextView.isScrollEnabled = false
+        self.descriptionTextView.isScrollEnabled = true
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
     func computeGradient(){
@@ -137,6 +143,34 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         }
     }
     
+    func showAttendeesAction(){
+        if let users = self.event.attendees, users.count > 0 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListUserViewController") as! ListUserViewController
+            vc.userIds = users
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func askForSuggestion(){
+        let alert = UIAlertController(title: "", message: "Souhaites-tu ajouter les évènements, auxquels tu participes, à ton calendrier ?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { action in
+            UserDefaults.standard.set(false, forKey: kSuggestCalendar)
+        }))
+        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { action in
+            UserDefaults.standard.set(true, forKey: kSuggestCalendar)
+            self.addToCalendarAction()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func suggestAddCalendar(){
+        guard let suggest = UserDefaults.standard.object(forKey: kSuggestCalendar) as? Bool else { self.askForSuggestion() ; return }
+        if suggest { self.addToCalendarAction() }
+    }
+    
+    
+    
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
     }
@@ -148,6 +182,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
                 self.event = event
                 self.generateViewForEvent()
             })
+            self.suggestAddCalendar()
         }else{
             APIManager.dismissEvent(event_id: event.id!, controller: self, completion: { (opt_event) in
                 guard let event = opt_event else { return }

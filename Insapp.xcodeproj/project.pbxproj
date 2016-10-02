@@ -19,6 +19,9 @@
 		E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1EA1D911A2F00355512 /* TutorialViewController.swift */; };
 		E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192C1EC1D93C98C00355512 /* CreditViewController.swift */; };
 		E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E192C1EE1D9427AE00355512 /* GoogleService-Info.plist */; };
+		E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E193DD851D9E72EF00478B52 /* ListUserViewController.swift */; };
+		E193DD881D9E73B700478B52 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E193DD871D9E73B700478B52 /* UserCell.xib */; };
+		E193DD8A1D9E745400478B52 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E193DD891D9E745400478B52 /* UserCell.swift */; };
 		E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */; };
 		E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */; };
 		E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */; };
@@ -82,6 +85,9 @@
 		E192C1EC1D93C98C00355512 /* CreditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		E192C1EE1D9427AE00355512 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E192C1F01D9427FB00355512 /* Insapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Insapp-Bridging-Header.h"; sourceTree = "<group>"; };
+		E193DD851D9E72EF00478B52 /* ListUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUserViewController.swift; sourceTree = "<group>"; };
+		E193DD871D9E73B700478B52 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		E193DD891D9E745400478B52 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 				E192C1EA1D911A2F00355512 /* TutorialViewController.swift */,
 				E192C1EC1D93C98C00355512 /* CreditViewController.swift */,
 				E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */,
+				E193DD851D9E72EF00478B52 /* ListUserViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
 				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
+				E193DD871D9E73B700478B52 /* UserCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
 				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
 				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
+				E193DD891D9E745400478B52 /* UserCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -367,6 +376,7 @@
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
+				E193DD881D9E73B700478B52 /* UserCell.xib in Resources */,
 				E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */,
 				E19F7CD01D8AD09500B9F517 /* CommentView.xib in Resources */,
 				E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */,
@@ -456,6 +466,7 @@
 				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
+				E193DD8A1D9E745400478B52 /* UserCell.swift in Sources */,
 				E1C3F9EE1D8951D7006A66CF /* EventCell.swift in Sources */,
 				E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */,
 				E1C3F9F01D897142006A66CF /* NewsViewController.swift in Sources */,
@@ -476,6 +487,7 @@
 				E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */,
 				E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */,
 				E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */,
+				E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */,
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,

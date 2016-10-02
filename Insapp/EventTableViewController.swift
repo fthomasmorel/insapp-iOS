@@ -19,9 +19,10 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var noEventLabel: UILabel!
     
     var events:[[Event]] = []
-    var currentEvents:[Event] = []
-    var todayEvents:[Event] = []
-    var comingEvents:[Event] = []
+    var weekEvents:[Event] = []
+    var dayEvents:[Event] = []
+    var monthEvents:[Event] = []
+    var otherEvents:[Event] = []
     var hasCurrentEvents = false
     var tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
@@ -50,10 +51,11 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func fetchEvents(){
         APIManager.fetchFutureEvents(controller: self) { (events) in
-            self.currentEvents = Event.filterCurrent(events: events)
-            self.todayEvents = Event.filterToday(events: events)
-            self.comingEvents = Event.filterComing(events: events)
-            self.events = [Event.sort(events: self.currentEvents), Event.sort(events: self.todayEvents), Event.sort(events: self.comingEvents)]
+            self.dayEvents = Event.filterToday(events: events)
+            self.weekEvents = Event.filterWeek(events: events)
+            self.monthEvents = Event.filterMonth(events: events)
+            self.otherEvents = Event.filterOther(events: events)
+            self.events = [self.dayEvents, self.weekEvents, self.monthEvents, self.otherEvents]
             self.events = self.events.filter({ (list) -> Bool in
                 return !list.isEmpty
                 })
@@ -75,35 +77,15 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let hasCurrentEvent = self.currentEvents.count > 0
-        let hasTodayEvent = self.todayEvents.count > 0
-        let hasComingEvent = self.comingEvents.count > 0
-        
-        switch (section, hasCurrentEvent, hasTodayEvent, hasComingEvent) {
-        case (0, true, true, true):
-            return "En ce moment"
-        case (1, true, true, true):
+        switch self.events[section] {
+        case let tab where tab == self.dayEvents:
             return "Aujourd'hui"
-        case (2, true, true, true):
-            return "À venir"
-        case (0, true, false, true):
-            return "En ce moment"
-        case (1, true, false, true):
-            return "À venir"
-        case (0, false, true, true):
-            return "Aujourd'hui"
-        case (1, false, true, true):
-            return "À venir"
-        case (0, true, true, false):
-            return "En ce moment"
-        case (1, true, true, false):
-            return "Aujourd'hui"
-        case (_, true, false, false):
-            return "En ce moment"
-        case (_, false, true, false):
-            return "Aujourd'hui"
-        case (_, false, false, true):
-            return "À venir"
+        case let tab where tab == self.weekEvents:
+            return "Les 7 prochains jours"
+        case let tab where tab == self.monthEvents:
+            return "Les 30 prochains jours"
+        case let tab where tab == self.otherEvents:
+            return (section == 0 ? "À venir" : "Plus tard")
         default:
             return "À venir"
         }
@@ -149,6 +131,10 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
         vc.event = event
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func scrollToTop(){
+        self.tableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {

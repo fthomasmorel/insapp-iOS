@@ -31,7 +31,7 @@ class EditUserViewController: UIViewController {
         self.settingViewController?.promotionTextField.text = user!.promotion
         self.settingViewController?.genderTextField.text = convertGender[user!.gender!]
         
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EditUserViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         self.lightStatusBar()
     }
@@ -47,6 +47,8 @@ class EditUserViewController: UIViewController {
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {
+        self.settingViewController?.view.resignFirstResponder()
+        self.settingViewController?.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     

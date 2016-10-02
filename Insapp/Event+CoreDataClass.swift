@@ -76,21 +76,27 @@ public class Event: NSManagedObject {
         return sort(events: filter(events: events))
     }
     
-    static func filterCurrent(events: [Event]) -> [Event] {
-        return sort(events: events.filter({ (event) -> Bool in
-            return event.dateStart!.timeIntervalSinceNow < 0 && event.dateEnd!.timeIntervalSinceNow > 0
-        }))
-    }
-    
     static func filterToday(events: [Event]) -> [Event] {
         return sort(events: events.filter({ (event) -> Bool in
-            return event.dateStart!.isToday() && event.dateStart!.timeIntervalSinceNow > 0
+            return event.dateStart!.isToday()
         }))
     }
     
-    static func filterComing(events: [Event]) -> [Event] {
+    static func filterWeek(events: [Event]) -> [Event] {
         return sort(events: events.filter({ (event) -> Bool in
-            return event.dateStart!.timeIntervalSinceNow > 0 && event.dateEnd!.timeIntervalSinceNow > 0 && !event.dateStart!.isToday()
+            return !event.dateStart!.isToday() && event.dateStart!.isThisWeek()
+        }))
+    }
+    
+    static func filterMonth(events: [Event]) -> [Event] {
+        return sort(events: events.filter({ (event) -> Bool in
+            return !event.dateStart!.isToday() && !event.dateStart!.isThisWeek() && event.dateStart!.isThisMonth()
+        }))
+    }
+    
+    static func filterOther(events: [Event]) -> [Event] {
+        return sort(events: events.filter({ (event) -> Bool in
+            return !event.dateStart!.isToday() && !event.dateStart!.isThisWeek() && !event.dateStart!.isThisMonth()
         }))
     }
 }

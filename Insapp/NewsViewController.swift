@@ -96,11 +96,12 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func commentAction(post: Post, forCell cell: PostCell) {
+    func commentAction(post: Post, forCell cell: PostCell, showKeyboard: Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
         vc.association = cell.association
         vc.post = post
+        vc.showKeyboard = showKeyboard
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -123,6 +124,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController
         vc.association = association
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func scrollToTop(){
+        self.postTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {

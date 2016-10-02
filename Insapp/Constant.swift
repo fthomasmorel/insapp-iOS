@@ -47,6 +47,7 @@ let kCommentCellEmptyWidth = 64
 let kCommentViewEmptyHeight = CGFloat(16)
 let kCommentEmptyTextViewHeight = CGFloat(33)
 
+let kUserCell = "kUserCell"
 
 //API
 let kAPIHostname = "https://api.thomasmorel.io"
@@ -121,24 +122,24 @@ let kEventStatus         = "status"
 
 //OTHER
 let kMaxDescriptionLength = 120
+let kSuggestCalendar = "kSuggestCalendar"
 
 let promotions = [
     "", "1STPI", "2STPI",
     "3EII", "3GM", "3GCU", "3GMA", "3INFO", "3SGM", "3SRC",
     "4EII", "4GM", "4GCU", "4GMA", "4INFO", "4SGM", "4SRC",
     "5EII", "5GM", "5GCU", "5GMA", "5INFO", "5SGM", "5SRC",
-    "Personel/Enseignant"
+    "Personnel/Enseignant"
 ]
 
 let genders = [
-    "-", "Féminin", "Masculin"
+    "", "Féminin", "Masculin"
 ]
 
 let convertGender = [
-    ""          : "-",
+    ""          : "",
     "female"    : "Féminin",
     "male"      : "Masculin",
-    "-"         : "",
     "Féminin"   : "female",
     "Masculin"  : "male"
 ]

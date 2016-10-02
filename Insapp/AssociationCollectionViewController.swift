@@ -104,6 +104,10 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         }
     }
     
+    func scrollToTop(){
+        self.collectionView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
     @IBAction func reloadAction(_ sender: AnyObject) {
         self.refreshUI(reload: true)
         self.fetchAssociations()

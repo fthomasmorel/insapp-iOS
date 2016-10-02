@@ -11,7 +11,6 @@ import UIKit
 
 protocol CommentViewDelegate {
     func postComment(_ content: String)
-    func updateFrame(_ frame: CGRect)
 }
 
 class CommentView: UIView, UITextViewDelegate {
@@ -28,36 +27,40 @@ class CommentView: UIView, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         self.checkTextView()
-        self.computeNewSize()
+        self.invalidateIntrinsicContentSize()
     }
     
     func initFrame(keyboardFrame: CGRect){
+        self.autoresizingMask = UIViewAutoresizing.flexibleHeight
         self.keyboardFrame = keyboardFrame
         self.textView.delegate = self
         self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
         self.checkTextView()
-        self.computeNewSize()
+        self.invalidateIntrinsicContentSize()
     }
-    
-    func updateOrigin(_ newY:CGFloat){
-        let frame = CGRect(x: 0, y: newY - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: self.frame.height)
-        delegate?.updateFrame(frame)
-        
-    }
-    
-    func computeNewSize(){
-        let textFieldHeight = ( self.textView.text.characters.count > 0 ? self.textView.contentSize.height : kCommentEmptyTextViewHeight )
-        let height = textFieldHeight + CGFloat(kCommentViewEmptyHeight)
-        
-        var frame = self.textView.frame
-        frame.size = CGSize(width: self.frame.width, height: height)
-        frame.origin = CGPoint(x: 0, y: keyboardFrame.origin.y - height)
 
-        var newFrame = self.textView.frame
-        newFrame.size.height = height
-        self.textView.frame = newFrame
-        
-        delegate?.updateFrame(frame)
+    
+    override var intrinsicContentSize: CGSize {
+        let textSize = self.textView.sizeThatFits(CGSize(width: self.textView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        self.textView.isScrollEnabled = textSize.height > 4*CGFloat(kCommentViewEmptyHeight)
+        self.textView.frame.size.height = min(textSize.height, 4*CGFloat(kCommentViewEmptyHeight))
+        let height = self.textView.isScrollEnabled ? 5*CGFloat(kCommentViewEmptyHeight) : textSize.height + CGFloat(kCommentViewEmptyHeight)
+        self.textView.scrollToBotom()
+        return CGSize(width: self.bounds.width, height: height)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == kDarkGreyColor {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Commenter"
+            textView.textColor = kDarkGreyColor
+        }
     }
     
     func checkTextView(){
@@ -69,12 +72,15 @@ class CommentView: UIView, UITextViewDelegate {
     }
     
     func clearText(){
-        self.textView.text = ""
+        self.textView.text = "Commenter"
+        self.textView.textColor = kDarkGreyColor
         self.checkTextView()
+        self.invalidateIntrinsicContentSize()
     }
     
     @IBAction func postAction(_ sender: AnyObject) {
         delegate?.postComment(self.textView.text)
+        self.textView.text = ""
     }
     
 }

@@ -12,7 +12,7 @@ import UIKit
 
 
 protocol PostCellDelegate {
-    func commentAction(post: Post, forCell cell: PostCell)
+    func commentAction(post: Post, forCell cell: PostCell, showKeyboard: Bool)
     func likeAction(post: Post, forCell cell: PostCell, liked: Bool)
     func associationAction(association: Association)
 }
@@ -86,9 +86,7 @@ class PostCell: UITableViewCell {
         let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
         self.likeButton.setImage(like_image, for: .normal)
         
-        //let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
-        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.likeAction(_:)))
-        tapGesture1.numberOfTapsRequired = 2
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
         self.postImageView.isUserInteractionEnabled = true
         self.postImageView.addGestureRecognizer(tapGesture1)
         
@@ -123,7 +121,8 @@ class PostCell: UITableViewCell {
     }
     
     @IBAction func commentAction(_ sender: AnyObject) {
-        delegate?.commentAction(post: self.post, forCell: self)
+        let keyboard = (sender as? UIView == self.commentButton)
+        delegate?.commentAction(post: self.post, forCell: self, showKeyboard: keyboard)
     }
     
     @IBAction func likeAction(_ sender: AnyObject) {

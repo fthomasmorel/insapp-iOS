@@ -20,6 +20,8 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     var post:Post!
     var association:Association!
     var commentView:CommentView!
+    var keyboardFrame:CGRect!
+    var showKeyboard = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,19 +30,19 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: kCommentCell)
         self.commentTableView.tableFooterView = UIView()
         self.commentTableView.keyboardDismissMode = .interactive;
-        
         self.fetchUsers()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
         
         let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
         self.commentView = CommentView.instanceFromNib()
         self.commentView.initFrame(keyboardFrame: frame)
         self.commentView.delegate = self
-        self.view.addSubview(self.commentView)
+        self.commentView.clearText()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         self.notifyGoogleAnalytics()
         self.lightStatusBar()
@@ -48,12 +50,23 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if showKeyboard {
+            self.commentView.textView.becomeFirstResponder()
+        }
         self.scrollToBottom()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: self.view.window)
+    }
+    
+    override var inputAccessoryView: UIView {
+        return self.commentView
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
     
     func fetchUsers(){
@@ -81,11 +94,11 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
 
-    func scrollToBottom(){
+    func scrollToBottom(_ animated: Bool = true){
         let numberOfRows = self.commentTableView.numberOfRows(inSection: 0)
         if numberOfRows > 0 {
             let indexPath = IndexPath(row: numberOfRows-1, section: 0)
-            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: animated)
         }
     }
     
@@ -103,18 +116,20 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func keyboardWillShow(_ notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
-        self.commentView.initFrame(keyboardFrame: keyboardFrame)
-        self.commentView.isHidden = false
-        self.scrollToBottom()
+        self.keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
+        DispatchQueue.main.async {
+            self.commentTableView.contentInset = UIEdgeInsetsMake(0, 0, self.keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
+            self.commentTableView.scrollIndicatorInsets = self.commentTableView.contentInset
+            self.scrollToBottom(false)
+        }
+
     }
     
     func keyboardWillChangeFrame(_ notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let newOriginY = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.origin.y
-        if self.commentView.keyboardFrame != nil {
-            self.commentView.updateOrigin(newOriginY)
-        }
+        self.keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
+        self.commentTableView.contentInset = .zero
+        self.commentTableView.scrollIndicatorInsets = .zero
     }
 
     func postComment(_ content: String) {
@@ -126,19 +141,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
             self.fetchUsers()
             DispatchQueue.main.async {
                 self.commentTableView.reloadData()
-                self.commentView.clearText()
+                self.commentView.resignFirstResponder()
             }
         }
     }
-    
-    func updateFrame(_ frame: CGRect) {
-        self.commentTableViewHeightConstraint.constant = self.view.frame.height - frame.origin.y - frame.size.height
-        self.updateViewConstraints()
-        UIView.animate(withDuration: 0.25, animations: {
-            self.commentView.frame = frame
-            })
-    }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {

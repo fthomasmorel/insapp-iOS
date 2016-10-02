@@ -23,6 +23,10 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     @IBOutlet weak var descriptionLengthLabel: UILabel!
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var avatarHelpLabel: UILabel!
+    @IBOutlet weak var insappImageView: UIImageView!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var addToCalendarSwitch: UISwitch!
+    
     
     var promotionPickerView:UIPickerView!
     var genderPickerView:UIPickerView!
@@ -59,6 +63,21 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             
             self.updateDescriptionLengthLabel(length: self.descriptionTextView.text.characters.count)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            
+            self.descriptionTextView.isScrollEnabled = false
+            self.descriptionTextView.isScrollEnabled = true
+            
+            self.insappImageView.layer.masksToBounds = true
+            self.insappImageView.layer.cornerRadius = 10
+            self.versionLabel.text = ""
+            if let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+                self.versionLabel.text = "Insapp v\(version)"
+            }
+            
+            self.addToCalendarSwitch.isOn = false
+            if let addToCalendar = UserDefaults.standard.object(forKey: kSuggestCalendar) as? Bool {
+                self.addToCalendarSwitch.isOn = addToCalendar
+            }
         }
         
         self.lightStatusBar()
@@ -116,7 +135,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 7 {
+        if indexPath.row == 9 {
             let alert = UIAlertController(title: "Attention", message: "Veux tu vraiment supprimer ton compte Insapp ?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -138,6 +157,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         APIManager.delete(user: (self.parent as! EditUserViewController).user!, controller: self.parent!, completion: { (result) in
             if result == .success {
                 Credentials.delete()
+                UserDefaults.standard.removeObject(forKey: kSuggestCalendar)
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SpashScreenViewController")
                 self.present(vc, animated: true, completion: nil)
@@ -189,5 +209,11 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             self.notificationSwitch.isOn = self.isNotificationEnabled
         }
     }
+    
+    
+    @IBAction func addToCalendarSwitchAction(_ sender: AnyObject) {
+        UserDefaults.standard.set(self.addToCalendarSwitch.isOn, forKey: kSuggestCalendar)
+    }
+    
 }
 

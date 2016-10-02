@@ -184,19 +184,28 @@ extension NSDate {
         return todayDay == day && todayMonth == month && todayYear == year
     }
     
+    func isThisWeek() -> Bool {
+        return self.timeIntervalSinceNow < 604800
+    }
+    
+    func isThisMonth() -> Bool {
+        return self.timeIntervalSinceNow < 2592000
+    }
+    
+    
     static func stringForInterval(start: NSDate, end: NSDate, day: Bool = true) -> String {
         let calendar = NSCalendar.current
         
         let days = [ "Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi" ]
         
-        let startWeekDay = days[calendar.component(.weekday, from: start as Date)-1]
+        let startWeekDay = days[calendar.component(.weekday, from: start as Date) % 7]
         let startDay = calendar.component(.day, from: start as Date)
         let startMonth = calendar.component(.month, from: start as Date)
         let startYear = calendar.component(.year, from: start as Date)
         let startHour = calendar.component(.hour, from: start as Date)
         let startMinute = String(format: "%02d", calendar.component(.minute, from: start as Date))
         
-        let endWeekDay = days[calendar.component(.weekday, from: end as Date)-1]
+        let endWeekDay = days[calendar.component(.weekday, from: end as Date) % 7]
         let endDay = calendar.component(.day, from: end as Date)
         let endMonth = calendar.component(.month, from: end as Date)
         let endYear = calendar.component(.year, from: end as Date)
@@ -220,7 +229,7 @@ extension NSDate {
             if day {
                 return "Du \(startWeekDay) \(startDay)/\(startMonth)\(startYearStr) à \(startHour):\(startMinute)\nAu \(endWeekDay) \(endDay)/\(endMonth)\(endYearStr) à \(endHour):\(endMinute)"
             }else{
-                return "Du \(startDay)/\(startMonth)\(startYearStr) au \(endDay)/\(endMonth)\(startYearStr)"
+                return "Du \(startDay)/\(startMonth)\(startYearStr) au \(endDay)/\(endMonth)\(endYearStr)"
             }
         }
     }
@@ -255,6 +264,11 @@ extension String {
 }
 
 extension UITextView {
+        
+    func scrollToBotom() {
+        let range = NSMakeRange(text.characters.count - 1, 1);
+        scrollRangeToVisible(range);
+    }
     
     static func heightForContent(_ content: String, andWidth width: CGFloat) -> CGFloat {
         let fixedWidth = width

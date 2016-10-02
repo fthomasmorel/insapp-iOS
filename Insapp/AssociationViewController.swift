@@ -16,6 +16,7 @@ class AssociationViewController: UIViewController, EventListDelegate {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var eventListHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var emailButton: UIButton!
     
     
     var eventListViewController: EventListViewController!
@@ -35,7 +36,6 @@ class AssociationViewController: UIViewController, EventListDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.descriptionTextView.text = association.desc
         self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
@@ -52,7 +52,15 @@ class AssociationViewController: UIViewController, EventListDelegate {
         self.backButton.setImage(arrow, for: .normal)
         self.changeStatusBarForColor(colorStr: association.fgColor)
         
+        let letter = (self.association.fgColor! == "ffffff" ? UIImage(named: "letter_white")! : UIImage(named: "letter_black")!)
+        self.emailButton.setImage(letter, for: .normal)
+        
         self.initEventView()
+        
+        self.descriptionTextView.text = self.association.desc
+        self.descriptionTextView.isScrollEnabled = false
+        self.descriptionTextView.isScrollEnabled = true
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
     func computeGradient(){
@@ -98,6 +106,12 @@ class AssociationViewController: UIViewController, EventListDelegate {
         }
     }
 
+    @IBAction func openEmailAction(_ sender: AnyObject) {
+        let email = self.association.email!
+        let url = URL(string: "mailto:\(email)")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
     }

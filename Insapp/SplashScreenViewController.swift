@@ -81,6 +81,9 @@ class SpashScreenViewController: UIViewController {
     func loadViewController(name: String, completion: ((_ vc: UIViewController) -> Void)? = nil){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: name)
+        if name == "TabViewController" {
+            (vc as! UITabBarController).delegate = UIApplication.shared.delegate as! UITabBarControllerDelegate?
+        }
         self.present(vc, animated: true) {
             guard let _ = completion else { return }
             completion!(vc)
