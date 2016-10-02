@@ -21,10 +21,12 @@ extension APIManager{
         }) { (errorMessage, statusCode) in completion(false) ; return false }
     }
     
-    static func signin(username: String, controller: UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
+    static func signin(username: String, eraseUser: Bool, controller: UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
         let params = [
             kLoginUsername: username,
-        ]
+            kLoginEraseUser: eraseUser,
+            kLoginDeviceId: UIDevice.current.identifierForVendor!.uuidString
+        ] as [String : Any]
         request(url: "/signin/user", method: .post, parameters: params as [String : AnyObject], completion: { result in
             guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
             completion(Credentials.parseJson(json))

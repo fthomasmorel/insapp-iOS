@@ -26,6 +26,10 @@ class CommentView: UIView, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        if textView.textColor == kDarkGreyColor {
+            textView.text = ""
+            textView.textColor = .black
+        }
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
     }
@@ -51,7 +55,7 @@ class CommentView: UIView, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == kDarkGreyColor {
-            textView.text = nil
+            textView.text = ""
             textView.textColor = .black
         }
     }
@@ -64,23 +68,27 @@ class CommentView: UIView, UITextViewDelegate {
     }
     
     func checkTextView(){
+        let characters = NSCharacterSet.alphanumerics
         if let text = textView.text {
-            self.postButton.isEnabled = text.characters.count > 0
+            self.postButton.isEnabled = text.characters.count > 0 && textView.textColor != kDarkGreyColor && (text.rangeOfCharacter(from: characters) != nil)
         }else{
             self.postButton.isEnabled = false
         }
     }
     
     func clearText(){
-        self.textView.text = "Commenter"
-        self.textView.textColor = kDarkGreyColor
+        self.textView.text = ""
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
     }
     
     @IBAction func postAction(_ sender: AnyObject) {
-        delegate?.postComment(self.textView.text)
-        self.textView.text = ""
+        let characters = NSCharacterSet.alphanumerics
+        if var text = self.textView.text, let _ = text.rangeOfCharacter(from: characters) {
+            text.condenseNewLine()
+            delegate?.postComment(text)
+        }
+        self.clearText()
     }
     
 }

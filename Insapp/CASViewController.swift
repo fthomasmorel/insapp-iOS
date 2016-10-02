@@ -39,8 +39,8 @@ class CASViewController: UIViewController, UIWebViewDelegate{
         return true
     }
     
-    func signInUser(username: String){
-        APIManager.signin(username: username, controller: self) { (opt_cred) in
+    func signInUser(username: String, eraseUser: Bool = false){
+        APIManager.signin(username: username, eraseUser: eraseUser, controller: self) { (opt_cred) in
             guard let credentials = opt_cred else { return }
             APIManager.login(credentials, controller: self, completion: { (opt_cred) in
                 guard let creds = opt_cred else { return }
@@ -56,6 +56,17 @@ class CASViewController: UIViewController, UIWebViewDelegate{
                 })
             })
         }
+    }
+    
+    func askForChangePhone(){
+        let alert = UIAlertController(title: "Attention", message: "Ton compte est lié à un autre téléphone. Souhaites-tu changer de téléphone ? (Le compte sur l'autre téléphone sera alors déconnecté)", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { action in
+            self.dismissAction(self)
+        }))
+        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { action in
+            self.signInUser(username: self.username!, eraseUser: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func showHelpAction(_ sender: AnyObject) {

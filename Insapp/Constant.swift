@@ -55,6 +55,8 @@ let kCDNHostname = "https://cdn.thomasmorel.io/"
 let kCASHostname = "https://cas-test.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"
+let kLoginDeviceId = "device"
+let kLoginEraseUser = "erase"
 
 
 

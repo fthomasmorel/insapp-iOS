@@ -261,6 +261,11 @@ extension String {
     var dateFromISO8602: NSDate? {
         return Date.Formatter.iso8602.date(from: self) as NSDate?
     }
+    
+    mutating func condenseNewLine(){
+        let parts = self.components(separatedBy: "\n").filter { (str) -> Bool in return !str.isEmpty }
+        self = parts.joined(separator: "\n\n")
+    }
 }
 
 extension UITextView {
