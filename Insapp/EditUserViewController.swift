@@ -77,8 +77,9 @@ class EditUserViewController: UIViewController {
         user?.promotion = promotion
         user?.gender = convertGender[gender!]
         
-        
-        if let description = self.settingViewController?.descriptionTextView.text {
+        let characters = NSCharacterSet.alphanumerics
+        if var description = self.settingViewController?.descriptionTextView.text, let _ = description.rangeOfCharacter(from: characters) {
+            description.condenseNewLine()
             user?.desc = description
         }
         

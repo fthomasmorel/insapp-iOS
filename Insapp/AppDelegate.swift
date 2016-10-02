@@ -89,8 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let navigationController = viewController as? UINavigationController, let vc = navigationController.topViewController {
             if self.previousViewController == vc {
-                if vc.responds(to: Selector(("scrollToTop"))) {
-                    vc.perform(Selector(("scrollToTop")))
+                if vc.responds(to: #selector(NewsViewController.scrollToTop)) {
+                    vc.perform(#selector(NewsViewController.scrollToTop))
                 }
             }
             self.previousViewController = vc;

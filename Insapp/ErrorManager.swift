@@ -16,8 +16,8 @@ extension UIViewController{
         if statusCode == 406 {
             self.stopLoading()
             self.displayError(message: kErrorUserExist)
-            if self.responds(to: Selector("askForChangePhone")) {
-                self.perform(Selector("askForChangePhone"))
+            if self.responds(to: Selector(("askForChangePhone"))) {
+                self.perform(Selector(("askForChangePhone")))
             }
         }
         else if statusCode != 200 && statusCode != 401 {

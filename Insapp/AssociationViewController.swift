@@ -91,15 +91,10 @@ class AssociationViewController: UIViewController, EventListDelegate {
                 self.eventListViewController.view.isHidden = true
                 self.eventListViewController.eventTableView.isScrollEnabled = false
                 break
-            case let nbEvent where nbEvent < 3:
-                self.eventListViewController.view.isHidden = false
-                self.eventListHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
-                self.eventListViewController.eventTableView.isScrollEnabled = false
-                break
             default:
                 self.eventListViewController.view.isHidden = false
-                self.eventListHeightConstraint.constant = 180 + CGFloat(30 + 10)
-                self.eventListViewController.eventTableView.isScrollEnabled = true
+                self.eventListHeightConstraint.constant = CGFloat(eventNumber*60) + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = false
                 break
             }
             self.updateViewConstraints()

@@ -38,10 +38,6 @@ class UserViewController: UIViewController, EventListDelegate {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
         self.editButton.isHidden = !self.isEditable
@@ -126,16 +122,10 @@ class UserViewController: UIViewController, EventListDelegate {
                 self.eventListViewController.view.isHidden = true
                 self.eventListViewController.eventTableView.isScrollEnabled = false
                 break
-            case let nbEvent where nbEvent < 3:
-                self.eventListViewController.view.isHidden = false
-                self.eventViewHeightConstraint.constant = CGFloat(nbEvent*60) + CGFloat(30 + 10)
-                self.eventListViewController.eventTableView.isScrollEnabled = false
-                break
             default:
                 self.eventListViewController.view.isHidden = false
-                self.eventViewHeightConstraint.constant = 180 + CGFloat(30 + 10)
-                self.eventListViewController.eventTableView.isScrollEnabled = true
-                break
+                self.eventViewHeightConstraint.constant = CGFloat(eventNumber*60) + CGFloat(30 + 10)
+                self.eventListViewController.eventTableView.isScrollEnabled = false
             }
             self.updateViewConstraints()
         }
