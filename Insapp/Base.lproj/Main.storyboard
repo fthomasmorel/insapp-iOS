@@ -968,24 +968,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnI-uZ-DSw">
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Associations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0L-gk-4tD">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="HWt-fo-weq"/>
-                                            <constraint firstAttribute="height" constant="21" id="ra4-wp-FqV"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
-                                        <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="y0L-gk-4tD" firstAttribute="top" secondItem="hnI-uZ-DSw" secondAttribute="top" constant="35" id="KhH-yi-CCe"/>
-                                    <constraint firstItem="y0L-gk-4tD" firstAttribute="centerX" secondItem="hnI-uZ-DSw" secondAttribute="centerX" id="UXa-ik-7w3"/>
                                     <constraint firstAttribute="height" constant="80" id="vpx-gi-3Do"/>
                                 </constraints>
                             </view>
+                            <searchBar opaque="NO" contentMode="redraw" barStyle="black" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="iGJ-Kv-82N">
+                                <color key="tintColor" red="0.92549019610000005" green="0.36470588240000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.92549019607843142" green="0.36470588235294116" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skg-Eu-Aum">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aucune association 🤕" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmz-yt-IKi">
@@ -1074,9 +1075,12 @@
                             <constraint firstItem="egq-rp-VmR" firstAttribute="top" secondItem="Skg-Eu-Aum" secondAttribute="bottom" constant="15" id="TFe-hx-fz5"/>
                             <constraint firstItem="egq-rp-VmR" firstAttribute="top" secondItem="Rhd-bp-fbS" secondAttribute="bottom" id="bkF-i0-G8Q"/>
                             <constraint firstAttribute="trailing" secondItem="Skg-Eu-Aum" secondAttribute="trailing" id="bnD-Zl-s49"/>
+                            <constraint firstItem="iGJ-Kv-82N" firstAttribute="top" secondItem="hAJ-yP-d0y" secondAttribute="bottom" constant="16" id="eq6-Fo-yjl"/>
                             <constraint firstItem="Skg-Eu-Aum" firstAttribute="top" secondItem="hnI-uZ-DSw" secondAttribute="bottom" id="mql-2M-Daw"/>
                             <constraint firstItem="hnI-uZ-DSw" firstAttribute="top" secondItem="hAJ-yP-d0y" secondAttribute="bottom" constant="-20" id="p52-eK-zpp"/>
+                            <constraint firstItem="iGJ-Kv-82N" firstAttribute="leading" secondItem="I5L-Km-l2h" secondAttribute="leading" id="qfA-gd-zGS"/>
                             <constraint firstItem="Skg-Eu-Aum" firstAttribute="leading" secondItem="I5L-Km-l2h" secondAttribute="leading" id="uLb-bn-J6d"/>
+                            <constraint firstAttribute="trailing" secondItem="iGJ-Kv-82N" secondAttribute="trailing" id="wp6-90-cPo"/>
                             <constraint firstAttribute="trailing" secondItem="Rhd-bp-fbS" secondAttribute="trailing" id="xUM-1x-xUq"/>
                         </constraints>
                     </view>
@@ -1086,6 +1090,7 @@
                         <outlet property="loader" destination="cUA-R5-TnR" id="Uin-zQ-QYA"/>
                         <outlet property="noAssociationLabel" destination="dmz-yt-IKi" id="5Tg-yR-z0B"/>
                         <outlet property="reloadButton" destination="sKr-oA-tTT" id="Zsq-iN-Eef"/>
+                        <outlet property="searchBar" destination="iGJ-Kv-82N" id="uJ3-Fw-r51"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpj-j0-eLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2297,7 +2302,7 @@ préférées grâce à la page des News</string>
         <scene sceneID="sCM-mh-icl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Qz7-pH-akU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" image="user" id="zW7-WS-cne"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="megaphone" id="zW7-WS-cne"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uz1-5X-0AU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -2326,6 +2331,7 @@ préférées grâce à la page des News</string>
         <image name="go_button" width="147" height="56"/>
         <image name="insapp-logo" width="83" height="83"/>
         <image name="letter_black" width="52" height="31"/>
+        <image name="megaphone" width="27" height="28"/>
         <image name="news" width="27" height="27"/>
         <image name="popup_notif" width="246" height="171"/>
         <image name="post_tutorial" width="231" height="478"/>

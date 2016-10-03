@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 
-class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class AssociationCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     var refreshControl:UIRefreshControl!
     var associations:[Association] = []
+    var filteredAssociations:[Association] = []
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noAssociationLabel: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
@@ -33,6 +35,10 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+    
+        self.searchBar.backgroundImage = UIImage()
+        self.searchBar.delegate = self
+        
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
@@ -48,6 +54,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     func fetchAssociations(){
         APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
+            self.filteredAssociations = associations
             self.refreshControl.endRefreshing()
             self.refreshUI()
         }
@@ -58,7 +65,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return associations.count
+        return self.filteredAssociations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -67,7 +74,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let association = self.associations[indexPath.row]
+        let association = self.filteredAssociations[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath as IndexPath) as! AssociationCell
         cell.load(association: association)
@@ -75,7 +82,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let association = self.associations[indexPath.row]
+        let association = self.filteredAssociations[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController 
         vc.association = association
@@ -100,6 +107,23 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
             self.noAssociationLabel.isHidden = true
             self.reloadButton.isHidden = true
             self.loader.isHidden = false
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.filteredAssociations = self.associations
+            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.searchBar.resignFirstResponder()
+            }
+        }else{
+            self.filteredAssociations = self.associations.filter({ (association) -> Bool in
+                return association.name!.lowercased().contains(searchText.lowercased()) ||
+                        association.email!.lowercased().contains(searchText.lowercased()) ||
+                        association.desc!.lowercased().contains(searchText.lowercased())
+            })
             self.collectionView.reloadData()
         }
     }
