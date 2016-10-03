@@ -10,16 +10,18 @@ import Foundation
 import UIKit
 
 protocol CommentViewDelegate {
-    func postComment(_ content: String)
+    func postComment(_ content: String, withTags: [CommentTag])
+    func searchForUser(_ word: String)
 }
 
-class CommentView: UIView, UITextViewDelegate {
+class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var textView: UITextView!
     
     var delegate:CommentViewDelegate?
     var keyboardFrame: CGRect!
+    var tags:[String : String] = [:]
     
     class func instanceFromNib() -> CommentView {
         return UINib(nibName: "CommentView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! CommentView
@@ -32,6 +34,8 @@ class CommentView: UIView, UITextViewDelegate {
         }
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
+        self.updateTag()
+        self.searchForUser()
     }
     
     func initFrame(keyboardFrame: CGRect){
@@ -82,11 +86,48 @@ class CommentView: UIView, UITextViewDelegate {
         self.invalidateIntrinsicContentSize()
     }
     
+    func searchForUser(){
+        let words = self.textView.text.components(separatedBy: " ")
+        if let word = words.last, word.hasPrefix("@") {
+            self.delegate?.searchForUser(word.replacingOccurrences(of: "@", with: ""))
+        }else{
+            self.delegate?.searchForUser("")
+        }
+        
+    }
+    
+    func addTag(_ word: String, _ user: User){
+        self.tags[word] = user.id!
+    }
+    
+    func updateTag(){
+        for tag in tags.keys{
+            if !self.textView.text.contains(tag){
+                self.tags.removeValue(forKey: tag)
+            }
+        }
+    }
+    
+    func didTouchUser(_ user: User) {
+        var words = self.textView.text.components(separatedBy: " ")
+        if var word = words.last, word.hasPrefix("@") {
+            word = "@\(user.username!) "
+            words[words.count-1] = word
+            self.textView.text = words.joined(separator: " ")
+            self.addTag("@\(user.username!)", user)
+        }
+        self.delegate?.searchForUser("")
+    }
+    
     @IBAction func postAction(_ sender: AnyObject) {
         let characters = NSCharacterSet.alphanumerics
         if var text = self.textView.text, let _ = text.rangeOfCharacter(from: characters) {
             text.condenseNewLine()
-            delegate?.postComment(text)
+            var results:[CommentTag] = []
+            for (tag, user) in self.tags {
+                results.append(CommentTag(user: user, name: tag))
+            }
+            delegate?.postComment(text, withTags: results)
         }
         self.clearText()
     }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kNotificationCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kNotificationCell" rowHeight="80" id="Cye-UL-8mh" customClass="NotificationCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cye-UL-8mh" id="zW7-9K-YYh">
+                <frame key="frameInset" width="375" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6yV-cx-LSF">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="y39-4E-hfd"/>
+                            <constraint firstAttribute="height" constant="40" id="yqd-lo-I3e"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkW-aU-HTH">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Dnn-Jn-hpp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AKo-ON-yoo">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="85R-zD-fJz"/>
+                            <constraint firstAttribute="height" constant="60" id="e9b-h1-bJr"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hkW-aU-HTH" firstAttribute="leading" secondItem="6yV-cx-LSF" secondAttribute="trailing" constant="8" id="3YZ-5j-o0D"/>
+                    <constraint firstItem="AKo-ON-yoo" firstAttribute="top" secondItem="zW7-9K-YYh" secondAttribute="top" constant="9" id="L1r-bC-kvm"/>
+                    <constraint firstAttribute="trailing" secondItem="AKo-ON-yoo" secondAttribute="trailing" constant="8" id="NxG-31-P1R"/>
+                    <constraint firstItem="hkW-aU-HTH" firstAttribute="top" secondItem="zW7-9K-YYh" secondAttribute="top" constant="10" id="PQ1-bN-qCI"/>
+                    <constraint firstItem="AKo-ON-yoo" firstAttribute="leading" secondItem="hkW-aU-HTH" secondAttribute="trailing" constant="8" id="W4L-2z-mlf"/>
+                    <constraint firstItem="6yV-cx-LSF" firstAttribute="leading" secondItem="zW7-9K-YYh" secondAttribute="leading" constant="8" id="atv-UO-Xnx"/>
+                    <constraint firstItem="6yV-cx-LSF" firstAttribute="centerY" secondItem="AKo-ON-yoo" secondAttribute="centerY" id="koS-A4-O9m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentImageView" destination="AKo-ON-yoo" id="1hO-cj-83a"/>
+                <outlet property="messageLabel" destination="hkW-aU-HTH" id="f2h-Ak-QWz"/>
+                <outlet property="senderImageView" destination="6yV-cx-LSF" id="6io-Do-TzZ"/>
+            </connections>
+            <point key="canvasLocation" x="-7.5" y="-7"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -49,6 +49,8 @@ let kCommentEmptyTextViewHeight = CGFloat(33)
 
 let kUserCell = "kUserCell"
 
+let kNotificationCell = "kNotificationCell"
+
 //API
 let kAPIHostname = "https://api.thomasmorel.io"
 let kCDNHostname = "https://cdn.thomasmorel.io/"
@@ -67,7 +69,11 @@ let kCommentId      = "ID"
 let kCommentUserId  = "user"
 let kCommentContent = "content"
 let kCommentDate    = "date"
+let kCommentTags    = "tags"
 
+let kCommentTagId   = "ID"
+let kCommentTagUser = "user"
+let kCommentTagName = "name"
 
 let kPostId             = "ID"
 let kPostTitle          = "title"
@@ -121,6 +127,21 @@ let kEventBgColor        = "bgColor"
 let kEventFgColor        = "fgColor"
 let kEventPhotoURL       = "image"
 let kEventStatus         = "status"
+
+let kNotificationId         = "ID"
+let kNotificationSender     = "sender"
+let kNotificationReceiver   = "receiver"
+let kNotificationContent    = "content"
+let kNotificationType       = "type"
+let kNotificationMessage    = "message"
+let kNotificationSeen       = "seen"
+let kNotificationDate       = "date"
+let kNotificationComment    = "comment"
+
+let kNotificationTypeEvent  = "event"
+let kNotificationTypePost   = "post"
+let kNotificationTypeTag    = "tag"
+
 
 //OTHER
 let kMaxDescriptionLength = 120

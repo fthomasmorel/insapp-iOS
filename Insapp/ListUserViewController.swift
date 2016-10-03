@@ -9,12 +9,17 @@
 import Foundation
 import UIKit
 
+protocol ListUserDelegate {
+    func didTouchUser(_ user:User)
+}
+
 class ListUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
     let fetchUserGroup = DispatchGroup()
     
+    var delegate: ListUserDelegate?
     var userIds:[String] = []
     var users:[User] = []
     
@@ -25,7 +30,6 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: kUserCell)
         self.tableView.tableFooterView = UIView()
         self.tableView.isHidden = true
-        self.fetchUsers()
     }
     
     func fetchUsers(){
@@ -40,11 +44,11 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         DispatchQueue.global().async {
-            self.reloadEvents()
+            self.reloadUsers()
         }
     }
     
-    func reloadEvents(){
+    func reloadUsers(){
         self.fetchUserGroup.wait()
         DispatchQueue.main.async {
             self.tableView.isHidden = false
@@ -73,16 +77,6 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = self.users[indexPath.row]
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-        vc.user_id = user.id
-        vc.setEditable(false)
-        vc.canReturn(true)
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.delegate?.didTouchUser(user)
     }
-    
-    @IBAction func dismissAction(_ sender: AnyObject) {
-        self.navigationController!.popViewController(animated: true)
-    }
-    
 }

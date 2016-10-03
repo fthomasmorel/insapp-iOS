@@ -13,15 +13,19 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var listUserView: UIView!
+    @IBOutlet weak var heightConstraintUserViewController: NSLayoutConstraint!
     
     let fetchUserGroup = DispatchGroup()
     
+    var listUserViewController:ListUserViewController!
     var users:[String:User]! = [:]
     var post:Post!
     var association:Association!
     var commentView:CommentView!
     var keyboardFrame:CGRect!
     var showKeyboard = false
+    var activeComment: Comment?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +36,14 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.keyboardDismissMode = .interactive;
         self.fetchUsers()
         
-        
         let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
         self.commentView = CommentView.instanceFromNib()
         self.commentView.initFrame(keyboardFrame: frame)
         self.commentView.delegate = self
         self.commentView.clearText()
+        
+        self.listUserViewController = self.childViewControllers.last as? ListUserViewController
+        self.listUserViewController.delegate = self.commentView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +59,12 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         if showKeyboard {
             self.commentView.textView.becomeFirstResponder()
         }
-        self.scrollToBottom()
+        if let comment = self.activeComment, let row = self.post.comments?.index(of: comment){
+            let indexPath = IndexPath(row: row, section: 0)
+            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: animated)
+        }else{
+            self.scrollToBottom()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -132,9 +143,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.scrollIndicatorInsets = .zero
     }
 
-    func postComment(_ content: String) {
+    func postComment(_ content: String, withTags tags: [CommentTag]) {
         let user_id = User.fetch()!.id!
         let comment = Comment(comment_id: "", user_id: user_id, content: content, date: NSDate())
+        comment.tags = tags
         APIManager.comment(post_id: self.post.id!, comment: comment, controller: self) { (opt_post) in
             guard let post = opt_post else { return }
             self.post = post
@@ -143,6 +155,21 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.commentTableView.reloadData()
                 self.commentView.resignFirstResponder()
             }
+        }
+    }
+    
+    func searchForUser(_ word: String) {
+        if word.characters.count > 0 {
+            APIManager.searchUser(word: word, controller: self) { (users) in
+                if users.count > 0 {
+                    self.listUserView.isHidden = false
+                    self.listUserViewController.users = users
+                    self.listUserViewController.reloadUsers()
+                    self.listUserViewController.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
+                }
+            }
+        }else{
+            self.listUserView.isHidden = true
         }
     }
     
@@ -192,6 +219,11 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.parent = self
         cell.loadUserComment(comment, user: user)
         cell.delegate = self
+        
+        if comment.id! == self.activeComment?.id! {
+            cell.frontView.backgroundColor = kLightGreyColor
+        }
+        
         return cell
     }
     

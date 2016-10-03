@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
+
 public class Comment: NSManagedObject, NSCoding {
 
     static let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -32,21 +33,24 @@ public class Comment: NSManagedObject, NSCoding {
         self.user_id = user_id
         self.content = content
         self.date = date
+        self.tags = []
     }
     
-    static func parseJson(_ json: Dictionary<String, String>) -> Optional<Comment> {
-        guard let id        = json[kCommentId]          else { return .none }
-        guard let user_id   = json[kCommentUserId]      else { return .none }
-        guard let content   = json[kCommentContent]     else { return .none }
-        guard let dateStr   = json[kCommentDate]        else { return .none }
-        guard let date      = dateStr.dateFromISO8602   else { return .none }
+    static func parseJson(_ json: Dictionary<String, AnyObject>) -> Optional<Comment> {
+        guard let id        = json[kCommentId] as? String       else { return .none }
+        guard let user_id   = json[kCommentUserId] as? String   else { return .none }
+        guard let content   = json[kCommentContent] as? String  else { return .none }
+        guard let dateStr   = json[kCommentDate] as? String     else { return .none }
+        guard let date      = dateStr.dateFromISO8602           else { return .none }
         
         let comment = Comment(comment_id: id, user_id: user_id, content: content, date: date)
         
+        guard let tags   = json[kCommentTags] as? [Dictionary<String, String>] else { return comment }
+        comment.tags = CommentTag.parseArray(tags)
         return comment
     }
     
-    static func parseJsonArray(_ array: [Dictionary<String, String>]) -> [Comment] {
+    static func parseJsonArray(_ array: [Dictionary<String, AnyObject>]) -> [Comment] {
         let commentsJson = array.filter({ (json) -> Bool in
             if let post = Comment.parseJson(json) {
                 Comment.managedContext.delete(post)
@@ -62,12 +66,13 @@ public class Comment: NSManagedObject, NSCoding {
         return comments
     }
     
-    static func toJson(_ comment:Comment) -> Dictionary<String, String>{
+    static func toJson(_ comment:Comment) -> Dictionary<String, AnyObject>{
         return [
-            kCommentId: comment.id!,
-            kCommentUserId: comment.user_id!,
-            kCommentContent: comment.content!,
-            kCommentDate: String(describing: comment.date!)
+            kCommentId: comment.id as AnyObject!,
+            kCommentUserId: comment.user_id as AnyObject!,
+            kCommentContent: comment.content as AnyObject!,
+            //kCommentDate: String(describing: comment.date!) as AnyObject!,
+            kCommentTags: CommentTag.toJson(tags: comment.tags!) as AnyObject!
         ]
     }
     

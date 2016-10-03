@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		9AA51A7D696DE37EA2028636 /* Pods_Insapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */; };
+		E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8291DA147D40029C051 /* AttendesViewController.swift */; };
+		E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */; };
+		E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */; };
+		E11EE8381DA245C20029C051 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11EE8371DA245C20029C051 /* NotificationCell.xib */; };
+		E11EE83A1DA246A30029C051 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8391DA246A30029C051 /* NotificationCell.swift */; };
+		E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83B1DA247DD0029C051 /* Notification+CoreDataClass.swift */; };
+		E11EE83E1DA247DD0029C051 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83C1DA247DD0029C051 /* Notification+CoreDataProperties.swift */; };
+		E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83F1DA24C960029C051 /* NotificationViewController.swift */; };
 		E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C7051D8DA02D00CE3D5B /* EventListCell.xib */; };
 		E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7071D8DA11100CE3D5B /* EventListCell.swift */; };
 		E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */; };
@@ -72,6 +80,14 @@
 /* Begin PBXFileReference section */
 		91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07F8504F090A6CA8BCC8915 /* Pods-Insapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E11EE8291DA147D40029C051 /* AttendesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendesViewController.swift; sourceTree = "<group>"; };
+		E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E11EE8371DA245C20029C051 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		E11EE8391DA246A30029C051 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		E11EE83B1DA247DD0029C051 /* Notification+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E11EE83C1DA247DD0029C051 /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E11EE83F1DA24C960029C051 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		E181C7051D8DA02D00CE3D5B /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -200,6 +216,8 @@
 				E192C1EC1D93C98C00355512 /* CreditViewController.swift */,
 				E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */,
 				E193DD851D9E72EF00478B52 /* ListUserViewController.swift */,
+				E11EE8291DA147D40029C051 /* AttendesViewController.swift */,
+				E11EE83F1DA24C960029C051 /* NotificationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -225,6 +243,7 @@
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
 				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
 				E193DD871D9E73B700478B52 /* UserCell.xib */,
+				E11EE8371DA245C20029C051 /* NotificationCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -239,6 +258,7 @@
 				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
 				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 				E193DD891D9E745400478B52 /* UserCell.swift */,
+				E11EE8391DA246A30029C051 /* NotificationCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -284,6 +304,10 @@
 		E1DC7F321D86F27C00284222 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E11EE83B1DA247DD0029C051 /* Notification+CoreDataClass.swift */,
+				E11EE83C1DA247DD0029C051 /* Notification+CoreDataProperties.swift */,
+				E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */,
+				E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */,
 				E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */,
 				E181C70A1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift */,
 				E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */,
@@ -372,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11EE8381DA245C20029C051 /* NotificationCell.xib in Resources */,
 				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
@@ -453,16 +478,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */,
 				E1C3F9D71D88365D006A66CF /* EditUserTableViewController.swift in Sources */,
 				E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */,
 				E1DC7F691D86FBAB00284222 /* Credentials+CoreDataClass.swift in Sources */,
 				E1C3F9D51D8803D2006A66CF /* UserViewController.swift in Sources */,
 				E1C3F9D21D87FC07006A66CF /* SplashScreenViewController.swift in Sources */,
+				E11EE83A1DA246A30029C051 /* NotificationCell.swift in Sources */,
 				E1C3F9DF1D8940D8006A66CF /* EventViewController.swift in Sources */,
 				E1C3F9F51D897609006A66CF /* Post+CoreDataClass.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
+				E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
+				E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */,
 				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
@@ -491,6 +520,7 @@
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,
+				E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */,
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
 				E1C3F9E31D8946FD006A66CF /* APIManager+Association.swift in Sources */,
 				E181C7101D8DBC6A00CE3D5B /* AssociationCell.swift in Sources */,
@@ -499,7 +529,9 @@
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
 				E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */,
 				E192C1E91D9119C900355512 /* TutorialPageViewController.swift in Sources */,
+				E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
+				E11EE83E1DA247DD0029C051 /* Notification+CoreDataProperties.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,
 				E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */,
 			);

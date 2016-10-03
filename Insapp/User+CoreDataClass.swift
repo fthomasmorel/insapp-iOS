@@ -58,6 +58,22 @@ public class User: NSManagedObject {
         return User.userInstance
     }
     
+    static func parseArray(_ array: [Dictionary<String, AnyObject>]) -> [User] {
+        let usersJson = array.filter({ (json) -> Bool in
+            if let user = User.parseJson(json) {
+                User.managedContext.delete(user)
+                return true
+            }else{
+                return false
+            }
+        })
+        
+        let users = usersJson.map { (json) -> User in
+            return User.parseJson(json)!
+        }
+        return users
+    }
+    
     static func parseJson(_ json:Dictionary<String, AnyObject>) -> Optional<User>{
         guard let id            = json[kUserId] as? String          else { return .none }
         guard let username      = json[kUserUsername] as? String    else { return .none }

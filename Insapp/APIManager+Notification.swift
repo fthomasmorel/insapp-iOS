@@ -29,12 +29,24 @@ extension APIManager {
             return false }
     }
     
-    static func disableNotification(credentials: Credentials){
-        requestWithToken(url: "/notification/\(credentials.userId)", method: .delete, completion: { result in
-            
-        }) { (errorMessage, statusCode) in
-            
-            return false }
+    static func fetchNotifications(controller: UIViewController, completion:@escaping (_ notifications:[Notification]) -> ()){
+        let user_id = Credentials.fetch()!.userId
+        requestWithToken(url: "/notification/\(user_id)", method: .get, completion: { result in
+            guard let resultJson = result as? Dictionary<String, AnyObject> else { completion([]) ; return }
+            guard let notifJsonArray = resultJson["notifications"] as? [Dictionary<String, AnyObject>] else { completion([]) ; return }
+            completion(Notification.parseArray(notifJsonArray))
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
+    
+    static func readNotification(notification: Notification, controller: UIViewController, completion:@escaping (_ notification:Optional<Notification>) -> ()){
+        let user_id = Credentials.fetch()!.userId
+        let notif_id = notification.id!
+        requestWithToken(url: "/notification/\(user_id)/\(notif_id)", method: .delete, completion: { result in
+            guard let notifJson = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
+            completion(Notification.parseJson(notifJson))
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
+    }
+
+    
 }
 

@@ -41,7 +41,7 @@ public class Post: NSManagedObject {
         guard let association   = json[kPostAssociation] as? String else { return .none }
         guard let dateStr       = json[kPostDate] as? String        else { return .none }
         guard let likes         = json[kPostLikes] as? [String]     else { return .none }
-        guard let commentsJson  = json[kPostComments] as? [Dictionary<String, String>] else { return .none }
+        guard let commentsJson  = json[kPostComments] as? [Dictionary<String, AnyObject>] else { return .none }
         guard let photoURL      = json[kPostPhotoURL] as? String    else { return .none }
         guard let size          = json[kPostImageSize] as? Dictionary<String, CGFloat> else { return .none }
     
@@ -49,7 +49,7 @@ public class Post: NSManagedObject {
         guard let _             = size["height"]                    else { return .none }
         guard let date          = dateStr.dateFromISO8602           else { return .none }
         
-        let comments = Comment.parseJsonArray(commentsJson)
+        let comments = Comment.parseJsonArray(commentsJson as [Dictionary<String, AnyObject>])
         
         return Post(post_id: id, title: title, association: association, description: desc, date: date, likes: likes, comments: comments, photoURL: photoURL, size: size)
     }

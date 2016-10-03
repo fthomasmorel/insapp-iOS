@@ -146,7 +146,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     func showAttendeesAction(){
         if let users = self.event.attendees, users.count > 0 {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ListUserViewController") as! ListUserViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "AttendesViewController") as! AttendesViewController
             vc.userIds = users
             self.navigationController?.pushViewController(vc, animated: true)
         }

@@ -18,7 +18,7 @@ protocol CommentCellDelegate {
     func open(association: Association)
 }
 
-class CommentCell: UITableViewCell {
+class CommentCell: UITableViewCell, UITextViewDelegate {
     
     
     @IBOutlet weak var userImageView: UIImageView!
@@ -58,13 +58,22 @@ class CommentCell: UITableViewCell {
         super.layoutSubviews()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CommentCell.handleTapGesture(_:)))
         self.usernameLabel.addGestureRecognizer(tapGesture)
+        self.contentTextView.delegate = self
     }
     
     func preloadUserComment(_ comment: Comment){
         self.usernameLabel.text = "@\(comment.user_id!.lowercased())"
         self.timestampLabel.text = comment.date!.timestamp()
         
-        self.contentTextView.text = comment.content!
+        let string = comment.content!
+        let attributedString = NSMutableAttributedString(string: string)
+        let paragrapheStyle = NSMutableParagraphStyle()
+        paragrapheStyle.lineSpacing = 0
+        
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length:string.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:string.characters.count))
+        self.contentTextView.attributedText = attributedString
+        
         let contentSize = self.contentTextView.sizeThatFits(self.contentTextView.bounds.size)
         var frame = self.contentTextView.frame
         frame.size.height = contentSize.height
@@ -75,7 +84,14 @@ class CommentCell: UITableViewCell {
         self.usernameLabel.text = "@\(association.name!.lowercased())"
         self.timestampLabel.text = post.date!.timestamp()
         
-        self.contentTextView.text = post.desc!
+        let attributedString = NSMutableAttributedString(string: post.desc!)
+        let paragrapheStyle = NSMutableParagraphStyle()
+        paragrapheStyle.lineSpacing = 0
+        
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: post.desc!.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:post.desc!.characters.count))
+        self.contentTextView.attributedText = attributedString
+        
         let contentSize = self.contentTextView.sizeThatFits(self.contentTextView.bounds.size)
         var frame = self.contentTextView.frame
         frame.size.height = contentSize.height
@@ -84,7 +100,21 @@ class CommentCell: UITableViewCell {
 
     
     func loadUserComment(_ comment: Comment, user: User){
-        self.contentTextView.text = comment.content!
+        let string = comment.content!
+        let attributedString = NSMutableAttributedString(string: string)
+        for tag in comment.tags!{
+            let range = (string as NSString).range(of: tag.name!)
+            attributedString.addAttribute(NSLinkAttributeName, value: NSURL(string: tag.user!)!, range: range)
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: range)
+        }
+        
+        let paragrapheStyle = NSMutableParagraphStyle()
+        paragrapheStyle.lineSpacing = 0
+        
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length:string.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:string.characters.count))
+        self.contentTextView.attributedText = attributedString
+        
         let height = self.contentTextView.contentSize.height
         var newFrame = self.contentTextView.frame
         newFrame.size.height = height
@@ -105,7 +135,14 @@ class CommentCell: UITableViewCell {
     
     func loadAssociationComment(association: Association, forPost post: Post){
         self.association = association
-        self.contentTextView.text = post.desc!
+        let attributedString = NSMutableAttributedString(string: post.desc!)
+        
+        let paragrapheStyle = NSMutableParagraphStyle()
+        paragrapheStyle.lineSpacing = 0
+        
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: post.desc!.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:post.desc!.characters.count))
+        self.contentTextView.attributedText = attributedString
         
         let height = self.contentTextView.contentSize.height
         var newFrame = self.contentTextView.frame
@@ -141,6 +178,14 @@ class CommentCell: UITableViewCell {
             break
         default: break
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        APIManager.fetch(user_id: URL.absoluteString, controller: self.delegate! as! UIViewController) { (user_opt) in
+            guard let user = user_opt else { return }
+            self.delegate?.open(user: user)
+        }
+        return false
     }
  
     func openSubmenu(){
