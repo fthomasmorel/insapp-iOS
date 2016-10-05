@@ -43,6 +43,7 @@ public class Association: NSManagedObject {
         guard let cover     = json[kAssociationCover] as? String        else { return .none }
         guard let bgColor   = json[kAssociationBgColor] as? String      else { return .none }
         guard let fgColor   = json[kAssociationFgColor] as? String      else { return .none }
+        guard cover.characters.count > 0, profile.characters.count > 0  else { return .none }
         
         let association = Association(association_id: id, name: name, email: email, description: desc)
         association.profilePhotoURL = profile

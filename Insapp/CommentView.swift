@@ -27,17 +27,6 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         return UINib(nibName: "CommentView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! CommentView
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.textColor == kDarkGreyColor {
-            textView.text = ""
-            textView.textColor = .black
-        }
-        self.checkTextView()
-        self.invalidateIntrinsicContentSize()
-        self.updateTag()
-        self.searchForUser()
-    }
-    
     func initFrame(keyboardFrame: CGRect){
         self.autoresizingMask = UIViewAutoresizing.flexibleHeight
         self.keyboardFrame = keyboardFrame
@@ -45,6 +34,7 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
+        self.textView.autocorrectionType = .no
     }
 
     
@@ -55,6 +45,34 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         let height = self.textView.isScrollEnabled ? 5*CGFloat(kCommentViewEmptyHeight) : textSize.height + CGFloat(kCommentViewEmptyHeight)
         self.textView.scrollToBotom()
         return CGSize(width: self.bounds.width, height: height)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let removedTags = self.updateTag()
+        
+        if text == "", removedTags.count > 0 {
+            let string = self.textView.attributedText.string
+            let locationEnd = self.textView.selectedRange.location
+            let locationStart = string.searchLast(string: " ", from: locationEnd)
+            
+            let range = string.index(string.startIndex, offsetBy: locationStart)..<string.index(string.startIndex, offsetBy: locationEnd)
+            
+            self.textView.attributedText = NSAttributedString(string: string.replacingCharacters(in: range, with: ""))
+        }
+        
+        
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.textColor == kDarkGreyColor {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        self.checkTextView()
+        self.invalidateIntrinsicContentSize()
+        self.searchForUser()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -81,47 +99,51 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     }
     
     func clearText(){
-        self.textView.text = ""
+        self.textView.attributedText = NSAttributedString(string: "")
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
     }
     
     func searchForUser(){
-        let words = self.textView.text.components(separatedBy: " ")
+        let words = self.textView.attributedText.string.components(separatedBy: " ")
         if let word = words.last, word.hasPrefix("@") {
+            print("\(self.textView.selectedRange.location):\(self.textView.selectedRange.length)")
             self.delegate?.searchForUser(word.replacingOccurrences(of: "@", with: ""))
         }else{
             self.delegate?.searchForUser("")
         }
-        
     }
     
     func addTag(_ word: String, _ user: User){
         self.tags[word] = user.id!
     }
     
-    func updateTag(){
+    func updateTag() -> [String]{
+        var removedTags:[String] = []
         for tag in tags.keys{
-            if !self.textView.text.contains(tag){
-                self.tags.removeValue(forKey: tag)
+            if !self.textView.attributedText.string.contains(tag){
+                removedTags.append(self.tags.removeValue(forKey: tag)!)
             }
         }
+        return removedTags
     }
     
     func didTouchUser(_ user: User) {
-        var words = self.textView.text.components(separatedBy: " ")
+        var words = self.textView.attributedText.string.components(separatedBy: " ")
         if var word = words.last, word.hasPrefix("@") {
             word = "@\(user.username!) "
             words[words.count-1] = word
-            self.textView.text = words.joined(separator: " ")
-            self.addTag("@\(user.username!)", user)
+            let attributedString = NSMutableAttributedString(string: words.joined(separator: " "))
+            self.textView.attributedText = attributedString
+            self.addTag(word, user)
         }
         self.delegate?.searchForUser("")
     }
     
     @IBAction func postAction(_ sender: AnyObject) {
         let characters = NSCharacterSet.alphanumerics
-        if var text = self.textView.text, let _ = text.rangeOfCharacter(from: characters) {
+        if self.textView.attributedText.string.characters.count > 0, let _ = self.textView.attributedText.string.rangeOfCharacter(from: characters) {
+            var text = self.textView.attributedText.string
             text.condenseNewLine()
             var results:[CommentTag] = []
             for (tag, user) in self.tags {

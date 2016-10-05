@@ -64,6 +64,8 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
             self.updateDescriptionLengthLabel(length: self.descriptionTextView.text.characters.count)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             
+            self.nameTextField.delegate = self
+            
             self.descriptionTextView.isScrollEnabled = false
             self.descriptionTextView.isScrollEnabled = true
             
@@ -163,6 +165,14 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
                 self.present(vc, animated: true, completion: nil)
             }
         })
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if range.location == textField.text?.characters.count, string == " ", let text = textField.text {
+            textField.text = text + "\u{00a0}"
+            return false
+        }
+        return true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

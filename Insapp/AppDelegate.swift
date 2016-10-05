@@ -41,6 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        guard let _ = Credentials.fetch() else { return }
+        APIManager.fetchNotifications(controller: self.window!.rootViewController!) { (notifs) in
+            let badge = notifs.filter({ (notif) -> Bool in return !notif.seen })
+            (self.window!.rootViewController! as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge)"
+        }
+    }
+    
     func registerForNotification(completion: (() -> ())? = nil ){
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in

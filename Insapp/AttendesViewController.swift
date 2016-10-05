@@ -28,7 +28,7 @@ class AttendesViewController: UIViewController, ListUserDelegate {
         vc.user_id = user.id
         vc.setEditable(false)
         vc.canReturn(true)
-        self.parent!.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

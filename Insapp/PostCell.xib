@@ -71,16 +71,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jl-tc-4Or">
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="61" id="6Q3-Nu-gqe"/>
-                        </constraints>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1O-Xc-ODh">
                         <constraints>
                             <constraint firstAttribute="width" constant="81" id="iEk-NF-Qpb"/>
@@ -128,6 +118,14 @@
                             <constraint firstAttribute="height" constant="0.5" id="skp-bI-gkp"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-6I-Ndh">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="61" id="dZ4-YO-9LH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-m9-jhI">
                         <constraints>
                             <constraint firstAttribute="height" constant="68" id="p4p-WV-qDp"/>
@@ -144,19 +142,18 @@
                     <constraint firstItem="wHN-Ld-R3I" firstAttribute="leading" secondItem="auB-78-wBy" secondAttribute="trailing" constant="8" id="9O5-KZ-eVl"/>
                     <constraint firstItem="cEW-m9-jhI" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="CJx-V0-ua3"/>
                     <constraint firstItem="CZg-O7-Es1" firstAttribute="top" secondItem="0Xl-Yl-3Zb" secondAttribute="bottom" id="Equ-ke-ynX"/>
-                    <constraint firstItem="3jl-tc-4Or" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="J8W-en-NXm"/>
+                    <constraint firstItem="ecU-6I-Ndh" firstAttribute="top" secondItem="Ekm-Qy-QeQ" secondAttribute="bottom" constant="-4.5" id="Mc6-TK-Ys2"/>
                     <constraint firstItem="GUI-T1-o9o" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="N9B-ZL-2s4"/>
                     <constraint firstItem="KcS-1Z-lvB" firstAttribute="leading" secondItem="QIv-w3-eUt" secondAttribute="trailing" constant="2" id="NlE-Bz-ALR"/>
                     <constraint firstItem="auB-78-wBy" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" constant="8" id="ORn-uw-XJd"/>
                     <constraint firstItem="auB-78-wBy" firstAttribute="leading" secondItem="AWT-dF-cCB" secondAttribute="trailing" constant="8" id="Qm4-Xy-emH"/>
                     <constraint firstItem="Ekm-Qy-QeQ" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="Qwd-zP-wd6"/>
                     <constraint firstItem="YZ8-J9-CE9" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="R3g-Fy-Ob7"/>
-                    <constraint firstItem="3jl-tc-4Or" firstAttribute="top" secondItem="Ekm-Qy-QeQ" secondAttribute="bottom" constant="-5" id="RW8-cg-998"/>
                     <constraint firstItem="AWT-dF-cCB" firstAttribute="top" secondItem="CSS-YU-nuV" secondAttribute="top" constant="8" id="Rez-Ix-jWZ"/>
                     <constraint firstAttribute="trailing" secondItem="Ekm-Qy-QeQ" secondAttribute="trailing" constant="8" id="SQr-Hx-seE"/>
-                    <constraint firstAttribute="trailing" secondItem="3jl-tc-4Or" secondAttribute="trailing" constant="8" id="SVx-Ax-j6Q"/>
                     <constraint firstItem="P6U-js-hDt" firstAttribute="height" secondItem="E1O-Xc-ODh" secondAttribute="height" id="URa-FQ-gyD"/>
                     <constraint firstItem="CZg-O7-Es1" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="V7B-8G-j6c"/>
+                    <constraint firstAttribute="trailing" secondItem="ecU-6I-Ndh" secondAttribute="trailing" constant="8" id="VOS-Q1-AJL"/>
                     <constraint firstItem="0Xl-Yl-3Zb" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" id="VeK-4u-vty"/>
                     <constraint firstItem="P6U-js-hDt" firstAttribute="centerY" secondItem="E1O-Xc-ODh" secondAttribute="centerY" id="VpI-1X-Wll"/>
                     <constraint firstItem="iCj-fe-M2m" firstAttribute="centerY" secondItem="QIv-w3-eUt" secondAttribute="centerY" id="YeD-Px-ToE"/>
@@ -169,6 +166,7 @@
                     <constraint firstItem="AWT-dF-cCB" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="hJH-aT-l1q"/>
                     <constraint firstItem="KcS-1Z-lvB" firstAttribute="top" secondItem="CZg-O7-Es1" secondAttribute="bottom" constant="8" id="hVo-r2-pnT"/>
                     <constraint firstItem="E1O-Xc-ODh" firstAttribute="centerY" secondItem="KcS-1Z-lvB" secondAttribute="centerY" id="i2e-IY-CYM"/>
+                    <constraint firstItem="ecU-6I-Ndh" firstAttribute="leading" secondItem="CSS-YU-nuV" secondAttribute="leading" constant="8" id="lpi-IY-nkO"/>
                     <constraint firstItem="Ekm-Qy-QeQ" firstAttribute="top" secondItem="QIv-w3-eUt" secondAttribute="bottom" constant="4" id="mNN-fa-UUn"/>
                     <constraint firstItem="P6U-js-hDt" firstAttribute="width" secondItem="E1O-Xc-ODh" secondAttribute="width" id="sF5-0C-aEP"/>
                     <constraint firstItem="GUI-T1-o9o" firstAttribute="centerY" secondItem="QIv-w3-eUt" secondAttribute="centerY" id="wxd-dx-Skd"/>
@@ -181,7 +179,7 @@
                 <outlet property="associationLabel" destination="Ekm-Qy-QeQ" id="gxG-fo-TO7"/>
                 <outlet property="commentButton" destination="KcS-1Z-lvB" id="eTj-wG-2cg"/>
                 <outlet property="commentLabel" destination="E1O-Xc-ODh" id="LW5-6B-2c9"/>
-                <outlet property="descriptionTextView" destination="3jl-tc-4Or" id="NP4-mz-us2"/>
+                <outlet property="descriptionLabel" destination="ecU-6I-Ndh" id="HCW-yA-NrT"/>
                 <outlet property="gradientView" destination="cEW-m9-jhI" id="0wQ-GQ-ryo"/>
                 <outlet property="likeButton" destination="GUI-T1-o9o" id="G6D-EK-2Ay"/>
                 <outlet property="likeLabel" destination="QIv-w3-eUt" id="tGo-gu-hEK"/>

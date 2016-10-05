@@ -11,14 +11,18 @@ import UIKit
 
 class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate {
     
-    @IBOutlet weak var postTableView: UITableView!
+    @IBOutlet weak var postTableView: UITableView!  
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var noPostLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     private let tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
+    var activePost: Post?
     var posts:[Post]! = []
+    var canReturn = false
+    var canRefresh = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,20 +31,33 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.postTableView.dataSource = self
         self.postTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: kPostCell)
         
-        self.addChildViewController(self.tableViewController)
-        self.tableViewController.tableView = self.postTableView
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
-        self.refreshControl.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
-        self.tableViewController.refreshControl = self.refreshControl
-        self.postTableView.addSubview(refreshControl)
-        self.fetchPosts()
+        if self.canRefresh {
+            self.addChildViewController(self.tableViewController)
+            self.tableViewController.tableView = self.postTableView
+            self.refreshControl = UIRefreshControl()
+            self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
+            self.refreshControl.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
+            self.tableViewController.refreshControl = self.refreshControl
+            self.postTableView.addSubview(refreshControl)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let post = self.activePost {
+            self.posts = [post]
+        }else{
+            self.fetchPosts()
+        }
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
+        self.backButton.isHidden = !self.canReturn
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let post = self.activePost, let row = self.posts.index(of: post) {
+            self.postTableView.scrollToRow(at: IndexPath(row: row, section:0), at: .bottom, animated: true)
+        }
     }
     
     func fetchPosts(){
@@ -128,6 +145,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func scrollToTop(){
         self.postTableView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
+    @IBAction func dismissAction(_ sender: AnyObject) {
+        self.navigationController!.popViewController(animated: true)
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {

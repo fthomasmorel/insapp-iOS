@@ -161,9 +161,13 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func searchForUser(_ word: String) {
         if word.characters.count > 0 {
             APIManager.searchUser(word: word, controller: self) { (users) in
-                if users.count > 0 {
+                if users.count > 0 {                    
                     self.listUserView.isHidden = false
                     self.listUserViewController.users = users
+                    self.listUserViewController.reloadUsers()
+                    self.listUserViewController.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
+                }else{
+                    self.listUserViewController.users = []
                     self.listUserViewController.reloadUsers()
                     self.listUserViewController.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
                 }

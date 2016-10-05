@@ -29,7 +29,8 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var gradientView: UIView!
     
     
@@ -72,15 +73,17 @@ class PostCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.descriptionTextView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        self.computeGradientView()
+        DispatchQueue.main.async {
+            self.computeGradientView()
+            self.descriptionLabel.sizeToFit()
+        }
     }
     
     func renderStaticData(){
         self.titleLabel.text = post.title!
         self.commentLabel.text = "(\(post.comments!.count))"
         self.likeLabel.text = "(\(post.likes!.count))"
-        self.descriptionTextView.text = post.desc
+        self.descriptionLabel.text = post.desc! + "\n\n\n\n"
         self.timestampLabel.text = post.date!.timestamp()
         
         let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
@@ -96,8 +99,6 @@ class PostCell: UITableViewCell {
         let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(PostCell.handleTapGesture))
         self.associationLabel.addGestureRecognizer(tapGesture3)
     }
-    
-    
     
     func computeGradientView(){
         let opaqueColor = UIColor.white
@@ -116,8 +117,9 @@ class PostCell: UITableViewCell {
                 sublayer.removeFromSuperlayer()
             }
         }
-
+        
         self.gradientView.layer.insertSublayer(gradient, at: 0)
+        self.bringSubview(toFront: self.gradientView)
     }
     
     @IBAction func commentAction(_ sender: AnyObject) {

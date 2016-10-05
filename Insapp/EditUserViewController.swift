@@ -72,7 +72,7 @@ class EditUserViewController: UIViewController {
         let gender = self.settingViewController!.genderTextField.text
         let email = self.settingViewController!.emailTextField.text
         
-        user?.name = name
+        user?.name = name.replacingOccurrences(of: "\u{00a0}", with: " ")
         user?.email = email
         user?.promotion = promotion
         user?.gender = convertGender[gender!]

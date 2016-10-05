@@ -266,6 +266,13 @@ extension String {
         let parts = self.components(separatedBy: "\n").filter { (str) -> Bool in return !str.isEmpty }
         self = parts.joined(separator: "\n\n")
     }
+    
+    func searchLast(string: String, from: Int) -> Int{
+        if let range = self.range(of: string, options: CompareOptions.backwards){
+            return distance(from: self.startIndex, to: range.upperBound)
+        }
+        return 0
+    }
 }
 
 extension UITextView {

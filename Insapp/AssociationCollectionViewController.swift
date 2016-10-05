@@ -37,6 +37,13 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     override func viewWillAppear(_ animated: Bool) {
     
         self.searchBar.backgroundImage = UIImage()
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
+        if let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView {
+            glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            glassIconView.tintColor = kDarkGreyColor
+        }
+
         self.searchBar.delegate = self
         
         self.notifyGoogleAnalytics()

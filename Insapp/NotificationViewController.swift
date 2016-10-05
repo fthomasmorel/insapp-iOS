@@ -80,14 +80,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func open(post: Post){
-        APIManager.fetchAssociation(association_id: post.association!, controller: self) { (opt_assos) in
-            guard let assos = opt_assos else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
-            vc.post = post
-            vc.association = assos
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
+        vc.activePost = post
+        vc.canReturn = true
+        vc.canRefresh = false
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func open(user: User){
@@ -119,10 +117,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func open(post: Post, withCommentId comment_id: String){
+        guard let comment = post.comments?.filter({ (comment) -> Bool in
+            return comment.id! == comment_id
+        }).first else { return }
+        self.open(post: post, withComment: comment)
+    }
+    
     func didRead(notification: Notification){
-        APIManager.readNotification(notification: notification, controller: self) { (opt_notif) in
-            
-        }
+        APIManager.readNotification(notification:   notification, controller: self) { (opt_notif) in }
     }
     
     func refreshUI(reload:Bool = false){
@@ -145,11 +148,19 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             self.loader.isHidden = false
             self.tableView.reloadData()
         }
+        let badge = self.notifications.filter { (notif) -> Bool in return !notif.seen }.count
+        if badge > 0 {
+            (self.navigationController?.parent as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge)"
+        }else{
+            (self.navigationController?.parent as? UITabBarController)?.tabBar.items?[3].badgeValue = nil
+        }
     }
     
     func scrollToTop(){
         self.tableView.setContentOffset(CGPoint.zero, animated: true)
     }
+    
+    
     
     @IBAction func reloadAction(_ sender: AnyObject) {
         self.refreshUI(reload: true)

@@ -148,6 +148,8 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         var newFrame = self.contentTextView.frame
         newFrame.size.height = height
         self.contentTextView.frame = newFrame
+        self.contentTextView.dataDetectorTypes = .link
+        self.contentTextView.delegate = self
         
         self.usernameLabel.text = "@\(association.name!.lowercased())"
         self.contentTextView.sizeToFit()
@@ -181,11 +183,14 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        APIManager.fetch(user_id: URL.absoluteString, controller: self.delegate! as! UIViewController) { (user_opt) in
-            guard let user = user_opt else { return }
-            self.delegate?.open(user: user)
+        if !URL.absoluteString.contains("http") {
+            APIManager.fetch(user_id: URL.absoluteString, controller: self.delegate! as! UIViewController) { (user_opt) in
+                guard let user = user_opt else { return }
+                self.delegate?.open(user: user)
+            }
+            return false
         }
-        return false
+        return true
     }
  
     func openSubmenu(){

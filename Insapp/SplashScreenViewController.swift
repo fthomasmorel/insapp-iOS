@@ -58,22 +58,57 @@ class SpashScreenViewController: UIViewController {
         var completion: ((UIViewController) -> Void)? = nil
         if let notification = appDelegate.notification {
             completion = { viewController in
-                if let event_id = notification["id"] as? String {
-                    self.loadEventViewController(viewController as! UITabBarController, event_id: event_id)
-                }
+                guard let type = notification["type"] as? String, let content = notification["content"] as? String, let comment = notification["comment"] as? String else { return }
+                switch type {
+                case kNotificationTypeEvent:
+                    self.loadEventViewController(viewController as! UITabBarController, event_id: content)
+                    break
+                case kNotificationTypePost:
+                    self.loadPostViewController(viewController as! UITabBarController, post_id: content)
+                    break
+                case kNotificationTypeTag:
+                    self.loadCommentViewController(viewController as! UITabBarController, post_id: content, comment_id: comment)
+                    break
+                default:
+                    break
+                }       
             }
         }
         self.loadViewController(name: "TabViewController", completion: completion)
     }
     
     func loadEventViewController(_ controller: UITabBarController, event_id: String){
-        controller.selectedIndex = 1
         let navigationController = (controller.selectedViewController as! UINavigationController)
-        let eventController = (navigationController.topViewController as! EventTableViewController)
-        APIManager.fetchEvent(event_id: event_id, controller: eventController, completion: { (opt_event) in
+        let viewController = navigationController.topViewController
+        APIManager.fetchEvent(event_id: event_id, controller: viewController!, completion: { (opt_event) in
             guard let event = opt_event else { return }
+            controller.selectedIndex = 3
             DispatchQueue.main.async {
-                eventController.loadEvent(event: event)
+                (controller.selectedViewController as! NotificationCellDelegate).open(event: event)
+            }
+        })
+    }
+    
+    func loadPostViewController(_ controller: UITabBarController, post_id: String){
+        let navigationController = (controller.selectedViewController as! UINavigationController)
+        let viewController = navigationController.topViewController
+        APIManager.fetchPost(post_id: post_id, controller: viewController!, completion: { (opt_post) in
+            guard let post = opt_post else { return }
+            controller.selectedIndex = 3
+            DispatchQueue.main.async {
+                (controller.selectedViewController as! NotificationCellDelegate).open(post: post)
+            }
+        })
+    }
+    
+    func loadCommentViewController(_ controller: UITabBarController, post_id: String, comment_id: String){
+        let navigationController = (controller.selectedViewController as! UINavigationController)
+        let viewController = navigationController.topViewController
+        APIManager.fetchPost(post_id: post_id, controller: viewController!, completion: { (opt_post) in
+            guard let post = opt_post else { return }
+            controller.selectedIndex = 3
+            DispatchQueue.main.async {
+                (controller.selectedViewController as! NotificationCellDelegate).open(post: post, withCommentId: comment_id)
             }
         })
     }
@@ -83,6 +118,15 @@ class SpashScreenViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: name)
         if name == "TabViewController" {
             (vc as! UITabBarController).delegate = UIApplication.shared.delegate as! UITabBarControllerDelegate?
+            DispatchQueue.global().async {
+                APIManager.fetchNotifications(controller: self, completion: { (notifs) in
+                    let badge = notifs.filter({ (notif) -> Bool in return !notif.seen }).count
+                    DispatchQueue.main.async {
+                        guard badge > 0 else { return }
+                        (vc as! UITabBarController).tabBar.items?[3].badgeValue = "\(badge)"
+                    }
+                })
+            }
         }
         self.present(vc, animated: true) {
             guard let _ = completion else { return }

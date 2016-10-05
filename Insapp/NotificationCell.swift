@@ -15,6 +15,7 @@ protocol NotificationCellDelegate {
     func open(event: Event)
     func open(association: Association)
     func open(post: Post, withComment comment: Comment)
+    func open(post: Post, withCommentId comment_id: String)
     func didRead(notification: Notification)
 }
 
@@ -41,6 +42,7 @@ class NotificationCell: UITableViewCell {
         
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(NotificationCell.didTouchView))
         self.contentImageView.addGestureRecognizer(tap2)
+        self.addGestureRecognizer(tap2)
     }
     
     func loadNotification(_ notification: Notification){
