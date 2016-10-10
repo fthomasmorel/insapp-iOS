@@ -12,42 +12,42 @@ import Alamofire
 class APIManager: AnyObject{
     
     static var token:String!
+    static let group = DispatchGroup()
     
     static func process(request: URLRequestConvertible, completion: @escaping (Optional<AnyObject>) -> (), errorBlock: @escaping (String, Int) -> (Bool)){
-        let proc: () -> (Bool) = {
-            let group = DispatchGroup()
+        { () -> Void in
             var retry = false
-            group.enter()
-            DispatchQueue.global().async {
+            //group.enter()
+            //DispatchQueue.global().async {
                 Alamofire.request(request).responseJSON { response in
                     guard let res = response.response else {
                         retry = errorBlock(kErrorServer, -1)
-                        group.leave()
+                        //group.leave()
                         return
                     }
-                    //var error = kErrorUnkown
-//                    if let dict = response.result.value as? Dictionary<String, AnyObject>{
-//                        if let err = dict["error"] as? String {
-//                            error = err
-//                        }
-//                    }
-                    retry = errorBlock(kErrorUnkown, res.statusCode)
+                    var error = kErrorUnkown
+                    if let dict = response.result.value as? Dictionary<String, AnyObject>{
+                        if let err = dict["error"] as? String {
+                            error = err
+                        }
+                    }
+                    retry = errorBlock(error, res.statusCode)
                     if !retry {
                         completion(response.result.value as AnyObject)   
                     }
-                    group.leave()
+                    //group.leave()
                 }
-            }
-            group.wait()
-            return retry
-        }
+            //}
+            //group.wait()
+            //return retry
+        }()
         
-        DispatchQueue.global().async {
-            let retry = proc()
-            if retry {
-                _ = proc()
-            }
-        }
+        //DispatchQueue.global().async {
+            //let retry = proc()
+            //if retry {
+               // _ = proc()
+            //}
+        //}
     }
     
     static func requestWithToken(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){

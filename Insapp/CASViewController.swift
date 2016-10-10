@@ -22,6 +22,10 @@ class CASViewController: UIViewController, UIWebViewDelegate{
         let req = URLRequest(url: url!)
         
         self.username = nil
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
         self.webView.loadRequest(req)
         self.webView.delegate = self
     }
@@ -42,30 +46,34 @@ class CASViewController: UIViewController, UIWebViewDelegate{
     func signInUser(username: String, eraseUser: Bool = false){
         APIManager.signin(username: username, eraseUser: eraseUser, controller: self) { (opt_cred) in
             guard let credentials = opt_cred else { return }
-            APIManager.login(credentials, controller: self, completion: { (opt_cred) in
-                guard let creds = opt_cred else { return }
-                APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
-                    guard let _ = opt_user else { return }
-                    self.stopLoading()
-                    DispatchQueue.main.async {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "TabViewController") as! UITabBarController
-                        vc.delegate = UIApplication.shared.delegate as! UITabBarControllerDelegate?
-                        self.present(vc, animated: true, completion: nil)
-                    }
-                })
+            APIManager.login(credentials, controller: self, completion: { (opt_cred, opt_user) in
+                guard let _ = opt_cred else {
+                    self.displayError(message: kErrorServer)
+                    return
+                }
+                guard let _ = opt_user else {
+                    self.displayError(message: kErrorUnkown)
+                    return
+                }
+                self.stopLoading()
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "TabViewController") as! UITabBarController
+                    vc.delegate = UIApplication.shared.delegate as! UITabBarControllerDelegate?
+                    self.present(vc, animated: true, completion: nil)
+                }
             })
         }
     }
     
     func askForChangePhone(){
-        let alert = UIAlertController(title: "Attention", message: "Ton compte est lié à un autre téléphone. Souhaites-tu changer de téléphone ? (Le compte sur l'autre téléphone sera alors déconnecté)", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { action in
-            self.dismissAction(self)
-        }))
-        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { action in
-            self.signInUser(username: self.username!, eraseUser: true)
-        }))
+        let alert = Alert.create(alert: .switchPhone) { (success) in
+            if success {
+                self.signInUser(username: self.username!, eraseUser: true)
+            }else{
+                self.dismissAction(self)
+            }
+        }
         self.present(alert, animated: true, completion: nil)
     }
     

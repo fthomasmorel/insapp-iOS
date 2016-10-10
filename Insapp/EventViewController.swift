@@ -32,6 +32,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.changeStatusBarForColor(colorStr: event.fgColor)
     }
@@ -42,6 +43,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.showAttendeesAction))
         self.attendeesLabel.addGestureRecognizer(tap2)
+        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
 
     }
     
@@ -83,7 +85,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         self.descriptionTextView.text = self.event.desc
         self.descriptionTextView.isScrollEnabled = false
         self.descriptionTextView.isScrollEnabled = true
-        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
     func computeGradient(){
@@ -133,12 +134,16 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
             }
         case .notDetermined:
             store.requestAccess(to: .event, completion: { (granted, error) -> Void in
-                if !granted { return }
+                if !granted {
+                    
+                }
                 DispatchQueue.main.async{
                     self.present(eventController, animated: true, completion: self.darkStatusBar)
                 }
             })
         case .denied, .restricted:
+            let alert = Alert.create(alert: .calendarAuthorization)
+            self.present(alert, animated: true, completion: nil)
             return
         }
     }
@@ -153,14 +158,14 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     }
     
     func askForSuggestion(){
-        let alert = UIAlertController(title: "", message: "Souhaites-tu ajouter les évènements, auxquels tu participes, à ton calendrier ?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { action in
-            UserDefaults.standard.set(false, forKey: kSuggestCalendar)
-        }))
-        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { action in
-            UserDefaults.standard.set(true, forKey: kSuggestCalendar)
-            self.addToCalendarAction()
-        }))
+        let alert = Alert.create(alert: .eventAdding) { (success) in
+            if success {
+                UserDefaults.standard.set(true, forKey: kSuggestCalendar)
+                self.addToCalendarAction()
+            }else{
+                UserDefaults.standard.set(false, forKey: kSuggestCalendar)
+            }
+        }
         self.present(alert, animated: true, completion: nil)
     }
     

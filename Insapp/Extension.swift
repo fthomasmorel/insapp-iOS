@@ -66,6 +66,10 @@ extension UIViewController{
         self.view.viewWithTag(2)?.removeFromSuperview()
     }
     
+    func hideNavBar(){
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
 }
 
 extension UIColor{
@@ -86,6 +90,24 @@ extension UIColor{
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+}
+
+extension UIImage{
+    
+    func resize(width: CGFloat) -> UIImage{
+        let image = self
+        let ratio = width/image.size.width
+        let size = image.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
+        let hasAlpha = true
+        let scale: CGFloat = 0.0
+        
+        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage!
     }
 }
 
@@ -289,3 +311,5 @@ extension UITextView {
         return contentSize.height
     }
 }
+
+

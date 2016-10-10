@@ -21,6 +21,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     var refreshControl: UIRefreshControl!
     var notifications:[Notification] = []
     
+    var events:[String: Event] = [:]
+    var associations:[String: Association] = [:]
+    var users:[String: User] = [:]
+    var posts:[String: Post] = [:]
+    
+    let group = DispatchGroup()
+    let queue = DispatchQueue.global(qos: .background)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -40,15 +48,41 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
-        self.lightStatusBar()
         self.fetchNotifications()
+        self.lightStatusBar()
+        self.hideNavBar()
     }
     
     func fetchNotifications(){
         APIManager.fetchNotifications(controller: self) { (notifications) in
-            self.notifications = notifications
-            self.refreshControl.endRefreshing()
-            self.refreshUI()
+            DispatchQueue.main.async {
+                self.notifications = notifications
+                for notification in notifications {
+                    switch notification.type! {
+                    case kNotificationTypeEvent:
+                        self.download(eventId: notification.content!)
+                        self.download(associationId: notification.sender!)
+                        break
+                    case kNotificationTypePost:
+                        self.download(postId: notification.content!)
+                        self.download(associationId: notification.sender!)
+                        break
+                    case kNotificationTypeTag:
+                        self.download(postId: notification.content!)
+                        self.download(userId: notification.sender!)
+                        break
+                    default:
+                        break
+                    }
+                }
+                
+                self.group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+                    DispatchQueue.main.async {
+                        self.refreshControl.endRefreshing()
+                        self.refreshUI()
+                    }
+                }))
+            }
         }
     }
     
@@ -68,9 +102,28 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let notification = self.notifications[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: kNotificationCell, for: indexPath) as! NotificationCell
         cell.delegate = self
-        cell.loadNotification(notification)
+        switch notification.type! {
+        case kNotificationTypeEvent:
+            let content = self.events[notification.content!]!
+            let sender = self.associations[notification.sender!]!
+            cell.load(notification, withEvent: content, withSender: sender)
+            break
+        case kNotificationTypePost:
+            let content = self.posts[notification.content!]!
+            let sender = self.associations[notification.sender!]!
+            cell.load(notification, withPost: content, withSender: sender)
+            break
+        case kNotificationTypeTag:
+            let content = self.posts[notification.content!]!
+            let sender = self.users[notification.sender!]!
+            cell.load(notification, withPost: content, withUser: sender)
+            break
+        default:
+            break
+        }
         return cell
     }
+    
     
     func open(event: Event){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -83,6 +136,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
         vc.activePost = post
+        vc.activeAssociation = self.associations[post.association!]
         vc.canReturn = true
         vc.canRefresh = false
         self.navigationController?.pushViewController(vc, animated: true)
@@ -124,8 +178,53 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.open(post: post, withComment: comment)
     }
     
-    func didRead(notification: Notification){
-        APIManager.readNotification(notification:   notification, controller: self) { (opt_notif) in }
+    
+    func download(eventId: String){
+        guard self.events[eventId] == nil else { return }
+        self.group.enter()
+        self.queue.async(group: self.group, execute: {
+            APIManager.fetchEvent(event_id: eventId, controller: self) { (opt_event) in
+                guard let event = opt_event else { return }
+                self.events[eventId] = event
+                self.group.leave()
+            }
+        })
+    }
+
+    func download(postId: String){
+        guard self.posts[postId] == nil else { return }
+        self.group.enter()
+        self.queue.async(group: self.group, execute: {
+            APIManager.fetchPost(post_id: postId, controller: self) { (opt_post) in
+                guard let post = opt_post else { return }
+                self.posts[postId] = post
+                self.group.leave()
+            }
+        })
+    }
+    
+    func download(associationId: String){
+        guard self.associations[associationId] == nil else { return }
+        self.group.enter()
+        self.queue.async(group: self.group, execute: {
+            APIManager.fetchAssociation(association_id: associationId, controller: self) { (opt_association) in
+                guard let association = opt_association else { return }
+                self.associations[associationId] = association
+                self.group.leave()
+            }
+        })
+    }
+    
+    func download(userId: String){
+        guard self.users[userId] == nil else { return }
+        self.group.enter()
+        self.queue.async(group: self.group, execute: {
+            APIManager.fetch(user_id: userId, controller: self) { (opt_user) in
+                guard let user = opt_user else { return }
+                self.users[userId] = user
+                self.group.leave()
+            }
+        })
     }
     
     func refreshUI(reload:Bool = false){
@@ -148,18 +247,19 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             self.loader.isHidden = false
             self.tableView.reloadData()
         }
-        let badge = self.notifications.filter { (notif) -> Bool in return !notif.seen }.count
-        if badge > 0 {
-            (self.navigationController?.parent as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge)"
-        }else{
-            (self.navigationController?.parent as? UITabBarController)?.tabBar.items?[3].badgeValue = nil
+        
+        let application = UIApplication.shared
+        application.applicationIconBadgeNumber = 0
+        (self.navigationController?.parent as? UITabBarController)?.tabBar.items?[3].badgeValue = nil
+        
+        for notification in self.notifications {
+            APIManager.readNotification(notification: notification, controller: self, completion: { (_) in })
         }
     }
     
     func scrollToTop(){
         self.tableView.setContentOffset(CGPoint.zero, animated: true)
     }
-    
     
     
     @IBAction func reloadAction(_ sender: AnyObject) {

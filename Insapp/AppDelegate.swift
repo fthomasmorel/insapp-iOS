@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         Fabric.with([Crashlytics.self])
         
-        
         self.notification = launchOptions?[.remoteNotification] as? [String: AnyObject]
         
         return true
@@ -45,13 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         guard let _ = Credentials.fetch() else { return }
         APIManager.fetchNotifications(controller: self.window!.rootViewController!) { (notifs) in
             let badge = notifs.filter({ (notif) -> Bool in return !notif.seen })
-            (self.window!.rootViewController! as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge)"
+            (self.window!.rootViewController! as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge.count)"
+            application.applicationIconBadgeNumber = badge.count
         }
     }
     
     func registerForNotification(completion: (() -> ())? = nil ){
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             UIApplication.shared.registerForRemoteNotifications()
             completion?()
         }
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if let credentials = Credentials.fetch(), let controller = self.window?.rootViewController {
-            APIManager.login(credentials, controller: controller, completion: { (cred_opt) in } )
+            APIManager.login(credentials, controller: controller, completion: { (_, _) in } )
         }
     }
 
@@ -107,6 +107,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
     }
     
+    func activeViewController() -> UIViewController? {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let tabController = appDelegate.window!.rootViewController!.presentedViewController as? UITabBarController {
+            if let navigationController = tabController.selectedViewController as? UINavigationController {
+                return navigationController.topViewController
+            }
+        }
+        return .none
+    }
 
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {

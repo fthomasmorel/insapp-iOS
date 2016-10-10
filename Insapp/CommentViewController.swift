@@ -36,6 +36,8 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.commentTableView.keyboardDismissMode = .interactive;
         self.fetchUsers()
         
+        self.navigationController?.navigationBar.isHidden = true
+        
         let frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
         self.commentView = CommentView.instanceFromNib()
         self.commentView.initFrame(keyboardFrame: frame)
@@ -49,27 +51,22 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CommentViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        
         self.notifyGoogleAnalytics()
         self.lightStatusBar()
         self.hideTabBar()
+        self.hideNavBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if showKeyboard {
             self.commentView.textView.becomeFirstResponder()
         }
-        if let comment = self.activeComment, let row = self.post.comments?.index(of: comment){
-            let indexPath = IndexPath(row: row, section: 0)
-            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: animated)
-        }else{
-            self.scrollToBottom()
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: self.view.window)
+        self.showTabBar()
     }
     
     override var inputAccessoryView: UIView {
@@ -101,7 +98,12 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.fetchUserGroup.wait()
         DispatchQueue.main.async {
             self.commentTableView.reloadData()
-            self.scrollToBottom()
+            if let comment = self.activeComment, let row = self.post.comments?.index(of: comment){
+                let indexPath = IndexPath(row: row+1, section: 0)
+                self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            }else{
+                self.scrollToBottom()
+            }
         }
     }
 
@@ -259,7 +261,6 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {
-        self.showTabBar()
         self.navigationController!.popViewController(animated: true)
     }
 }

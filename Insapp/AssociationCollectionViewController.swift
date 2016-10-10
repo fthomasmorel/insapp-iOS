@@ -25,6 +25,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.keyboardDismissMode = .interactive
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
@@ -35,8 +36,10 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-    
+        self.hideNavBar()
         self.searchBar.backgroundImage = UIImage()
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
+        
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
         if let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView {
@@ -44,6 +47,9 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
             glassIconView.tintColor = kDarkGreyColor
         }
 
+        NotificationCenter.default.addObserver(self, selector: #selector(AssociationCollectionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AssociationCollectionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         self.searchBar.delegate = self
         
         self.notifyGoogleAnalytics()
@@ -59,12 +65,20 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func fetchAssociations(){
+        self.searchBar.text = ""
         APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
             self.filteredAssociations = associations
-            self.refreshControl.endRefreshing()
-            self.refreshUI()
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                self.refreshUI()
+            }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: self.view.window)
     }
     
     private func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -96,6 +110,28 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func keyboardWillShow(_ notification: NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
+        DispatchQueue.main.async {
+            self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
+            self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
+            self.searchBar.showsCancelButton = true
+            self.refreshControl.removeFromSuperview()
+        }
+        
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        self.collectionView.contentInset = .zero
+        self.collectionView.scrollIndicatorInsets = .zero
+        self.refreshControl.isHidden = false
+        self.searchBar.showsCancelButton = false
+        if self.associations.count == self.filteredAssociations.count {
+            self.collectionView.addSubview(self.refreshControl)   
+        }
+    }
+    
     func refreshUI(reload:Bool = false){
         if self.associations.count == 0 {
             if reload {
@@ -122,9 +158,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         if searchText == "" {
             self.filteredAssociations = self.associations
             self.collectionView.reloadData()
-            DispatchQueue.main.async {
-                self.searchBar.resignFirstResponder()
-            }
         }else{
             self.filteredAssociations = self.associations.filter({ (association) -> Bool in
                 return association.name!.lowercased().contains(searchText.lowercased()) ||
@@ -133,6 +166,18 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
             })
             self.collectionView.reloadData()
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        DispatchQueue.main.async {
+            self.searchBar.resignFirstResponder()
+            self.fetchAssociations()
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
     }
     
     func scrollToTop(){

@@ -61,7 +61,6 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
             self.textView.attributedText = NSAttributedString(string: string.replacingCharacters(in: range, with: ""))
         }
         
-        
         return true
     }
     
@@ -99,7 +98,13 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     }
     
     func clearText(){
-        self.textView.attributedText = NSAttributedString(string: "")
+        if !self.textView.isFirstResponder {
+            self.textView.text = "Commenter"
+            self.textView.textColor = kDarkGreyColor
+        }else{
+            self.textView.text = ""
+            self.textView.textColor = .black
+        }
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
     }

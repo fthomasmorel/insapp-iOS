@@ -65,35 +65,35 @@ class TutorialViewController: UIPageViewController, UIPageViewControllerDataSour
     func pageAction(page: String){
         if page == "TutorialNotificationViewController" {
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 if !granted {
-                    let alert = UIAlertController(title: "", message: "Pour activer les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(defaultAction)
+                    let alert = Alert.create(alert: .notificationEnable)
                     self.present(alert, animated: true, completion: nil)
                 }else{
-                    let alert = UIAlertController(title: "", message: "Les notifications ont bien été activées", preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(defaultAction)
+                    let alert = Alert.create(alert: .notificationConfirmation)
                     self.present(alert, animated: true, completion: nil)
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             }
         }else{
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 if !granted {
-                    let alert = UIAlertController(title: "", message: "Pour activer les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(defaultAction)
+                    let alert = Alert.create(alert: .notificationEnable) { sucess in
+                        DispatchQueue.main.async {
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
                     self.present(alert, animated: true, completion: nil)
                 }else{
                     UIApplication.shared.registerForRemoteNotifications()
-                }
-                DispatchQueue.main.async {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
-                    self.present(vc, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
+                        self.present(vc, animated: true, completion: nil)
+                    }
                 }
             }
         }

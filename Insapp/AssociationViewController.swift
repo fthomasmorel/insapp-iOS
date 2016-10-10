@@ -32,6 +32,7 @@ class AssociationViewController: UIViewController, EventListDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNavBar()
         self.notifyGoogleAnalytics()
     }
     

@@ -19,12 +19,9 @@ class EventCell: UITableViewCell {
     
     var parent: UIViewController!
     
-    func loadEvent(_ event: Event){
+    func loadEvent(_ event: Event, forAssociation association: Association){
         self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
-        APIManager.fetchAssociation(association_id: event.association!, controller: self.parent) { (opt_asso) in
-            guard let association = opt_asso else { return }
-            self.associationLabel.text = "@\(association.name!.lowercased())"
-        }
+        self.associationLabel.text = "@\(association.name!.lowercased())"
         self.titleLabel.text = event.name
         self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
         self.attendeesLabel.text = "\(event.attendees!.count) participant\((event.attendees!.count > 1 ? "s" : ""))"

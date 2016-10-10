@@ -29,34 +29,38 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var gradientView: UIView!
     
-    
-    static let fetchPhotoGroup = DispatchGroup()
+    let queue = DispatchQueue(label: "test", qos: .background, attributes: DispatchQueue.Attributes.concurrent, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency.never, target: nil)
     
     var association:Association!
     var delegate: PostCellDelegate?
     var parent: UIViewController!
     var post:Post!
     
-    func loadPost(_ post: Post){
-        self.post = post
-        APIManager.fetchAssociation(association_id: post.association!, controller: self.parent, completion: { (opt_asso) in
-            guard let association = opt_asso else { return }
-            self.association = association
-            self.associationLabel.text = "@\(association.name!.lowercased())"
-            self.associationImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        DispatchQueue.main.async {
             self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
             self.associationImageView.layer.masksToBounds = true
-        })
-        self.postImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+            self.computeGradientView()
+        }
+    }
+    
+    func loadPost(_ post: Post, forAssociation association: Association){
+        self.post = post
+
+        self.association = association
+        self.associationLabel.text = "@\(association.name!.lowercased())"
+        DispatchQueue.main.async {
+            self.associationImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
+            self.postImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+        }
         
+        let height = post.imageSize!["height"]!
         let ratio = self.frame.size.width/post.imageSize!["width"]!
-        let height = post.imageSize!["height"]! * ratio
-        
-        self.postImageViewHeightConstraint.constant = height
+        self.postImageViewHeightConstraint.constant = ratio * height
         self.updateConstraintsIfNeeded()
         
         self.renderStaticData()
@@ -73,10 +77,10 @@ class PostCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        DispatchQueue.main.async {
-            self.computeGradientView()
-            self.descriptionLabel.sizeToFit()
-        }
+        //DispatchQueue.main.async {
+            //self.computeGradientView()
+            //self.descriptionLabel.sizeToFit()
+        //}
     }
     
     func renderStaticData(){

@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 class EventTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +16,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var noEventLabel: UILabel!
     
+    var associations:[String: Association] = [:]
     var events:[[Event]] = []
     var weekEvents:[Event] = []
     var dayEvents:[Event] = []
@@ -43,10 +42,19 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.refreshUI(reload: true)
         self.lightStatusBar()
         self.fetchEvents()
+    }
+    
+    override func triggerError(_ message: String, _ statusCode: Int) -> Bool {
+        if statusCode == 401 {
+            self.events = []
+            self.refreshUI()
+        }
+        return super.triggerError(message, statusCode)
     }
     
     func fetchEvents(){
@@ -58,9 +66,27 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
             self.events = [self.dayEvents, self.weekEvents, self.monthEvents, self.otherEvents]
             self.events = self.events.filter({ (list) -> Bool in
                 return !list.isEmpty
-                })
-            self.refreshControl.endRefreshing()
-            self.refreshUI()
+            })
+            
+            let group = DispatchGroup()
+            
+            for event in events {
+                if self.associations[event.association!] == nil {
+                    group.enter()
+                    APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_asso) in
+                        guard let association = opt_asso else { return }
+                        self.associations[event.association!] = association
+                        group.leave()
+                    }
+                }
+            }
+            
+            group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: { 
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    self.refreshUI()
+                }
+            }))
         }
     }
 
@@ -93,9 +119,10 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = self.events[indexPath.section][indexPath.row]
+        let association = self.associations[event.association!]
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventCell, for: indexPath) as! EventCell
         cell.parent = self
-        cell.loadEvent(event)
+        cell.loadEvent(event, forAssociation: association!)
         return cell
     }
     

@@ -22,6 +22,13 @@ class AttendesViewController: UIViewController, ListUserDelegate {
         self.listUserViewController?.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.notifyGoogleAnalytics()
+        self.lightStatusBar()
+        self.hideNavBar()
+    }
+    
     func didTouchUser(_ user:User){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController

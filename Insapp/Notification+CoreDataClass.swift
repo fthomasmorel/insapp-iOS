@@ -57,6 +57,9 @@ public class Notification: NSManagedObject {
             guard let comment       = Comment.parseJson(commentJson)                                else { return .none }
             notification.comment = comment
         }
+        
+        
+        
         return notification
     }
     

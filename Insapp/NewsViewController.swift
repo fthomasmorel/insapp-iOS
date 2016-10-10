@@ -20,18 +20,22 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
     var activePost: Post?
+    var activeAssociation: Association?
     var posts:[Post]! = []
+    var associations:[String:Association] = [:]
     var canReturn = false
     var canRefresh = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIApplication.shared.registerForRemoteNotifications()
+        
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         self.postTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: kPostCell)
         
-        if self.canRefresh {
+        if canRefresh{
             self.addChildViewController(self.tableViewController)
             self.tableViewController.tableView = self.postTableView
             self.refreshControl = UIRefreshControl()
@@ -43,8 +47,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let post = self.activePost {
+        self.hideNavBar()
+        if let post = self.activePost, let association = self.activeAssociation {
             self.posts = [post]
+            self.associations[association.id!] = association
         }else{
             self.fetchPosts()
         }
@@ -62,9 +68,23 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
+            let group = DispatchGroup()
             self.posts = posts
-            self.refreshControl.endRefreshing()
-            self.refreshUI()
+            for post in self.posts{
+                if self.associations[post.association!] == nil {
+                    group.enter()
+                    APIManager.fetchAssociation(association_id: post.association!, controller: self, completion: { (opt_asso) in
+                        guard let association = opt_asso else { return }
+                        self.associations[association.id!] = association
+                        group.leave()
+                    })
+                }
+            }
+            
+            group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+                self.refreshControl.endRefreshing()
+                self.refreshUI()
+            }))
         })
     }
     
@@ -72,6 +92,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let post = self.posts[indexPath.row]
         let ratio = self.view.frame.size.width/post.imageSize!["width"]!
         return post.imageSize!["height"]! * ratio + kPostCellEmptyHeight
+        //return self.view.frame.size.width + kPostCellEmptyHeight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -84,10 +105,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = self.posts[indexPath.row]
+        let association = self.associations[post.association!]!
         let cell = tableView.dequeueReusableCell(withIdentifier: kPostCell, for: indexPath) as! PostCell
         cell.parent = self
         cell.delegate = self
-        cell.loadPost(post)
+        cell.loadPost(post, forAssociation: association)
         return cell
     }
     

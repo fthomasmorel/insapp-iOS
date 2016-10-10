@@ -22,6 +22,7 @@ class EditUserViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.settingViewController?.avatarImageView.image = user?.avatar()
         self.settingViewController?.usernameTextField.text = "@\(user!.username!)"
@@ -77,8 +78,9 @@ class EditUserViewController: UIViewController {
         user?.promotion = promotion
         user?.gender = convertGender[gender!]
         
-        let characters = NSCharacterSet.alphanumerics
-        if var description = self.settingViewController?.descriptionTextView.text, let _ = description.rangeOfCharacter(from: characters) {
+        let characters = NSMutableCharacterSet.alphanumeric()
+        characters.addCharacters(in: NSRange(location: 0x1F300, length: 0x1F700 - 0x1F300))
+        if var description = self.settingViewController?.descriptionTextView.text, let _ = description.rangeOfCharacter(from: characters as CharacterSet) {
             description.condenseNewLine()
             user?.desc = description
         }

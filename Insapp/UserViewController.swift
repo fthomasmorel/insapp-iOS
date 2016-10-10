@@ -45,6 +45,8 @@ class UserViewController: UIViewController, EventListDelegate {
         self.creditButton.isHidden = self.canReturn
         
         DispatchQueue.main.async {
+            self.hideNavBar()
+            
             self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2
             self.profilePictureImageView.layer.masksToBounds = true
             self.profilePictureImageView.backgroundColor = kWhiteColor

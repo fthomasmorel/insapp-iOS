@@ -75,6 +75,7 @@
 		E1DC7F691D86FBAB00284222 /* Credentials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F611D86FBAB00284222 /* Credentials+CoreDataClass.swift */; };
 		E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */; };
 		E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */; };
+		E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E01CD31DA8EDE20082E88A /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,7 @@
 		E1DC7F611D86FBAB00284222 /* Credentials+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E1E01CD31DA8EDE20082E88A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FF193D226DDB96C99A3FA380 /* Pods-Insapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +230,7 @@
 				E1C3F9E51D894BDB006A66CF /* Extension.swift */,
 				E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */,
 				E192C1E31D90131500355512 /* Constant.swift */,
+				E1E01CD31DA8EDE20082E88A /* Alert.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */,
 				E1C3F9F21D89722F006A66CF /* APIManager+Post.swift in Sources */,
 				E1C3F9FA1D8A88D0006A66CF /* PostCell.swift in Sources */,
+				E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */,
 				E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */,
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,

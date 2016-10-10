@@ -52,8 +52,8 @@ let kUserCell = "kUserCell"
 let kNotificationCell = "kNotificationCell"
 
 //API
-let kAPIHostname = "https://api.thomasmorel.io"
-let kCDNHostname = "https://cdn.thomasmorel.io/"
+let kAPIHostname = "https://insapp.insa-rennes.fr/api/v1"
+let kCDNHostname = "https://insapp.insa-rennes.fr/cdn/"
 let kCASHostname = "https://cas-test.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"

@@ -33,22 +33,26 @@ extension APIManager{
         }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func login(_ credentials: Credentials, controller:UIViewController, completion:@escaping (Optional<Credentials>) -> ()){
+    static func login(_ credentials: Credentials, controller:UIViewController, completion:@escaping (Optional<Credentials>, Optional<User>) -> ()){
         let params = [
             kCredentialsUserId: credentials.userId,
             kCredentialsUsername: credentials.username,
             kCredentialsAuthToken: credentials.authToken
         ]
         request(url: "/login/user", method: .post, parameters: params as [String : AnyObject], completion: { result in
-            guard let json = result as? Dictionary<String, AnyObject> else { completion(.none) ; return }
-            guard let credentialsJson = json["credentials"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
-            guard let token = json["sessionToken"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
-            guard let user = json["user"] as? Dictionary<String, AnyObject> else { completion(.none) ; return }
-            guard let _ = User.parseJson(user) else { completion(.none) ; return }
+            guard let json = result as? Dictionary<String, AnyObject> else { completion(.none, .none) ; return }
+            guard let credentialsJson = json["credentials"] as? Dictionary<String, AnyObject> else { completion(.none, .none) ; return }
+            guard let credentials = Credentials.parseJson(credentialsJson) else { completion(.none, .none) ; return }
+            guard let token = json["sessionToken"] as? Dictionary<String, AnyObject> else { completion(credentials, .none) ; return }
+            guard let userJson = json["user"] as? Dictionary<String, AnyObject> else { completion(credentials, .none) ; return }
+            guard let user = User.parseJson(userJson) else {
+                completion(credentials, .none)
+                return
+            }
             
             APIManager.token = token["Token"] as! String
             
-            completion(Credentials.parseJson(credentialsJson))
+            completion(credentials, user)
         }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     

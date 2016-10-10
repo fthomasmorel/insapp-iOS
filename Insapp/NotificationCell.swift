@@ -16,7 +16,6 @@ protocol NotificationCellDelegate {
     func open(association: Association)
     func open(post: Post, withComment comment: Comment)
     func open(post: Post, withCommentId comment_id: String)
-    func didRead(notification: Notification)
 }
 
 class NotificationCell: UITableViewCell {
@@ -45,9 +44,38 @@ class NotificationCell: UITableViewCell {
         self.addGestureRecognizer(tap2)
     }
     
-    func loadNotification(_ notification: Notification){
+    func load(_ notification: Notification, withEvent event: Event, withSender sender: Association){
+        self.load(notification: notification)
+        self.event = event
+        self.associationSender = sender
+        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+    }
+    
+    func load(_ notification: Notification, withPost post: Post, withSender sender: Association){
+        self.load(notification: notification)
+        self.post = post
+        self.associationSender = sender
+        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+    }
+    
+    func load(_ notification: Notification, withPost post: Post, withUser user: User){
+        self.load(notification: notification)
+        self.post = post
+        self.userSender = user
+        self.senderImageView.image = user.avatar()
+        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+    }
+    
+    func load(notification: Notification){
+        
+        let attributedString = NSMutableAttributedString(string: notification.message! + " ")
+        let dateString = NSMutableAttributedString(string: notification.date!.timestamp(), attributes:
+            [NSForegroundColorAttributeName: kDarkGreyColor])
+        attributedString.append(dateString)
         self.notification = notification
-        self.messageLabel.text = notification.message!
+        self.messageLabel.attributedText = attributedString
         self.comment = notification.comment
         
         self.backgroundColor = .white
@@ -58,90 +86,11 @@ class NotificationCell: UITableViewCell {
         self.senderImageView.backgroundColor = kWhiteColor
         self.senderImageView.layer.borderColor = kDarkGreyColor.cgColor
         self.senderImageView.layer.borderWidth = 1
-        
-        switch notification.type! {
-        case kNotificationTypeEvent:
-            self.generateEventNotificationCell(notification)
-            break
-        case kNotificationTypePost:
-            self.generatePostNotificationCell(notification)
-            break
-        case kNotificationTypeTag:
-            self.generateTagNotificationCell(notification)
-            break
-        default: break
-        }
+
     }
     
-    func generateEventNotificationCell(_ notification: Notification){
-        APIManager.fetchEvent(event_id: notification.content!, controller: self.delegate! as! UIViewController) { (opt_event) in
-            if let event = opt_event {
-                self.updateCellWithEvent(event)
-            }
-        }
-        APIManager.fetchAssociation(association_id: notification.sender!, controller: self.delegate! as! UIViewController, completion: { (opt_assos) in
-            if let assos = opt_assos {
-                self.updateCellWithAssociation(assos)
-            }
-        })
-    }
-    
-    func generatePostNotificationCell(_ notification: Notification){
-        APIManager.fetchPost(post_id: notification.content!, controller: self.delegate! as! UIViewController) { (opt_post) in
-            if let post = opt_post {
-                self.updateCellWithPost(post)
-            }
-        }
-        APIManager.fetchAssociation(association_id: notification.sender!, controller: self.delegate! as! UIViewController, completion: { (opt_assos) in
-            if let assos = opt_assos {
-                self.updateCellWithAssociation(assos)
-            }
-        })
-    }
-    
-    func generateTagNotificationCell(_ notification: Notification){
-        APIManager.fetchPost(post_id: notification.content!, controller: self.delegate! as! UIViewController) { (opt_post) in
-            if let post = opt_post {
-                self.updateCellWithPost(post)
-            }
-        }
-        APIManager.fetch(user_id: notification.sender!, controller: self.delegate! as! UIViewController, completion: { (opt_user) in
-            if let user = opt_user {
-                self.updateCellWithUser(user)
-            }
-        })
-    }
-    
-    func updateCellWithEvent(_ event: Event){
-        DispatchQueue.main.async {
-            self.event = event
-            self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
-        }
-    }
-    
-    func updateCellWithPost(_ post: Post){
-        DispatchQueue.main.async {
-            self.post = post
-            self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
-        }
-    }
-    
-    func updateCellWithAssociation(_ association: Association){
-        DispatchQueue.main.async {
-            self.associationSender = association
-            self.senderImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
-        }
-    }
-    
-    func updateCellWithUser(_ user: User){
-        DispatchQueue.main.async {
-            self.userSender = user
-            self.senderImageView.image = user.avatar()
-        }
-    }
     
     func didTouchView(){
-        self.delegate?.didRead(notification: self.notification)
         switch self.notification.type! {
         case kNotificationTypeEvent:
             if let event = self.event {
@@ -170,6 +119,5 @@ class NotificationCell: UITableViewCell {
         if self.notification.type! != kNotificationTypeTag, let association = self.associationSender{
             self.delegate?.open(association: association)
         }
-        self.delegate?.didRead(notification: self.notification)
     }
 }

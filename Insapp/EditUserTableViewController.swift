@@ -138,20 +138,12 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 9 {
-            let alert = UIAlertController(title: "Attention", message: "Veux tu vraiment supprimer ton compte Insapp ?", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { action in
-                switch action.style{
-                case .default:
-                    break
-                case .cancel:
-                    break
-                case .destructive:
+            let alert = Alert.create(alert: .deleteUser, completion: { (success) in
+                if success {
                     self.deleteUser()
-                    break
                 }
-            }))
+            })
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -198,11 +190,9 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     @IBAction func notificationStatusAction(_ sender: AnyObject) {
         if self.notificationSwitch.isOn {
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 if !granted {
-                    let alert = UIAlertController(title: "", message: "Pour activer les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(defaultAction)
+                    let alert = Alert.create(alert: .notificationEnable)
                     self.present(alert, animated: true, completion: nil)
                     DispatchQueue.main.async {
                         self.notificationSwitch.isOn = self.isNotificationEnabled
@@ -212,9 +202,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
                 }
             }
         }else{
-            let alert = UIAlertController(title: "", message: "Pour désactiver les notifications, vas dans Réglages > Notifications > Insapp", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(defaultAction)
+            let alert = Alert.create(alert: .notificationDisable)
             self.present(alert, animated: true, completion: nil)
             self.notificationSwitch.isOn = self.isNotificationEnabled
         }

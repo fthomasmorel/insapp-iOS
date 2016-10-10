@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 import UIKit
 
 class SpashScreenViewController: UIViewController {
@@ -36,14 +37,10 @@ class SpashScreenViewController: UIViewController {
     }
     
     func login(_ credentials:Credentials){
-        APIManager.login(credentials, controller: self, completion: { (opt_cred) in
-            guard let creds = opt_cred else { self.signin() ; return }
-            APIManager.fetch(user_id: creds.userId, controller: self, completion: { (opt_user) in
-                guard let _ = opt_user else { self.signin() ; return }
-                let delegate = UIApplication.shared.delegate as! AppDelegate
-                delegate.registerForNotification()
-                self.displayTabViewController()
-            })
+        APIManager.login(credentials, controller: self, completion: { (opt_cred, opt_user) in
+            guard let _ = opt_cred else { self.signin() ; return }
+            guard let _ = opt_user else { self.signin() ; return }
+            self.displayTabViewController()
         })
     }
     
@@ -58,7 +55,7 @@ class SpashScreenViewController: UIViewController {
         var completion: ((UIViewController) -> Void)? = nil
         if let notification = appDelegate.notification {
             completion = { viewController in
-                guard let type = notification["type"] as? String, let content = notification["content"] as? String, let comment = notification["comment"] as? String else { return }
+                guard let type = notification["type"] as? String, let content = notification["content"] as? String else { return }
                 switch type {
                 case kNotificationTypeEvent:
                     self.loadEventViewController(viewController as! UITabBarController, event_id: content)
@@ -67,11 +64,13 @@ class SpashScreenViewController: UIViewController {
                     self.loadPostViewController(viewController as! UITabBarController, post_id: content)
                     break
                 case kNotificationTypeTag:
+                    guard let comment = notification["comment"] as? String else { return }
                     self.loadCommentViewController(viewController as! UITabBarController, post_id: content, comment_id: comment)
                     break
                 default:
                     break
-                }       
+                }
+                
             }
         }
         self.loadViewController(name: "TabViewController", completion: completion)
@@ -80,11 +79,12 @@ class SpashScreenViewController: UIViewController {
     func loadEventViewController(_ controller: UITabBarController, event_id: String){
         let navigationController = (controller.selectedViewController as! UINavigationController)
         let viewController = navigationController.topViewController
+        controller.selectedIndex = 3
         APIManager.fetchEvent(event_id: event_id, controller: viewController!, completion: { (opt_event) in
             guard let event = opt_event else { return }
-            controller.selectedIndex = 3
             DispatchQueue.main.async {
-                (controller.selectedViewController as! NotificationCellDelegate).open(event: event)
+                let controller = (controller.selectedViewController as! UINavigationController).topViewController
+                (controller as! NotificationCellDelegate).open(event: event)
             }
         })
     }
@@ -92,11 +92,12 @@ class SpashScreenViewController: UIViewController {
     func loadPostViewController(_ controller: UITabBarController, post_id: String){
         let navigationController = (controller.selectedViewController as! UINavigationController)
         let viewController = navigationController.topViewController
+        controller.selectedIndex = 3
         APIManager.fetchPost(post_id: post_id, controller: viewController!, completion: { (opt_post) in
             guard let post = opt_post else { return }
-            controller.selectedIndex = 3
             DispatchQueue.main.async {
-                (controller.selectedViewController as! NotificationCellDelegate).open(post: post)
+                let controller = (controller.selectedViewController as! UINavigationController).topViewController
+                (controller as! NotificationCellDelegate).open(post: post)
             }
         })
     }
@@ -104,11 +105,12 @@ class SpashScreenViewController: UIViewController {
     func loadCommentViewController(_ controller: UITabBarController, post_id: String, comment_id: String){
         let navigationController = (controller.selectedViewController as! UINavigationController)
         let viewController = navigationController.topViewController
+        controller.selectedIndex = 3
         APIManager.fetchPost(post_id: post_id, controller: viewController!, completion: { (opt_post) in
             guard let post = opt_post else { return }
-            controller.selectedIndex = 3
             DispatchQueue.main.async {
-                (controller.selectedViewController as! NotificationCellDelegate).open(post: post, withCommentId: comment_id)
+                let controller = (controller.selectedViewController as! UINavigationController).topViewController
+                (controller as! NotificationCellDelegate).open(post: post, withCommentId: comment_id)
             }
         })
     }

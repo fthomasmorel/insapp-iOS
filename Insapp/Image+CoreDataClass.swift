@@ -43,7 +43,8 @@ public class Image: NSManagedObject {
     }
     
     static func store(image: UIImage, forUrl url: String){
-        let data = UIImageJPEGRepresentation(image, 0.0)
+        let width = UIScreen.main.bounds.size.width
+        let data = UIImageJPEGRepresentation(image.resize(width:  width), 0)
         _ = Image(data: data!, url: url)
         Image.saveContext()
     }
