@@ -13,6 +13,7 @@ import UIKit
 
 
 protocol CommentCellDelegate {
+    func report(comment: Comment)
     func delete(comment: Comment)
     func open(user: User)
     func open(association: Association)
@@ -26,6 +27,8 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var frontView: UIView!
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     var delegate: CommentCellDelegate?
     var parent: UIViewController!
@@ -126,11 +129,17 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         self.usernameLabel.text = "@\(user.username!.lowercased())"
         self.roundUserImage()
         self.user = user
+        self.addGestureRecognizer()
         if user.id! == User.fetch()!.id! {
-            self.addGestureRecognizer()
+            self.backgroundColor = kRedColor
+            self.button.backgroundColor = kRedColor
+            self.iconImageView.image = #imageLiteral(resourceName: "garbage")
         }else{
-            self.removeGestureRecognizer()
+            self.backgroundColor = kDarkGreyColor
+            self.button.backgroundColor = kDarkGreyColor
+            self.iconImageView.image = #imageLiteral(resourceName: "warning")
         }
+        
     }
     
     func loadAssociationComment(association: Association, forPost post: Post){
@@ -218,8 +227,12 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         }
     }
     
-    @IBAction func deleteAction(_ sender: AnyObject) {
-        self.delegate?.delete(comment: self.comment!)
+    @IBAction func buttonAction(_ sender: AnyObject) {
+        if self.iconImageView.image == #imageLiteral(resourceName: "warning") {
+            self.delegate?.report(comment: self.comment!)
+        }else{
+            self.delegate?.delete(comment: self.comment!)
+        }
     }
     
 }

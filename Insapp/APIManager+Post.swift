@@ -72,6 +72,9 @@ extension APIManager {
         }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-
+    static func report(comment: Comment, post: Post, controller: UIViewController){
+        requestWithToken(url: "/report/\(post.id!)/comment/\(comment.id!)", method: .put, completion: { (_) in
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
+    }
     
 }

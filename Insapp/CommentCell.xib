@@ -12,20 +12,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qsj-L7-wbz" id="Q5L-V9-HPP">
-                <frame key="frameInset" width="375" height="226"/>
+                <frame key="frameInset" width="375" height="226.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv9-6P-afy">
+                        <connections>
+                            <action selector="buttonAction:" destination="qsj-L7-wbz" eventType="touchUpInside" id="Dcz-Ba-v6k"/>
+                        </connections>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="garbage" translatesAutoresizingMaskIntoConstraints="NO" id="JeJ-S9-bWd">
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="44R-nZ-DeR"/>
                             <constraint firstAttribute="width" constant="30" id="uWn-GS-Ina"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv9-6P-afy">
-                        <connections>
-                            <action selector="deleteAction:" destination="qsj-L7-wbz" eventType="touchUpInside" id="eZq-Ka-URv"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13A-1G-GSI">
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l26-4k-xf4">
@@ -80,7 +80,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.91096353529999996" green="0.36053669449999998" blue="0.33869665859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="13A-1G-GSI" firstAttribute="leading" secondItem="Q5L-V9-HPP" secondAttribute="leading" id="Gm3-z8-vZG"/>
                     <constraint firstAttribute="trailing" secondItem="13A-1G-GSI" secondAttribute="trailing" id="HiA-LJ-cR7"/>
@@ -95,8 +95,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="button" destination="Kv9-6P-afy" id="NJW-eR-vZg"/>
                 <outlet property="contentTextView" destination="fpu-p1-PDZ" id="Mco-xR-eUx"/>
                 <outlet property="frontView" destination="13A-1G-GSI" id="89a-On-ncR"/>
+                <outlet property="iconImageView" destination="JeJ-S9-bWd" id="95O-35-Wcv"/>
                 <outlet property="timestampLabel" destination="jGp-ZV-T9S" id="jzN-Ws-vUH"/>
                 <outlet property="userImageView" destination="l26-4k-xf4" id="B0A-24-S35"/>
                 <outlet property="usernameLabel" destination="IHo-Rr-AH5" id="KVA-ad-k15"/>

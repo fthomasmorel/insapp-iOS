@@ -233,6 +233,17 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell
     }
     
+    func report(comment: Comment){
+        let alertController = Alert.create(alert: .reportComment) { report in
+            if report {
+                APIManager.report(comment: comment, post: self.post, controller: self)
+                let alert = Alert.create(alert: .reportConfirmation)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func delete(comment: Comment) {
         APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, controller: self, completion: { (opt_post) in
             guard let post = opt_post else { return }

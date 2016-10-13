@@ -16,6 +16,9 @@ enum AlertType {
     case notificationConfirmation
     case switchPhone
     case deleteUser
+    case reportComment
+    case reportUser
+    case reportConfirmation
 }
 
 class Alert: AnyObject {
@@ -36,9 +39,53 @@ class Alert: AnyObject {
             return Alert.createSwitchPhoneAlert(completion)
         case .deleteUser:
             return Alert.createDeleteUserAlert(completion)
+        case .reportComment:
+            return Alert.createReportCommentAlert(completion)
+        case .reportUser:
+            return Alert.createReportUserAlert(completion)
+        case .reportConfirmation:
+            return Alert.createReportConfirmationAlert(completion)
         }
     }
     
+    private static func createReportConfirmationAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
+        let alert = UIAlertController(title: "", message: "Un email a été envoyé à l'AEIR et au responsable d'Insapp. Une décision sera prise dans les 24h", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Ok", style: .default, handler: { alert in
+            completion?(true)
+        })
+        alert.addAction(defaultAction)
+        return alert
+    }
+
+    private static func createReportUserAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
+        let alertController = UIAlertController(title: nil, message: "Souhaites-tu signaler cet utilisateur ?", preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel) { (action) in
+            completion?(false)
+        }
+        alertController.addAction(cancelAction)
+        
+        let badContentAction = UIAlertAction(title: "Signaler", style: .destructive) { (action) in
+            completion?(true)
+        }
+        alertController.addAction(badContentAction)
+        return alertController
+    }
+    
+    private static func createReportCommentAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
+        let alertController = UIAlertController(title: nil, message: "Souhaites-tu signaler ce commentaire ?", preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel) { (action) in
+            completion?(false)
+        }
+        alertController.addAction(cancelAction)
+        
+        let badContentAction = UIAlertAction(title: "Contenu non approprié", style: .destructive) { (action) in
+            completion?(true)
+        }
+        alertController.addAction(badContentAction)
+        return alertController
+    }
     
     private static func createSwitchPhoneAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
         let alert = UIAlertController(title: "Attention", message: "Ton compte est lié à un autre téléphone. Souhaites-tu changer de téléphone ? (Le compte sur l'autre téléphone sera alors déconnecté)", preferredStyle: UIAlertControllerStyle.alert)

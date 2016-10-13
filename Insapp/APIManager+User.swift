@@ -44,4 +44,9 @@ extension APIManager{
             completion(User.parseArray(users))
         }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
+    
+    static func report(user: User, controller: UIViewController){
+        requestWithToken(url: "/report/user/\(user.id!)", method: .put, completion: { (_) in
+        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
+    }
 }

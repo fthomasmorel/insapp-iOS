@@ -12,6 +12,7 @@ import UIKit
 
 class UserViewController: UIViewController, EventListDelegate {
     
+    @IBOutlet weak var optionButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var eventView: UIView!
     @IBOutlet weak var eventViewHeightConstraint: NSLayoutConstraint!
@@ -41,6 +42,7 @@ class UserViewController: UIViewController, EventListDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
         self.editButton.isHidden = !self.isEditable
+        self.optionButton.isHidden = self.isEditable
         self.backButton.isHidden = !self.canReturn
         self.creditButton.isHidden = self.canReturn
         
@@ -139,6 +141,17 @@ class UserViewController: UIViewController, EventListDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "EditUserViewController") as! EditUserViewController
         vc.user = self.user
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func optionAction(_ sender: AnyObject) {
+        let alertController = Alert.create(alert: .reportUser) { report in
+            if report {
+                APIManager.report(user: self.user, controller: self)
+                let alert = Alert.create(alert: .reportConfirmation)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func creditAction(_ sender: AnyObject) {

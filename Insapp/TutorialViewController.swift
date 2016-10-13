@@ -80,22 +80,29 @@ class TutorialViewController: UIPageViewController, UIPageViewControllerDataSour
             center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 if !granted {
                     let alert = Alert.create(alert: .notificationEnable) { sucess in
-                        DispatchQueue.main.async {
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
-                            self.present(vc, animated: true, completion: nil)
-                        }
+                        self.presentCASViewController()
                     }
                     self.present(alert, animated: true, completion: nil)
                 }else{
                     UIApplication.shared.registerForRemoteNotifications()
-                    DispatchQueue.main.async {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
-                        self.present(vc, animated: true, completion: nil)
-                    }
+                    self.presentCASViewController()
                 }
             }
+        }
+    }
+    
+    func presentCASViewController(){
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LegalViewController") as! LegalViewController
+            vc.onAgree = {
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "CASViewController")
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+            self.present(vc, animated: true, completion: nil)
         }
     }
 }

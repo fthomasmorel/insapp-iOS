@@ -47,28 +47,14 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         return CGSize(width: self.bounds.width, height: height)
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        let removedTags = self.updateTag()
-        
-        if text == "", removedTags.count > 0 {
-            let string = self.textView.attributedText.string
-            let locationEnd = self.textView.selectedRange.location
-            let locationStart = string.searchLast(string: " ", from: locationEnd)
-            
-            let range = string.index(string.startIndex, offsetBy: locationStart)..<string.index(string.startIndex, offsetBy: locationEnd)
-            
-            self.textView.attributedText = NSAttributedString(string: string.replacingCharacters(in: range, with: ""))
-        }
-        
-        return true
-    }
+
     
     func textViewDidChange(_ textView: UITextView) {
         if textView.textColor == kDarkGreyColor {
             textView.text = ""
             textView.textColor = .black
         }
+        self.updateTag()
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
         self.searchForUser()
@@ -123,14 +109,12 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         self.tags[word] = user.id!
     }
     
-    func updateTag() -> [String]{
-        var removedTags:[String] = []
+    func updateTag(){
         for tag in tags.keys{
             if !self.textView.attributedText.string.contains(tag){
-                removedTags.append(self.tags.removeValue(forKey: tag)!)
+                _ = self.tags.removeValue(forKey: tag)
             }
         }
-        return removedTags
     }
     
     func didTouchUser(_ user: User) {

@@ -38,6 +38,7 @@
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
 		E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */; };
+		E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */; };
 		E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
 		E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */; };
@@ -113,6 +114,7 @@
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
 		E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				E193DD851D9E72EF00478B52 /* ListUserViewController.swift */,
 				E11EE8291DA147D40029C051 /* AttendesViewController.swift */,
 				E11EE83F1DA24C960029C051 /* NotificationViewController.swift */,
+				E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				E1C3F9D91D8837E7006A66CF /* EditUserViewController.swift in Sources */,
 				E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */,
 				E1C3F9E91D894E40006A66CF /* EventTableViewController.swift in Sources */,
+				E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */,
 				E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */,
 				E1C3F9E11D8946C8006A66CF /* APIManager+Event.swift in Sources */,
 				E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */,
@@ -677,7 +681,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -698,7 +702,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
