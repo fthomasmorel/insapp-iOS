@@ -228,6 +228,8 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if comment.id! == self.activeComment?.id! {
             cell.frontView.backgroundColor = kLightGreyColor
+        }else{
+            cell.frontView.backgroundColor = .white
         }
         
         return cell

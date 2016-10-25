@@ -77,6 +77,7 @@ class EditUserViewController: UIViewController {
         user?.email = email
         user?.promotion = promotion
         user?.gender = convertGender[gender!]
+        user?.desc = ""
         
         let characters = NSMutableCharacterSet.alphanumeric()
         characters.addCharacters(in: NSRange(location: 0x1F300, length: 0x1F700 - 0x1F300))

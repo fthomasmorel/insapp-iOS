@@ -88,7 +88,7 @@ class Alert: AnyObject {
     }
     
     private static func createSwitchPhoneAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
-        let alert = UIAlertController(title: "Attention", message: "Ton compte est lié à un autre téléphone. Souhaites-tu changer de téléphone ? (Le compte sur l'autre téléphone sera alors déconnecté)", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Attention", message: "Si ton compte existe déjà sur un autre téléphone, tu seras deconnecté(e) de ce dernier. Tu ne perdras aucune donnée. Souhaites-tu continuer ?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { action in
             completion?(false)
         }))
@@ -99,7 +99,7 @@ class Alert: AnyObject {
     }
     
     private static func createDeleteUserAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
-        let alert = UIAlertController(title: "Attention", message: "Veux tu vraiment supprimer ton compte Insapp ?", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Attention", message: "Veux-tu vraiment supprimer ton compte Insapp ?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { action in
             completion?(true)
@@ -124,7 +124,7 @@ class Alert: AnyObject {
     }
     
     private static func createCalendarAuthorizationAlert(_ completion: ((Bool) -> ())?) -> UIAlertController{
-        let alert = UIAlertController(title: "Attention", message: "Pour ajouter l'évènement à ton calendrier, tu dois authoriser l'utilisation du calendrier dans les réglages du téléphone :)", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Attention", message: "Pour ajouter l'évènement à ton calendrier, tu dois autoriser l'utilisation du calendrier dans les réglages du téléphone :)", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         return alert
     }

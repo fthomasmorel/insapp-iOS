@@ -47,15 +47,20 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         self.notifyGoogleAnalytics()
-        self.refreshUI(reload: true)
-        self.fetchNotifications()
         self.lightStatusBar()
         self.hideNavBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.refreshUI(reload: true)
+        DispatchQueue.global().async {
+            self.fetchNotifications()
+        }
+    }
+    
     func fetchNotifications(){
         APIManager.fetchNotifications(controller: self) { (notifications) in
-            DispatchQueue.main.async {
+            DispatchQueue.global().async {
                 self.notifications = notifications
                 for notification in notifications {
                     switch notification.type! {
@@ -77,10 +82,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 
                 self.group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
-                    DispatchQueue.main.async {
-                        self.refreshControl.endRefreshing()
-                        self.refreshUI()
-                    }
+                    self.refreshControl.endRefreshing()
+                    self.refreshUI()
                 }))
             }
         }
@@ -136,7 +139,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
         vc.activePost = post
-        vc.activeAssociation = self.associations[post.association!]
         vc.canReturn = true
         vc.canRefresh = false
         self.navigationController?.pushViewController(vc, animated: true)
@@ -180,7 +182,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func download(eventId: String){
-        guard self.events[eventId] == nil else { return }
+        //guard self.events[eventId] == nil else { return }
         self.group.enter()
         self.queue.async(group: self.group, execute: {
             APIManager.fetchEvent(event_id: eventId, controller: self) { (opt_event) in
@@ -192,7 +194,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func download(postId: String){
-        guard self.posts[postId] == nil else { return }
+        //guard self.posts[postId] == nil else { return }
         self.group.enter()
         self.queue.async(group: self.group, execute: {
             APIManager.fetchPost(post_id: postId, controller: self) { (opt_post) in

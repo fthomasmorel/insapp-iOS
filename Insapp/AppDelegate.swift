@@ -42,10 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         guard let _ = Credentials.fetch() else { return }
+        guard let _ = APIManager.token else { return }
         APIManager.fetchNotifications(controller: self.window!.rootViewController!) { (notifs) in
             let badge = notifs.filter({ (notif) -> Bool in return !notif.seen })
-            (self.window!.rootViewController! as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge.count)"
-            application.applicationIconBadgeNumber = badge.count
+            DispatchQueue.main.async {
+                (self.window!.rootViewController!.presentedViewController! as? UITabBarController)?.tabBar.items?[3].badgeValue = "\(badge.count)"
+                application.applicationIconBadgeNumber = badge.count
+            }
         }
     }
     

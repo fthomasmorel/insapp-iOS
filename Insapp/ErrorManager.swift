@@ -15,10 +15,7 @@ extension UIViewController{
     func triggerError(_ message: String, _ statusCode: Int) -> Bool {
         if statusCode == 406 {
             self.stopLoading()
-            self.displayError(message: kErrorUserExist)
-            if self.responds(to: Selector(("askForChangePhone"))) {
-                self.perform(Selector(("askForChangePhone")))
-            }
+            self.displayError(message: message)
         }
         else if statusCode != 200 && statusCode != 401 {
             self.stopLoading()

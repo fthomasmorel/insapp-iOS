@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //ERROR MESSAGE
-let kErrorServer = "Impossible de se connecter au serveur. Verifie ta connection et réessaye plus tard!"
+let kErrorServer = "Impossible de se connecter au serveur. Vérifie ta connexion et réessaye plus tard!"
 let kErrorUnkown = "Une erreur est survenue. Merci de réessayer plus tard!"
 let kErrorUserExist = "Ce nom d'utilsateur est déjà utilisé!"
 let kErrorBadCASId = "Impossible de vérifier tes identifiants!"
@@ -54,7 +54,7 @@ let kNotificationCell = "kNotificationCell"
 //API
 let kAPIHostname = "https://insapp.fr/api/v1"
 let kCDNHostname = "https://insapp.fr/cdn/"
-let kCASHostname = "https://cas-test.insa-rennes.fr"
+let kCASHostname = "https://cas.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"
 let kLoginDeviceId = "device"

@@ -44,9 +44,14 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         self.hideNavBar()
         self.notifyGoogleAnalytics()
-        self.refreshUI(reload: true)
         self.lightStatusBar()
-        self.fetchEvents()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.refreshUI(reload: true)
+        DispatchQueue.global().async {
+            self.fetchEvents()
+        }
     }
     
     override func triggerError(_ message: String, _ statusCode: Int) -> Bool {

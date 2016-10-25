@@ -32,29 +32,25 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.refreshControl.addTarget(self, action: #selector(AssociationCollectionViewController.fetchAssociations), for: UIControlEvents.valueChanged)
         self.collectionView.addSubview(refreshControl)
         self.collectionView.alwaysBounceVertical = true
-        self.fetchAssociations()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.hideNavBar()
-        self.searchBar.backgroundImage = UIImage()
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
         
+        self.searchBar.backgroundImage = UIImage()
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
         if let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView {
             glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             glassIconView.tintColor = kDarkGreyColor
         }
-
+        self.searchBar.delegate = self
+        self.fetchAssociations()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.hideNavBar()
+        self.notifyGoogleAnalytics()
+        self.lightStatusBar()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(AssociationCollectionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AssociationCollectionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        self.searchBar.delegate = self
-        
-        self.notifyGoogleAnalytics()
-        self.refreshUI(reload: true)
-        self.lightStatusBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +58,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
+        self.refreshUI(reload: true)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
     }
     
     func fetchAssociations(){

@@ -18,7 +18,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var backButton: UIButton!
     
     private let tableViewController = UITableViewController()
-    var refreshControl: UIRefreshControl!
+    var refreshControl: UIRefreshControl?
     var activePost: Post?
     var activeAssociation: Association?
     var posts:[Post]! = []
@@ -39,53 +39,56 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.addChildViewController(self.tableViewController)
             self.tableViewController.tableView = self.postTableView
             self.refreshControl = UIRefreshControl()
-            self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
-            self.refreshControl.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
+            self.refreshControl?.backgroundColor = UIColor.white.withAlphaComponent(0)
+            self.refreshControl?.addTarget(self, action: #selector(NewsViewController.fetchPosts), for: UIControlEvents.valueChanged)
             self.tableViewController.refreshControl = self.refreshControl
-            self.postTableView.addSubview(refreshControl)
+            self.postTableView.addSubview(refreshControl!)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.hideNavBar()
-        if let post = self.activePost, let association = self.activeAssociation {
-            self.posts = [post]
-            self.associations[association.id!] = association
-        }else{
-            self.fetchPosts()
-        }
         self.notifyGoogleAnalytics()
-        self.refreshUI(reload: true)
         self.lightStatusBar()
         self.backButton.isHidden = !self.canReturn
+        self.hideNavBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if let post = self.activePost, let row = self.posts.index(of: post) {
-            self.postTableView.scrollToRow(at: IndexPath(row: row, section:0), at: .bottom, animated: true)
+        self.refreshUI(reload: true)
+        DispatchQueue.global().async {
+            if let post = self.activePost{
+                self.posts = [post]
+                self.fetchAssocations()
+            }else{
+                self.fetchPosts()
+            }
         }
     }
     
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
-            let group = DispatchGroup()
             self.posts = posts
-            for post in self.posts{
-                if self.associations[post.association!] == nil {
-                    group.enter()
-                    APIManager.fetchAssociation(association_id: post.association!, controller: self, completion: { (opt_asso) in
-                        guard let association = opt_asso else { return }
-                        self.associations[association.id!] = association
-                        group.leave()
-                    })
-                }
-            }
-            
-            group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
-                self.refreshControl.endRefreshing()
-                self.refreshUI()
-            }))
+            self.fetchAssocations()
         })
+    }
+    
+    func fetchAssocations(){
+        let group = DispatchGroup()
+        for post in self.posts{
+            if self.associations[post.association!] == nil {
+                group.enter()
+                APIManager.fetchAssociation(association_id: post.association!, controller: self, completion: { (opt_asso) in
+                    guard let association = opt_asso else { return }
+                    self.associations[association.id!] = association
+                    group.leave()
+                })
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+            self.refreshControl?.endRefreshing()
+            self.refreshUI()
+        }))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,7 +103,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count
+        return (self.posts.count == 0 || self.associations.count == 0 ? 0 : self.posts.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
