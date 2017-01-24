@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D051D8B1DCB8B1500DED954 /* UniversalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D051D8A1DCB8B1500DED954 /* UniversalSearchViewController.swift */; };
+		7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D051D8C1DCB909300DED954 /* APIManager+Search.swift */; };
+		7D0C40D01DEAECE3005FE515 /* SearchUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0C40CF1DEAECE3005FE515 /* SearchUserCell.xib */; };
+		7D0C40D21DEAEDDC005FE515 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C40D11DEAEDDC005FE515 /* SearchUserCell.swift */; };
+		7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0F88421DEDCC3E00E740F2 /* AssociationSearchCell.xib */; };
+		7D0F88451DEDCCEF00E740F2 /* AssociationSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0F88441DEDCCEF00E740F2 /* AssociationSearchCell.swift */; };
+		7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D128FE71DEB894A00BD3661 /* SearchAssociationCell.xib */; };
+		7D128FEA1DEB899100BD3661 /* SearchAssociationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D128FE91DEB899100BD3661 /* SearchAssociationCell.swift */; };
+		7D1591861DE49E44001F949E /* SearchEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D1591851DE49E44001F949E /* SearchEventCell.xib */; };
+		7D1591881DE49EB0001F949E /* SearchEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1591871DE49EB0001F949E /* SearchEventCell.swift */; };
+		7D7468921E0A911000F2FD53 /* SeeMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7468911E0A911000F2FD53 /* SeeMoreViewController.swift */; };
+		7D9D50EC1DF40837002AC837 /* SeeMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9D50EB1DF40837002AC837 /* SeeMoreCell.xib */; };
+		7D9D50EE1DF40875002AC837 /* SeeMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D50ED1DF40875002AC837 /* SeeMoreCell.swift */; };
+		7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBA1DD1CCFE00BDA8A1 /* SearchPostCell.xib */; };
+		7DBEFCBD1DD1D49F00BDA8A1 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */; };
 		9AA51A7D696DE37EA2028636 /* Pods_Insapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */; };
 		E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8291DA147D40029C051 /* AttendesViewController.swift */; };
 		E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */; };
@@ -80,6 +95,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D051D8A1DCB8B1500DED954 /* UniversalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalSearchViewController.swift; sourceTree = "<group>"; };
+		7D051D8C1DCB909300DED954 /* APIManager+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIManager+Search.swift"; sourceTree = "<group>"; };
+		7D0C40CF1DEAECE3005FE515 /* SearchUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchUserCell.xib; sourceTree = "<group>"; };
+		7D0C40D11DEAEDDC005FE515 /* SearchUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
+		7D0F88421DEDCC3E00E740F2 /* AssociationSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationSearchCell.xib; sourceTree = "<group>"; };
+		7D0F88441DEDCCEF00E740F2 /* AssociationSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationSearchCell.swift; sourceTree = "<group>"; };
+		7D128FE71DEB894A00BD3661 /* SearchAssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAssociationCell.xib; sourceTree = "<group>"; };
+		7D128FE91DEB899100BD3661 /* SearchAssociationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAssociationCell.swift; sourceTree = "<group>"; };
+		7D1591851DE49E44001F949E /* SearchEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventCell.xib; sourceTree = "<group>"; };
+		7D1591871DE49EB0001F949E /* SearchEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventCell.swift; sourceTree = "<group>"; };
+		7D7468911E0A911000F2FD53 /* SeeMoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeMoreViewController.swift; sourceTree = "<group>"; };
+		7D9D50EB1DF40837002AC837 /* SeeMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeeMoreCell.xib; sourceTree = "<group>"; };
+		7D9D50ED1DF40875002AC837 /* SeeMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeMoreCell.swift; sourceTree = "<group>"; };
+		7DBEFCBA1DD1CCFE00BDA8A1 /* SearchPostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPostCell.xib; sourceTree = "<group>"; };
+		7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07F8504F090A6CA8BCC8915 /* Pods-Insapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.debug.xcconfig"; sourceTree = "<group>"; };
 		E11EE8291DA147D40029C051 /* AttendesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendesViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +217,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7D09F78D1E0C5DC900B93A6E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7D128FE91DEB899100BD3661 /* SearchAssociationCell.swift */,
+				7D9D50ED1DF40875002AC837 /* SeeMoreCell.swift */,
+				7D0C40D11DEAEDDC005FE515 /* SearchUserCell.swift */,
+				7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */,
+				7D1591871DE49EB0001F949E /* SearchEventCell.swift */,
+				7D0F88441DEDCCEF00E740F2 /* AssociationSearchCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		7D09F78E1E0C5DEC00B93A6E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7D7468911E0A911000F2FD53 /* SeeMoreViewController.swift */,
+				7D051D8A1DCB8B1500DED954 /* UniversalSearchViewController.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		7D7468901E0A8EC800F2FD53 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7D128FE71DEB894A00BD3661 /* SearchAssociationCell.xib */,
+				7D0F88421DEDCC3E00E740F2 /* AssociationSearchCell.xib */,
+				7D9D50EB1DF40837002AC837 /* SeeMoreCell.xib */,
+				7D0C40CF1DEAECE3005FE515 /* SearchUserCell.xib */,
+				7D1591851DE49E44001F949E /* SearchEventCell.xib */,
+				7DBEFCBA1DD1CCFE00BDA8A1 /* SearchPostCell.xib */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		E1C3F9CE1D87F802006A66CF /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +262,7 @@
 				E1C3F9E21D8946FD006A66CF /* APIManager+Association.swift */,
 				E1C3F9F11D89722F006A66CF /* APIManager+Post.swift */,
 				E192C1E51D90277000355512 /* APIManager+Notification.swift */,
+				7D051D8C1DCB909300DED954 /* APIManager+Search.swift */,
 			);
 			name = APIManager;
 			sourceTree = "<group>";
@@ -204,6 +270,7 @@
 		E1C3F9D31D88037A006A66CF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7D09F78E1E0C5DEC00B93A6E /* Search */,
 				E1C3F9D11D87FC07006A66CF /* SplashScreenViewController.swift */,
 				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
 				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
@@ -241,6 +308,7 @@
 		E1C3F9E71D894C00006A66CF /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				7D7468901E0A8EC800F2FD53 /* Search */,
 				E1DC7F0D1D86E2C900284222 /* Main.storyboard */,
 				E1DC7F151D86E2C900284222 /* LaunchScreen.storyboard */,
 				E1C3F9EA1D895008006A66CF /* EventCell.xib */,
@@ -257,6 +325,7 @@
 		E1C3F9EC1D8951CC006A66CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7D09F78D1E0C5DC900B93A6E /* Search */,
 				E1C3F9ED1D8951D7006A66CF /* EventCell.swift */,
 				E1C3F9F91D8A88D0006A66CF /* PostCell.swift */,
 				E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */,
@@ -368,7 +437,7 @@
 				TargetAttributes = {
 					E1DC7F051D86E2C900284222 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 9JPSY4Q8SW;
+						DevelopmentTeam = SWYL5ARZNN;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -404,15 +473,21 @@
 			files = (
 				E11EE8381DA245C20029C051 /* NotificationCell.xib in Resources */,
 				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
+				7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
+				7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
+				7D0C40D01DEAECE3005FE515 /* SearchUserCell.xib in Resources */,
 				E193DD881D9E73B700478B52 /* UserCell.xib in Resources */,
 				E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */,
 				E19F7CD01D8AD09500B9F517 /* CommentView.xib in Resources */,
 				E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */,
 				E1DC7F141D86E2C900284222 /* Assets.xcassets in Resources */,
+				7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */,
+				7D1591861DE49E44001F949E /* SearchEventCell.xib in Resources */,
 				E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */,
+				7D9D50EC1DF40837002AC837 /* SeeMoreCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */,
+				7D0F88451DEDCCEF00E740F2 /* AssociationSearchCell.swift in Sources */,
 				E1C3F9D71D88365D006A66CF /* EditUserTableViewController.swift in Sources */,
 				E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */,
 				E1DC7F691D86FBAB00284222 /* Credentials+CoreDataClass.swift in Sources */,
@@ -493,25 +569,32 @@
 				E11EE83A1DA246A30029C051 /* NotificationCell.swift in Sources */,
 				E1C3F9DF1D8940D8006A66CF /* EventViewController.swift in Sources */,
 				E1C3F9F51D897609006A66CF /* Post+CoreDataClass.swift in Sources */,
+				7D128FEA1DEB899100BD3661 /* SearchAssociationCell.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
 				E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */,
+				7D0C40D21DEAEDDC005FE515 /* SearchUserCell.swift in Sources */,
 				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
+				7D051D8B1DCB8B1500DED954 /* UniversalSearchViewController.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
 				E193DD8A1D9E745400478B52 /* UserCell.swift in Sources */,
+				7D1591881DE49EB0001F949E /* SearchEventCell.swift in Sources */,
 				E1C3F9EE1D8951D7006A66CF /* EventCell.swift in Sources */,
 				E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */,
 				E1C3F9F01D897142006A66CF /* NewsViewController.swift in Sources */,
+				7D7468921E0A911000F2FD53 /* SeeMoreViewController.swift in Sources */,
 				E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */,
 				E1C3F9F21D89722F006A66CF /* APIManager+Post.swift in Sources */,
 				E1C3F9FA1D8A88D0006A66CF /* PostCell.swift in Sources */,
+				7DBEFCBD1DD1D49F00BDA8A1 /* SearchPostCell.swift in Sources */,
 				E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */,
 				E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */,
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,
+				7D9D50EE1DF40875002AC837 /* SeeMoreCell.swift in Sources */,
 				E1DC7F681D86FBAB00284222 /* Association+CoreDataProperties.swift in Sources */,
 				E1C3F9D91D8837E7006A66CF /* EditUserViewController.swift in Sources */,
 				E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */,
@@ -527,6 +610,7 @@
 				E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */,
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
+				7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,
 				E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */,
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
@@ -672,7 +756,7 @@
 				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				DEVELOPMENT_TEAM = SWYL5ARZNN;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -696,7 +780,7 @@
 				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				DEVELOPMENT_TEAM = SWYL5ARZNN;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

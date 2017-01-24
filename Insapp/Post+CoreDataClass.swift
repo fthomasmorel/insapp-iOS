@@ -53,4 +53,20 @@ public class Post: NSManagedObject {
         
         return Post(post_id: id, title: title, association: association, description: desc, date: date, likes: likes, comments: comments, photoURL: photoURL, size: size)
     }
+    
+    static func parseArray(_ array: [Dictionary<String, AnyObject>]) -> [Post] {
+        let postsJson = array.filter({ (json) -> Bool in
+            if let post = Post.parseJson(json) {
+                Post.managedContext.delete(post)
+                return true
+            }else{
+                return false
+            }
+        })
+        
+        let posts = postsJson.map { (json) -> Post in
+            return Post.parseJson(json)!
+        }
+        return posts
+    }
 }

@@ -140,6 +140,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let vc = storyboard.instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
         vc.activePost = post
         vc.canReturn = true
+        vc.canSearch = false
         vc.canRefresh = false
         self.navigationController?.pushViewController(vc, animated: true)
     }

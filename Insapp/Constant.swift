@@ -51,8 +51,20 @@ let kUserCell = "kUserCell"
 
 let kNotificationCell = "kNotificationCell"
 
+let kSearchPostCell = "SearchPostCell"
+
+let kSearchEventCell = "SearchEventCell"
+
+let kSearchUserCell = "SearchUserCell"
+
+let kSearchAssociationCell = "SearchAssociationCell"
+
+let kAssociationSearchCell = "AssociationSearchCell"
+
+let kSeeMoreCell = "SeeMoreCell"
+
 //API
-let kAPIHostname = "https://insapp.fr/api/v1"
+let kAPIHostname = "https://dev.insapp.fr/api/v1"
 let kCDNHostname = "https://insapp.fr/cdn/"
 let kCASHostname = "https://cas.insa-rennes.fr"
 let kLoginPassword = "password"

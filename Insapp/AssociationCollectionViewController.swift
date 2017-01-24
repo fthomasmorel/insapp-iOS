@@ -13,13 +13,17 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     
     var refreshControl:UIRefreshControl!
     var associations:[Association] = []
-    var filteredAssociations:[Association] = []
+//    var filteredAssociations:[Association] = []
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noAssociationLabel: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var reloadButton: UIButton!
+    
+    @IBOutlet weak var searchView: UIView!    
+    var searchViewController: UniversalSearchViewController!
+    var backgroundSearchView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.collectionView.addSubview(refreshControl)
         self.collectionView.alwaysBounceVertical = true
         
+        self.searchViewController = self.childViewControllers.last as? UniversalSearchViewController
+        
         self.searchBar.backgroundImage = UIImage()
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
@@ -41,7 +47,16 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
             glassIconView.tintColor = kDarkGreyColor
         }
         self.searchBar.delegate = self
+        self.searchBar.showsCancelButton = false
         self.fetchAssociations()
+        
+        self.backgroundSearchView = UIView()
+        self.backgroundSearchView.backgroundColor = .black
+        self.backgroundSearchView.alpha = 0.7
+        self.backgroundSearchView.isHidden = true
+        self.view.addSubview(self.backgroundSearchView)
+        self.searchView.isHidden = true
+        self.view.bringSubview(toFront: self.searchView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,13 +75,15 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         layout.minimumLineSpacing = 10
         self.refreshUI(reload: true)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
+        
+        self.backgroundSearchView.frame = self.collectionView.frame
     }
     
     func fetchAssociations(){
         self.searchBar.text = ""
         APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
-            self.filteredAssociations = associations
+//            self.filteredAssociations = associations
             DispatchQueue.main.async {
                 self.refreshControl.endRefreshing()
                 self.refreshUI()
@@ -84,7 +101,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.filteredAssociations.count
+        return self.associations.count
+//        return self.filteredAssociations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -93,7 +111,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let association = self.filteredAssociations[indexPath.row]
+        let association = self.associations[indexPath.row]
+        //let association = self.filteredAssociations[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath as IndexPath) as! AssociationCell
         cell.load(association: association)
@@ -101,7 +120,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let association = self.filteredAssociations[indexPath.row]
+//        let association = self.filteredAssociations[indexPath.row]
+        let association = self.associations[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController 
         vc.association = association
@@ -114,7 +134,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         DispatchQueue.main.async {
             self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
             self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
-            self.searchBar.showsCancelButton = true
+            //self.searchBar.showsCancelButton = true
             self.refreshControl.removeFromSuperview()
         }
         
@@ -124,10 +144,10 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.collectionView.contentInset = .zero
         self.collectionView.scrollIndicatorInsets = .zero
         self.refreshControl.isHidden = false
-        self.searchBar.showsCancelButton = false
-        if self.associations.count == self.filteredAssociations.count {
-            self.collectionView.addSubview(self.refreshControl)   
-        }
+        //self.searchBar.showsCancelButton = false
+//        if self.associations.count == self.filteredAssociations.count {
+//            self.collectionView.addSubview(self.refreshControl)   
+//        }
     }
     
     func refreshUI(reload:Bool = false){
@@ -152,31 +172,59 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" {
-            self.filteredAssociations = self.associations
-            self.collectionView.reloadData()
-        }else{
-            self.filteredAssociations = self.associations.filter({ (association) -> Bool in
-                return association.name!.lowercased().contains(searchText.lowercased()) ||
-                        association.email!.lowercased().contains(searchText.lowercased()) ||
-                        association.desc!.lowercased().contains(searchText.lowercased())
-            })
-            self.collectionView.reloadData()
-        }
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText == "" {
+//            self.filteredAssociations = self.associations
+//            self.collectionView.reloadData()
+//        }else{
+//            self.filteredAssociations = self.associations.filter({ (association) -> Bool in
+//                return association.name!.lowercased().contains(searchText.lowercased()) ||
+//                        association.email!.lowercased().contains(searchText.lowercased()) ||
+//                        association.desc!.lowercased().contains(searchText.lowercased())
+//            })
+//            self.collectionView.reloadData()
+//        }
+//    }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = false
-        DispatchQueue.main.async {
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        self.searchBar.showsCancelButton = false
+//        DispatchQueue.main.async {
+//            self.searchBar.resignFirstResponder()
+//            self.fetchAssociations()
+//        }
+//        
+//        self.backgroundSearchView.isHidden = true
+//    }
+//    
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        self.searchBar.showsCancelButton = true
+//        
+//        self.backgroundSearchView.isHidden = false
+//    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchedText = self.searchBar.text {
             self.searchBar.resignFirstResponder()
-            self.fetchAssociations()
+            self.backgroundSearchView.isHidden = true
+            self.searchBar.showsCancelButton = true
+            self.searchViewController.search(keyword: searchedText)
+            self.searchView.isHidden = false
         }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBar.showsCancelButton = true
+        self.backgroundSearchView.isHidden = false
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+        self.backgroundSearchView.isHidden = true
+        self.searchView.isHidden = true
+    }
+
     
     func scrollToTop(){
         self.collectionView.setContentOffset(CGPoint.zero, animated: true)

@@ -9,15 +9,21 @@
 import Foundation
 import UIKit
 
-class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate {
+class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var postTableView: UITableView!  
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var noPostLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var searchView: UIView!
     
     private let tableViewController = UITableViewController()
+    
+    var searchViewController: UniversalSearchViewController!
+    
     var refreshControl: UIRefreshControl?
     var activePost: Post?
     var activeAssociation: Association?
@@ -25,11 +31,15 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var associations:[String:Association] = [:]
     var canReturn = false
     var canRefresh = true
+    var canSearch = true
+    var backgroundSearchView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         UIApplication.shared.registerForRemoteNotifications()
+        
+        self.searchViewController = self.childViewControllers.last as? UniversalSearchViewController
         
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
@@ -44,6 +54,26 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.tableViewController.refreshControl = self.refreshControl
             self.postTableView.addSubview(refreshControl!)
         }
+        
+        self.searchBar.backgroundImage = UIImage()
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
+        textFieldInsideSearchBar!.textColor = kWhiteColor
+        if let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView {
+            glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            glassIconView.tintColor = kDarkGreyColor
+        }
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
+        self.searchBar.delegate = self
+        self.searchBar.showsCancelButton = false
+        
+        self.backgroundSearchView = UIView()
+        self.backgroundSearchView.backgroundColor = .black
+        self.backgroundSearchView.alpha = 0.7
+        self.backgroundSearchView.isHidden = true
+        self.view.addSubview(self.backgroundSearchView)
+        self.searchView.isHidden = true
+        self.view.bringSubview(toFront: self.searchView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +81,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.lightStatusBar()
         self.backButton.isHidden = !self.canReturn
         self.hideNavBar()
+        self.searchBar.isHidden = !self.canSearch
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         self.refreshUI(reload: true)
@@ -63,6 +96,8 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.fetchPosts()
             }
         }
+        self.backgroundSearchView.frame = self.postTableView.frame
+        //self.view.bringSubview(toFront: self.backgroundSearchView)
     }
     
     func fetchPosts(){
@@ -170,6 +205,30 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func scrollToTop(){
         self.postTableView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchedText = self.searchBar.text {
+            self.searchBar.resignFirstResponder()
+            self.backgroundSearchView.isHidden = true
+            self.searchBar.showsCancelButton = true
+            self.searchViewController.search(keyword: searchedText)
+            self.searchView.isHidden = false
+        }
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+        self.backgroundSearchView.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+        self.backgroundSearchView.isHidden = true
+        self.searchView.isHidden = true
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

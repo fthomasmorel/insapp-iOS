@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EventTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
@@ -26,8 +26,15 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     var tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchView: UIView!
+    
+    var searchViewController: UniversalSearchViewController!
+    var backgroundSearchView : UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchViewController = self.childViewControllers.last as? UniversalSearchViewController
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: kEventCell)
@@ -39,6 +46,26 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.refreshControl.addTarget(self, action: #selector(EventTableViewController.fetchEvents), for: UIControlEvents.valueChanged)
         self.tableViewController.refreshControl = self.refreshControl
         self.tableView.addSubview(refreshControl)
+        
+        self.searchBar.backgroundImage = UIImage()
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        (textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel)?.textColor = kDarkGreyColor
+        textFieldInsideSearchBar!.textColor = kWhiteColor
+        if let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView {
+            glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            glassIconView.tintColor = kDarkGreyColor
+        }
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
+        self.searchBar.delegate = self
+        self.searchBar.showsCancelButton = false
+        
+        self.backgroundSearchView = UIView()
+        self.backgroundSearchView.backgroundColor = .black
+        self.backgroundSearchView.alpha = 0.7
+        self.backgroundSearchView.isHidden = true
+        self.view.addSubview(self.backgroundSearchView)
+        self.searchView.isHidden = true
+        self.view.bringSubview(toFront: self.searchView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +79,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         DispatchQueue.global().async {
             self.fetchEvents()
         }
+        self.backgroundSearchView.frame = self.tableView.frame
     }
     
     override func triggerError(_ message: String, _ statusCode: Int) -> Bool {
@@ -173,4 +201,29 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.refreshUI(reload: true)
         self.fetchEvents()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchedText = self.searchBar.text {
+            self.searchBar.resignFirstResponder()
+            self.backgroundSearchView.isHidden = true
+            self.searchBar.showsCancelButton = true
+            self.searchViewController.search(keyword: searchedText)
+            self.searchView.isHidden = false
+        }
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+        self.backgroundSearchView.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+        self.backgroundSearchView.isHidden = true
+        self.searchView.isHidden = true
+    }
+
 }

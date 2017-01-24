@@ -57,4 +57,20 @@ public class Association: NSManagedObject {
         return association
     }
     
+    static func parseArray(_ array: [Dictionary<String, AnyObject>]) -> [Association] {
+        let associationsJson = array.filter({ (json) -> Bool in
+            if let association = Association.parseJson(json) {
+                Association.managedContext.delete(association)
+                return true
+            }else{
+                return false
+            }
+        })
+        
+        let associations = associationsJson.map { (json) -> Association in
+            return Association.parseJson(json)!
+        }
+        return associations
+    }
+    
 }

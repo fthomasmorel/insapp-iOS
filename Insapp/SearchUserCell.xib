@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SearchUserCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchUserCell" rowHeight="66" id="obe-sS-h3G" customClass="SearchUserCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="obe-sS-h3G" id="dKw-Jd-DYG">
+                <frame key="frameInset" width="375" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd6-sX-ELo">
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X7-eS-u8U">
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m31-Wi-v3e">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Ubv-sr-YSM"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="2X7-eS-u8U" secondAttribute="bottom" constant="16" id="1zZ-TH-VAC"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="trailing" secondItem="dKw-Jd-DYG" secondAttribute="trailingMargin" id="6zw-nb-01N"/>
+                    <constraint firstItem="m31-Wi-v3e" firstAttribute="leading" secondItem="dKw-Jd-DYG" secondAttribute="leadingMargin" id="JuX-lM-7fV"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="bottom" secondItem="m31-Wi-v3e" secondAttribute="bottom" id="WXn-45-N6I"/>
+                    <constraint firstItem="2X7-eS-u8U" firstAttribute="top" secondItem="dKw-Jd-DYG" secondAttribute="topMargin" constant="-4" id="l4D-3i-OJ3"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="leading" secondItem="m31-Wi-v3e" secondAttribute="trailing" constant="8" symbolic="YES" id="lRe-Lb-MO6"/>
+                    <constraint firstItem="m31-Wi-v3e" firstAttribute="centerY" secondItem="dKw-Jd-DYG" secondAttribute="centerY" id="n3G-Iz-LIB"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="trailing" secondItem="2X7-eS-u8U" secondAttribute="trailing" id="pmU-lW-MVC"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="top" secondItem="dKw-Jd-DYG" secondAttribute="topMargin" constant="16" id="pxF-Hj-IDK"/>
+                    <constraint firstItem="m31-Wi-v3e" firstAttribute="top" secondItem="dKw-Jd-DYG" secondAttribute="topMargin" constant="-3" id="qNi-jY-p1d"/>
+                    <constraint firstItem="dd6-sX-ELo" firstAttribute="leading" secondItem="2X7-eS-u8U" secondAttribute="leading" id="yzD-ft-Lgh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarImageView" destination="m31-Wi-v3e" id="q82-UM-vTH"/>
+                <outlet property="nameLabel" destination="dd6-sX-ELo" id="0Sf-o4-6Si"/>
+                <outlet property="usernameLabel" destination="2X7-eS-u8U" id="PBy-Qt-wbn"/>
+            </connections>
+            <point key="canvasLocation" x="54.5" y="578"/>
+        </tableViewCell>
+    </objects>
+</document>

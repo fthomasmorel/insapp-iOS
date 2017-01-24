@@ -60,6 +60,22 @@ public class Event: NSManagedObject {
         return event
     }
     
+    static func parseArray(_ array: [Dictionary<String, AnyObject>]) -> [Event] {
+        let eventsJson = array.filter({ (json) -> Bool in
+            if let event = Event.parseJson(json) {
+                Event.managedContext.delete(event)
+                return true
+            }else{
+                return false
+            }
+        })
+        
+        let events = eventsJson.map { (json) -> Event in
+            return Event.parseJson(json)!
+        }
+        return events
+    }
+    
     static func sort(events: [Event]) -> [Event] {
         return events.sorted { (a, b) -> Bool in
             return a.dateStart!.timeIntervalSince(b.dateStart! as Date) < 0

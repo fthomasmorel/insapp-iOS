@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SearchAssociationCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAssociationCell" id="NhQ-n0-lAo" customClass="SearchAssociationCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NhQ-n0-lAo" id="Bhc-tH-AIJ">
+                <frame key="frameInset" width="375" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="h36-Ef-LzR">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="liu-gS-r2p">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="h36-Ef-LzR" secondAttribute="bottom" id="IrE-GD-Bjw"/>
+                    <constraint firstItem="h36-Ef-LzR" firstAttribute="top" secondItem="Bhc-tH-AIJ" secondAttribute="top" id="eyY-oS-beI"/>
+                    <constraint firstItem="h36-Ef-LzR" firstAttribute="leading" secondItem="Bhc-tH-AIJ" secondAttribute="leading" id="sKi-bS-Wlf"/>
+                    <constraint firstAttribute="trailing" secondItem="h36-Ef-LzR" secondAttribute="trailing" id="uBa-Wi-8fG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="associationCollectionView" destination="h36-Ef-LzR" id="Qvh-OQ-B9O"/>
+            </connections>
+            <point key="canvasLocation" x="-265.5" y="76.5"/>
+        </tableViewCell>
+    </objects>
+</document>

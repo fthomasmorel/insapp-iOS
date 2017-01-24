@@ -38,12 +38,6 @@ extension APIManager{
         }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
     }
     
-    static func searchUser(word: String, controller: UIViewController, completion:@escaping (_ users:[User]) -> ()){
-        requestWithToken(url: "/search/users/\(word)", method: .get, completion: { (result) in
-            guard let dict = result as? Dictionary<String, AnyObject>, let users = dict["users"] as? [Dictionary<String, AnyObject>] else { completion([]) ; return }
-            completion(User.parseArray(users))
-        }) { (errorMessage, statusCode) in return controller.triggerError(errorMessage, statusCode) }
-    }
     
     static func report(user: User, controller: UIViewController){
         requestWithToken(url: "/report/user/\(user.id!)", method: .put, completion: { (_) in
