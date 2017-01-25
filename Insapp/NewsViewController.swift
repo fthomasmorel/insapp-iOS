@@ -211,11 +211,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let searchedText = self.searchBar.text {
             self.searchBar.resignFirstResponder()
             self.backgroundSearchView.isHidden = true
-            self.searchBar.showsCancelButton = true
+            self.searchBar.showsCancelButton = false
             self.searchViewController.search(keyword: searchedText)
             self.searchView.isHidden = false
         }
-        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

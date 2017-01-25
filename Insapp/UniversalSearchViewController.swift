@@ -27,6 +27,7 @@ class UniversalSearchViewController: UITableViewController {
         self.tableView.register(UINib(nibName: "SearchPostCell", bundle: nil), forCellReuseIdentifier: kSearchPostCell)
         self.tableView.register(UINib(nibName: "SearchAssociationCell", bundle: nil), forCellReuseIdentifier: kSearchAssociationCell)
         self.tableView.register(UINib(nibName: "SeeMoreCell", bundle: nil), forCellReuseIdentifier: kSeeMoreCell)
+        self.tableView.tableFooterView = UIView()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

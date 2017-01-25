@@ -32,6 +32,7 @@ class SeeMoreViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: kPostCell)
         self.tableView.register(UINib(nibName: "SearchPostCell", bundle: nil), forCellReuseIdentifier: kSearchPostCell)
         self.tableView.register(UINib(nibName: "SearchAssociationCell", bundle: nil), forCellReuseIdentifier: kSearchAssociationCell)
+        self.tableView.tableFooterView = UIView()
     }
 
 

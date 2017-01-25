@@ -32,6 +32,7 @@ class SearchAssociationCell: UITableViewCell, UICollectionViewDataSource, UIColl
             layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
             layout.minimumInteritemSpacing = 1
             layout.minimumLineSpacing = 1
+            self.associationCollectionView.showsHorizontalScrollIndicator = false
         } else {
             let layout: UICollectionViewFlowLayout = self.associationCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
             layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)

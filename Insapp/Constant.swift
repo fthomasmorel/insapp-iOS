@@ -65,7 +65,7 @@ let kSeeMoreCell = "SeeMoreCell"
 
 //API
 let kAPIHostname = "https://dev.insapp.fr/api/v1"
-let kCDNHostname = "https://insapp.fr/cdn/"
+let kCDNHostname = "https://dev.insapp.fr/cdn/"
 let kCASHostname = "https://cas.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"
