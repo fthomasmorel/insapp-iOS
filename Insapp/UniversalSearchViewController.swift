@@ -37,32 +37,32 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
         self.tableView.tableFooterView = UIView()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
-     
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let vw = UIView()
         vw.backgroundColor = kLightGreyColor
         let label = UILabel(frame: .zero)
         label.text = "Section"
         label.font = UIFont(name: kBoldFont, size: 15.0)
-
+        
         switch section {
         case 0:
             label.text = "Associations"
@@ -73,7 +73,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
         default:
             label.text = "Utilisateurs"
         }
-
+        
         
         label.sizeToFit()
         label.frame.origin.x = 8
@@ -86,7 +86,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch  section {
@@ -122,45 +122,45 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
-    switch indexPath.section {
-    case 0:
-        if (self.associations.count == 0) {
-            return 35
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch indexPath.section {
+        case 0:
+            if (self.associations.count == 0) {
+                return 35
+            }
+            return 100
+        case 1:
+            if (self.posts.count == 0) {
+                return 35
+            }
+            if(indexPath.row == 1 && self.posts.count > 6) {
+                return 35
+            }
+            return tableView.frame.width/3 * (self.posts.count > 3 ? 2 : 1)
+        case 2:
+            if (self.events.count == 0) {
+                return 35
+            }
+            if(indexPath.row == 4 && self.events.count > 5) {
+                return 35
+            }
+            return 70
+        default:
+            if (self.users.count == 0) {
+                return 35
+            }
+            if(indexPath.row == 4 && self.users.count > 5) {
+                return 35
+            }
+            return 50
         }
-        return 100
-    case 1:
-        if (self.posts.count == 0) {
-            return 35
-        }
-        if(indexPath.row == 1 && self.posts.count > 6) {
-            return 35
-        }
-        return tableView.frame.width/3 * (self.posts.count > 3 ? 2 : 1)
-    case 2:
-        if (self.events.count == 0) {
-            return 35
-        }
-        if(indexPath.row == 4 && self.events.count > 5) {
-            return 35
-        }
-        return 70
-    default:
-        if (self.users.count == 0) {
-            return 35
-        }
-        if(indexPath.row == 4 && self.users.count > 5) {
-            return 35
-        }
-        return 50
-    }
     }
     
     func search(keyword: String){
         self.tableView.isHidden = true
         self.searchText = keyword
-            
+        
         APIManager.search(word: keyword, controller: self, completion: { (associations, users, events, posts) in
             
             let group = DispatchGroup()
@@ -198,10 +198,10 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                     self.tableView.reloadData()
                 }
             }))
-
+            
         })
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
@@ -214,11 +214,11 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 cell.selectionStyle = .none
                 return cell
             } else {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchAssociationCell, for: indexPath) as! SearchAssociationCell
-            cell.parent = self
-            cell.searchText = self.searchText
-            cell.loadAssociations(self.associations)
-            return cell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchAssociationCell, for: indexPath) as! SearchAssociationCell
+                cell.parent = self
+                cell.searchText = self.searchText
+                cell.loadAssociations(self.associations)
+                return cell
             }
         case 1:
             if (self.posts.count == 0) {
@@ -241,6 +241,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchPostCell, for: indexPath) as! SearchPostCell
                 cell.parent = self
                 cell.loadPosts(self.posts)
+                
                 return cell
             }
         case 2:
@@ -263,6 +264,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
             else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchEventCell, for: indexPath) as! SearchEventCell
                 cell.load(event: self.events[indexPath.row])
+                cell.selectionStyle = .none
                 return cell
             }
         default:
@@ -285,6 +287,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
             else {
                 let user = self.users[indexPath.row]
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchUserCell, for: indexPath) as! SearchUserCell
+                cell.selectionStyle = .none
                 cell.loadUser(user: user)
                 return cell
             }
@@ -311,7 +314,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
             }
         case 2:
             if (self.events.count == 0) {
-                
+                return
             }
             else if(indexPath.row == 4 && self.events.count > 5) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -323,15 +326,15 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else {
-            let event = self.events[indexPath.row]
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
-            vc.event = event
-            self.parent?.navigationController?.pushViewController(vc, animated: true)
+                let event = self.events[indexPath.row]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+                vc.event = event
+                self.parent?.navigationController?.pushViewController(vc, animated: true)
             }
         default:
-            if (self.events.count == 0) {
-                
+            if (self.users.count == 0) {
+                return
             }
             else if(indexPath.row == 4 && self.users.count > 5) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -343,16 +346,16 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else {
-            let user = self.users[indexPath.row]
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-            vc.user_id = user.id
-            vc.setEditable(false)
-            vc.canReturn(true)
-            self.parent?.navigationController?.pushViewController(vc, animated: true)
+                let user = self.users[indexPath.row]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+                vc.user_id = user.id
+                vc.setEditable(false)
+                vc.canReturn(true)
+                self.parent?.navigationController?.pushViewController(vc, animated: true)
             }
         }
         
     }
-
+    
 }
