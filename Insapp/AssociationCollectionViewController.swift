@@ -13,7 +13,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     
     var refreshControl:UIRefreshControl!
     var associations:[Association] = []
-//    var filteredAssociations:[Association] = []
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -83,7 +82,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.searchBar.text = ""
         APIManager.fetchAssociations(controller: self) { (associations) in
             self.associations = associations
-//            self.filteredAssociations = associations
             DispatchQueue.main.async {
                 self.refreshControl.endRefreshing()
                 self.refreshUI()
@@ -102,7 +100,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.associations.count
-//        return self.filteredAssociations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -112,7 +109,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let association = self.associations[indexPath.row]
-        //let association = self.filteredAssociations[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath as IndexPath) as! AssociationCell
         cell.load(association: association)
@@ -120,7 +116,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let association = self.filteredAssociations[indexPath.row]
+
         let association = self.associations[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController 
@@ -134,7 +130,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         DispatchQueue.main.async {
             self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
             self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
-            //self.searchBar.showsCancelButton = true
             self.refreshControl.removeFromSuperview()
         }
         
@@ -144,10 +139,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.collectionView.contentInset = .zero
         self.collectionView.scrollIndicatorInsets = .zero
         self.refreshControl.isHidden = false
-        //self.searchBar.showsCancelButton = false
-//        if self.associations.count == self.filteredAssociations.count {
-//            self.collectionView.addSubview(self.refreshControl)   
-//        }
+
     }
     
     func refreshUI(reload:Bool = false){
@@ -172,35 +164,6 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         }
     }
     
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchText == "" {
-//            self.filteredAssociations = self.associations
-//            self.collectionView.reloadData()
-//        }else{
-//            self.filteredAssociations = self.associations.filter({ (association) -> Bool in
-//                return association.name!.lowercased().contains(searchText.lowercased()) ||
-//                        association.email!.lowercased().contains(searchText.lowercased()) ||
-//                        association.desc!.lowercased().contains(searchText.lowercased())
-//            })
-//            self.collectionView.reloadData()
-//        }
-//    }
-    
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        self.searchBar.showsCancelButton = false
-//        DispatchQueue.main.async {
-//            self.searchBar.resignFirstResponder()
-//            self.fetchAssociations()
-//        }
-//        
-//        self.backgroundSearchView.isHidden = true
-//    }
-//    
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        self.searchBar.showsCancelButton = true
-//        
-//        self.backgroundSearchView.isHidden = false
-//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchedText = self.searchBar.text {

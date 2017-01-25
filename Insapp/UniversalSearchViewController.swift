@@ -8,7 +8,13 @@
 
 import UIKit
 
-class UniversalSearchViewController: UITableViewController {
+class UniversalSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     
     var searchText: String!
     
@@ -19,6 +25,7 @@ class UniversalSearchViewController: UITableViewController {
     var events: [Event]! = []
     var data: [[AnyObject]] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: kSearchUserCell)
@@ -28,6 +35,8 @@ class UniversalSearchViewController: UITableViewController {
         self.tableView.register(UINib(nibName: "SearchAssociationCell", bundle: nil), forCellReuseIdentifier: kSearchAssociationCell)
         self.tableView.register(UINib(nibName: "SeeMoreCell", bundle: nil), forCellReuseIdentifier: kSeeMoreCell)
         self.tableView.tableFooterView = UIView()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,11 +52,11 @@ class UniversalSearchViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
      
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let vw = UIView()
         vw.backgroundColor = kLightGreyColor
         let label = UILabel(frame: .zero)
@@ -72,37 +81,13 @@ class UniversalSearchViewController: UITableViewController {
         return vw
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 0:
-//            if (self.associations.count == 0) {
-//                return nil
-//            }
-//            return "Associations"
-//        case 1:
-//            if (self.posts.count == 0) {
-//                return nil
-//            }
-//            return "Posts"
-//        case 2:
-//            if (self.events.count == 0) {
-//                return nil
-//            }
-//            return "Évènements"
-//        default:
-//            if (self.users.count == 0) {
-//                return nil
-//            }
-//            return "Utilisateurs"
-//        }
-//    }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch  section {
         case 0:
@@ -137,7 +122,7 @@ class UniversalSearchViewController: UITableViewController {
         }
     }
     
-   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     switch indexPath.section {
     case 0:
@@ -173,7 +158,7 @@ class UniversalSearchViewController: UITableViewController {
     }
     
     func search(keyword: String){
-        
+        self.tableView.isHidden = true
         self.searchText = keyword
             
         APIManager.search(word: keyword, controller: self, completion: { (associations, users, events, posts) in
@@ -209,6 +194,7 @@ class UniversalSearchViewController: UITableViewController {
                     self.events = events
                     self.posts = posts
                     self.data = [associations,posts,events,users]
+                    self.tableView.isHidden = false
                     self.tableView.reloadData()
                 }
             }))
@@ -216,7 +202,7 @@ class UniversalSearchViewController: UITableViewController {
         })
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0:
@@ -225,6 +211,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Aucun résultat"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: kSearchAssociationCell, for: indexPath) as! SearchAssociationCell
@@ -239,6 +226,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Aucun résultat"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             if(indexPath.row == 1 && self.posts.count > 6){
@@ -246,6 +234,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Voir plus de résultats"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             else {
@@ -260,6 +249,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Aucun résultat"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             if (indexPath.row == 4 && self.events.count > 5){
@@ -267,6 +257,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Voir plus de résultats"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             else {
@@ -280,6 +271,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Aucun résultat"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             if (indexPath.row == 4 && self.users.count > 5){
@@ -287,6 +279,7 @@ class UniversalSearchViewController: UITableViewController {
                 cell.moreLabel.text = "Voir plus de résultats"
                 cell.moreLabel.textAlignment = .center
                 cell.moreLabel.textColor = kDarkGreyColor
+                cell.selectionStyle = .none
                 return cell
             }
             else {
@@ -299,7 +292,7 @@ class UniversalSearchViewController: UITableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             return

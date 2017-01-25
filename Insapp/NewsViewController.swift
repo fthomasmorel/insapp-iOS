@@ -97,7 +97,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         self.backgroundSearchView.frame = self.postTableView.frame
-        //self.view.bringSubview(toFront: self.backgroundSearchView)
     }
     
     func fetchPosts(){
@@ -130,7 +129,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let post = self.posts[indexPath.row]
         let ratio = self.view.frame.size.width/post.imageSize!["width"]!
         return post.imageSize!["height"]! * ratio + kPostCellEmptyHeight
-        //return self.view.frame.size.width + kPostCellEmptyHeight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
