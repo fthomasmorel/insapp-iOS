@@ -183,9 +183,13 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func likeAction(post: Post, forCell cell: PostCell, liked: Bool) {
         let completion = { (opt_post:Optional<Post>) -> () in
             guard let new_post = opt_post else { return }
-            guard let index = self.posts.index(of: post) else { return }
-            self.posts[index] = new_post
-            cell.reload(post: new_post)
+            if let index = self.posts.index(of: post) {
+                self.posts[index] = new_post
+                cell.reload(post: new_post)
+                if let _ = self.activePost {
+                    self.activePost = new_post
+                }
+            }
         }
         if liked {
             APIManager.dislikePost(post_id: post.id!, controller: self, completion: completion)
@@ -202,7 +206,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func scrollToTop(){
-        self.postTableView.setContentOffset(CGPoint.zero, animated: true)
+        if self.searchView.isHidden {
+            self.postTableView.setContentOffset(CGPoint.zero, animated: true)
+        }else{
+            self.searchBarCancelButtonClicked(self.searchBar)
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

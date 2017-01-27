@@ -190,7 +190,11 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
 
     
     func scrollToTop(){
-        self.collectionView.setContentOffset(CGPoint.zero, animated: true)
+        if self.searchView.isHidden {
+            self.collectionView.setContentOffset(CGPoint.zero, animated: true)
+        }else{
+            self.searchBarCancelButtonClicked(self.searchBar)
+        }
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {

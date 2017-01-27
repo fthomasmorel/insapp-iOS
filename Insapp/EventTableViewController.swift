@@ -194,7 +194,11 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func scrollToTop(){
-        self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        if self.searchView.isHidden {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }else{
+            self.searchBarCancelButtonClicked(self.searchBar)
+        }
     }
     
     @IBAction func reloadAction(_ sender: AnyObject) {

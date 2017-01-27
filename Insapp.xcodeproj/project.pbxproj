@@ -437,7 +437,7 @@
 				TargetAttributes = {
 					E1DC7F051D86E2C900284222 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = SWYL5ARZNN;
+						DevelopmentTeam = 9JPSY4Q8SW;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -756,11 +756,11 @@
 				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = SWYL5ARZNN;
+				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp;
+				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
@@ -780,11 +780,11 @@
 				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = SWYL5ARZNN;
+				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp;
+				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

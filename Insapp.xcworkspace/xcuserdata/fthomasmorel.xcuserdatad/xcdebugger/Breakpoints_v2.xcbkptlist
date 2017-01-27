@@ -51,13 +51,13 @@
                   symbolName = "Insapp.AppDelegate.(application (__ObjC.UIApplication, didReceiveRemoteNotification : Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;, fetchCompletionHandler : (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "Insapp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/AppDelegate.swift"
-                  timestampString = "498918071.535327"
+                  urlString = "file:///Users/fthomasmorel/Projects/Insapp-iOS2/Insapp/AppDelegate.swift"
+                  timestampString = "507195513.513981"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "48"
                   endingLineNumber = "48"
-                  offsetFromSymbolStart = "214">
+                  offsetFromSymbolStart = "192">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -66,13 +66,13 @@
                   symbolName = "Insapp.AppDelegate.(application (__ObjC.UIApplication, didReceiveRemoteNotification : Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;, fetchCompletionHandler : (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()).(closure #1).(closure #2)"
                   moduleName = "Insapp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fthomasmorel/Projects/Insapp/Insapp/AppDelegate.swift"
-                  timestampString = "498918071.536851"
+                  urlString = "file:///Users/fthomasmorel/Projects/Insapp-iOS2/Insapp/AppDelegate.swift"
+                  timestampString = "507195513.5151"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
                   endingLineNumber = "49"
-                  offsetFromSymbolStart = "30">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
