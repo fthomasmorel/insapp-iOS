@@ -78,6 +78,7 @@
 		E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9F41D897609006A66CF /* Post+CoreDataProperties.swift */; };
 		E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C3F9F71D89831E006A66CF /* PostCell.xib */; };
 		E1C3F9FA1D8A88D0006A66CF /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9F91D8A88D0006A66CF /* PostCell.swift */; };
+		E1CEB4891E3D02F500F84CB1 /* GifSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */; };
 		E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F091D86E2C900284222 /* AppDelegate.swift */; };
 		E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DC7F0D1D86E2C900284222 /* Main.storyboard */; };
 		E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */; };
@@ -169,6 +170,7 @@
 		E1C3F9F41D897609006A66CF /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9F71D89831E006A66CF /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		E1C3F9F91D8A88D0006A66CF /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifSupport.swift; sourceTree = "<group>"; };
 		E1DC7F061D86E2C900284222 /* Insapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Insapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DC7F091D86E2C900284222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DC7F0E1D86E2C900284222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */,
 				E192C1E31D90131500355512 /* Constant.swift */,
 				E1E01CD31DA8EDE20082E88A /* Alert.swift */,
+				E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 			files = (
 				E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */,
 				7D0F88451DEDCCEF00E740F2 /* AssociationSearchCell.swift in Sources */,
+				E1CEB4891E3D02F500F84CB1 /* GifSupport.swift in Sources */,
 				E1C3F9D71D88365D006A66CF /* EditUserTableViewController.swift in Sources */,
 				E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */,
 				E1DC7F691D86FBAB00284222 /* Credentials+CoreDataClass.swift in Sources */,

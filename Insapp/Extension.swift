@@ -133,11 +133,16 @@ extension UIImageView {
             guard
                 let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-                let data = data , error == nil,
-                let image = UIImage(data: data)
+                let data = data , error == nil
                 else { return }
-            Image.store(image: image, forUrl: link)
-            self.displayImage(image, completion: completion)
+            var image:UIImage?
+            if link.hasSuffix(".gif") {
+                image = UIImage.gifImageWithData(data: data as NSData)
+            }else{
+                image = UIImage(data: data)
+                Image.store(image: image!, forUrl: link)
+            }
+            self.displayImage(image!, completion: completion)
             }.resume()
     }
     
