@@ -19,6 +19,9 @@ extension Event {
     @NSManaged public var name: String?
     @NSManaged public var desc: String?
     @NSManaged public var attendees: Array<String>?
+    @NSManaged public var maybe: Array<String>?
+    @NSManaged public var notgoing: Array<String>?
+    @NSManaged public var comments: [Comment]?
     @NSManaged public var status: String?
     @NSManaged public var dateStart: NSDate?
     @NSManaged public var dateEnd: NSDate?

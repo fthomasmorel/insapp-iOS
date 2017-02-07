@@ -83,16 +83,16 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         self.contentTextView.frame = frame
     }
     
-    func preloadAssociationComment(association: Association, forPost post: Post){
+    func preloadAssociationComment(association: Association, forText text: String, atDate date: NSDate){
         self.usernameLabel.text = "@\(association.name!.lowercased())"
-        self.timestampLabel.text = post.date!.timestamp()
+        self.timestampLabel.text = date.timestamp()
         
-        let attributedString = NSMutableAttributedString(string: post.desc!)
+        let attributedString = NSMutableAttributedString(string: text)
         let paragrapheStyle = NSMutableParagraphStyle()
         paragrapheStyle.lineSpacing = 0
         
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: post.desc!.characters.count))
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:post.desc!.characters.count))
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: text.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length: text.characters.count))
         self.contentTextView.attributedText = attributedString
         
         let contentSize = self.contentTextView.sizeThatFits(self.contentTextView.bounds.size)
@@ -142,15 +142,15 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         
     }
     
-    func loadAssociationComment(association: Association, forPost post: Post){
+    func loadAssociationComment(association: Association, forText text: String, atDate date: NSDate){
         self.association = association
-        let attributedString = NSMutableAttributedString(string: post.desc!)
+        let attributedString = NSMutableAttributedString(string: text)
         
         let paragrapheStyle = NSMutableParagraphStyle()
         paragrapheStyle.lineSpacing = 0
         
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: post.desc!.characters.count))
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:post.desc!.characters.count))
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: kNormalFont, size: 15.0)!, range: NSRange(location:0, length: text.characters.count))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragrapheStyle, range: NSRange(location:0, length:text.characters.count))
         self.contentTextView.attributedText = attributedString
         
         let height = self.contentTextView.contentSize.height
@@ -162,7 +162,7 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         
         self.usernameLabel.text = "@\(association.name!.lowercased())"
         self.contentTextView.sizeToFit()
-        self.timestampLabel.text = post.date!.timestamp()
+        self.timestampLabel.text = date.timestamp()
         self.userImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
         self.roundUserImage()
         

@@ -24,6 +24,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     var fontColor: UIColor?
     var eventIds: [String] = []
     var events: [Event] = []
+    var associations: [String: Association] = [:]
 
     
     override func viewDidLoad() {
@@ -43,27 +44,33 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     func fetchEvents(){
         self.events = []
         for eventId in self.eventIds {
+            self.fetchEventGroup.enter()
             DispatchQueue.global().async {
-                self.fetchEventGroup.enter()
                 APIManager.fetchEvent(event_id: eventId, controller: self, completion: { (opt_event) in
                     guard let event = opt_event else { return }
                     self.events.append(event)
+                    if self.associations[event.association!] == nil {
+                        self.fetchEventGroup.enter()
+                        APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_asso) in
+                            guard let association = opt_asso else { return }
+                            self.associations[event.association!] = association
+                            self.fetchEventGroup.leave()
+                        }
+                    }
                     self.fetchEventGroup.leave()
                 })
             }
         }
-        DispatchQueue.global().async {
+        
+        self.fetchEventGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
             self.reloadEvents()
-        }
+        }))
     }
     
     func reloadEvents(){
-        self.fetchEventGroup.wait()
         self.events = Event.sortAndFilter(events: self.events)
         self.delegate?.updateHeightForEventListView(eventNumber: self.events.count)
-        DispatchQueue.main.async {
-            self.eventTableView.reloadData()
-        }
+        self.eventTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,9 +94,11 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = self.events[indexPath.row]
+        let association = self.associations[event.association!]!
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
         vc.event = event
+        vc.association = association
         self.parent?.navigationController?.pushViewController(vc, animated: true)
         
     }

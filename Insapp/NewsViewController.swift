@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate, UISearchBarDelegate {
+class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostCellDelegate, UISearchBarDelegate, CommentControllerDelegate {
     
     @IBOutlet weak var postTableView: UITableView!  
     @IBOutlet weak var loader: UIActivityIndicatorView!
@@ -175,9 +175,31 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
         vc.association = cell.association
-        vc.post = post
+        vc.comments = post.comments
+        vc.desc = post.desc
+        vc.date = post.date
+        vc.content = post
+        vc.delegate = self
         vc.showKeyboard = showKeyboard
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.comment(post_id: (content as! Post).id!, comment: comment, controller: self) { (opt_post) in
+            guard let post = opt_post else { return }
+            completion(post, post.desc!, post.date!, post.comments!)
+        }
+    }
+    
+    func uncomment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.uncomment(post_id: (content as! Post).id!, comment_id: comment.id!, controller: self, completion: { (opt_post) in
+            guard let post = opt_post else { return }
+            completion(post, post.desc!, post.date!, post.comments!)
+        })
+    }
+    
+    func report(content: AnyObject, comment: Comment){
+        APIManager.report(comment: comment, post: (content as! Post), controller: self)
     }
     
     func likeAction(post: Post, forCell cell: PostCell, liked: Bool) {

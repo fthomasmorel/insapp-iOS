@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NotificationCellDelegate {
+class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NotificationCellDelegate, CommentControllerDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -165,12 +165,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func open(post: Post, withComment comment: Comment){
         APIManager.fetchAssociation(association_id: post.association!, controller: self) { (opt_assos) in
             guard let assos = opt_assos else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
-            vc.post = post
-            vc.association = assos
-            vc.activeComment = comment
-            self.navigationController?.pushViewController(vc, animated: true)
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+                vc.comments = post.comments
+                vc.activeComment = comment
+                vc.association = assos
+                vc.desc = post.desc
+                vc.date = post.date
+                vc.content = post
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
@@ -181,6 +187,24 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.open(post: post, withComment: comment)
     }
     
+    func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.comment(post_id: (content as! Post).id!, comment: comment, controller: self) { (opt_post) in
+            guard let post = opt_post else { return }
+            completion(post, post.desc!, post.date!, post.comments!)
+        }
+    }
+    
+    func uncomment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.uncomment(post_id: (content as! Post).id!, comment_id: comment.id!, controller: self, completion: { (opt_post) in
+            guard let post = opt_post else { return }
+            completion(post, post.desc!, post.date!, post.comments!)
+        })
+    }
+    
+    func report(content: AnyObject, comment: Comment){
+        APIManager.report(comment: comment, post: (content as! Post), controller: self)
+    }
+
     
     func download(eventId: String){
         //guard self.events[eventId] == nil else { return }

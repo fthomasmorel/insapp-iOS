@@ -11,105 +11,204 @@ import EventKitUI
 import EventKit
 import UIKit
 
-class EventViewController: UIViewController, EKEventEditViewDelegate {
+class EventViewController: UIViewController, EKEventEditViewDelegate, UITableViewDelegate, UITableViewDataSource, EventTabDelegate, CommentControllerDelegate, CommentCellDelegate {
 
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var associationLabel: UILabel!
-    @IBOutlet weak var dateLabel: UITextView!
-    @IBOutlet weak var attendeesLabel: UILabel!
-    @IBOutlet weak var decisionControl: UISegmentedControl!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var dateLabelHeightConstraint: NSLayoutConstraint!
     
-    var event:Event!
+    @IBOutlet weak var tableView: UITableView!
     
+    var index = 0
+    var event: Event!
+    var association: Association!
+    var eventTabView: EventTabView!
+    var users: [String: User] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.generateViewForEvent()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .none
+        self.tableView.tableFooterView = UIView()
+        self.tableView.register(UINib(nibName: "EventHeaderCell", bundle: nil), forCellReuseIdentifier: kEventHeaderCell)
+        self.tableView.register(UINib(nibName: "EventDescriptionCell", bundle: nil), forCellReuseIdentifier: kEventDescriptionCell)
+        self.tableView.register(UINib(nibName: "EventCommentCell", bundle: nil), forCellReuseIdentifier: kEventCommentCell)
+        self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: kCommentCell)
+        
+        
+        self.eventTabView = Bundle.main.loadNibNamed("EventTabView", owner: self, options: nil)?[0] as! EventTabView
+        self.eventTabView.statusBarView.backgroundColor = UIColor.hexToRGB(self.event.bgColor!)
+        self.eventTabView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.changeStatusBarForColor(colorStr: event.fgColor)
+        self.fetchUsers()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.addToCalendarAction))
-        self.dateLabel.addGestureRecognizer(tap1)
-        
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.showAttendeesAction))
-        self.attendeesLabel.addGestureRecognizer(tap2)
-        self.descriptionTextView.scrollRangeToVisible(NSRange(location:0, length:0))
-
-    }
-    
-    func generateViewForEvent(){
-        self.view.backgroundColor = UIColor.hexToRGB(event.bgColor!)
-        
-        APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_asso) in
-            guard let association = opt_asso else { return }
-            self.associationLabel.text = "@\(association.name!.lowercased())"
+    func fetchUsers(){
+        let users = Array(Set(self.event.comments!.map({ (comment) -> String in return comment.user_id! })))
+        let group = DispatchGroup()
+        self.users = [:]
+        for userId in users {
+            group.enter()
+            DispatchQueue.global().async {
+                APIManager.fetch(user_id: userId, controller: self, completion: { (opt_user) in
+                    self.users[userId] = opt_user!
+                    group.leave()
+                })
+            }
         }
-
-        self.coverImageView.downloadedFrom(link: kCDNHostname + self.event.photoURL!)
-        self.computeGradient()
-        self.titleLabel.text = self.event.name
-        
-        let dateString = NSDate.stringForInterval(start: self.event.dateStart!, end: self.event.dateEnd!)
-        self.dateLabelHeightConstraint.constant = dateString.contains("\n") ? 50 : 25
-        self.dateLabel.attributedText = NSAttributedString(string: dateString, attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
-        
-        self.attendeesLabel.text = "\(self.event.attendees!.count) participant\((self.event.attendees!.count > 1 ? "s" : ""))"
-        self.decisionControl.selectedSegmentIndex = 1
-        if (User.fetch()!.events?.contains(self.event.id!))! {
-            self.decisionControl.selectedSegmentIndex = 0
+        group.notify(queue: DispatchQueue.main) { 
+            self.tableView.reloadData()
         }
-        
-        let fontColor = UIColor.hexToRGB(self.event.fgColor!)
-        
-        self.titleLabel.textColor = fontColor
-        self.associationLabel.textColor = fontColor
-        self.dateLabel.textColor = fontColor
-        self.attendeesLabel.textColor = fontColor
-        self.decisionControl.tintColor = fontColor
-        self.descriptionTextView.textColor = fontColor
-        self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: fontColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-        
-        let arrow = (self.event.fgColor! == "ffffff" ? UIImage(named: "arrow_left_white")! : UIImage(named: "arrow_left_black")!)
-        self.backButton.setImage(arrow, for: .normal)
-        
-        self.descriptionTextView.text = self.event.desc
-        self.descriptionTextView.isScrollEnabled = false
-        self.descriptionTextView.isScrollEnabled = true
     }
     
-    func computeGradient(){
-        let opaqueColor = UIColor.hexToRGB(event.bgColor!)
-        let transColor = opaqueColor.withAlphaComponent(0)
-        
-        let gradient: CAGradientLayer = CAGradientLayer()
-        
-        gradient.colors = [opaqueColor.cgColor, transColor.cgColor]
-        gradient.locations = [0 , 1]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 0.0, y: 0.1)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.coverImageView.frame.size.width, height: 180)
-        
-        if let sublayers = self.coverImageView.layer.sublayers {
-            for sublayer in sublayers {
-                sublayer.removeFromSuperlayer()
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 { return 0 }
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 { return .none }
+        self.eventTabView.updateIndex(index: self.index)
+        return self.eventTabView
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 { return 1 }
+        let commentCount = (self.users.count == 0 ? 0 : event.comments!.count)
+        return ( self.index == 0 ? 1 : commentCount + 1)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 { return 410 }
+        let descriptionHeight = EventDescriptionCell.getHeight(width: self.view.frame.width, forText: self.event.desc!)
+        if self.index == 0 { return descriptionHeight }
+        if indexPath.row == 0 { return 71 }
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell) as! CommentCell
+        cell.parent = self
+        cell.preloadUserComment(self.event.comments![indexPath.row-1])
+        let textView = cell.viewWithTag(2) as! UITextView
+        return (textView.contentSize.height + CGFloat(kCommentCellEmptyHeight))
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: kEventHeaderCell, for: indexPath) as! EventHeaderCell
+            cell.parent = self
+            cell.load(event: self.event, association: self.association)
+            return cell
+        }
+        if self.index == 1 {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: kEventCommentCell, for: indexPath) as! EventCommentCell
+                cell.avatarImageView.image = User.userInstance?.avatar()
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
+                let comment = self.event.comments![indexPath.row-1]
+                let user = self.users[comment.user_id!]!
+                cell.delegate = self
+                cell.loadUserComment(comment, user: user)
+                return cell
             }
         }
         
-        self.coverImageView.layer.insertSublayer(gradient, at: 0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: kEventDescriptionCell, for: indexPath) as! EventDescriptionCell
+        cell.contentLabel.text = self.event.desc
+        return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1, indexPath.row == 0, self.index == 1 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+            vc.comments = self.event.comments
+            vc.association = self.association
+            vc.desc = self.event.desc!
+            vc.date = NSDate()
+            vc.content = self.event
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func report(comment: Comment){
+         APIManager.report(comment: comment, event: self.event, controller: self)
+    }
+    
+    func delete(comment: Comment){
+        APIManager.uncomment(event_id: self.event.id!, comment_id: comment.id!, controller: self, completion: { (opt_event) in
+            guard let event = opt_event else { return }
+            self.event = event
+            self.tableView.reloadData()
+        })
+    }
+    
+    func open(user: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        vc.user_id = user.id
+        vc.setEditable(false)
+        vc.canReturn(true)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func open(association: Association){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AssociationViewController") as! AssociationViewController
+        vc.association = association
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.comment(event_id: (content as! Event).id!, comment: comment, controller: self) { (opt_event) in
+            guard let event = opt_event else { return }
+            completion(event, event.desc!, NSDate(), event.comments!)
+        }
+    }
+    
+    func uncomment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
+        APIManager.uncomment(event_id: (content as! Event).id!, comment_id: comment.id!, controller: self, completion: { (opt_event) in
+            guard let event = opt_event else { return }
+            completion(event, event.desc!, NSDate(), event.comments!)
+        })
+    }
+    
+    func report(content: AnyObject, comment: Comment){
+        APIManager.report(comment: comment, event: (content as! Event), controller: self)
+    }
+
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func indexDidChange(index: Int) {
+        self.index = index
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+        self.tableView.reloadData()
+    }
+    
+    func changeStatus(status: String){
+        if status != "none" {
+            APIManager.changeStatusForEvent(event_id: self.event.id!, status: status, controller: self, completion: { (opt_event) in
+                guard let event = opt_event else { return }
+                self.event = event
+                self.tableView.reloadData()
+            })
+        }else{
+            APIManager.dismissEvent(event_id: self.event.id!, controller: self, completion: { (opt_event) in
+                guard let event = opt_event else { return }
+                self.event = event
+                self.tableView.reloadData()
+            })
+        }
     }
     
     func addToCalendarAction(){
@@ -149,12 +248,16 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
     }
     
     func showAttendeesAction(){
-        if let users = self.event.attendees, users.count > 0 {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "AttendesViewController") as! AttendesViewController
-            vc.userIds = users
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        guard let going = self.event.attendees,
+            let maybe = self.event.maybe,
+            let notgoing = self.event.notgoing,
+            going.count > 0 || maybe.count > 0 || notgoing.count > 0 else { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AttendesViewController") as! AttendesViewController
+        vc.going = going
+        vc.maybe = maybe
+        vc.notgoing = notgoing
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func askForSuggestion(){
@@ -174,27 +277,8 @@ class EventViewController: UIViewController, EKEventEditViewDelegate {
         if suggest { self.addToCalendarAction() }
     }
     
-    
-    
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
-    }
-    
-    @IBAction func decisionDidChange(_ sender: AnyObject) {
-        if self.decisionControl.selectedSegmentIndex == 0 {
-            APIManager.participateToEvent(event_id: event.id!, controller: self, completion: { (opt_event) in
-                guard let event = opt_event else { return }
-                self.event = event
-                self.generateViewForEvent()
-            })
-            self.suggestAddCalendar()
-        }else{
-            APIManager.dismissEvent(event_id: event.id!, controller: self, completion: { (opt_event) in
-                guard let event = opt_event else { return }
-                self.event = event
-                self.generateViewForEvent()
-            })
-        }
     }
     
 }

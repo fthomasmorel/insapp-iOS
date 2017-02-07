@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bk4-lh-SUX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bk4-lh-SUX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1366,120 +1366,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mMg-d5-NFZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="eMI-ff-nVM"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyg-Pl-p2y">
-                                <rect key="frame" x="16" y="188" width="343" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="LQA-wS-fna"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJ9-GN-wNg">
-                                <rect key="frame" x="16" y="230" width="343" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="uTZ-cT-G6I"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaN-s1-1lf">
-                                <rect key="frame" x="16" y="254" width="343" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="GeN-qK-SOh"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kR-ME-4LE">
-                                <rect key="frame" x="16" y="305" width="343" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="P6u-ze-Wwa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rv5-AX-NMl">
-                                <rect key="frame" x="16" y="348" width="343" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="fRw-xa-xio"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="J'y vais"/>
-                                    <segment title="J'y vais pas"/>
-                                </segments>
-                                <connections>
-                                    <action selector="decisionDidChange:" destination="nvl-CO-ciT" eventType="valueChanged" id="4dP-l0-LwT"/>
-                                </connections>
-                            </segmentedControl>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IlW-tT-ri4">
-                                <rect key="frame" x="16" y="392" width="343" height="255"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-Vk-BoL">
-                                <rect key="frame" x="20" y="35" width="35" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Y2k-RP-PRe"/>
-                                    <constraint firstAttribute="width" constant="35" id="fiD-9v-D5k"/>
-                                </constraints>
-                                <state key="normal" image="arrow_left_white">
-                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissAction:" destination="go4-qq-aKa" eventType="touchUpInside" id="YGJ-H0-AKQ"/>
-                                    <action selector="dismissAction:" destination="nvl-CO-ciT" eventType="touchUpInside" id="uuR-rI-WoS"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Fz-HO-FgM">
+                                <rect key="frame" x="0.0" y="-20" width="375" height="687"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="IlW-tT-ri4" secondAttribute="trailing" constant="16" id="0gX-kA-FBu"/>
-                            <constraint firstAttribute="trailing" secondItem="rv5-AX-NMl" secondAttribute="trailing" constant="16" id="6c6-dx-Gfq"/>
-                            <constraint firstItem="rv5-AX-NMl" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="6cp-9H-nvZ"/>
-                            <constraint firstItem="pyg-Pl-p2y" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="9Jd-B4-yDt"/>
-                            <constraint firstItem="bJ9-GN-wNg" firstAttribute="top" secondItem="pyg-Pl-p2y" secondAttribute="bottom" id="AIC-i0-zAV"/>
-                            <constraint firstItem="uaN-s1-1lf" firstAttribute="top" secondItem="bJ9-GN-wNg" secondAttribute="bottom" id="GMG-VT-5bE"/>
-                            <constraint firstItem="uym-XE-J4l" firstAttribute="top" secondItem="IlW-tT-ri4" secondAttribute="bottom" constant="20" id="J1D-lA-YdA"/>
-                            <constraint firstItem="bJ9-GN-wNg" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="L8C-oX-9WZ"/>
-                            <constraint firstItem="ATa-Vk-BoL" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="20" id="LY3-vp-Q61"/>
-                            <constraint firstAttribute="trailing" secondItem="uaN-s1-1lf" secondAttribute="trailing" constant="16" id="MSc-3b-1r3"/>
-                            <constraint firstItem="IlW-tT-ri4" firstAttribute="top" secondItem="rv5-AX-NMl" secondAttribute="bottom" constant="16" id="Mmm-Of-3NG"/>
-                            <constraint firstAttribute="topMargin" secondItem="mMg-d5-NFZ" secondAttribute="top" id="NXf-4t-Fhs"/>
-                            <constraint firstItem="mMg-d5-NFZ" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" id="S1G-Ud-Gl3"/>
-                            <constraint firstAttribute="trailing" secondItem="bJ9-GN-wNg" secondAttribute="trailing" constant="16" id="TrC-D7-kUe"/>
-                            <constraint firstAttribute="trailing" secondItem="pyg-Pl-p2y" secondAttribute="trailing" constant="16" id="UJh-fn-1TM"/>
-                            <constraint firstItem="pyg-Pl-p2y" firstAttribute="top" secondItem="mMg-d5-NFZ" secondAttribute="bottom" constant="8" id="Ur1-ay-uLn"/>
-                            <constraint firstItem="ATa-Vk-BoL" firstAttribute="top" secondItem="Cid-Ii-UmA" secondAttribute="bottom" constant="15" id="VDm-xJ-Pb9"/>
-                            <constraint firstItem="IlW-tT-ri4" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="ZHM-4W-D4b"/>
-                            <constraint firstAttribute="trailing" secondItem="2kR-ME-4LE" secondAttribute="trailing" constant="16" id="ZfF-Ve-7gF"/>
-                            <constraint firstItem="uaN-s1-1lf" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="hSp-GN-R03"/>
-                            <constraint firstAttribute="trailing" secondItem="mMg-d5-NFZ" secondAttribute="trailing" id="hb4-BM-0th"/>
-                            <constraint firstItem="2kR-ME-4LE" firstAttribute="top" secondItem="uaN-s1-1lf" secondAttribute="bottom" constant="1" id="qM5-1O-yXc"/>
-                            <constraint firstItem="rv5-AX-NMl" firstAttribute="top" secondItem="2kR-ME-4LE" secondAttribute="bottom" constant="8" id="t2d-9L-lwU"/>
-                            <constraint firstItem="2kR-ME-4LE" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" constant="16" id="xGY-ww-ieG"/>
+                            <constraint firstAttribute="trailing" secondItem="8Fz-HO-FgM" secondAttribute="trailing" id="Mgg-Bq-VB1"/>
+                            <constraint firstItem="8Fz-HO-FgM" firstAttribute="leading" secondItem="J8T-TE-l3w" secondAttribute="leading" id="Vb6-Sh-Bku"/>
+                            <constraint firstItem="uym-XE-J4l" firstAttribute="top" secondItem="8Fz-HO-FgM" secondAttribute="bottom" id="WiS-Ka-kiu"/>
+                            <constraint firstItem="8Fz-HO-FgM" firstAttribute="top" secondItem="J8T-TE-l3w" secondAttribute="topMargin" constant="-20" id="jRQ-V4-J7k"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="associationLabel" destination="bJ9-GN-wNg" id="yRM-FY-m2R"/>
-                        <outlet property="attendeesLabel" destination="2kR-ME-4LE" id="07t-2B-mfE"/>
-                        <outlet property="backButton" destination="ATa-Vk-BoL" id="fgR-o2-3i7"/>
-                        <outlet property="coverImageView" destination="mMg-d5-NFZ" id="SR2-Xw-Odd"/>
-                        <outlet property="dateLabel" destination="uaN-s1-1lf" id="9U6-SY-igW"/>
-                        <outlet property="dateLabelHeightConstraint" destination="GeN-qK-SOh" id="9ZC-qt-vwb"/>
-                        <outlet property="decisionControl" destination="rv5-AX-NMl" id="pQT-iy-FAF"/>
-                        <outlet property="descriptionTextView" destination="IlW-tT-ri4" id="GhK-xE-IjX"/>
-                        <outlet property="titleLabel" destination="pyg-Pl-p2y" id="r3Y-SH-mZr"/>
+                        <outlet property="tableView" destination="8Fz-HO-FgM" id="VTy-iO-ECH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Geu-Nv-cEh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -197,6 +197,18 @@ extension Date {
 
 extension NSDate {
     
+    func day() -> Int {
+        let calendar = NSCalendar.current
+        let day = calendar.component(.day, from: self as Date)
+        return day
+    }
+    
+    func monthName() -> String {
+        let calendar = NSCalendar.current
+        let month = calendar.component(.month, from: self as Date)
+        return DateFormatter().monthSymbols[month - 1]
+    }
+    
     func isToday() -> Bool {
         let calendar = NSCalendar.current
         let day = calendar.component(.day, from: self as Date)

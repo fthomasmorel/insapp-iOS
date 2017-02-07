@@ -23,6 +23,14 @@
 		7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBA1DD1CCFE00BDA8A1 /* SearchPostCell.xib */; };
 		7DBEFCBD1DD1D49F00BDA8A1 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */; };
 		9AA51A7D696DE37EA2028636 /* Pods_Insapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */; };
+		E119D06C1E4879F600C10A64 /* EventTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D06B1E4879F600C10A64 /* EventTabView.xib */; };
+		E119D06E1E487DBB00C10A64 /* EventHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */; };
+		E119D0721E487FA300C10A64 /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0711E487FA300C10A64 /* EventHeaderCell.swift */; };
+		E119D0751E48BA3D00C10A64 /* EventTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0741E48BA3D00C10A64 /* EventTabView.swift */; };
+		E119D0771E48BEBF00C10A64 /* EventDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */; };
+		E119D0791E48BFC300C10A64 /* EventDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */; };
+		E119D07B1E49B6E100C10A64 /* EventCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */; };
+		E119D07D1E49B7BF00C10A64 /* EventCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */; };
 		E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8291DA147D40029C051 /* AttendesViewController.swift */; };
 		E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */; };
 		E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */; };
@@ -113,6 +121,14 @@
 		7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07F8504F090A6CA8BCC8915 /* Pods-Insapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E119D06B1E4879F600C10A64 /* EventTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTabView.xib; sourceTree = "<group>"; };
+		E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventHeaderCell.xib; sourceTree = "<group>"; };
+		E119D0711E487FA300C10A64 /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
+		E119D0741E48BA3D00C10A64 /* EventTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabView.swift; sourceTree = "<group>"; };
+		E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionCell.xib; sourceTree = "<group>"; };
+		E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionCell.swift; sourceTree = "<group>"; };
+		E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCommentCell.xib; sourceTree = "<group>"; };
+		E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCommentCell.swift; sourceTree = "<group>"; };
 		E11EE8291DA147D40029C051 /* AttendesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendesViewController.swift; sourceTree = "<group>"; };
 		E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -254,6 +270,40 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
+		E119D06F1E487DBF00C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
+				E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */,
+				E119D06B1E4879F600C10A64 /* EventTabView.xib */,
+				E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */,
+				E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		E119D0701E487F8900C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E119D0711E487FA300C10A64 /* EventHeaderCell.swift */,
+				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
+				E1C3F9ED1D8951D7006A66CF /* EventCell.swift */,
+				E119D0741E48BA3D00C10A64 /* EventTabView.swift */,
+				E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */,
+				E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		E119D0731E4880F600C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
+				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
 		E1C3F9CE1D87F802006A66CF /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +322,7 @@
 		E1C3F9D31D88037A006A66CF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E119D0731E4880F600C10A64 /* Event */,
 				7D09F78E1E0C5DEC00B93A6E /* Search */,
 				E1C3F9D11D87FC07006A66CF /* SplashScreenViewController.swift */,
 				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
@@ -279,8 +330,6 @@
 				E1C3F9D81D8837E7006A66CF /* EditUserViewController.swift */,
 				E1C3F9DA1D8855F8006A66CF /* AssociationCollectionViewController.swift */,
 				E1C3F9DC1D8874EA006A66CF /* AssociationViewController.swift */,
-				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
-				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
 				E1C3F9EF1D897142006A66CF /* NewsViewController.swift */,
 				E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */,
 				E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */,
@@ -311,6 +360,7 @@
 		E1C3F9E71D894C00006A66CF /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				E119D06F1E487DBF00C10A64 /* Event */,
 				7D7468901E0A8EC800F2FD53 /* Search */,
 				E1DC7F0D1D86E2C900284222 /* Main.storyboard */,
 				E1DC7F151D86E2C900284222 /* LaunchScreen.storyboard */,
@@ -318,7 +368,6 @@
 				E1C3F9F71D89831E006A66CF /* PostCell.xib */,
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
-				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
 				E193DD871D9E73B700478B52 /* UserCell.xib */,
 				E11EE8371DA245C20029C051 /* NotificationCell.xib */,
 			);
@@ -328,12 +377,11 @@
 		E1C3F9EC1D8951CC006A66CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E119D0701E487F8900C10A64 /* Event */,
 				7D09F78D1E0C5DC900B93A6E /* Search */,
-				E1C3F9ED1D8951D7006A66CF /* EventCell.swift */,
 				E1C3F9F91D8A88D0006A66CF /* PostCell.swift */,
 				E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */,
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
-				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
 				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 				E193DD891D9E745400478B52 /* UserCell.swift */,
 				E11EE8391DA246A30029C051 /* NotificationCell.swift */,
@@ -477,9 +525,11 @@
 				E11EE8381DA245C20029C051 /* NotificationCell.xib in Resources */,
 				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
 				7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */,
+				E119D06E1E487DBB00C10A64 /* EventHeaderCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
 				7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
+				E119D07B1E49B6E100C10A64 /* EventCommentCell.xib in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
 				7D0C40D01DEAECE3005FE515 /* SearchUserCell.xib in Resources */,
 				E193DD881D9E73B700478B52 /* UserCell.xib in Resources */,
@@ -488,9 +538,11 @@
 				E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */,
 				E1DC7F141D86E2C900284222 /* Assets.xcassets in Resources */,
 				7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */,
+				E119D0771E48BEBF00C10A64 /* EventDescriptionCell.xib in Resources */,
 				7D1591861DE49E44001F949E /* SearchEventCell.xib in Resources */,
 				E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */,
 				7D9D50EC1DF40837002AC837 /* SeeMoreCell.xib in Resources */,
+				E119D06C1E4879F600C10A64 /* EventTabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +626,7 @@
 				E1C3F9DF1D8940D8006A66CF /* EventViewController.swift in Sources */,
 				E1C3F9F51D897609006A66CF /* Post+CoreDataClass.swift in Sources */,
 				7D128FEA1DEB899100BD3661 /* SearchAssociationCell.swift in Sources */,
+				E119D0791E48BFC300C10A64 /* EventDescriptionCell.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
@@ -599,6 +652,7 @@
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,
 				7D9D50EE1DF40875002AC837 /* SeeMoreCell.swift in Sources */,
+				E119D07D1E49B7BF00C10A64 /* EventCommentCell.swift in Sources */,
 				E1DC7F681D86FBAB00284222 /* Association+CoreDataProperties.swift in Sources */,
 				E1C3F9D91D8837E7006A66CF /* EditUserViewController.swift in Sources */,
 				E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */,
@@ -607,6 +661,7 @@
 				E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */,
 				E1C3F9E11D8946C8006A66CF /* APIManager+Event.swift in Sources */,
 				E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */,
+				E119D0721E487FA300C10A64 /* EventHeaderCell.swift in Sources */,
 				E1C3F9DB1D8855F8006A66CF /* AssociationCollectionViewController.swift in Sources */,
 				E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */,
 				E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */,
@@ -628,6 +683,7 @@
 				E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
 				E11EE83E1DA247DD0029C051 /* Notification+CoreDataProperties.swift in Sources */,
+				E119D0751E48BA3D00C10A64 /* EventTabView.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,
 				E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */,
 			);
