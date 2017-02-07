@@ -24,7 +24,8 @@ enum ColorTheme{
 }
 
 class EventHeaderCell: UITableViewCell {
-    
+        
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
@@ -92,6 +93,7 @@ class EventHeaderCell: UITableViewCell {
             self.goingImageView.image = #imageLiteral(resourceName: "go_light")
             self.unkownImageView.image = #imageLiteral(resourceName: "unkown_light")
             self.notgoingImageView.image = #imageLiteral(resourceName: "not_going_light")
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_white"), for: .normal)
         }else{
             self.theme = .dark
             self.clockImageView.image = #imageLiteral(resourceName: "clock_dark")
@@ -99,6 +101,7 @@ class EventHeaderCell: UITableViewCell {
             self.goingImageView.image = #imageLiteral(resourceName: "go_dark")
             self.unkownImageView.image = #imageLiteral(resourceName: "unkown_dark")
             self.notgoingImageView.image = #imageLiteral(resourceName: "not_going_dark")
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_black"), for: .normal)
         }
         
         self.eventImageView.downloadedFrom(link: photo_url)

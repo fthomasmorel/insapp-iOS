@@ -13,7 +13,7 @@ let kEventDescriptionCell = "kEventDescriptionCell"
 
 class EventDescriptionCell: UITableViewCell {
     
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
     
     static func getHeight(width: CGFloat, forText text: String) -> CGFloat {
         let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width-16, height: CGFloat.greatestFiniteMagnitude))

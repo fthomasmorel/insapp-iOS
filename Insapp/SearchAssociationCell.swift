@@ -13,7 +13,7 @@ class SearchAssociationCell: UITableViewCell, UICollectionViewDataSource, UIColl
 
     @IBOutlet weak var associationCollectionView: UICollectionView!
     
-    var parent: UniversalSearchViewController!
+    var parent: UIViewController!
     var associations: [Association] = []
     var searchText: String!
     var assoSelected: Association?

@@ -24,5 +24,6 @@ extension Association {
     @NSManaged public var bgColor: String?
     @NSManaged public var fgColor: String?
     @NSManaged public var events: Array<String>?
+    @NSManaged public var posts: Array<String>?
 
 }

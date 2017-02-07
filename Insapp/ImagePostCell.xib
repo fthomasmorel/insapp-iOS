@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="kImagePostCell" reuseIdentifier="kImagePostCell" id="nHS-ks-p5A" customClass="ImagePostCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="myd-xz-wkP">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="myd-xz-wkP" firstAttribute="top" secondItem="nHS-ks-p5A" secondAttribute="top" id="5j6-dR-PYG"/>
+                <constraint firstAttribute="bottom" secondItem="myd-xz-wkP" secondAttribute="bottom" id="7yx-bp-7p4"/>
+                <constraint firstAttribute="trailing" secondItem="myd-xz-wkP" secondAttribute="trailing" id="fvC-Rv-laY"/>
+                <constraint firstItem="myd-xz-wkP" firstAttribute="leading" secondItem="nHS-ks-p5A" secondAttribute="leading" id="u7Z-ko-HRs"/>
+            </constraints>
+            <size key="customSize" width="228" height="219"/>
+            <connections>
+                <outlet property="postImageView" destination="myd-xz-wkP" id="utn-58-WTh"/>
+            </connections>
+            <point key="canvasLocation" x="190" y="41"/>
+        </collectionViewCell>
+    </objects>
+</document>

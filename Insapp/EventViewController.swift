@@ -124,7 +124,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventDescriptionCell, for: indexPath) as! EventDescriptionCell
-        cell.contentLabel.text = self.event.desc! + "\n\n\n\n"
+        cell.contentTextView.text = self.event.desc! + "\n\n\n\n"
         return cell
     }
     

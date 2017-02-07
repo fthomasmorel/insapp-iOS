@@ -9,6 +9,7 @@
         <attribute name="fgColor" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="posts" attributeType="Transformable" customClassName="Array&lt;Post&gt;" syncable="YES"/>
         <attribute name="profilePhotoURL" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName=".Comment" syncable="YES">
@@ -82,7 +83,7 @@
         <attribute name="username" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Association" positionX="18" positionY="135" width="119" height="178"/>
+        <element name="Association" positionX="18" positionY="135" width="119" height="195"/>
         <element name="Comment" positionX="-180" positionY="63" width="128" height="118"/>
         <element name="CommentTag" positionX="-171" positionY="63" width="128" height="75"/>
         <element name="Credentials" positionX="25" positionY="-27" width="128" height="90"/>

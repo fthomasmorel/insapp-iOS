@@ -28,6 +28,7 @@ public class Association: NSManagedObject {
         self.email = email
         self.desc = description
         self.events = []
+        self.posts = []
         self.profilePhotoURL = ""
         self.coverPhotoURL = ""
         self.bgColor = ""
@@ -51,9 +52,13 @@ public class Association: NSManagedObject {
         association.bgColor = bgColor
         association.fgColor = fgColor
         
-        guard let events    = json[kAssociationEvents] as? Array<String>else { return association }
-        association.events = events
-    
+        if let events = json[kAssociationEvents] as? Array<String> {
+            association.events = events
+        }
+        if let posts = json[kAssociationPosts] as? Array<String> {
+            association.posts = posts
+        }
+        
         return association
     }
     

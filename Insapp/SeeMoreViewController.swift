@@ -20,13 +20,13 @@ class SeeMoreViewController: UIViewController, UITableViewDataSource, UITableVie
     var associationTable: [String: Association] = [:]
     var searchedText: String!
     var type: Int!
-    var prt: UniversalSearchViewController!
+    var prt: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.resultLabel.text = "\"\(searchedText!)\""
+        self.resultLabel.text = searchedText!
         
         self.tableView.register(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: kSearchUserCell)
         self.tableView.register(UINib(nibName: "SearchEventCell", bundle: nil), forCellReuseIdentifier: kSearchEventCell)
