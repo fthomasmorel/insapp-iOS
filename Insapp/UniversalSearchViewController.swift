@@ -320,6 +320,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SeeMoreViewController") as! SeeMoreViewController
                 vc.events = self.events
+                vc.associationTable = self.associationTable
                 vc.searchedText = self.searchText
                 vc.type = 3
                 vc.prt = self
@@ -329,6 +330,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let event = self.events[indexPath.row]
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+                vc.association = self.associationTable[event.association!]!
                 vc.event = event
                 self.parent?.navigationController?.pushViewController(vc, animated: true)
             }

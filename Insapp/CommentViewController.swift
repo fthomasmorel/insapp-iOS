@@ -105,6 +105,9 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func reload(){
+        self.comments = self.comments?.sorted(by: { (commentA, commentB) -> Bool in
+            return commentA.date!.timeIntervalSince(commentB.date! as Date) < 0
+        })
         self.commentTableView.reloadData()
         if let comment = self.activeComment, let row = self.comments?.index(of: comment){
             let indexPath = IndexPath(row: row+1, section: 0)

@@ -46,6 +46,10 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
         self.fetchUsers()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.reloadView()
+    }
+    
     func fetchUsers(){
         let users = Array(Set(self.event.comments!.map({ (comment) -> String in return comment.user_id! })))
         let group = DispatchGroup()
@@ -60,7 +64,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
             }
         }
         group.notify(queue: DispatchQueue.main) { 
-            self.tableView.reloadData()
+            self.reloadView()
         }
     }
     
@@ -146,7 +150,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
         APIManager.uncomment(event_id: self.event.id!, comment_id: comment.id!, controller: self, completion: { (opt_event) in
             guard let event = opt_event else { return }
             self.event = event
-            self.tableView.reloadData()
+            self.reloadView()
         })
     }
     
@@ -169,6 +173,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
         APIManager.comment(event_id: (content as! Event).id!, comment: comment, controller: self) { (opt_event) in
             guard let event = opt_event else { return }
+            self.event = event
             completion(event, event.desc!, NSDate(), event.comments!)
         }
     }
@@ -176,6 +181,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     func uncomment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){
         APIManager.uncomment(event_id: (content as! Event).id!, comment_id: comment.id!, controller: self, completion: { (opt_event) in
             guard let event = opt_event else { return }
+            self.event = event
             completion(event, event.desc!, NSDate(), event.comments!)
         })
     }
@@ -192,7 +198,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     func indexDidChange(index: Int) {
         self.index = index
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
-        self.tableView.reloadData()
+        self.reloadView()
     }
     
     func changeStatus(status: String){
@@ -200,13 +206,13 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
             APIManager.changeStatusForEvent(event_id: self.event.id!, status: status, controller: self, completion: { (opt_event) in
                 guard let event = opt_event else { return }
                 self.event = event
-                self.tableView.reloadData()
+                self.reloadView()
             })
         }else{
             APIManager.dismissEvent(event_id: self.event.id!, controller: self, completion: { (opt_event) in
                 guard let event = opt_event else { return }
                 self.event = event
-                self.tableView.reloadData()
+                self.reloadView()
             })
         }
     }
@@ -275,6 +281,13 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     func suggestAddCalendar(){
         guard let suggest = UserDefaults.standard.object(forKey: kSuggestCalendar) as? Bool else { self.askForSuggestion() ; return }
         if suggest { self.addToCalendarAction() }
+    }
+    
+    func reloadView(){
+        self.event.comments = self.event.comments?.sorted(by: { (commentA, commentB) -> Bool in
+            return commentA.date!.timeIntervalSince(commentB.date! as Date) > 0
+        })
+        self.tableView.reloadData()
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

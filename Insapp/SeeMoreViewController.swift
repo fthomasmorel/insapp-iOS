@@ -17,6 +17,7 @@ class SeeMoreViewController: UIViewController, UITableViewDataSource, UITableVie
     var events: [Event] = []
     var posts: [Post] = []
     var associations: [Association] = []
+    var associationTable: [String: Association] = [:]
     var searchedText: String!
     var type: Int!
     var prt: UniversalSearchViewController!
@@ -112,6 +113,7 @@ class SeeMoreViewController: UIViewController, UITableViewDataSource, UITableVie
                 let event = self.events[indexPath.row]
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+                vc.association = self.associationTable[event.association!]!
                 vc.event = event
                 self.prt.navigationController?.pushViewController(vc, animated: true)
             default:
