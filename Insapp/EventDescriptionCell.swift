@@ -20,9 +20,9 @@ class EventDescriptionCell: UITableViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: kNormalFont, size: 17)
-        label.text = text + "\n"
+        label.text = text + "\n\n\n"
         label.sizeToFit()
-        return label.frame.height + 16
+        return label.frame.height + 16 + 50
     }
     
 }
