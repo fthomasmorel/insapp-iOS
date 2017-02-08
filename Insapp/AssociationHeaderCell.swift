@@ -22,6 +22,7 @@ class AssociationHeaderCell: UITableViewCell {
     override func layoutSubviews() {
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width/2
         self.profileImageView.layer.masksToBounds = true
+        self.profileImageView.layer.borderWidth = 1
     }
     
     func load(association: Association){
@@ -32,6 +33,7 @@ class AssociationHeaderCell: UITableViewCell {
         
         self.coverImageView.downloadedFrom(link: coverURL)
         self.profileImageView.downloadedFrom(link: profileURL)
+        self.profileImageView.layer.borderColor = fgColor.cgColor
         self.nameLabel.text = "@" + association.name!
         self.nameLabel.textColor = fgColor
         self.backgroundColor = bgColor

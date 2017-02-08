@@ -28,6 +28,7 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.register(UINib(nibName: "AssociationPostsCell", bundle: nil), forCellReuseIdentifier: kAssociationPostsCell)
         self.tableView.register(UINib(nibName: "AssociationEventsCell", bundle: nil), forCellReuseIdentifier: kAssociationEventsCell)
         self.tableView.register(UINib(nibName: "AssociationDescriptionCell", bundle: nil), forCellReuseIdentifier: kAssociationDescriptionCell)
+        self.tableView.register(UINib(nibName: "AssociationContactCell", bundle: nil), forCellReuseIdentifier: kAssociationContactCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,14 +100,15 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 1 }
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 { return 233 }
         if indexPath.row == 0 { return AssociationEventsCell.getHeightForEvents(events: self.events) }
         if indexPath.row == 1 { return self.posts.count == 0 ? 0 : 225 + 30 }
-        return AssociationDescriptionCell.getHeightForAssociation(association, forWidth: self.tableView.frame.width)
+        if indexPath.row == 2 { return AssociationDescriptionCell.getHeightForAssociation(association, forWidth: self.tableView.frame.width) }
+        return 60
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,11 +128,23 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.load(posts: self.posts, forAssociation: self.association)
                 cell.delegate = self
                 return cell
-            }else{
+            }else if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: kAssociationDescriptionCell, for: indexPath) as! AssociationDescriptionCell
                 cell.load(association: self.association)
                 return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: kAssociationContactCell, for: indexPath) as! AssociationContactCell
+                cell.load(association: self.association)
+                return cell
             }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1, indexPath.row == 3 {
+            let email = self.association.email!
+            let url = URL(string: "mailto:\(email)")
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         }
     }
     
@@ -171,12 +185,6 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
         vc.type = 3
         vc.prt = self
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction func openEmailAction(_ sender: AnyObject) {
-        let email = self.association.email!
-        let url = URL(string: "mailto:\(email)")
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {
