@@ -29,6 +29,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.keyboardDismissMode = .interactive
+        self.collectionView.register(UINib(nibName: "AssociationCell", bundle: nil), forCellWithReuseIdentifier: kAssociationCell)
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.backgroundColor = UIColor.white.withAlphaComponent(0)
@@ -56,6 +57,8 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         self.view.addSubview(self.backgroundSearchView)
         self.searchView.isHidden = true
         self.view.bringSubview(toFront: self.searchView)
+        
+        self.refreshUI(reload: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,9 +75,7 @@ class AssociationCollectionViewController: UIViewController, UICollectionViewDat
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
-        self.refreshUI(reload: true)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.white
-        
         self.backgroundSearchView.frame = self.collectionView.frame
     }
     

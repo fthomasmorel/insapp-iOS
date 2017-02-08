@@ -109,7 +109,9 @@ class EventHeaderCell: UITableViewCell {
         self.titleLabel.textColor = fgColor
         self.associationLabel.text = "@\(association.name!)"
         self.associationLabel.textColor = fgColor
-        self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
+        
+        let date = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: true)
+        self.dateLabel.text = date + (date.contains("\n") ? "" : "\n")
         self.dateLabel.textColor = fgColor
         self.attendeesLabel.text = "\(event.attendees!.count) participants"
         self.attendeesLabel.textColor = fgColor

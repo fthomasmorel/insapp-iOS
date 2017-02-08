@@ -19,10 +19,6 @@ class AttendesViewController: UIViewController, ListUserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.listUserViewController = self.childViewControllers.last as? ListUserViewController
-//        var users:[[String]] = []
-//        if going.count > 0 { users.append(going) }
-//        if maybe.count > 0 { users.append(maybe) }
-//        if notgoing.count > 0 { users.append(notgoing) }
         self.listUserViewController?.userIds = [going, maybe, notgoing]
         self.listUserViewController?.fetchUsers()
         self.listUserViewController?.delegate = self

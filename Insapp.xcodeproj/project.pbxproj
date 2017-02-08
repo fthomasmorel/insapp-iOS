@@ -50,6 +50,7 @@
 		E12E45851E4A5A13004D0C44 /* AssociationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */; };
 		E12E45871E4AFDFF004D0C44 /* AssociationContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */; };
 		E12E45891E4AFE89004D0C44 /* AssociationContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */; };
+		E12E458B1E4B0205004D0C44 /* AssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E458A1E4B0205004D0C44 /* AssociationCell.xib */; };
 		E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C7051D8DA02D00CE3D5B /* EventListCell.xib */; };
 		E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7071D8DA11100CE3D5B /* EventListCell.swift */; };
 		E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */; };
@@ -159,6 +160,7 @@
 		E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationDescriptionCell.xib; sourceTree = "<group>"; };
 		E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationContactCell.xib; sourceTree = "<group>"; };
 		E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationContactCell.swift; sourceTree = "<group>"; };
+		E12E458A1E4B0205004D0C44 /* AssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationCell.xib; sourceTree = "<group>"; };
 		E181C7051D8DA02D00CE3D5B /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				E119D08D1E4A408000C10A64 /* AssociationEventsCell.swift */,
 				E12E45821E4A5A0B004D0C44 /* AssociationDescriptionCell.swift */,
 				E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */,
+				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 			);
 			name = Association;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				E119D08B1E4A3F1100C10A64 /* AssociationEventsCell.xib */,
 				E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */,
 				E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */,
+				E12E458A1E4B0205004D0C44 /* AssociationCell.xib */,
 			);
 			name = Association;
 			sourceTree = "<group>";
@@ -439,7 +443,6 @@
 				E1C3F9F91D8A88D0006A66CF /* PostCell.swift */,
 				E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */,
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
-				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 				E193DD891D9E745400478B52 /* UserCell.swift */,
 				E11EE8391DA246A30029C051 /* NotificationCell.swift */,
 			);
@@ -600,6 +603,7 @@
 				E1DC7F141D86E2C900284222 /* Assets.xcassets in Resources */,
 				E12E45851E4A5A13004D0C44 /* AssociationDescriptionCell.xib in Resources */,
 				7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */,
+				E12E458B1E4B0205004D0C44 /* AssociationCell.xib in Resources */,
 				E119D0771E48BEBF00C10A64 /* EventDescriptionCell.xib in Resources */,
 				7D1591861DE49E44001F949E /* SearchEventCell.xib in Resources */,
 				E119D0801E49F3CB00C10A64 /* AssociationHeaderCell.xib in Resources */,

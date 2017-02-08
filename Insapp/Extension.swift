@@ -211,16 +211,17 @@ extension NSDate {
     
     func isToday() -> Bool {
         let calendar = NSCalendar.current
-        let day = calendar.component(.day, from: self as Date)
-        let month = calendar.component(.month, from: self as Date)
-        let year = calendar.component(.year, from: self as Date)
+//        let day = calendar.component(.day, from: self as Date)
+//        let month = calendar.component(.month, from: self as Date)
+//        let year = calendar.component(.year, from: self as Date)
+//        
+//        let today = NSDate()
+//        let todayDay = calendar.component(.day, from: today as Date)
+//        let todayMonth = calendar.component(.month, from: today as Date)
+//        let todayYear = calendar.component(.year, from: today as Date)
         
-        let today = NSDate()
-        let todayDay = calendar.component(.day, from: today as Date)
-        let todayMonth = calendar.component(.month, from: today as Date)
-        let todayYear = calendar.component(.year, from: today as Date)
-        
-        return todayDay == day && todayMonth == month && todayYear == year
+        return self.timeIntervalSinceNow <= 0
+        //return todayDay >= day && todayMonth >= month && todayYear >= year ||
     }
     
     func isThisWeek() -> Bool {

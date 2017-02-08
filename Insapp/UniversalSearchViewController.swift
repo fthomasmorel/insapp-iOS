@@ -304,7 +304,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SeeMoreViewController") as! SeeMoreViewController
                 vc.posts = self.posts
-                vc.searchedText = self.searchText
+                vc.searchedText = "\"\(self.searchText!)\""
                 vc.type = 2
                 vc.prt = self
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -321,7 +321,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let vc = storyboard.instantiateViewController(withIdentifier: "SeeMoreViewController") as! SeeMoreViewController
                 vc.events = self.events
                 vc.associationTable = self.associationTable
-                vc.searchedText = self.searchText
+                vc.searchedText = "\"\(self.searchText!)\""
                 vc.type = 3
                 vc.prt = self
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -342,7 +342,7 @@ class UniversalSearchViewController: UIViewController, UITableViewDataSource, UI
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SeeMoreViewController") as! SeeMoreViewController
                 vc.users = self.users
-                vc.searchedText = self.searchText
+                vc.searchedText = "\"\(self.searchText!)\""
                 vc.type = 4
                 vc.prt = self
                 self.navigationController?.pushViewController(vc, animated: true)

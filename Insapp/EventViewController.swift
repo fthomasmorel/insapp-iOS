@@ -90,7 +90,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 { return 410 }
+        if indexPath.section == 0 { return 430 }
         let descriptionHeight = EventDescriptionCell.getHeight(width: self.view.frame.width, forText: self.event.desc!)
         if self.index == 0 { return descriptionHeight }
         if indexPath.row == 0 { return 71 }

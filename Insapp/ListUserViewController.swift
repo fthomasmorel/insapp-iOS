@@ -62,12 +62,17 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
         if users.count == 1 { return .none }
         switch section {
         case 0:
-            return "\"J'y vais\""
+            return "J'y vais"
         case 1:
-            return "\"Peut-être\""
+            return "Peut-être"
         default:
-            return "\"J'y vais pas\""
+            return "J'y vais pas"
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if users.count == 1 { return 0 }
+        return self.users[section].count > 0 ? 20 : 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
