@@ -37,10 +37,12 @@
                         <action selector="commentAction:" destination="Q5Y-tD-lzG" eventType="touchUpInside" id="pa8-jm-U1b"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukl-6p-23k">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukl-6p-23k">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="xFY-Rr-13Z"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6wm-v0-ggc">
                     <rect key="frame" x="0.0" y="68" width="186" height="2"/>
@@ -49,6 +51,11 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ukl-6p-23k" firstAttribute="leading" secondItem="Q5Y-tD-lzG" secondAttribute="leading" id="3A1-pI-B7I"/>
+                <constraint firstItem="ukl-6p-23k" firstAttribute="top" secondItem="Q5Y-tD-lzG" secondAttribute="top" id="7bi-dO-w9T"/>
+                <constraint firstAttribute="trailing" secondItem="ukl-6p-23k" secondAttribute="trailing" id="cVM-Ua-Afv"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="aboutButton" destination="5Iv-YZ-Thb" id="NPa-GE-EyL"/>

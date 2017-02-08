@@ -210,7 +210,7 @@ extension NSDate {
     }
     
     func isToday() -> Bool {
-        let calendar = NSCalendar.current
+//        let calendar = NSCalendar.current
 //        let day = calendar.component(.day, from: self as Date)
 //        let month = calendar.component(.month, from: self as Date)
 //        let year = calendar.component(.year, from: self as Date)

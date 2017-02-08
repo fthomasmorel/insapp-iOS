@@ -21,6 +21,7 @@ class EventTabView: UIView {
     @IBOutlet weak var commentButton: UIButton!
     
     var delegate: EventTabDelegate?
+    var index = 0
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -47,9 +48,12 @@ class EventTabView: UIView {
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowRadius = 1
+        
+        updateIndex(index: self.index)
     }
     
     func updateIndex(index: Int){
+        self.index = index
         self.underlineView.frame.origin.x = CGFloat(index)*self.frame.width/2
     }
     

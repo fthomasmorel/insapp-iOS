@@ -79,7 +79,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return .none }
-        self.eventTabView.updateIndex(index: self.index)
         return self.eventTabView
     }
     
@@ -197,7 +196,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     
     func indexDidChange(index: Int) {
         self.index = index
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
         self.reloadView()
     }
     
@@ -288,6 +286,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
             return commentA.date!.timeIntervalSince(commentB.date! as Date) > 0
         })
         self.tableView.reloadData()
+        self.eventTabView.updateIndex(index: self.index)
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

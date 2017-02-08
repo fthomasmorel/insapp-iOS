@@ -40,7 +40,8 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
                 self.fetchUserGroup.enter()
                 DispatchQueue.global().async {
                     APIManager.fetch(user_id: userId, controller: self, completion: { (user_opt) in
-                        self.users[i].append(user_opt!)
+                        guard let user = user_opt else { self.fetchUserGroup.leave() ; return }
+                        self.users[i].append(user)
                         self.fetchUserGroup.leave()
                     })
                 }
