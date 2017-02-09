@@ -11,6 +11,7 @@
 		7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D051D8C1DCB909300DED954 /* APIManager+Search.swift */; };
 		7D0C40D01DEAECE3005FE515 /* SearchUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0C40CF1DEAECE3005FE515 /* SearchUserCell.xib */; };
 		7D0C40D21DEAEDDC005FE515 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C40D11DEAEDDC005FE515 /* SearchUserCell.swift */; };
+		7D0D96081E3F89910076D35B /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D96071E3F89910076D35B /* BarCodeViewController.swift */; };
 		7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0F88421DEDCC3E00E740F2 /* AssociationSearchCell.xib */; };
 		7D0F88451DEDCCEF00E740F2 /* AssociationSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0F88441DEDCCEF00E740F2 /* AssociationSearchCell.swift */; };
 		7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D128FE71DEB894A00BD3661 /* SearchAssociationCell.xib */; };
@@ -125,6 +126,7 @@
 		7D051D8C1DCB909300DED954 /* APIManager+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIManager+Search.swift"; sourceTree = "<group>"; };
 		7D0C40CF1DEAECE3005FE515 /* SearchUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchUserCell.xib; sourceTree = "<group>"; };
 		7D0C40D11DEAEDDC005FE515 /* SearchUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
+		7D0D96071E3F89910076D35B /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
 		7D0F88421DEDCC3E00E740F2 /* AssociationSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationSearchCell.xib; sourceTree = "<group>"; };
 		7D0F88441DEDCCEF00E740F2 /* AssociationSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationSearchCell.swift; sourceTree = "<group>"; };
 		7D128FE71DEB894A00BD3661 /* SearchAssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAssociationCell.xib; sourceTree = "<group>"; };
@@ -418,6 +420,17 @@
 				E119D0731E4880F600C10A64 /* Event */,
 				7D09F78E1E0C5DEC00B93A6E /* Search */,
 				E1C3F9D11D87FC07006A66CF /* SplashScreenViewController.swift */,
+<<<<<<< Updated upstream
+=======
+				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
+				7D0D96071E3F89910076D35B /* BarCodeViewController.swift */,
+				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
+				E1C3F9D81D8837E7006A66CF /* EditUserViewController.swift */,
+				E1C3F9DA1D8855F8006A66CF /* AssociationCollectionViewController.swift */,
+				E1C3F9DC1D8874EA006A66CF /* AssociationViewController.swift */,
+				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
+				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
+>>>>>>> Stashed changes
 				E1C3F9EF1D897142006A66CF /* NewsViewController.swift */,
 				E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */,
 				E192C1E81D9119C900355512 /* TutorialPageViewController.swift */,
@@ -589,7 +602,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9JPSY4Q8SW;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -782,6 +795,7 @@
 				E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */,
 				E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */,
 				E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */,
+				7D0D96081E3F89910076D35B /* BarCodeViewController.swift in Sources */,
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
 				7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */,
@@ -938,7 +952,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "143800cc-9b95-4caf-b020-f6a39ff0b94e";
+				PROVISIONING_PROFILE_SPECIFIER = InsappDev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -956,7 +971,11 @@
 				CODE_SIGN_ENTITLEMENTS = Insapp/Insapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+<<<<<<< Updated upstream
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+=======
+				DEVELOPMENT_TEAM = "";
+>>>>>>> Stashed changes
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

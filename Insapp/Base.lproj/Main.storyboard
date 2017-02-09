@@ -65,9 +65,56 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+<<<<<<< Updated upstream
+=======
+                                    <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOI-ZS-p9Y">
+                                        <rect key="frame" x="16" y="205" width="343" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="yOE-Mw-SgV"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="Jyd-wY-poP" kind="embed" id="Lvi-fT-7g9"/>
+                                        </connections>
+                                    </containerView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8U2-A9-YD9">
+                                        <rect key="frame" x="16" y="215" width="343" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="pwJ-YB-yNZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                    </textView>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ajouterCode" translatesAutoresizingMaskIntoConstraints="NO" id="Q8S-u1-AGg" userLabel="amicalisteImage">
+                                        <rect key="frame" x="16" y="378" width="343" height="75"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="343" id="HyX-Jn-yuw"/>
+                                            <constraint firstAttribute="height" constant="75" id="ik9-cV-Ref"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ma carte amicaliste" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oi2-5N-CZC" userLabel="amicalisteLabel">
+                                        <rect key="frame" x="16" y="352" width="193" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="HYt-06-OHG"/>
+                                            <constraint firstAttribute="width" constant="193" id="iVU-bE-4L6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-A2-BJA" userLabel="codeLabel">
+                                        <rect key="frame" x="166" y="452" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+>>>>>>> Stashed changes
                                 </subviews>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.36470588240000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+<<<<<<< Updated upstream
                                     <constraint firstItem="6on-rs-YYP" firstAttribute="top" secondItem="fIX-Od-fm9" secondAttribute="bottom" constant="-2" id="0bZ-3W-R4A"/>
                                     <constraint firstItem="fIX-Od-fm9" firstAttribute="top" secondItem="1z9-P4-hvA" secondAttribute="top" constant="8" id="2uf-JF-f0q"/>
                                     <constraint firstItem="PsE-pp-qb5" firstAttribute="leading" secondItem="22a-i4-SXk" secondAttribute="trailing" constant="8" id="D9n-M9-NN0"/>
@@ -80,6 +127,29 @@
                                     <constraint firstItem="6on-rs-YYP" firstAttribute="leading" secondItem="22a-i4-SXk" secondAttribute="trailing" constant="8" id="rh0-Cg-CZP"/>
                                     <constraint firstItem="PsE-pp-qb5" firstAttribute="top" secondItem="6on-rs-YYP" secondAttribute="bottom" constant="-4" id="tFb-pg-f2A"/>
                                     <constraint firstItem="fIX-Od-fm9" firstAttribute="leading" secondItem="22a-i4-SXk" secondAttribute="trailing" constant="8" id="xDY-bl-CJi"/>
+=======
+                                    <constraint firstItem="Q8S-u1-AGg" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="5kS-It-EKF"/>
+                                    <constraint firstItem="keQ-7h-IhW" firstAttribute="top" secondItem="FJh-q7-Ign" secondAttribute="bottom" id="7ob-HW-vNH"/>
+                                    <constraint firstItem="Oi2-5N-CZC" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="FuB-mi-Wb4"/>
+                                    <constraint firstAttribute="trailing" secondItem="FJh-q7-Ign" secondAttribute="trailing" constant="16" id="Ne7-sJ-iSk"/>
+                                    <constraint firstItem="FJh-q7-Ign" firstAttribute="top" secondItem="Hxf-CW-jwb" secondAttribute="top" constant="80" id="O2T-Z7-Tij"/>
+                                    <constraint firstAttribute="trailing" secondItem="xCp-ng-T18" secondAttribute="trailing" constant="16" id="RLC-nT-Ggs"/>
+                                    <constraint firstAttribute="trailing" secondItem="keQ-7h-IhW" secondAttribute="trailing" constant="16" id="SeS-Ul-7Yn"/>
+                                    <constraint firstItem="gOI-ZS-p9Y" firstAttribute="top" secondItem="7Hb-d7-Zqm" secondAttribute="bottom" constant="10" id="Z47-hI-VDC"/>
+                                    <constraint firstItem="keQ-7h-IhW" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="Z6D-Re-srq"/>
+                                    <constraint firstItem="7Hb-d7-Zqm" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="bxy-se-XGJ"/>
+                                    <constraint firstItem="8U2-A9-YD9" firstAttribute="top" secondItem="gOI-ZS-p9Y" secondAttribute="bottom" constant="10" id="d5I-eA-sSO"/>
+                                    <constraint firstItem="Oi2-5N-CZC" firstAttribute="top" secondItem="8U2-A9-YD9" secondAttribute="bottom" constant="17" id="dkj-bC-FOB"/>
+                                    <constraint firstItem="Oac-A2-BJA" firstAttribute="centerX" secondItem="Hxf-CW-jwb" secondAttribute="centerX" id="gpA-V5-Kmf"/>
+                                    <constraint firstItem="7Hb-d7-Zqm" firstAttribute="top" secondItem="xCp-ng-T18" secondAttribute="bottom" id="hI1-3c-cCc"/>
+                                    <constraint firstItem="Oac-A2-BJA" firstAttribute="top" secondItem="Q8S-u1-AGg" secondAttribute="bottom" constant="-1" id="hYu-HV-Qsv"/>
+                                    <constraint firstItem="xCp-ng-T18" firstAttribute="top" secondItem="keQ-7h-IhW" secondAttribute="bottom" id="ih8-gi-Gbx"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Hb-d7-Zqm" secondAttribute="trailing" constant="16" id="jqF-2b-BH0"/>
+                                    <constraint firstItem="FJh-q7-Ign" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="kOA-aC-7Wy"/>
+                                    <constraint firstItem="xCp-ng-T18" firstAttribute="leading" secondItem="Hxf-CW-jwb" secondAttribute="leading" constant="16" id="oDg-ZV-WBA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q8S-u1-AGg" secondAttribute="bottom" constant="21" id="vZx-7Z-oj1"/>
+                                    <constraint firstItem="Q8S-u1-AGg" firstAttribute="top" secondItem="Oi2-5N-CZC" secondAttribute="bottom" constant="5" id="yla-R0-fcV"/>
+>>>>>>> Stashed changes
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RYQ-ra-RMn">
@@ -113,7 +183,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANh-Wo-QMq">
-                                        <rect key="frame" x="20" y="32.5" width="35" height="35"/>
+                                        <rect key="frame" x="20" y="33" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Hzv-Hk-Sx6"/>
                                             <constraint firstAttribute="width" constant="35" id="KXq-Sq-PM7"/>
@@ -159,6 +229,16 @@
                                     <constraint firstItem="Pns-gS-QUF" firstAttribute="leading" secondItem="RYQ-ra-RMn" secondAttribute="leading" constant="20" id="wYe-7h-mWj"/>
                                 </constraints>
                             </view>
+<<<<<<< Updated upstream
+=======
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dp4-3r-1eP">
+                                <rect key="frame" x="128" y="72" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="KDz-8T-uj2"/>
+                                    <constraint firstAttribute="height" constant="120" id="fFy-nt-brV"/>
+                                </constraints>
+                            </imageView>
+>>>>>>> Stashed changes
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -178,8 +258,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="0rg-hL-BVo"/>
                     <connections>
+<<<<<<< Updated upstream
                         <outlet property="avatarImageView" destination="22a-i4-SXk" id="MNr-fv-Uh3"/>
+=======
+                        <outlet property="amicalisteImage" destination="Q8S-u1-AGg" id="upn-CK-RGt"/>
+                        <outlet property="amicalisteLabel" destination="Oi2-5N-CZC" id="Joe-9r-G2o"/>
+>>>>>>> Stashed changes
                         <outlet property="backButton" destination="Pns-gS-QUF" id="RSh-Ug-Pfu"/>
+                        <outlet property="codeLabel" destination="Oac-A2-BJA" id="UR2-ma-NnA"/>
                         <outlet property="creditButton" destination="ANh-Wo-QMq" id="cCB-ML-fo6"/>
                         <outlet property="editButton" destination="Xwx-uE-0bb" id="Vff-1p-aAA"/>
                         <outlet property="emailLabel" destination="6on-rs-YYP" id="Muq-Ih-Ggd"/>
@@ -285,6 +371,7 @@
             </objects>
             <point key="canvasLocation" x="3081" y="1916"/>
         </scene>
+<<<<<<< Updated upstream
         <!--User Event List View Controller-->
         <scene sceneID="u2Y-7s-n8g">
             <objects>
@@ -357,6 +444,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uN0-5q-yPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4068" y="1916.4917541229386"/>
+=======
+        <!--Bar Code View Controller-->
+        <scene sceneID="czn-5D-yde">
+            <objects>
+                <viewController storyboardIdentifier="BarCodeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9P2-P1-ehh" customClass="BarCodeViewController" customModule="Insapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gLG-az-6oe"/>
+                        <viewControllerLayoutGuide type="bottom" id="IdX-Zl-9kg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZUv-Lb-60O">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFE-wS-jXh" userLabel="cameraViewCanvas">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="codebar@2x 2" translatesAutoresizingMaskIntoConstraints="NO" id="SJb-lG-E4W" userLabel="imageView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZN-n6-kAV" userLabel="dismissButton">
+                                <rect key="frame" x="24" y="35" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="PZI-j5-LTI"/>
+                                    <constraint firstAttribute="height" constant="35" id="mnl-yn-pBh"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="9P2-P1-ehh" eventType="touchUpInside" id="ZXx-vr-cQV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LFE-wS-jXh" firstAttribute="bottom" secondItem="IdX-Zl-9kg" secondAttribute="top" id="7rJ-MO-eqV"/>
+                            <constraint firstItem="0ZN-n6-kAV" firstAttribute="top" secondItem="gLG-az-6oe" secondAttribute="bottom" constant="15" id="GWB-lX-c8G"/>
+                            <constraint firstItem="0ZN-n6-kAV" firstAttribute="leading" secondItem="ZUv-Lb-60O" secondAttribute="leadingMargin" constant="8" id="Tsw-r3-y1r"/>
+                            <constraint firstAttribute="trailing" secondItem="LFE-wS-jXh" secondAttribute="trailing" id="a5F-aZ-8Fx"/>
+                            <constraint firstItem="LFE-wS-jXh" firstAttribute="top" secondItem="ZUv-Lb-60O" secondAttribute="top" id="lZH-9o-7Pn"/>
+                            <constraint firstItem="LFE-wS-jXh" firstAttribute="leading" secondItem="ZUv-Lb-60O" secondAttribute="leading" id="yHg-KF-d85"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraViewCanvas" destination="LFE-wS-jXh" id="dXC-VM-bnm"/>
+                        <outlet property="dismissButton" destination="0ZN-n6-kAV" id="vya-Nd-j8D"/>
+                        <outlet property="imageView" destination="SJb-lG-E4W" id="5SQ-jC-Rum"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y2k-Wn-wrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4392.8000000000002" y="1760.8695652173915"/>
+>>>>>>> Stashed changes
         </scene>
         <!--Credit View Controller-->
         <scene sceneID="3Rq-O9-RTO">
@@ -2563,12 +2703,14 @@ préférées grâce à la page News</string>
         </scene>
     </scenes>
     <resources>
+        <image name="ajouterCode" width="844" height="282"/>
         <image name="arrow_left_white" width="68" height="52"/>
         <image name="assocation_tutorial" width="231" height="478"/>
         <image name="associations" width="30" height="27"/>
         <image name="avatars" width="356" height="401"/>
         <image name="calendar" width="27" height="27"/>
         <image name="check" width="73" height="54"/>
+        <image name="codebar@2x 2" width="768" height="1296"/>
         <image name="cross" width="51" height="51"/>
         <image name="event_tutorial" width="231" height="478"/>
         <image name="gear" width="68" height="68"/>
@@ -2585,7 +2727,12 @@ préférées grâce à la page News</string>
         <image name="user" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Lvi-fT-7g9"/>
         <segue reference="Oqz-cD-eQp"/>
+<<<<<<< Updated upstream
         <segue reference="Iad-5e-dbL"/>
+=======
+        <segue reference="sY5-PM-Elg"/>
+>>>>>>> Stashed changes
     </inferredMetricsTieBreakers>
 </document>

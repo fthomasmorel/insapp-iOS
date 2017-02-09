@@ -36,6 +36,8 @@
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Used to add events to Calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Utilisation pour le scan</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

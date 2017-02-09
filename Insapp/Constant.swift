@@ -64,10 +64,15 @@ let kAssociationSearchCell = "AssociationSearchCell"
 let kSeeMoreCell = "SeeMoreCell"
 
 //API
+<<<<<<< Updated upstream
 let kAPIHostname = "https://dev.insapp.fr/api/v1"
 let kCDNHostname = "https://dev.insapp.fr/cdn/"
 //let kAPIHostname = "http://localhost:9010/api/v1"
 //let kCDNHostname = "http://localhost:9010/cdn/"
+=======
+let kAPIHostname = "https://insapp.fr/api/v1"
+let kCDNHostname = "https://insapp.fr/cdn/"
+>>>>>>> Stashed changes
 let kCASHostname = "https://cas.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"

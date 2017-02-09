@@ -26,14 +26,26 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var promotionLabel: UILabel!
     
+<<<<<<< Updated upstream
     var associations: [String : Association] = [:]
     var events: [Event] = []
     var user:User!
     
+=======
+    
+    @IBOutlet weak var amicalisteImage: UIImageView!
+    @IBOutlet weak var amicalisteLabel: UILabel!
+    @IBOutlet weak var codeLabel: UILabel!
+    
+    var eventListViewController: EventListViewController!
+>>>>>>> Stashed changes
     var isEditable:Bool = true
     var canReturn:Bool = false
     var user_id:String!
 
+    
+    var code = ""
+    let prefs = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +65,26 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         if self.user_id == nil {
             self.user_id = Credentials.fetch()!.userId
         }
+        let recognizer = UITapGestureRecognizer()
+        
+        amicalisteImage.isUserInteractionEnabled = true
+        
+        recognizer.addTarget(self, action: #selector(UserViewController.imageTapped))
+        
+        amicalisteImage.addGestureRecognizer(recognizer)
+        
+        if let prevCode = prefs.string(forKey: "code"){
+            self.code = prevCode
+        } else{
+            prefs.setValue("", forKey: "code")
+        }
+        
+        if(self.code == ""){
+            self.codeLabel.text = "Aucun code défini"
+            self.amicalisteImage.image = #imageLiteral(resourceName: "ajouterCode")
+        } else {
+            self.loadCode(code: self.code)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +96,35 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.optionButton.isHidden = self.isEditable
         self.backButton.isHidden = !self.canReturn
         self.creditButton.isHidden = self.canReturn
+<<<<<<< Updated upstream
+=======
+        self.amicalisteImage.isHidden = !self.isEditable
+        self.amicalisteLabel.isHidden = !self.isEditable
+        self.codeLabel.isHidden = !self.isEditable
+        
+        DispatchQueue.main.async {
+            self.hideNavBar()
+            
+            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2
+            self.profilePictureImageView.layer.masksToBounds = true
+            self.profilePictureImageView.backgroundColor = kWhiteColor
+            self.profilePictureImageView.layer.borderColor = kDarkGreyColor.cgColor
+            self.profilePictureImageView.layer.borderWidth = 1
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(UserViewController.editAction(_:)))
+            self.profilePictureImageView.isUserInteractionEnabled = true
+            self.profilePictureImageView.addGestureRecognizer(tap)
+        }
+        
+        if self.user == nil {
+            usernameLabel.backgroundColor = kLightGreyColor
+            nameLabel.backgroundColor = kLightGreyColor
+            promotionLabel.backgroundColor = kLightGreyColor
+            emailLabel.backgroundColor = kLightGreyColor
+            descriptionTextView.backgroundColor = kLightGreyColor
+        }
+        
+>>>>>>> Stashed changes
         self.fetchUser(user_id: user_id)
     }
     
@@ -214,5 +275,90 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func dismissAction(_ sender: AnyObject) {
         self.navigationController!.popViewController(animated: true)
+    }
+    
+    func imageTapped(){
+        let alertController = UIAlertController(title: "Entrez votre code", message: "Choisir le mode de saisie", preferredStyle: .alert)
+        
+        let typeAction = UIAlertAction(title: "Taper", style: .default, handler: {
+            alert -> Void in
+            let alertController = UIAlertController(title: "Entrez votre code", message: "Veuillez rentrer votre code", preferredStyle: .alert)
+            
+            let saveAction = UIAlertAction(title: "Valider", style: .default, handler: {
+                alert -> Void in
+                
+                let text = alertController.textFields![0] as UITextField
+                if let code = text.text {
+                    self.loadCode(code: code)
+                }
+                return
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+                return
+            })
+            
+            alertController.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
+                if(self.code == ""){
+                    textField.placeholder = "Entrez votre code"
+                } else {
+                    textField.text = self.code
+                }
+            })
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            return
+        })
+        
+        let scanAction = UIAlertAction(title: "Scanner", style: .default, handler: {
+            alert -> Void in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "BarCodeViewController") as! BarCodeViewController
+            vc.parentView = self
+            self.present(vc, animated: true, completion: nil)
+            return
+        })
+        
+        let cancelAction = UIAlertAction(title: "Annuler", style: .default, handler: {
+            (action : UIAlertAction!) -> Void in
+            return
+        })
+        
+        alertController.addAction(typeAction)
+        alertController.addAction(scanAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func loadCode(code: String) {
+        self.code = code
+        prefs.setValue(code, forKey: "code")
+        if(code == ""){
+            self.codeLabel.text = "Aucun code défini"
+            self.amicalisteImage.image = #imageLiteral(resourceName: "ajouterCode")
+        } else {
+            self.amicalisteImage.image = generateBarcode(from: self.code)
+            self.codeLabel.text = self.code
+        }
+    }
+    
+    func generateBarcode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+        
+        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            
+            if let output = filter.outputImage?.applying(transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+        
+        return nil
     }
 }
