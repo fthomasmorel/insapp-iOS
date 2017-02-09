@@ -100,6 +100,12 @@ public class Event: NSManagedObject {
         })
     }
     
+    static func filterPast(events: [Event]) -> [Event] {
+        return events.filter({ (event) -> Bool in
+            return event.dateEnd!.timeIntervalSinceNow < 0
+        })
+    }
+    
     static func sortAndFilter(events: [Event]) -> [Event] {
         return sort(events: filter(events: events))
     }

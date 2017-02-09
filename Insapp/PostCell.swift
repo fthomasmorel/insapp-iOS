@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import FaveButton
 
 
 protocol PostCellDelegate {
@@ -17,14 +17,14 @@ protocol PostCellDelegate {
     func associationAction(association: Association)
 }
 
-class PostCell: UITableViewCell {
+class PostCell: UITableViewCell, FaveButtonDelegate {
     
     @IBOutlet weak var associationImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postImageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: FaveButton!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
@@ -42,6 +42,7 @@ class PostCell: UITableViewCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         DispatchQueue.main.async {
+            self.likeButton.delegate = self
             self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
             self.associationImageView.layer.masksToBounds = true
             self.computeGradientView()
@@ -50,7 +51,7 @@ class PostCell: UITableViewCell {
     
     func loadPost(_ post: Post, forAssociation association: Association){
         self.post = post
-
+        self.likeButton.isSelected = post.likes!.contains(User.fetch()!.id!)
         self.association = association
         self.associationLabel.text = "@\(association.name!.lowercased())"
         DispatchQueue.main.async {
@@ -90,8 +91,8 @@ class PostCell: UITableViewCell {
         self.descriptionLabel.text = post.desc! + "\n\n\n\n"
         self.timestampLabel.text = post.date!.timestamp()
         
-        let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
-        self.likeButton.setImage(like_image, for: .normal)
+        //let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
+        //self.likeButton.setImage(like_image, for: .normal)
         
         let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
         self.postImageView.isUserInteractionEnabled = true
@@ -126,12 +127,30 @@ class PostCell: UITableViewCell {
         self.bringSubview(toFront: self.gradientView)
     }
     
+    func faveButton(_ faveButton: FaveButton, didSelected selected: Bool){
+        delegate?.likeAction(post: self.post, forCell: self, liked: post.likes!.contains(User.fetch()!.id!))
+    }
+    
+    func faveButtonDotColors(_ faveButton: FaveButton) -> [DotColors]?{
+        if( faveButton === self.likeButton ){
+            return [
+                DotColors(first: color(0x7DC2F4), second: color(0xE2264D)),
+                DotColors(first: color(0xF8CC61), second: color(0x9BDFBA)),
+                DotColors(first: color(0xAF90F4), second: color(0x90D1F9)),
+                DotColors(first: color(0xE9A966), second: color(0xF8C852)),
+                DotColors(first: color(0xF68FA7), second: color(0xF6A2B8))
+            ]
+        }
+        return nil
+    }
+    
     @IBAction func commentAction(_ sender: AnyObject) {
         let keyboard = (sender as? UIView == self.commentButton)
         delegate?.commentAction(post: self.post, forCell: self, showKeyboard: keyboard)
     }
     
     @IBAction func likeAction(_ sender: AnyObject) {
+        self.likeButton.isSelected = !self.likeButton.isSelected
         delegate?.likeAction(post: self.post, forCell: self, liked: post.likes!.contains(User.fetch()!.id!))
     }
     
