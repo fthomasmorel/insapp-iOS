@@ -23,6 +23,8 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     var association: Association!
     var events:[Event] = []
     var posts:[Post] = []
+    var hasLoaded = false
+    let downloadGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,7 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.register(UINib(nibName: "AssociationEventsCell", bundle: nil), forCellReuseIdentifier: kAssociationEventsCell)
         self.tableView.register(UINib(nibName: "AssociationDescriptionCell", bundle: nil), forCellReuseIdentifier: kAssociationDescriptionCell)
         self.tableView.register(UINib(nibName: "AssociationContactCell", bundle: nil), forCellReuseIdentifier: kAssociationContactCell)
+        self.tableView.register(UINib(nibName: "LoadingCell", bundle: nil), forCellReuseIdentifier: kLoadingCell)
         
         self.coverImageView.downloadedFrom(link: kCDNHostname + self.association.coverPhotoURL!)
         self.profileImageView.downloadedFrom(link: kCDNHostname + self.association.profilePhotoURL!)
@@ -62,45 +65,40 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(_ animated: Bool) {
         self.fetchPosts()
         self.fetchEvents()
-    }
-    
-    func fetchPosts(){
-        let group = DispatchGroup()
-        self.posts = []
-        for postId in self.association.posts! {
-            group.enter()
-            APIManager.fetchPost(post_id: postId, controller: self, completion: { (opt_post) in
-                guard let post = opt_post else { return }
-                self.posts.append(post)
-                group.leave()
+        self.downloadGroup.notify(queue: DispatchQueue.main) {
+            self.events = self.events.sorted(by: { (e1, e2) -> Bool in
+                e1.dateStart!.timeIntervalSince(e2.dateStart! as Date) > 0
             })
-        }
-        
-        group.notify(queue: DispatchQueue.main) {
             self.posts = self.posts.sorted(by: { (p1, p2) -> Bool in
                 p1.date!.timeIntervalSince(p2.date! as Date) > 0
             })
+            self.hasLoaded = true
             self.tableView.reloadData()
+        }
+    }
+    
+    func fetchPosts(){
+        
+        self.posts = []
+        for postId in self.association.posts! {
+            self.downloadGroup.enter()
+            APIManager.fetchPost(post_id: postId, controller: self, completion: { (opt_post) in
+                guard let post = opt_post else { return }
+                self.posts.append(post)
+                self.downloadGroup.leave()
+            })
         }
     }
     
     func fetchEvents(){
-        let group = DispatchGroup()
         self.events = []
         for eventId in self.association.events! {
-            group.enter()
+            self.downloadGroup.enter()
             APIManager.fetchEvent(event_id: eventId, controller: self, completion: { (opt_event) in
                 guard let event = opt_event else { return }
                 self.events.append(event)
-                group.leave()
+                self.downloadGroup.leave()
             })
-        }
-        
-        group.notify(queue: DispatchQueue.main) {
-            self.events = self.events.sorted(by: { (e1, e2) -> Bool in
-                e1.dateStart!.timeIntervalSince(e2.dateStart! as Date) > 0
-            })
-            self.tableView.reloadData()
         }
     }
     
@@ -122,14 +120,15 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 1 }
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 { return 233 }
-        if indexPath.row == 0 { return AssociationEventsCell.getHeightForEvents(events: self.events) }
-        if indexPath.row == 1 { return self.posts.count == 0 ? 0 : 225 + 30 }
-        if indexPath.row == 2 { return AssociationDescriptionCell.getHeightForAssociation(association, forWidth: self.tableView.frame.width) }
+        if indexPath.row == 0 { return self.hasLoaded ? 0 : 44 } //LoadingCell
+        if indexPath.row == 1 { return AssociationEventsCell.getHeightForEvents(events: self.events) }
+        if indexPath.row == 2 { return self.posts.count == 0 ? 0 : 225 + 30 }
+        if indexPath.row == 3 { return AssociationDescriptionCell.getHeightForAssociation(association, forWidth: self.tableView.frame.width) }
         return 60
     }
     
@@ -141,16 +140,20 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
             return cell
         }else{
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: kLoadingCell, for: indexPath) as! LoadingCell
+                cell.load(association: self.association)
+                return cell
+            }else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: kAssociationEventsCell, for: indexPath) as! AssociationEventsCell
                 cell.load(events: self.events, forAssociation: self.association)
                 cell.delegate = self
                 return cell
-            }else if indexPath.row == 1 {
+            }else if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: kAssociationPostsCell, for: indexPath) as! AssociationPostsCell
                 cell.load(posts: self.posts, forAssociation: self.association)
                 cell.delegate = self
                 return cell
-            }else if indexPath.row == 2 {
+            }else if indexPath.row == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: kAssociationDescriptionCell, for: indexPath) as! AssociationDescriptionCell
                 cell.load(association: self.association)
                 return cell
@@ -163,7 +166,7 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1, indexPath.row == 3 {
+        if indexPath.section == 1, indexPath.row == 4 {
             let email = self.association.email!
             let url = URL(string: "mailto:\(email)")
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)

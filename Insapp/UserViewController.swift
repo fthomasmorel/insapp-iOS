@@ -34,6 +34,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     var isEditable:Bool = true
     var canReturn:Bool = false
     var user_id:String!
+    var hasLoaded = false
 
     
     override func viewDidLoad() {
@@ -45,6 +46,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.register(UINib(nibName: "UserEventsCell", bundle: nil), forCellReuseIdentifier: kUserEventsCell)
         self.tableView.register(UINib(nibName: "UserBarCodeCell", bundle: nil), forCellReuseIdentifier: kUserBarCodeCell)
         self.tableView.register(UINib(nibName: "UserDescriptionCell", bundle: nil), forCellReuseIdentifier: kUserDescriptionCell)
+        self.tableView.register(UINib(nibName: "LoadingCell", bundle: nil), forCellReuseIdentifier: kLoadingCell)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: kWhiteEmptyCell)
         
         self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width/2
@@ -118,6 +120,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.events = self.events.sorted(by: { (e1, e2) -> Bool in
                 e1.dateStart!.timeIntervalSince(e2.dateStart! as Date) > 0
             })
+            self.hasLoaded = true
             self.tableView.reloadData()
         }
     }
@@ -136,7 +139,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -146,23 +149,28 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 { return 116 }
         let isSelf = self.user?.id == User.userInstance?.id
-        if indexPath.row == 1 { return UserEventsCell.getHeightForEvents(events: self.events, isSelf: isSelf) }
-        if indexPath.row == 2 { return UserBarCodeCell.getHeightForUser(user: self.user) }
+        if indexPath.row == 1 { return (self.hasLoaded ? 0 : 44) }
+        if indexPath.row == 2 { return UserEventsCell.getHeightForEvents(events: self.events, isSelf: isSelf) }
+        if indexPath.row == 3 { return UserBarCodeCell.getHeightForUser(user: self.user) }
         return UserDescriptionCell.getHeightForUser(self.user, forWidth: self.view.frame.width)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: kLoadingCell, for: indexPath) as! LoadingCell
+            cell.loadUser()
+            return cell
+        }else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kUserEventsCell, for: indexPath) as! UserEventsCell
             let isSelf = self.user?.id == User.userInstance?.id
             cell.load(events: self.events, forAssociations: self.associations, isSelf: isSelf)
             cell.delegate = self
             return cell
-        }else if indexPath.row == 2 {
+        }else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kUserBarCodeCell, for: indexPath) as! UserBarCodeCell
             cell.load()
             return cell
-        }else if indexPath.row == 3 {
+        }else if indexPath.row == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kUserDescriptionCell, for: indexPath) as! UserDescriptionCell
             cell.load(user: self.user)
             return cell
@@ -172,7 +180,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2 {
+        if indexPath.row == 3 {
             let brightness: CGFloat = UIScreen.main.brightness
             UIScreen.main.brightness = brightness == self.initialBrightness ? 1 : self.initialBrightness
         }

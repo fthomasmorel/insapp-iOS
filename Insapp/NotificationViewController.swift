@@ -132,6 +132,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
         vc.event = event
+        vc.association = self.associations[event.association!]!
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

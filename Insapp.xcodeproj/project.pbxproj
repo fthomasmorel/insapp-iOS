@@ -121,6 +121,8 @@
 		E1F96D1B1E4DB8810050C1F8 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */; };
 		E1F96D1D1E4DBECB0050C1F8 /* UserBarCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */; };
 		E1F96D1F1E4DBEE40050C1F8 /* UserBarCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */; };
+		E1F96D211E4DC9870050C1F8 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */; };
+		E1F96D231E4DC9B70050C1F8 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -243,6 +245,8 @@
 		E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
 		E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserBarCodeCell.xib; sourceTree = "<group>"; };
 		E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBarCodeCell.swift; sourceTree = "<group>"; };
+		E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		FF193D226DDB96C99A3FA380 /* Pods-Insapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -465,6 +469,7 @@
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
 				E11EE8371DA245C20029C051 /* NotificationCell.xib */,
+				E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
 				E193DD891D9E745400478B52 /* UserCell.swift */,
 				E11EE8391DA246A30029C051 /* NotificationCell.swift */,
+				E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 				E119D0801E49F3CB00C10A64 /* AssociationHeaderCell.xib in Resources */,
 				E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */,
 				7D9D50EC1DF40837002AC837 /* SeeMoreCell.xib in Resources */,
+				E1F96D211E4DC9870050C1F8 /* LoadingCell.xib in Resources */,
 				E119D06C1E4879F600C10A64 /* EventTabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -806,6 +813,7 @@
 				E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */,
 				E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
+				E1F96D231E4DC9B70050C1F8 /* LoadingCell.swift in Sources */,
 				E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */,
 				E192C1E91D9119C900355512 /* TutorialPageViewController.swift in Sources */,
 				E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */,
