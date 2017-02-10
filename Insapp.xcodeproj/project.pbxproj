@@ -118,6 +118,9 @@
 		E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */; };
 		E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */; };
 		E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E01CD31DA8EDE20082E88A /* Alert.swift */; };
+		E1F96D1B1E4DB8810050C1F8 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */; };
+		E1F96D1D1E4DBECB0050C1F8 /* UserBarCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */; };
+		E1F96D1F1E4DBEE40050C1F8 /* UserBarCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,6 +240,9 @@
 		E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1E01CD31DA8EDE20082E88A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
+		E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserBarCodeCell.xib; sourceTree = "<group>"; };
+		E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBarCodeCell.swift; sourceTree = "<group>"; };
 		FF193D226DDB96C99A3FA380 /* Pods-Insapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -382,6 +388,7 @@
 				E12E458D1E4BAF87004D0C44 /* UserEventsCell.xib */,
 				E193DD871D9E73B700478B52 /* UserCell.xib */,
 				E1CBCF6F1E4C695F006253ED /* UserDescriptionCell.xib */,
+				E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -391,6 +398,7 @@
 			children = (
 				E1CBCF6A1E4C5C56006253ED /* UserEventsCell.swift */,
 				E1CBCF711E4C6989006253ED /* UserDescriptionCell.swift */,
+				E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
 				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
 				E1CBCF6C1E4C6218006253ED /* UserEventListViewController.swift */,
+				E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -630,6 +639,7 @@
 				7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */,
 				E119D06E1E487DBB00C10A64 /* EventHeaderCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
+				E1F96D1D1E4DBECB0050C1F8 /* UserBarCodeCell.xib in Resources */,
 				7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
 				E119D07B1E49B6E100C10A64 /* EventCommentCell.xib in Resources */,
@@ -737,6 +747,7 @@
 				E119D0791E48BFC300C10A64 /* EventDescriptionCell.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */,
+				E1F96D1B1E4DB8810050C1F8 /* BarCodeViewController.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
 				E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */,
@@ -784,6 +795,7 @@
 				E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */,
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
+				E1F96D1F1E4DBEE40050C1F8 /* UserBarCodeCell.swift in Sources */,
 				7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */,
 				E12E45891E4AFE89004D0C44 /* AssociationContactCell.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,

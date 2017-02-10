@@ -356,7 +356,65 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uN0-5q-yPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4068" y="1916.4917541229386"/>
+            <point key="canvasLocation" x="3817" y="1916"/>
+        </scene>
+        <!--Bar Code View Controller-->
+        <scene sceneID="MKG-Nb-1cE">
+            <objects>
+                <viewController storyboardIdentifier="BarCodeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2qi-7h-oyp" customClass="BarCodeViewController" customModule="Insapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZwV-Xf-PZ9"/>
+                        <viewControllerLayoutGuide type="bottom" id="FiQ-O6-Ego"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lwW-aG-Knh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiF-ol-Qc1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_code_filter" translatesAutoresizingMaskIntoConstraints="NO" id="sVW-je-9jh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eca-zC-nZY">
+                                <rect key="frame" x="10" y="30" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AMB-SJ-nYg"/>
+                                    <constraint firstAttribute="width" constant="30" id="rEi-O4-YAZ"/>
+                                </constraints>
+                                <state key="normal" image="cross">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissAction:" destination="yf0-RK-8jZ" eventType="touchUpInside" id="N3u-JX-7yv"/>
+                                    <action selector="dismissAction:" destination="2qi-7h-oyp" eventType="touchUpInside" id="NLP-fP-A0h"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FiQ-O6-Ego" firstAttribute="top" secondItem="UiF-ol-Qc1" secondAttribute="bottom" id="2JA-vE-un1"/>
+                            <constraint firstItem="Eca-zC-nZY" firstAttribute="top" secondItem="ZwV-Xf-PZ9" secondAttribute="bottom" constant="10" id="2gW-0n-Ft8"/>
+                            <constraint firstAttribute="trailing" secondItem="sVW-je-9jh" secondAttribute="trailing" id="8wA-60-LjT"/>
+                            <constraint firstItem="UiF-ol-Qc1" firstAttribute="top" secondItem="ZwV-Xf-PZ9" secondAttribute="bottom" constant="-20" id="Clx-By-0d3"/>
+                            <constraint firstItem="sVW-je-9jh" firstAttribute="top" secondItem="ZwV-Xf-PZ9" secondAttribute="bottom" constant="-20" id="PuN-du-h52"/>
+                            <constraint firstItem="UiF-ol-Qc1" firstAttribute="leading" secondItem="lwW-aG-Knh" secondAttribute="leading" id="SXT-NK-TqB"/>
+                            <constraint firstItem="sVW-je-9jh" firstAttribute="leading" secondItem="lwW-aG-Knh" secondAttribute="leading" id="hse-qk-aru"/>
+                            <constraint firstItem="Eca-zC-nZY" firstAttribute="leading" secondItem="lwW-aG-Knh" secondAttribute="leading" constant="10" id="mNc-4T-P82"/>
+                            <constraint firstItem="FiQ-O6-Ego" firstAttribute="top" secondItem="sVW-je-9jh" secondAttribute="bottom" id="pgP-Uz-Fi1"/>
+                            <constraint firstAttribute="trailing" secondItem="UiF-ol-Qc1" secondAttribute="trailing" id="zHt-4Y-bPG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraViewCanvas" destination="UiF-ol-Qc1" id="do9-gg-vx5"/>
+                        <outlet property="dismissButton" destination="Eca-zC-nZY" id="mL3-SA-sNo"/>
+                        <outlet property="imageView" destination="sVW-je-9jh" id="iQX-bD-74X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KhB-OL-syF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4512.8000000000002" y="1915.5922038980511"/>
         </scene>
         <!--Credit View Controller-->
         <scene sceneID="3Rq-O9-RTO">
@@ -644,8 +702,58 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="GAi-aK-Tdw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="655-7v-b9o">
                                         <rect key="frame" x="0.0" y="391" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="655-7v-b9o" id="ja2-vb-Ui6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carte Amicaliste" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuO-qz-Ycu">
+                                                    <rect key="frame" x="8" y="9" width="130" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="RNk-OK-W1m"/>
+                                                        <constraint firstAttribute="width" constant="130" id="Zdu-1U-kfS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlA-dP-GuQ">
+                                                    <rect key="frame" x="327" y="4" width="33" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="33" id="qWc-FT-VFS"/>
+                                                        <constraint firstAttribute="height" constant="34" id="rB7-Ru-e3b"/>
+                                                    </constraints>
+                                                    <state key="normal" image="camera"/>
+                                                    <connections>
+                                                        <action selector="showBarCodeCameraAction:" destination="kUp-Lo-Cqj" eventType="touchUpInside" id="XBC-C4-EZj"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbR-ZI-oH3">
+                                                    <rect key="frame" x="280" y="4" width="33" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="eOY-Uw-LVw"/>
+                                                        <constraint firstAttribute="width" constant="33" id="kxG-Q1-HHp"/>
+                                                    </constraints>
+                                                    <state key="normal" image="keyboard"/>
+                                                    <connections>
+                                                        <action selector="showBarCodeKeyboardAction:" destination="kUp-Lo-Cqj" eventType="touchUpInside" id="fAT-0d-VuJ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XbR-ZI-oH3" firstAttribute="centerY" secondItem="ja2-vb-Ui6" secondAttribute="centerY" id="GgN-pa-2jg"/>
+                                                <constraint firstAttribute="trailing" secondItem="IlA-dP-GuQ" secondAttribute="trailing" constant="15" id="MVp-uY-yBq"/>
+                                                <constraint firstItem="IlA-dP-GuQ" firstAttribute="centerY" secondItem="ja2-vb-Ui6" secondAttribute="centerY" id="eIc-yw-z7F"/>
+                                                <constraint firstItem="CuO-qz-Ycu" firstAttribute="centerY" secondItem="ja2-vb-Ui6" secondAttribute="centerY" id="iU9-fE-eE2"/>
+                                                <constraint firstItem="CuO-qz-Ycu" firstAttribute="leading" secondItem="ja2-vb-Ui6" secondAttribute="leading" constant="8" id="oZC-p1-g2h"/>
+                                                <constraint firstItem="IlA-dP-GuQ" firstAttribute="leading" secondItem="XbR-ZI-oH3" secondAttribute="trailing" constant="14" id="q1I-Hs-pvD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="GAi-aK-Tdw">
+                                        <rect key="frame" x="0.0" y="435" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GAi-aK-Tdw" id="tai-xw-t9S">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -663,6 +771,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4Gw-7p-W2t">
                                                     <rect key="frame" x="318" y="6.5" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.92549019610000005" green="0.36470588240000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="notificationStatusAction:" destination="kUp-Lo-Cqj" eventType="valueChanged" id="Ke2-dt-5pn"/>
                                                     </connections>
@@ -677,7 +786,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="79B-l3-2MT">
-                                        <rect key="frame" x="0.0" y="435" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="79B-l3-2MT" id="S9O-IW-ro0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -695,6 +804,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kVP-Ga-vdw">
                                                     <rect key="frame" x="318" y="6.5" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.92549019610000005" green="0.36470588240000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="addToCalendarSwitchAction:" destination="kUp-Lo-Cqj" eventType="valueChanged" id="e0a-Hb-4bj"/>
                                                     </connections>
@@ -709,7 +819,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="SOo-qX-0TU">
-                                        <rect key="frame" x="0.0" y="479" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="523" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SOo-qX-0TU" id="q5r-H9-8ZS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -749,7 +859,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="119" id="KYk-DS-F0m">
-                                        <rect key="frame" x="0.0" y="523" width="375" height="119"/>
+                                        <rect key="frame" x="0.0" y="567" width="375" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KYk-DS-F0m" id="VdS-Fj-9dK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="118.5"/>
@@ -774,7 +884,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="RRV-mb-5mx">
-                                        <rect key="frame" x="0.0" y="642" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="686" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RRV-mb-5mx" id="47h-lX-Jl0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -798,7 +908,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="9E8-9w-b3D">
-                                        <rect key="frame" x="0.0" y="686" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="730" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9E8-9w-b3D" id="70l-Nd-P8P">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -861,7 +971,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3081" y="2707"/>
+            <point key="canvasLocation" x="3080.8000000000002" y="2706.2968515742132"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="V5P-p0-QSe">
@@ -2644,13 +2754,16 @@ préférées grâce à la page News</string>
         <image name="assocation_tutorial" width="231" height="478"/>
         <image name="associations" width="30" height="27"/>
         <image name="avatars" width="356" height="401"/>
+        <image name="bar_code_filter" width="384" height="648"/>
         <image name="calendar" width="27" height="27"/>
+        <image name="camera" width="93" height="94"/>
         <image name="check" width="73" height="54"/>
         <image name="cross" width="51" height="51"/>
         <image name="event_tutorial" width="231" height="478"/>
         <image name="gear" width="68" height="68"/>
         <image name="go_button" width="147" height="56"/>
         <image name="insapp-logo" width="83" height="83"/>
+        <image name="keyboard" width="93" height="94"/>
         <image name="megaphone" width="27" height="28"/>
         <image name="news" width="27" height="27"/>
         <image name="option" width="65" height="77"/>

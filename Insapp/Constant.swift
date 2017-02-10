@@ -163,6 +163,7 @@ let kNotificationTypeTag    = "tag"
 //OTHER
 let kMaxDescriptionLength = 120
 let kSuggestCalendar = "kSuggestCalendar"
+let kBarCodeAmicalistCard = "kBarCodeAmicalistCard"
 
 let promotions = [
     "", "1STPI", "2STPI",

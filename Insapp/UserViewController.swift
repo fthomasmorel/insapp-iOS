@@ -29,6 +29,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     var associations: [String : Association] = [:]
     var events: [Event] = []
     var user:User!
+    var initialBrightness: CGFloat!
     
     var isEditable:Bool = true
     var canReturn:Bool = false
@@ -37,11 +38,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .none
         self.tableView.register(UINib(nibName: "UserEventsCell", bundle: nil), forCellReuseIdentifier: kUserEventsCell)
+        self.tableView.register(UINib(nibName: "UserBarCodeCell", bundle: nil), forCellReuseIdentifier: kUserBarCodeCell)
         self.tableView.register(UINib(nibName: "UserDescriptionCell", bundle: nil), forCellReuseIdentifier: kUserDescriptionCell)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: kWhiteEmptyCell)
         
@@ -59,6 +61,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.notifyGoogleAnalytics()
         self.lightStatusBar()
         self.hideNavBar()
+        
+        self.initialBrightness = UIScreen.main.brightness
         
         self.editButton.isHidden = !self.isEditable
         self.optionButton.isHidden = self.isEditable
@@ -132,7 +136,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -143,6 +147,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == 0 { return 116 }
         let isSelf = self.user?.id == User.userInstance?.id
         if indexPath.row == 1 { return UserEventsCell.getHeightForEvents(events: self.events, isSelf: isSelf) }
+        if indexPath.row == 2 { return UserBarCodeCell.getHeightForUser(user: self.user) }
         return UserDescriptionCell.getHeightForUser(self.user, forWidth: self.view.frame.width)
     }
     
@@ -154,12 +159,23 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.delegate = self
             return cell
         }else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: kUserBarCodeCell, for: indexPath) as! UserBarCodeCell
+            cell.load()
+            return cell
+        }else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kUserDescriptionCell, for: indexPath) as! UserDescriptionCell
             cell.load(user: self.user)
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: kWhiteEmptyCell, for: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            let brightness: CGFloat = UIScreen.main.brightness
+            UIScreen.main.brightness = brightness == self.initialBrightness ? 1 : self.initialBrightness
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

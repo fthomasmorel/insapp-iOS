@@ -208,6 +208,44 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
         }
     }
     
+    @IBAction func showBarCodeCameraAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "BarCodeViewController") as! BarCodeViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    @IBAction func showBarCodeKeyboardAction(_ sender: Any) {
+        let alertController = UIAlertController(title: "Carte Amicaliste", message: "Entre le code de 9 chiffres de ta carte Amicaliste", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Valider", style: .default, handler: {
+            alert -> Void in
+            
+            let text = alertController.textFields![0] as UITextField
+            if let code = text.text {
+                UserDefaults.standard.set(code, forKey: kBarCodeAmicalistCard)
+            }
+            return
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+            (action : UIAlertAction!) -> Void in
+            return
+        })
+        
+        alertController.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
+            textField.keyboardType = .numberPad
+            if let code = UserDefaults.standard.object(forKey: kBarCodeAmicalistCard) as? String {
+                textField.text = code
+            } else {
+                textField.placeholder = "XXXXXXXXX"
+            }
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     @IBAction func addToCalendarSwitchAction(_ sender: AnyObject) {
         UserDefaults.standard.set(self.addToCalendarSwitch.isOn, forKey: kSuggestCalendar)
