@@ -18,19 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F6G-Bo-hI5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="175" id="Pg9-8C-4xD"/>
-                        </constraints>
-                    </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gki-VD-rED">
-                        <rect key="frame" x="267" y="124" width="100" height="100"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="100" id="3Y8-OM-ZmW"/>
-                            <constraint firstAttribute="width" constant="100" id="x0w-4Y-qdF"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@rocknsolex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHe-Ly-0QT">
                         <rect key="frame" x="8" y="183" width="251" height="41"/>
                         <constraints>
@@ -55,23 +42,16 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="F6G-Bo-hI5" secondAttribute="trailing" id="1Ab-MI-9WJ"/>
-                    <constraint firstItem="gki-VD-rED" firstAttribute="top" secondItem="sDY-gW-vkx" secondAttribute="top" constant="124" id="Lhw-eu-Z14"/>
-                    <constraint firstAttribute="trailing" secondItem="gki-VD-rED" secondAttribute="trailing" constant="8" id="P0Z-ol-tEX"/>
+                    <constraint firstItem="RHe-Ly-0QT" firstAttribute="top" secondItem="sDY-gW-vkx" secondAttribute="top" constant="183" id="7Xo-Pd-pvC"/>
                     <constraint firstItem="RHe-Ly-0QT" firstAttribute="leading" secondItem="sDY-gW-vkx" secondAttribute="leading" constant="8" id="S7j-YQ-5Vg"/>
-                    <constraint firstItem="RHe-Ly-0QT" firstAttribute="top" secondItem="gki-VD-rED" secondAttribute="bottom" constant="-41" id="UId-rI-CgM"/>
-                    <constraint firstItem="F6G-Bo-hI5" firstAttribute="top" secondItem="sDY-gW-vkx" secondAttribute="top" id="W09-jo-zgi"/>
+                    <constraint firstAttribute="trailing" secondItem="RHe-Ly-0QT" secondAttribute="trailing" constant="116" id="S9e-Hq-sJ2"/>
                     <constraint firstItem="3G6-ek-mrT" firstAttribute="leading" secondItem="sDY-gW-vkx" secondAttribute="leading" constant="8" id="WlM-12-GgB"/>
                     <constraint firstItem="3G6-ek-mrT" firstAttribute="top" secondItem="sDY-gW-vkx" secondAttribute="top" constant="35" id="nAF-li-D2O"/>
-                    <constraint firstItem="F6G-Bo-hI5" firstAttribute="leading" secondItem="sDY-gW-vkx" secondAttribute="leading" id="uu6-HK-aS1"/>
-                    <constraint firstItem="gki-VD-rED" firstAttribute="leading" secondItem="RHe-Ly-0QT" secondAttribute="trailing" constant="8" id="yoa-ct-Kfb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backButton" destination="3G6-ek-mrT" id="iAs-i6-wta"/>
-                <outlet property="coverImageView" destination="F6G-Bo-hI5" id="n6x-ma-AeA"/>
                 <outlet property="nameLabel" destination="RHe-Ly-0QT" id="a1a-Yu-v7G"/>
-                <outlet property="profileImageView" destination="gki-VD-rED" id="uBe-Kr-KQ0"/>
             </connections>
             <point key="canvasLocation" x="15.5" y="-33.5"/>
         </tableViewCell>

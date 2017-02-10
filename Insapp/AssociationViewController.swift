@@ -11,7 +11,13 @@ import UIKit
 
 class AssociationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AssociationPostsDelegate, AssociationEventsDelegate {
     
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var associationNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var blurCoverView: UIVisualEffectView!
+    
     
     var eventListViewController: EventListViewController!
     var association: Association!
@@ -29,12 +35,28 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.register(UINib(nibName: "AssociationEventsCell", bundle: nil), forCellReuseIdentifier: kAssociationEventsCell)
         self.tableView.register(UINib(nibName: "AssociationDescriptionCell", bundle: nil), forCellReuseIdentifier: kAssociationDescriptionCell)
         self.tableView.register(UINib(nibName: "AssociationContactCell", bundle: nil), forCellReuseIdentifier: kAssociationContactCell)
+        
+        self.coverImageView.downloadedFrom(link: kCDNHostname + self.association.coverPhotoURL!)
+        self.profileImageView.downloadedFrom(link: kCDNHostname + self.association.profilePhotoURL!)
+        self.profileImageView.layer.cornerRadius = 50
+        self.profileImageView.layer.masksToBounds = true
+        self.associationNameLabel.text = "@"+self.association.name!
+        self.associationNameLabel.alpha = 0
+        self.blurCoverView.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.tableView.backgroundColor = UIColor.hexToRGB(self.association.bgColor!)
+        if self.association.fgColor! == "ffffff" {
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_white"), for: .normal)
+            self.lightStatusBar()
+        }else{
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_black"), for: .normal)
+            self.darkStatusBar()
+        }
+        self.associationNameLabel.textColor = UIColor.hexToRGB(self.association.fgColor!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -145,6 +167,30 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
             let email = self.association.email!
             let url = URL(string: "mailto:\(email)")
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let value = scrollView.contentOffset.y
+        if value >= 0 {
+            self.coverImageView.frame = CGRect(x: 0, y: max(-105,-value), width: self.view.frame.width, height: 175)
+            self.blurCoverView.frame = self.coverImageView.frame
+            self.blurCoverView.alpha = (20-(105-max(value, 85)))/20
+            self.associationNameLabel.alpha = (20-(145-max(value, 125)))/20
+            if value >= 105 {
+                self.profileImageView.frame = CGRect(x: self.view.frame.width-8-40, y: 20, width: 40, height: 40)
+            }else{
+                let coef = -0.0048*value+0.91
+                self.profileImageView.frame = CGRect(x: self.view.frame.width-8-100*coef, y: 125-value, width: 100*coef, height: 100*coef)
+            }
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width/2
+        }else{
+            self.coverImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 175 - value)
+            self.blurCoverView.frame = self.coverImageView.frame
+            self.blurCoverView.alpha = (self.coverImageView.frame.height-175)/100
+            self.profileImageView.frame = CGRect(x: self.view.frame.width-8-100, y: 125-value, width: 100, height: 100)
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width/2
+            self.associationNameLabel.alpha = 0
         }
     }
     
