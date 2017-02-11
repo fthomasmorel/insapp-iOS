@@ -16,6 +16,8 @@ protocol NotificationCellDelegate {
     func open(association: Association)
     func open(post: Post, withComment comment: Comment)
     func open(post: Post, withCommentId comment_id: String)
+    func open(event: Event, withComment comment: Comment)
+    func open(event: Event, withCommentId comment_id: String)
 }
 
 class NotificationCell: UITableViewCell {
@@ -68,6 +70,14 @@ class NotificationCell: UITableViewCell {
         self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
     }
     
+    func load(_ notification: Notification, withEvent event: Event, withUser user: User){
+        self.load(notification: notification)
+        self.event = event
+        self.userSender = user
+        self.senderImageView.image = user.avatar()
+        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+    }
+    
     func load(notification: Notification){
         
         let attributedString = NSMutableAttributedString(string: notification.message! + " ")
@@ -107,13 +117,18 @@ class NotificationCell: UITableViewCell {
                 self.delegate?.open(post: post, withComment: comment)
                 return
             }
+        case kNotificationTypeEventTag:
+            if let event = self.event, let comment = self.comment {
+                self.delegate?.open(event: event, withComment: comment)
+                return
+            }
         default:
             break
         }
     }
     
     func didTouchSender(){
-        if self.notification.type! == kNotificationTypeTag, let user = self.userSender{
+        if (self.notification.type! == kNotificationTypeTag || self.notification.type! == kNotificationTypeEventTag), let user = self.userSender{
             self.delegate?.open(user: user)
         }
         if self.notification.type! != kNotificationTypeTag, let association = self.associationSender{

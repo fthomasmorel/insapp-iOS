@@ -76,6 +76,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         self.download(postId: notification.content!)
                         self.download(userId: notification.sender!)
                         break
+                    case kNotificationTypeEventTag:
+                        self.download(eventId: notification.content!)
+                        self.download(userId: notification.sender!)
+                        break
                     default:
                         break
                     }
@@ -120,6 +124,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             let content = self.posts[notification.content!]!
             let sender = self.users[notification.sender!]!
             cell.load(notification, withPost: content, withUser: sender)
+            break
+        case kNotificationTypeEventTag:
+            let content = self.events[notification.content!]!
+            let sender = self.users[notification.sender!]!
+            cell.load(notification, withEvent: content, withUser: sender)
             break
         default:
             break
@@ -186,6 +195,27 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             return comment.id! == comment_id
         }).first else { return }
         self.open(post: post, withComment: comment)
+    }
+    
+    func open(event: Event, withComment comment: Comment){
+        APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_assos) in
+            guard let assos = opt_assos else { return }
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+                vc.event = event
+                vc.association = assos
+                vc.activeComment = comment
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func open(event: Event, withCommentId comment_id: String){
+        guard let comment = event.comments?.filter({ (comment) -> Bool in
+            return comment.id! == comment_id
+        }).first else { return }
+        self.open(event: event, withComment: comment)
     }
     
     func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ()){

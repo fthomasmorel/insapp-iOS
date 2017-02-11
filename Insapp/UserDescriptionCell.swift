@@ -18,6 +18,7 @@ class UserDescriptionCell: UITableViewCell {
     func load(user: User?){
         if user != nil {
             self.descriptionTextView.text = user!.desc!
+            self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue];
         }
     }
     

@@ -24,9 +24,7 @@ enum ColorTheme{
 }
 
 class EventHeaderCell: UITableViewCell {
-        
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var eventImageView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var associationLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -81,7 +79,6 @@ class EventHeaderCell: UITableViewCell {
     func load(event: Event, association: Association){
         self.event = event
         
-        let photo_url = kCDNHostname + event.photoURL!
         let fgColor = UIColor.hexToRGB(event.fgColor!)
         let bgColor = UIColor.hexToRGB(event.bgColor!)
         let monthName = event.dateStart!.monthName().uppercased()
@@ -93,7 +90,6 @@ class EventHeaderCell: UITableViewCell {
             self.goingImageView.image = #imageLiteral(resourceName: "go_light")
             self.unkownImageView.image = #imageLiteral(resourceName: "unkown_light")
             self.notgoingImageView.image = #imageLiteral(resourceName: "not_going_light")
-            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_white"), for: .normal)
         }else{
             self.theme = .dark
             self.clockImageView.image = #imageLiteral(resourceName: "clock_dark")
@@ -101,10 +97,8 @@ class EventHeaderCell: UITableViewCell {
             self.goingImageView.image = #imageLiteral(resourceName: "go_dark")
             self.unkownImageView.image = #imageLiteral(resourceName: "unkown_dark")
             self.notgoingImageView.image = #imageLiteral(resourceName: "not_going_dark")
-            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_black"), for: .normal)
         }
         
-        self.eventImageView.downloadedFrom(link: photo_url)
         self.titleLabel.text = event.name
         self.titleLabel.textColor = fgColor
         self.associationLabel.text = "@\(association.name!)"

@@ -69,6 +69,6 @@ class UserEventListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func dismissAction(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController!.popViewController(animated: true)
     }
 }

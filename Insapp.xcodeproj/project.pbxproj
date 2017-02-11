@@ -73,7 +73,6 @@
 		E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD11D8AD1A200B9F517 /* CommentView.swift */; };
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
-		E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */; };
 		E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */; };
 		E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
@@ -195,7 +194,6 @@
 		E19F7CD11D8AD1A200B9F517 /* CommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
 		E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -247,6 +245,8 @@
 		E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBarCodeCell.swift; sourceTree = "<group>"; };
 		E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		E1F96D241E4F24B20050C1F8 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Insapp-fpvrmazddeqndybobxdsewkwjnoh/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		E1F96D251E4F24B20050C1F8 /* FaveButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FaveButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Insapp-fpvrmazddeqndybobxdsewkwjnoh/Build/Products/Debug-iphonesimulator/FaveButton/FaveButton.framework"; sourceTree = "<group>"; };
 		FF193D226DDB96C99A3FA380 /* Pods-Insapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,6 +274,8 @@
 		1C1A49BC4867010B04E15155 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1F96D241E4F24B20050C1F8 /* Alamofire.framework */,
+				E1F96D251E4F24B20050C1F8 /* FaveButton.framework */,
 				91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */,
 			);
 			name = Frameworks;
@@ -345,7 +347,6 @@
 			children = (
 				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
 				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
-				E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -759,7 +760,6 @@
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
 				E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */,
 				7D0C40D21DEAEDDC005FE515 /* SearchUserCell.swift in Sources */,
-				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				7D051D8B1DCB8B1500DED954 /* UniversalSearchViewController.swift in Sources */,
 				E119D08E1E4A408000C10A64 /* AssociationEventsCell.swift in Sources */,
@@ -953,11 +953,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -977,11 +979,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

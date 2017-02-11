@@ -113,7 +113,7 @@ extension UIImage{
 
 extension UIImageView {
     
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, completion: Optional<() -> ()> = nil ){
+    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, animated: Bool = true, completion: Optional<() -> ()> = nil ){
         let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
         loader.startAnimating()
         loader.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
@@ -126,7 +126,7 @@ extension UIImageView {
         contentMode = mode
         
         if let image = Image.fetchImage(url: link){
-            self.displayImage(image, completion: completion)
+            self.displayImage(image, animated: animated, completion: completion)
             return
         }
         
@@ -143,11 +143,11 @@ extension UIImageView {
                 image = UIImage(data: data)
                 Image.store(image: image!, forUrl: link)
             }
-            self.displayImage(image!, completion: completion)
+            self.displayImage(image!, animated: animated, completion: completion)
             }.resume()
     }
     
-    func displayImage(_ image: UIImage, completion: Optional<() -> ()> = nil){
+    func displayImage(_ image: UIImage, animated: Bool, completion: Optional<() -> ()> = nil){
         DispatchQueue.main.async() { () -> Void in
             for subview in self.subviews{
                 if subview is UIActivityIndicatorView {
@@ -155,12 +155,16 @@ extension UIImageView {
                 }
             }
             if self.image == nil {
-                self.alpha = 0
-                self.image = image
                 if let ack = completion { ack() }
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.alpha = 1
-                })
+                if animated {
+                    self.alpha = 0
+                    self.image = image
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.alpha = 1
+                    })
+                }else{
+                    self.image = image
+                }
             }else{
                 self.image = image
                 if let ack = completion { ack() }

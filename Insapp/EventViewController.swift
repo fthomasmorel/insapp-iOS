@@ -15,11 +15,16 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
 
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var blurCoverView: UIVisualEffectView!
+    @IBOutlet weak var eventNameLabel: UILabel!
     
     var index = 0
     var event: Event!
     var association: Association!
     var eventTabView: EventTabView!
+    var activeComment: Comment?
     var users: [String: User] = [:]
     
     override func viewDidLoad() {
@@ -33,21 +38,45 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
         self.tableView.register(UINib(nibName: "EventCommentCell", bundle: nil), forCellReuseIdentifier: kEventCommentCell)
         self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: kCommentCell)
         
-        
         self.eventTabView = Bundle.main.loadNibNamed("EventTabView", owner: self, options: nil)?[0] as! EventTabView
         self.eventTabView.statusBarView.backgroundColor = UIColor.hexToRGB(self.event.bgColor!)
         self.eventTabView.delegate = self
+        
+        self.coverImageView.downloadedFrom(link: kCDNHostname + self.event.photoURL!, animated: false)
+        self.eventNameLabel.text = self.event.name!
+        self.eventNameLabel.alpha = 0
+        self.blurCoverView.alpha = 0
+        
+        if let _ = self.activeComment { self.index = 1 }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.hideNavBar()
         self.notifyGoogleAnalytics()
         self.changeStatusBarForColor(colorStr: event.fgColor)
+        
+        if self.event.fgColor! == "ffffff" {
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_white"), for: .normal)
+            self.lightStatusBar()
+        }else{
+            self.backButton.setImage(#imageLiteral(resourceName: "arrow_left_black"), for: .normal)
+            self.darkStatusBar()
+        }
+        self.eventNameLabel.textColor = UIColor.hexToRGB(self.event.fgColor!)
+        self.view.backgroundColor = UIColor.hexToRGB(self.event.bgColor!)
         self.fetchUsers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.reloadView()
+        if let comment = self.activeComment{
+            if let row = self.event.comments?.map({ (comment) -> String in
+                comment.id!
+            }).index(of: comment.id!){
+                let indexPath = IndexPath(row: row+1, section: 1)
+                self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            }
+        }
     }
     
     func fetchUsers(){
@@ -55,12 +84,14 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
         let group = DispatchGroup()
         self.users = [:]
         for userId in users {
-            group.enter()
-            DispatchQueue.global().async {
-                APIManager.fetch(user_id: userId, controller: self, completion: { (opt_user) in
-                    self.users[userId] = opt_user!
-                    group.leave()
-                })
+            if self.users[userId] == nil {
+                group.enter()
+                DispatchQueue.global().async {
+                    APIManager.fetch(user_id: userId, controller: self, completion: { (opt_user) in
+                        self.users[userId] = opt_user!
+                        group.leave()
+                    })
+                }
             }
         }
         group.notify(queue: DispatchQueue.main) { 
@@ -118,12 +149,18 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
                 let user = self.users[comment.user_id!]!
                 cell.delegate = self
                 cell.loadUserComment(comment, user: user)
+                if comment.id == self.activeComment?.id {
+                    cell.frontView.backgroundColor = kLightGreyColor
+                }else{
+                    cell.frontView.backgroundColor = .white
+                }
                 return cell
             }
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventDescriptionCell, for: indexPath) as! EventDescriptionCell
         cell.contentTextView.text = self.event.desc! + "\n\n\n\n"
+        cell.contentTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue];
         return cell
     }
     
@@ -140,6 +177,24 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let value = scrollView.contentOffset.y
+        print(value)
+        if value >= 0 {
+            self.coverImageView.frame = CGRect(x: 0, y: max(-105,-value), width: self.view.frame.width, height: 175)
+            self.blurCoverView.frame = self.coverImageView.frame
+            self.blurCoverView.alpha = (20-(105-max(value, 85)))/20
+            self.eventNameLabel.alpha = (20-(145-max(value, 125)))/20
+        }else{
+            self.coverImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 175 - value)
+            self.blurCoverView.frame = self.coverImageView.frame
+            self.blurCoverView.alpha = (self.coverImageView.frame.height-195)/100
+            self.eventNameLabel.alpha = 0
+        }
+        self.coverImageView.updateConstraints()
+    }
+
     
     func report(comment: Comment){
          APIManager.report(comment: comment, event: self.event, controller: self)
@@ -282,11 +337,14 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     }
     
     func reloadView(){
-        self.event.comments = self.event.comments?.sorted(by: { (commentA, commentB) -> Bool in
-            return commentA.date!.timeIntervalSince(commentB.date! as Date) > 0
-        })
-        self.tableView.reloadData()
-        self.eventTabView.updateIndex(index: self.index)
+        DispatchQueue.main.async {
+            self.event.comments = self.event.comments?.sorted(by: { (commentA, commentB) -> Bool in
+                return commentA.date!.timeIntervalSince(commentB.date! as Date) > 0
+            })
+            self.tableView.reloadData()
+            self.eventTabView.updateIndex(index: self.index)
+            self.tableView.delegate?.scrollViewDidScroll!(self.tableView)
+        }
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

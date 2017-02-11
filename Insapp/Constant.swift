@@ -155,9 +155,10 @@ let kNotificationSeen       = "seen"
 let kNotificationDate       = "date"
 let kNotificationComment    = "comment"
 
-let kNotificationTypeEvent  = "event"
-let kNotificationTypePost   = "post"
-let kNotificationTypeTag    = "tag"
+let kNotificationTypeEvent      = "event"
+let kNotificationTypePost       = "post"
+let kNotificationTypeTag        = "tag"
+let kNotificationTypeEventTag   = "eventTag"
 
 
 //OTHER

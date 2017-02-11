@@ -21,6 +21,7 @@ class AssociationDescriptionCell: UITableViewCell {
         self.titleLabel.textColor = UIColor.hexToRGB(association.fgColor!)
         self.descriptionTextView.text = association.desc! + "\n\n\n"
         self.descriptionTextView.textColor = UIColor.hexToRGB(association.fgColor!)
+        self.descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.hexToRGB(association.fgColor!), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue];
     }
     
     static func getHeightForAssociation(_ association: Association, forWidth width: CGFloat) -> CGFloat{

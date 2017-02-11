@@ -18,8 +18,6 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var blurCoverView: UIVisualEffectView!
     
-    
-    var eventListViewController: EventListViewController!
     var association: Association!
     var events:[Event] = []
     var posts:[Post] = []
@@ -78,7 +76,6 @@ class AssociationViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func fetchPosts(){
-        
         self.posts = []
         for postId in self.association.posts! {
             self.downloadGroup.enter()

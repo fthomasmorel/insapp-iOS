@@ -115,6 +115,19 @@ class SpashScreenViewController: UIViewController {
         })
     }
     
+    func loadCommentViewController(_ controller: UITabBarController, event_id: String, comment_id: String){
+        let navigationController = (controller.selectedViewController as! UINavigationController)
+        let viewController = navigationController.topViewController
+        controller.selectedIndex = 3
+        APIManager.fetchEvent(event_id: event_id, controller: viewController!, completion: { (opt_event) in
+            guard let event = opt_event else { return }
+            DispatchQueue.main.async {
+                let controller = (controller.selectedViewController as! UINavigationController).topViewController
+                (controller as! NotificationCellDelegate).open(event: event, withCommentId: comment_id)
+            }
+        })
+    }
+    
     func loadViewController(name: String, completion: ((_ vc: UIViewController) -> Void)? = nil){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: name)
