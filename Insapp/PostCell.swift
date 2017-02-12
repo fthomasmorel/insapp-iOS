@@ -39,14 +39,12 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
     var parent: UIViewController!
     var post:Post!
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        DispatchQueue.main.async {
-            self.likeButton.delegate = self
-            self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
-            self.associationImageView.layer.masksToBounds = true
-            self.computeGradientView()
-        }
+    override func layoutSubviews() {
+        self.likeButton.delegate = self
+        self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
+        self.associationImageView.layer.masksToBounds = true
+        self.postImageView.image = #imageLiteral(resourceName: "placeholder")
+        self.computeGradientView()
     }
     
     func loadPost(_ post: Post, forAssociation association: Association){
@@ -74,14 +72,6 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //DispatchQueue.main.async {
-            //self.computeGradientView()
-            //self.descriptionLabel.sizeToFit()
-        //}
     }
     
     func renderStaticData(){
