@@ -29,6 +29,7 @@ class AssociationEventsCell: UITableViewCell, UITableViewDelegate, UITableViewDa
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.separatorStyle = .none
         self.tableView.register(UINib(nibName: "EventListCell", bundle: nil), forCellReuseIdentifier: kEventListCell)
     }
     

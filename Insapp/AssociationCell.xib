@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hdm-cr-Qf2">
-                        <rect key="frame" x="8" y="8" width="65" height="65"/>
+                        <rect key="frame" x="13" y="8" width="55" height="55"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp3-ts-mUD">
                         <rect key="frame" x="0.0" y="66" width="81" height="15"/>
@@ -31,14 +31,14 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="Hdm-cr-Qf2" firstAttribute="leading" secondItem="hs3-5P-KOs" secondAttribute="leadingMargin" id="3a3-4k-YBt"/>
+                <constraint firstItem="Hdm-cr-Qf2" firstAttribute="leading" secondItem="hs3-5P-KOs" secondAttribute="leadingMargin" constant="5" id="3a3-4k-YBt"/>
                 <constraint firstAttribute="bottom" secondItem="Qp3-ts-mUD" secondAttribute="bottom" id="5CF-s5-Hql"/>
                 <constraint firstItem="Hdm-cr-Qf2" firstAttribute="top" secondItem="hs3-5P-KOs" secondAttribute="topMargin" id="8vf-NY-UaD"/>
                 <constraint firstItem="Qp3-ts-mUD" firstAttribute="top" secondItem="hs3-5P-KOs" secondAttribute="topMargin" constant="58" id="AEc-OK-upD"/>
                 <constraint firstAttribute="trailing" secondItem="Qp3-ts-mUD" secondAttribute="trailing" id="ATg-Kk-ece"/>
                 <constraint firstItem="Hdm-cr-Qf2" firstAttribute="centerX" secondItem="Qp3-ts-mUD" secondAttribute="centerX" id="LxF-6Y-keJ"/>
                 <constraint firstItem="Qp3-ts-mUD" firstAttribute="leading" secondItem="hs3-5P-KOs" secondAttribute="leading" id="Xl4-To-KPq"/>
-                <constraint firstItem="Hdm-cr-Qf2" firstAttribute="bottom" secondItem="hs3-5P-KOs" secondAttribute="bottomMargin" id="f1n-MB-63N"/>
+                <constraint firstItem="Hdm-cr-Qf2" firstAttribute="bottom" secondItem="hs3-5P-KOs" secondAttribute="bottomMargin" constant="-10" id="f1n-MB-63N"/>
             </constraints>
             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
             <connections>

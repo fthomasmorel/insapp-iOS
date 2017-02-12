@@ -14,6 +14,10 @@ import UIKit
 class EventViewController: UIViewController, EKEventEditViewDelegate, UITableViewDelegate, UITableViewDataSource, EventTabDelegate, CommentControllerDelegate, CommentCellDelegate {
 
     
+    @IBOutlet weak var blurViewOriginYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coverImageViewOriginYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coverImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var blurViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -110,6 +114,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return .none }
+        self.eventTabView.updateIndex(index: self.index)
         return self.eventTabView
     }
     
@@ -180,19 +185,26 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let value = scrollView.contentOffset.y
-        print(value)
         if value >= 0 {
             self.coverImageView.frame = CGRect(x: 0, y: max(-105,-value), width: self.view.frame.width, height: 175)
             self.blurCoverView.frame = self.coverImageView.frame
+            self.blurViewHeightConstraint.constant = self.blurCoverView.frame.height
+            self.blurViewOriginYConstraint.constant = self.blurCoverView.frame.origin.y - 20
+            self.coverImageViewHeightConstraint.constant = self.coverImageView.frame.height
+            self.coverImageViewOriginYConstraint.constant = self.coverImageView.frame.origin.y - 20
             self.blurCoverView.alpha = (20-(105-max(value, 85)))/20
             self.eventNameLabel.alpha = (20-(145-max(value, 125)))/20
         }else{
             self.coverImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 175 - value)
             self.blurCoverView.frame = self.coverImageView.frame
+            self.blurViewHeightConstraint.constant = self.blurCoverView.frame.height
+            self.blurViewOriginYConstraint.constant = self.blurCoverView.frame.origin.y - 20
+            self.coverImageViewHeightConstraint.constant = self.coverImageView.frame.height
+            self.coverImageViewOriginYConstraint.constant = self.coverImageView.frame.origin.y - 20
             self.blurCoverView.alpha = (self.coverImageView.frame.height-195)/100
             self.eventNameLabel.alpha = 0
         }
-        self.coverImageView.updateConstraints()
+        self.updateViewConstraints()
     }
 
     
@@ -342,7 +354,6 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
                 return commentA.date!.timeIntervalSince(commentB.date! as Date) > 0
             })
             self.tableView.reloadData()
-            self.eventTabView.updateIndex(index: self.index)
             self.tableView.delegate?.scrollViewDidScroll!(self.tableView)
         }
     }

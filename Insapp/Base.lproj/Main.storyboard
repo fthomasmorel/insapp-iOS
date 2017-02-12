@@ -1491,7 +1491,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Fz-HO-FgM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Fz-HO-FgM">
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
@@ -1571,7 +1571,11 @@
                     <connections>
                         <outlet property="backButton" destination="D8V-aj-CTU" id="767-Ji-92W"/>
                         <outlet property="blurCoverView" destination="WfM-rb-DUg" id="rto-Ki-4hH"/>
+                        <outlet property="blurViewHeightConstraint" destination="iqF-uo-UHI" id="7Wq-Zo-fYV"/>
+                        <outlet property="blurViewOriginYConstraint" destination="l0l-Nb-0EK" id="aLe-Vf-aPM"/>
                         <outlet property="coverImageView" destination="A9M-de-R3m" id="iON-ih-MBJ"/>
+                        <outlet property="coverImageViewHeightConstraint" destination="8KT-nD-9Ve" id="7d8-ms-XSE"/>
+                        <outlet property="coverImageViewOriginYConstraint" destination="XAe-TB-fZc" id="LCu-Tf-u1L"/>
                         <outlet property="eventNameLabel" destination="eco-V7-5BU" id="0TZ-JF-1bi"/>
                         <outlet property="tableView" destination="8Fz-HO-FgM" id="VTy-iO-ECH"/>
                     </connections>
