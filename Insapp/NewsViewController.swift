@@ -44,6 +44,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         self.postTableView.tableFooterView = UIView()
+        self.postTableView.separatorStyle = .none
         self.postTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: kPostCell)
         
         if canRefresh{
