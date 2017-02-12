@@ -16,7 +16,7 @@ class AssociationCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.associationImageView.frame = CGRect(x: 8, y: 0, width: self.frame.width-16, height: self.frame.width-16)
+        //self.associationImageView.frame = CGRect(x: 8, y: 0, width: self.frame.width-16, height: self.frame.width-16)
         self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
         self.associationImageView.layer.borderColor = kLightGreyColor.cgColor
         self.associationImageView.layer.borderWidth = 1

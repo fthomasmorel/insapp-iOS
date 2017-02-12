@@ -112,7 +112,8 @@ extension UIImage{
 }
 
 extension UIImageView {
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, completion: Optional<() -> ()> = nil ){
+    
+    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, animated: Bool = true, completion: Optional<() -> ()> = nil ){
         let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
         loader.startAnimating()
         loader.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
@@ -125,7 +126,7 @@ extension UIImageView {
         contentMode = mode
         
         if let image = Image.fetchImage(url: link){
-            self.displayImage(image, completion: completion)
+            self.displayImage(image, animated: animated, completion: completion)
             return
         }
         
@@ -142,11 +143,11 @@ extension UIImageView {
                 image = UIImage(data: data)
                 Image.store(image: image!, forUrl: link)
             }
-            self.displayImage(image!, completion: completion)
+            self.displayImage(image!, animated: animated, completion: completion)
             }.resume()
     }
     
-    func displayImage(_ image: UIImage, completion: Optional<() -> ()> = nil){
+    func displayImage(_ image: UIImage, animated: Bool, completion: Optional<() -> ()> = nil){
         DispatchQueue.main.async() { () -> Void in
             for subview in self.subviews{
                 if subview is UIActivityIndicatorView {
@@ -154,15 +155,30 @@ extension UIImageView {
                 }
             }
             if self.image == nil {
-                self.alpha = 0
-                self.image = image
                 if let ack = completion { ack() }
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.alpha = 1
-                })
+                if animated {
+                    self.alpha = 0
+                    self.image = image
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.alpha = 1
+                    })
+                }else{
+                    self.image = image
+                }
             }else{
                 self.image = image
                 if let ack = completion { ack() }
+            }
+        }
+    }
+    
+    func load(barcode: String){
+        let data = barcode.data(using: String.Encoding.ascii)
+        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            if let output = filter.outputImage?.applying(transform) {
+                self.image = UIImage(ciImage: output)
             }
         }
     }
@@ -197,18 +213,31 @@ extension Date {
 
 extension NSDate {
     
-    func isToday() -> Bool {
+    func day() -> Int {
         let calendar = NSCalendar.current
         let day = calendar.component(.day, from: self as Date)
+        return day
+    }
+    
+    func monthName() -> String {
+        let calendar = NSCalendar.current
         let month = calendar.component(.month, from: self as Date)
-        let year = calendar.component(.year, from: self as Date)
+        return DateFormatter().monthSymbols[month - 1]
+    }
+    
+    func isToday() -> Bool {
+//        let calendar = NSCalendar.current
+//        let day = calendar.component(.day, from: self as Date)
+//        let month = calendar.component(.month, from: self as Date)
+//        let year = calendar.component(.year, from: self as Date)
+//        
+//        let today = NSDate()
+//        let todayDay = calendar.component(.day, from: today as Date)
+//        let todayMonth = calendar.component(.month, from: today as Date)
+//        let todayYear = calendar.component(.year, from: today as Date)
         
-        let today = NSDate()
-        let todayDay = calendar.component(.day, from: today as Date)
-        let todayMonth = calendar.component(.month, from: today as Date)
-        let todayYear = calendar.component(.year, from: today as Date)
-        
-        return todayDay == day && todayMonth == month && todayYear == year
+        return self.timeIntervalSinceNow <= 0
+        //return todayDay >= day && todayMonth >= month && todayYear >= year ||
     }
     
     func isThisWeek() -> Bool {
@@ -317,4 +346,12 @@ extension UITextView {
     }
 }
 
+func color(_ rgbColor: Int) -> UIColor{
+    return UIColor(
+        red:   CGFloat((rgbColor & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbColor & 0x00FF00) >> 8 ) / 255.0,
+        blue:  CGFloat((rgbColor & 0x0000FF) >> 0 ) / 255.0,
+        alpha: CGFloat(1.0)
+    )
+}
 

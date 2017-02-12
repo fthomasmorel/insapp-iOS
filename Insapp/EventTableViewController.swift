@@ -76,6 +76,7 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         self.refreshUI(reload: true)
+        self.refreshControl.beginRefreshing()
         DispatchQueue.global().async {
             self.fetchEvents()
         }
@@ -161,7 +162,9 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = self.events[indexPath.section][indexPath.row]
-        self.loadEvent(event: event)
+        if let association = self.associations[event.association!] {
+            self.load(event: event, association: association)
+        }
     }
     
     func refreshUI(reload:Bool = false){
@@ -186,10 +189,11 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func loadEvent(event: Event){
+    func load(event: Event, association: Association){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
         vc.event = event
+        vc.association = association
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -27,12 +27,12 @@ class SearchEventCell: UITableViewCell {
     }
     
     func load(event: Event){
-    eventImage.contentMode = .scaleAspectFill
-    eventImage.clipsToBounds = true
-    self.eventImage.downloadedFrom(link: kCDNHostname + event.photoURL!)
-    self.eventDate.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
-    self.eventName.text = event.name
-    self.backgroundColor = .clear
-    self.eventDate.textColor = UIColor(red:0.47, green:0.47, blue:0.47, alpha:1.0)
+        eventImage.contentMode = .scaleAspectFill
+        eventImage.clipsToBounds = true
+        self.eventImage.downloadedFrom(link: kCDNHostname + event.photoURL!)
+        self.eventDate.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
+        self.eventName.text = event.name
+        self.backgroundColor = .clear
+        self.eventDate.textColor = UIColor(red:0.47, green:0.47, blue:0.47, alpha:1.0)
     }
 }

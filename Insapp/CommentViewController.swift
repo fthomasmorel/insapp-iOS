@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+protocol CommentControllerDelegate {
+    func comment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ())
+    func uncomment(content: AnyObject, comment: Comment, completion: @escaping (AnyObject, String, NSDate, [Comment]) -> ())
+    func report(content: AnyObject, comment: Comment)
+}
+
 class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentViewDelegate, CommentCellDelegate {
     
     @IBOutlet weak var commentTableView: UITableView!
@@ -20,12 +26,16 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var listUserViewController:ListUserViewController!
     var users:[String:User]! = [:]
-    var post:Post!
+    var comments: [Comment]? = []
+    var date: NSDate!
+    var desc: String!
+    var content: AnyObject!
     var association:Association!
     var commentView:CommentView!
     var keyboardFrame:CGRect!
     var showKeyboard = false
     var activeComment: Comment?
+    var delegate: CommentControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,32 +88,32 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func fetchUsers(){
-        let users = Array(Set(self.post.comments!.map({ (comment) -> String in return comment.user_id! })))
+        let users = Array(Set(self.comments!.map({ (comment) -> String in return comment.user_id! })))
         self.users = [:]
         for userId in users {
+            self.fetchUserGroup.enter()
             DispatchQueue.global().async {
-                self.fetchUserGroup.enter()
                 APIManager.fetch(user_id: userId, controller: self, completion: { (opt_user) in
                     self.users[userId] = opt_user!
                     self.fetchUserGroup.leave()
                 })
             }
         }
-        DispatchQueue.global().async {
+        self.fetchUserGroup.notify(queue: DispatchQueue.main) { 
             self.reload()
         }
     }
     
     func reload(){
-        self.fetchUserGroup.wait()
-        DispatchQueue.main.async {
-            self.commentTableView.reloadData()
-            if let comment = self.activeComment, let row = self.post.comments?.index(of: comment){
-                let indexPath = IndexPath(row: row+1, section: 0)
-                self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-            }else{
-                self.scrollToBottom()
-            }
+        self.comments = self.comments?.sorted(by: { (commentA, commentB) -> Bool in
+            return commentA.date!.timeIntervalSince(commentB.date! as Date) < 0
+        })
+        self.commentTableView.reloadData()
+        if let comment = self.activeComment, let row = self.comments?.index(of: comment){
+            let indexPath = IndexPath(row: row+1, section: 0)
+            self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        }else{
+            self.scrollToBottom()
         }
     }
 
@@ -149,15 +159,17 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let user_id = User.fetch()!.id!
         let comment = Comment(comment_id: "", user_id: user_id, content: content, date: NSDate())
         comment.tags = tags
-        APIManager.comment(post_id: self.post.id!, comment: comment, controller: self) { (opt_post) in
-            guard let post = opt_post else { return }
-            self.post = post
-            self.fetchUsers()
+        self.delegate?.comment(content: self.content, comment: comment, completion: { (content, description, date, comments) in
             DispatchQueue.main.async {
+                self.comments = comments
+                self.desc = description
+                self.content = content
+                self.date = date
+                self.fetchUsers()
                 self.commentTableView.reloadData()
                 self.commentView.resignFirstResponder()
             }
-        }
+        })
     }
     
     func searchForUser(_ word: String) {
@@ -165,7 +177,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
             APIManager.searchUser(word: word, controller: self) { (users) in
                 if users.count > 0 {                    
                     self.listUserView.isHidden = false
-                    self.listUserViewController.users = users
+                    self.listUserViewController.users = [users]
                     self.listUserViewController.reloadUsers()
                     self.listUserViewController.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.keyboardFrame.height - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight), 0)
                 }else{
@@ -183,13 +195,13 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell) as! CommentCell
             cell.parent = self
-            cell.preloadAssociationComment(association: self.association, forPost: self.post)
+            cell.preloadAssociationComment(association: self.association, forText: self.desc, atDate: self.date)
             let textView = cell.viewWithTag(2) as! UITextView
             return (textView.contentSize.height + CGFloat(kCommentCellEmptyHeight))
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: kCommentCell) as! CommentCell
             cell.parent = self
-            cell.preloadUserComment(self.post.comments![indexPath.row-1])
+            cell.preloadUserComment(self.comments![indexPath.row-1])
             let textView = cell.viewWithTag(2) as! UITextView
             return (textView.contentSize.height + CGFloat(kCommentCellEmptyHeight))
         }
@@ -200,7 +212,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.users.count == 0 ? 0 : self.post.comments!.count) + 1
+        return (self.users.count == 0 ? 0 : self.comments!.count) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -213,13 +225,13 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func generateDescriptionCell(_ indexPath: IndexPath) -> UITableViewCell {
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.parent = self
-        cell.loadAssociationComment(association: self.association, forPost: self.post)
+        cell.loadAssociationComment(association: self.association, forText: self.desc, atDate: self.date)
         cell.delegate = self
         return cell
     }
     
     func generateCommentCell(_ indexPath: IndexPath) -> UITableViewCell {
-        let comment = self.post.comments![indexPath.row-1]
+        let comment = self.comments![indexPath.row-1]
         let user = self.users[comment.user_id!]!
         let cell = self.commentTableView.dequeueReusableCell(withIdentifier: kCommentCell, for: indexPath) as! CommentCell
         cell.parent = self
@@ -238,7 +250,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func report(comment: Comment){
         let alertController = Alert.create(alert: .reportComment) { report in
             if report {
-                APIManager.report(comment: comment, post: self.post, controller: self)
+                self.delegate?.report(content: self.content, comment: comment)
                 let alert = Alert.create(alert: .reportConfirmation)
                 self.present(alert, animated: true, completion: nil)
             }
@@ -247,10 +259,12 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func delete(comment: Comment) {
-        APIManager.uncomment(post_id: self.post.id!, comment_id: comment.id!, controller: self, completion: { (opt_post) in
-            guard let post = opt_post else { return }
-            self.post = post
+        self.delegate?.uncomment(content: self.content, comment: comment, completion: { (content, description, date, comments) in
             DispatchQueue.main.async {
+                self.comments = comments
+                self.desc = description
+                self.content = content
+                self.date = date
                 self.commentTableView.reloadData()
                 self.commentView.clearText()
             }

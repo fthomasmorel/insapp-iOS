@@ -64,8 +64,12 @@ let kAssociationSearchCell = "AssociationSearchCell"
 let kSeeMoreCell = "SeeMoreCell"
 
 //API
-let kAPIHostname = "https://insapp.fr/api/v1"
-let kCDNHostname = "https://insapp.fr/cdn/"
+//let kAPIHostname = "https://insapp.fr/api/v1"
+//let kCDNHostname = "https://insapp.fr/cdn/"
+let kAPIHostname = "https://dev.insapp.fr/api/v1"
+let kCDNHostname = "https://dev.insapp.fr/cdn/"
+//let kAPIHostname = "http://localhost:9010/api/v1"
+//let kCDNHostname = "http://localhost:9010/cdn/"
 let kCASHostname = "https://cas.insa-rennes.fr"
 let kLoginPassword = "password"
 let kLoginUsername = "username"
@@ -133,6 +137,9 @@ let kEventName           = "name"
 let kEventDescription    = "description"
 let kEventAssociation    = "association"
 let kEventAttendees      = "participants"
+let kEventMaybe          = "maybe"
+let kEventNotGoing       = "notgoing"
+let kEventComments       = "comments"
 let kEventDateStart      = "dateStart"
 let kEventDateEnd        = "dateEnd"
 let kEventBgColor        = "bgColor"
@@ -150,21 +157,23 @@ let kNotificationSeen       = "seen"
 let kNotificationDate       = "date"
 let kNotificationComment    = "comment"
 
-let kNotificationTypeEvent  = "event"
-let kNotificationTypePost   = "post"
-let kNotificationTypeTag    = "tag"
+let kNotificationTypeEvent      = "event"
+let kNotificationTypePost       = "post"
+let kNotificationTypeTag        = "tag"
+let kNotificationTypeEventTag   = "eventTag"
 
 
 //OTHER
 let kMaxDescriptionLength = 120
 let kSuggestCalendar = "kSuggestCalendar"
+let kBarCodeAmicalistCard = "kBarCodeAmicalistCard"
 
 let promotions = [
     "", "1STPI", "2STPI",
     "3EII", "3GM", "3GCU", "3GMA", "3INFO", "3SGM", "3SRC",
     "4EII", "4GM", "4GCU", "4GMA", "4INFO", "4SGM", "4SRC",
     "5EII", "5GM", "5GCU", "5GMA", "5INFO", "5SGM", "5SRC",
-    "Personnel/Enseignant"
+    "Alternant", "Personnel/Enseignant"
 ]
 
 let genders = [

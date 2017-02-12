@@ -33,18 +33,24 @@ class EditUserViewController: UIViewController {
         self.settingViewController?.genderTextField.text = convertGender[user!.gender!]
         
         NotificationCenter.default.addObserver(self, selector: #selector(EditUserViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EditUserViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.lightStatusBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
     }
     
     func keyboardWillShow(_ notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue
         self.keyboardHeightConstraint.constant = keyboardFrame.height
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        self.keyboardHeightConstraint.constant = 0
     }
     
     @IBAction func dismissAction(_ sender: AnyObject) {

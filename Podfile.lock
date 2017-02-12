@@ -3,6 +3,7 @@ PODS:
   - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
+  - FaveButton (2.0.3)
   - FirebaseAnalytics (3.3.1):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
@@ -25,12 +26,14 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Crashlytics
   - Fabric
+  - FaveButton (~> 2.0.3)
   - Google/Analytics
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  FaveButton: cfcbc5e73da159c4f916613da5687357b5bb4783
   FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
@@ -39,6 +42,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: 99fcbcae8849dcadb013152785260778b352019c
+PODFILE CHECKSUM: 31c0ee96476c18f206fd367843341e74a4b901d1
 
 COCOAPODS: 1.1.0.rc.1

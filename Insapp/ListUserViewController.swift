@@ -20,8 +20,8 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
     let fetchUserGroup = DispatchGroup()
     
     var delegate: ListUserDelegate?
-    var userIds:[String] = []
-    var users:[User] = []
+    var userIds:[[String]] = []
+    var users:[[User]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,26 +34,46 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
     
     func fetchUsers(){
         self.users = []
-        for userId in self.userIds {
-            DispatchQueue.global().async {
+        for i in 0...self.userIds.count-1 {
+            self.users.append([])
+            for userId in self.userIds[i] {
                 self.fetchUserGroup.enter()
-                APIManager.fetch(user_id: userId, controller: self, completion: { (user_opt) in
-                    self.users.append(user_opt!)
-                    self.fetchUserGroup.leave()
-                })
+                DispatchQueue.global().async {
+                    APIManager.fetch(user_id: userId, controller: self, completion: { (user_opt) in
+                        guard let user = user_opt else { self.fetchUserGroup.leave() ; return }
+                        self.users[i].append(user)
+                        self.fetchUserGroup.leave()
+                    })
+                }
             }
         }
-        DispatchQueue.global().async {
-            self.reloadUsers()
-        }
+        self.fetchUserGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+            DispatchQueue.main.async {
+                self.reloadUsers()
+            }
+        }))
     }
     
     func reloadUsers(){
-        self.fetchUserGroup.wait()
-        DispatchQueue.main.async {
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
+        self.tableView.isHidden = false
+        self.tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if users.count == 1 { return .none }
+        switch section {
+        case 0:
+            return "J'y vais"
+        case 1:
+            return "Peut-être"
+        default:
+            return "J'y vais pas"
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if users.count == 1 { return 0 }
+        return self.users[section].count > 0 ? 20 : 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -61,22 +81,22 @@ class ListUserViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.users.count
+        return self.users[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = self.users[indexPath.row]
+        let user = self.users[indexPath.section][indexPath.row]
         let cell = self.tableView.dequeueReusableCell(withIdentifier: kUserCell, for: indexPath) as! UserCell
         cell.load(user: user)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = self.users[indexPath.row]
+        let user = self.users[indexPath.section][indexPath.row]
         self.delegate?.didTouchUser(user)
     }
 }

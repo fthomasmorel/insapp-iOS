@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kAssociationHeaderCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kAssociationHeaderCell" rowHeight="233" id="KKV-rL-YmA" customClass="AssociationHeaderCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="233"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KKV-rL-YmA" id="sDY-gW-vkx">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="232.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@rocknsolex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="RHe-Ly-0QT">
+                        <rect key="frame" x="8" y="183" width="251" height="41"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="41" id="Tja-iI-Ksz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RHe-Ly-0QT" firstAttribute="top" secondItem="sDY-gW-vkx" secondAttribute="top" constant="183" id="7Xo-Pd-pvC"/>
+                    <constraint firstItem="RHe-Ly-0QT" firstAttribute="leading" secondItem="sDY-gW-vkx" secondAttribute="leading" constant="8" id="S7j-YQ-5Vg"/>
+                    <constraint firstAttribute="trailing" secondItem="RHe-Ly-0QT" secondAttribute="trailing" constant="116" id="S9e-Hq-sJ2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="RHe-Ly-0QT" id="a1a-Yu-v7G"/>
+            </connections>
+            <point key="canvasLocation" x="15.5" y="-33.5"/>
+        </tableViewCell>
+    </objects>
+</document>

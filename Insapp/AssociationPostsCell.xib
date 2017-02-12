@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kAssociationPostsCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kAssociationPostsCell" rowHeight="225" id="Nng-b8-BLY" customClass="AssociationPostsCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nng-b8-BLY" id="OTX-hK-uay">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="226.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Derniers Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y59-pG-ajm">
+                        <rect key="frame" x="8" y="8" width="248" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="248" id="9CU-LC-F3w"/>
+                            <constraint firstAttribute="height" constant="30" id="WHe-b4-5rJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Dbc-kb-Sjg">
+                        <rect key="frame" x="0.0" y="46" width="375" height="180"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="bY4-3W-5xp"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kli-fu-jVE">
+                            <size key="itemSize" width="170" height="170"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvN-KB-OOd">
+                        <rect key="frame" x="283" y="0.0" width="84" height="47"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="47" id="8AP-w4-Rc7"/>
+                            <constraint firstAttribute="width" constant="84" id="p6g-z2-5YP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="19"/>
+                        <state key="normal" title="Tout voir">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="seeAllAction:" destination="Nng-b8-BLY" eventType="touchUpInside" id="Qp5-IH-Xjc"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Dbc-kb-Sjg" firstAttribute="leading" secondItem="OTX-hK-uay" secondAttribute="leading" id="4AK-eR-H5q"/>
+                    <constraint firstItem="y59-pG-ajm" firstAttribute="top" secondItem="OTX-hK-uay" secondAttribute="top" constant="8" id="E5Y-JZ-OGc"/>
+                    <constraint firstAttribute="trailing" secondItem="vvN-KB-OOd" secondAttribute="trailing" constant="8" id="HxL-3z-xSB"/>
+                    <constraint firstItem="Dbc-kb-Sjg" firstAttribute="top" secondItem="y59-pG-ajm" secondAttribute="bottom" constant="8" id="RCD-kD-wre"/>
+                    <constraint firstAttribute="trailing" secondItem="Dbc-kb-Sjg" secondAttribute="trailing" id="Tob-Sg-mlc"/>
+                    <constraint firstItem="y59-pG-ajm" firstAttribute="leading" secondItem="OTX-hK-uay" secondAttribute="leading" constant="8" id="hhH-Zh-BOO"/>
+                    <constraint firstItem="vvN-KB-OOd" firstAttribute="top" secondItem="OTX-hK-uay" secondAttribute="top" id="ltx-EQ-Fck"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="Dbc-kb-Sjg" id="aY4-Yx-0uj"/>
+                <outlet property="seeAllbutton" destination="vvN-KB-OOd" id="kdG-s8-NW1"/>
+                <outlet property="titleLabel" destination="y59-pG-ajm" id="6g9-GL-J65"/>
+            </connections>
+            <point key="canvasLocation" x="-167.5" y="12.5"/>
+        </tableViewCell>
+    </objects>
+</document>

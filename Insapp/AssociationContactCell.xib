@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kAssociationContactCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="kAssociationContactCell" rowHeight="60" id="tw5-gD-E4E" customClass="AssociationContactCell" customModule="Insapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tw5-gD-E4E" id="NyS-dR-71g">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af5-C1-if7">
+                        <rect key="frame" x="8" y="0.0" width="359" height="59.5"/>
+                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-JA-WPm">
+                        <rect key="frame" x="8" y="0.0" width="359" height="0.5"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="st5-I8-sAt"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCK-5q-3s9">
+                        <rect key="frame" x="8" y="59" width="359" height="0.5"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="1x3-di-zJ2"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="af5-C1-if7" firstAttribute="top" secondItem="NyS-dR-71g" secondAttribute="top" id="3Fd-xF-vRi"/>
+                    <constraint firstAttribute="trailing" secondItem="pCK-5q-3s9" secondAttribute="trailing" constant="8" id="7kp-IL-e3D"/>
+                    <constraint firstAttribute="bottom" secondItem="pCK-5q-3s9" secondAttribute="bottom" id="E2W-Hs-l3v"/>
+                    <constraint firstAttribute="bottom" secondItem="af5-C1-if7" secondAttribute="bottom" id="IDS-bp-yZZ"/>
+                    <constraint firstItem="Eh8-JA-WPm" firstAttribute="leading" secondItem="NyS-dR-71g" secondAttribute="leading" constant="8" id="LEY-CV-0X6"/>
+                    <constraint firstAttribute="trailing" secondItem="Eh8-JA-WPm" secondAttribute="trailing" constant="8" id="LrQ-rc-NpT"/>
+                    <constraint firstItem="pCK-5q-3s9" firstAttribute="leading" secondItem="NyS-dR-71g" secondAttribute="leading" constant="8" id="ZbL-RX-kWl"/>
+                    <constraint firstItem="Eh8-JA-WPm" firstAttribute="top" secondItem="NyS-dR-71g" secondAttribute="top" id="ad6-wc-BmQ"/>
+                    <constraint firstAttribute="trailing" secondItem="af5-C1-if7" secondAttribute="trailing" constant="8" id="p5W-Bc-fX5"/>
+                    <constraint firstItem="af5-C1-if7" firstAttribute="leading" secondItem="NyS-dR-71g" secondAttribute="leading" constant="8" id="zeo-6a-pUS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contactLabel" destination="af5-C1-if7" id="7h9-pm-vzz"/>
+                <outlet property="lowerSeparator" destination="pCK-5q-3s9" id="DoG-4L-xXC"/>
+                <outlet property="upperSeparator" destination="Eh8-JA-WPm" id="X9v-wM-XVs"/>
+            </connections>
+            <point key="canvasLocation" x="23.5" y="-16"/>
+        </tableViewCell>
+    </objects>
+</document>

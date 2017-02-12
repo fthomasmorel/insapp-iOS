@@ -34,8 +34,15 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Used to add events to Calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan le code barre de ta carte amicaliste pour l'avoir dans ton téléphone :)</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

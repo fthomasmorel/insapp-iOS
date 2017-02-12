@@ -13,7 +13,7 @@ class SearchAssociationCell: UITableViewCell, UICollectionViewDataSource, UIColl
 
     @IBOutlet weak var associationCollectionView: UICollectionView!
     
-    var parent: UniversalSearchViewController!
+    var parent: UIViewController!
     var associations: [Association] = []
     var searchText: String!
     var assoSelected: Association?
@@ -40,8 +40,8 @@ class SearchAssociationCell: UITableViewCell, UICollectionViewDataSource, UIColl
             layout.minimumLineSpacing = 10
             layout.scrollDirection = .vertical
         }
-        self.associationCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kSearchAssociationCell)
         self.associationCollectionView.register(UINib(nibName: "AssociationSearchCell", bundle: nil), forCellWithReuseIdentifier: kAssociationSearchCell)
+        self.associationCollectionView.register(UINib(nibName: "AssociationCell", bundle: nil), forCellWithReuseIdentifier: kAssociationCell)
     }
     
     
@@ -76,25 +76,22 @@ class SearchAssociationCell: UITableViewCell, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if(more == 0) {
-        let cell = associationCollectionView.dequeueReusableCell(withReuseIdentifier: kAssociationSearchCell, for: indexPath as IndexPath) as! AssociationSearchCell
-        if(indexPath.row == 5 && self.associations.count > 6 && more == 0) {
-            cell.associationImageView.image = #imageLiteral(resourceName: "plus")
-            cell.associationNameLabel.text = "\"\(self.searchText!)\""
-        }
-        else {
-            let association = self.associations[indexPath.row]
-            cell.load(association: association)
-        }
-        cell.associationImageView.layer.cornerRadius = 30
-        cell.associationImageView.layer.masksToBounds = true
-        cell.associationImageView.backgroundColor = kWhiteColor
-        
-        return cell
-        }
-        else {
-            let association = self.associations[indexPath.row]
             let cell = associationCollectionView.dequeueReusableCell(withReuseIdentifier: kAssociationSearchCell, for: indexPath as IndexPath) as! AssociationSearchCell
-            cell.more = 1
+            if(indexPath.row == 5 && self.associations.count > 6 && more == 0) {
+                cell.associationImageView.image = #imageLiteral(resourceName: "plus")
+                cell.associationNameLabel.text = "\"\(self.searchText!)\""
+            }else {
+                let association = self.associations[indexPath.row]
+                cell.load(association: association)
+            }
+            cell.associationImageView.layer.cornerRadius = 30
+            cell.associationImageView.layer.masksToBounds = true
+            cell.associationImageView.backgroundColor = kWhiteColor
+        
+            return cell
+        }else{
+            let association = self.associations[indexPath.row]
+            let cell = self.associationCollectionView.dequeueReusableCell(withReuseIdentifier: kAssociationCell, for: indexPath) as! AssociationCell
             cell.load(association: association)
             return cell
         }

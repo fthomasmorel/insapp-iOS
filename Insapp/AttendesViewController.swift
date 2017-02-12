@@ -11,13 +11,15 @@ import UIKit
 
 class AttendesViewController: UIViewController, ListUserDelegate {
     
-    var userIds:[String] = []
+    var going:[String] = []
+    var notgoing:[String] = []
+    var maybe:[String] = []
     var listUserViewController: ListUserViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.listUserViewController = self.childViewControllers.last as? ListUserViewController
-        self.listUserViewController?.userIds = userIds
+        self.listUserViewController?.userIds = [going, maybe, notgoing]
         self.listUserViewController?.fetchUsers()
         self.listUserViewController?.delegate = self
     }

@@ -48,11 +48,12 @@ public class Notification: NSManagedObject {
         guard let date      = dateStr.dateFromISO8602                   else { return .none }
         guard type == kNotificationTypeEvent ||
               type == kNotificationTypePost  ||
-              type == kNotificationTypeTag   else { return .none }
+              type == kNotificationTypeTag   ||
+              type == kNotificationTypeEventTag else { return .none }
         
         let notification = Notification(id: id, sender: sender, receiver: receiver, content: content, type: type, message: message, seen: seen, date: date as NSDate)
         
-        if type == kNotificationTypeTag {
+        if type == kNotificationTypeTag || type == kNotificationTypeEventTag {
             guard let commentJson   = json[kNotificationComment] as? Dictionary<String, AnyObject>  else { return .none }
             guard let comment       = Comment.parseJson(commentJson)                                else { return .none }
             notification.comment = comment

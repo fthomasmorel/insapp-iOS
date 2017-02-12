@@ -23,6 +23,21 @@
 		7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBA1DD1CCFE00BDA8A1 /* SearchPostCell.xib */; };
 		7DBEFCBD1DD1D49F00BDA8A1 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */; };
 		9AA51A7D696DE37EA2028636 /* Pods_Insapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */; };
+		E119D06C1E4879F600C10A64 /* EventTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D06B1E4879F600C10A64 /* EventTabView.xib */; };
+		E119D06E1E487DBB00C10A64 /* EventHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */; };
+		E119D0721E487FA300C10A64 /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0711E487FA300C10A64 /* EventHeaderCell.swift */; };
+		E119D0751E48BA3D00C10A64 /* EventTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0741E48BA3D00C10A64 /* EventTabView.swift */; };
+		E119D0771E48BEBF00C10A64 /* EventDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */; };
+		E119D0791E48BFC300C10A64 /* EventDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */; };
+		E119D07B1E49B6E100C10A64 /* EventCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */; };
+		E119D07D1E49B7BF00C10A64 /* EventCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */; };
+		E119D0801E49F3CB00C10A64 /* AssociationHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D07F1E49F3CB00C10A64 /* AssociationHeaderCell.xib */; };
+		E119D0831E49F5D800C10A64 /* AssociationHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0821E49F5D800C10A64 /* AssociationHeaderCell.swift */; };
+		E119D0861E49FBFC00C10A64 /* AssociationPostsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D0851E49FBFC00C10A64 /* AssociationPostsCell.xib */; };
+		E119D0881E4A02BD00C10A64 /* AssociationPostsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D0871E4A02BD00C10A64 /* AssociationPostsCell.swift */; };
+		E119D08A1E4A08AB00C10A64 /* ImagePostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D0891E4A08AB00C10A64 /* ImagePostCell.xib */; };
+		E119D08C1E4A3F1100C10A64 /* AssociationEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E119D08B1E4A3F1100C10A64 /* AssociationEventsCell.xib */; };
+		E119D08E1E4A408000C10A64 /* AssociationEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E119D08D1E4A408000C10A64 /* AssociationEventsCell.swift */; };
 		E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8291DA147D40029C051 /* AttendesViewController.swift */; };
 		E11EE8351DA173C40029C051 /* CommentTag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */; };
 		E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */; };
@@ -31,6 +46,12 @@
 		E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83B1DA247DD0029C051 /* Notification+CoreDataClass.swift */; };
 		E11EE83E1DA247DD0029C051 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83C1DA247DD0029C051 /* Notification+CoreDataProperties.swift */; };
 		E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE83F1DA24C960029C051 /* NotificationViewController.swift */; };
+		E12E45831E4A5A0B004D0C44 /* AssociationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E45821E4A5A0B004D0C44 /* AssociationDescriptionCell.swift */; };
+		E12E45851E4A5A13004D0C44 /* AssociationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */; };
+		E12E45871E4AFDFF004D0C44 /* AssociationContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */; };
+		E12E45891E4AFE89004D0C44 /* AssociationContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */; };
+		E12E458B1E4B0205004D0C44 /* AssociationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E458A1E4B0205004D0C44 /* AssociationCell.xib */; };
+		E12E458E1E4BAF87004D0C44 /* UserEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E458D1E4BAF87004D0C44 /* UserEventsCell.xib */; };
 		E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E181C7051D8DA02D00CE3D5B /* EventListCell.xib */; };
 		E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7071D8DA11100CE3D5B /* EventListCell.swift */; };
 		E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */; };
@@ -52,7 +73,6 @@
 		E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD11D8AD1A200B9F517 /* CommentView.swift */; };
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
-		E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */; };
 		E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */; };
 		E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
@@ -78,6 +98,10 @@
 		E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9F41D897609006A66CF /* Post+CoreDataProperties.swift */; };
 		E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C3F9F71D89831E006A66CF /* PostCell.xib */; };
 		E1C3F9FA1D8A88D0006A66CF /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9F91D8A88D0006A66CF /* PostCell.swift */; };
+		E1CBCF6B1E4C5C56006253ED /* UserEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CBCF6A1E4C5C56006253ED /* UserEventsCell.swift */; };
+		E1CBCF6D1E4C6218006253ED /* UserEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CBCF6C1E4C6218006253ED /* UserEventListViewController.swift */; };
+		E1CBCF701E4C695F006253ED /* UserDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CBCF6F1E4C695F006253ED /* UserDescriptionCell.xib */; };
+		E1CBCF721E4C6989006253ED /* UserDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CBCF711E4C6989006253ED /* UserDescriptionCell.swift */; };
 		E1CEB4891E3D02F500F84CB1 /* GifSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */; };
 		E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F091D86E2C900284222 /* AppDelegate.swift */; };
 		E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DC7F0D1D86E2C900284222 /* Main.storyboard */; };
@@ -93,6 +117,11 @@
 		E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */; };
 		E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */; };
 		E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E01CD31DA8EDE20082E88A /* Alert.swift */; };
+		E1F96D1B1E4DB8810050C1F8 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */; };
+		E1F96D1D1E4DBECB0050C1F8 /* UserBarCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */; };
+		E1F96D1F1E4DBEE40050C1F8 /* UserBarCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */; };
+		E1F96D211E4DC9870050C1F8 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */; };
+		E1F96D231E4DC9B70050C1F8 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +142,21 @@
 		7DBEFCBC1DD1D49F00BDA8A1 /* SearchPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07F8504F090A6CA8BCC8915 /* Pods-Insapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E119D06B1E4879F600C10A64 /* EventTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTabView.xib; sourceTree = "<group>"; };
+		E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventHeaderCell.xib; sourceTree = "<group>"; };
+		E119D0711E487FA300C10A64 /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
+		E119D0741E48BA3D00C10A64 /* EventTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabView.swift; sourceTree = "<group>"; };
+		E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionCell.xib; sourceTree = "<group>"; };
+		E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionCell.swift; sourceTree = "<group>"; };
+		E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCommentCell.xib; sourceTree = "<group>"; };
+		E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCommentCell.swift; sourceTree = "<group>"; };
+		E119D07F1E49F3CB00C10A64 /* AssociationHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationHeaderCell.xib; sourceTree = "<group>"; };
+		E119D0821E49F5D800C10A64 /* AssociationHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationHeaderCell.swift; sourceTree = "<group>"; };
+		E119D0851E49FBFC00C10A64 /* AssociationPostsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationPostsCell.xib; sourceTree = "<group>"; };
+		E119D0871E4A02BD00C10A64 /* AssociationPostsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationPostsCell.swift; sourceTree = "<group>"; };
+		E119D0891E4A08AB00C10A64 /* ImagePostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePostCell.xib; sourceTree = "<group>"; };
+		E119D08B1E4A3F1100C10A64 /* AssociationEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationEventsCell.xib; sourceTree = "<group>"; };
+		E119D08D1E4A408000C10A64 /* AssociationEventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationEventsCell.swift; sourceTree = "<group>"; };
 		E11EE8291DA147D40029C051 /* AttendesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendesViewController.swift; sourceTree = "<group>"; };
 		E11EE8331DA173C40029C051 /* CommentTag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E11EE8341DA173C40029C051 /* CommentTag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentTag+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -121,6 +165,14 @@
 		E11EE83B1DA247DD0029C051 /* Notification+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E11EE83C1DA247DD0029C051 /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E11EE83F1DA24C960029C051 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		E12E45821E4A5A0B004D0C44 /* AssociationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationDescriptionCell.swift; sourceTree = "<group>"; };
+		E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationDescriptionCell.xib; sourceTree = "<group>"; };
+		E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationContactCell.xib; sourceTree = "<group>"; };
+		E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationContactCell.swift; sourceTree = "<group>"; };
+		E12E458A1E4B0205004D0C44 /* AssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationCell.xib; sourceTree = "<group>"; };
+		E12E458D1E4BAF87004D0C44 /* UserEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserEventsCell.xib; sourceTree = "<group>"; };
+		E153883C1E507C46007DF493 /* Insapp_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Insapp_2.xcdatamodel; sourceTree = "<group>"; };
+		E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Insapp 2.xcdatamodel"; sourceTree = "<group>"; };
 		E181C7051D8DA02D00CE3D5B /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -144,7 +196,6 @@
 		E19F7CD11D8AD1A200B9F517 /* CommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
 		E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -170,6 +221,10 @@
 		E1C3F9F41D897609006A66CF /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9F71D89831E006A66CF /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		E1C3F9F91D8A88D0006A66CF /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		E1CBCF6A1E4C5C56006253ED /* UserEventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventsCell.swift; sourceTree = "<group>"; };
+		E1CBCF6C1E4C6218006253ED /* UserEventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventListViewController.swift; sourceTree = "<group>"; };
+		E1CBCF6F1E4C695F006253ED /* UserDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDescriptionCell.xib; sourceTree = "<group>"; };
+		E1CBCF711E4C6989006253ED /* UserDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionCell.swift; sourceTree = "<group>"; };
 		E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifSupport.swift; sourceTree = "<group>"; };
 		E1DC7F061D86E2C900284222 /* Insapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Insapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DC7F091D86E2C900284222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +242,13 @@
 		E1DC7F631D86FBAB00284222 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1DC7F641D86FBAB00284222 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1E01CD31DA8EDE20082E88A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
+		E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserBarCodeCell.xib; sourceTree = "<group>"; };
+		E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBarCodeCell.swift; sourceTree = "<group>"; };
+		E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		E1F96D241E4F24B20050C1F8 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Insapp-fpvrmazddeqndybobxdsewkwjnoh/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		E1F96D251E4F24B20050C1F8 /* FaveButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FaveButton.framework; path = "../../Library/Developer/Xcode/DerivedData/Insapp-fpvrmazddeqndybobxdsewkwjnoh/Build/Products/Debug-iphonesimulator/FaveButton/FaveButton.framework"; sourceTree = "<group>"; };
 		FF193D226DDB96C99A3FA380 /* Pods-Insapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insapp/Pods-Insapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,6 +276,8 @@
 		1C1A49BC4867010B04E15155 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1F96D241E4F24B20050C1F8 /* Alamofire.framework */,
+				E1F96D251E4F24B20050C1F8 /* FaveButton.framework */,
 				91F3E8AD26D80FD2335AF851 /* Pods_Insapp.framework */,
 			);
 			name = Frameworks;
@@ -254,6 +318,98 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
+		E119D06F1E487DBF00C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E1C3F9EA1D895008006A66CF /* EventCell.xib */,
+				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
+				E119D06D1E487DBB00C10A64 /* EventHeaderCell.xib */,
+				E119D06B1E4879F600C10A64 /* EventTabView.xib */,
+				E119D0761E48BEBF00C10A64 /* EventDescriptionCell.xib */,
+				E119D07A1E49B6E100C10A64 /* EventCommentCell.xib */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		E119D0701E487F8900C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E119D0711E487FA300C10A64 /* EventHeaderCell.swift */,
+				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
+				E1C3F9ED1D8951D7006A66CF /* EventCell.swift */,
+				E119D0741E48BA3D00C10A64 /* EventTabView.swift */,
+				E119D0781E48BFC300C10A64 /* EventDescriptionCell.swift */,
+				E119D07C1E49B7BF00C10A64 /* EventCommentCell.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		E119D0731E4880F600C10A64 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
+				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		E119D07E1E49F34A00C10A64 /* Association */ = {
+			isa = PBXGroup;
+			children = (
+				E1C3F9DA1D8855F8006A66CF /* AssociationCollectionViewController.swift */,
+				E1C3F9DC1D8874EA006A66CF /* AssociationViewController.swift */,
+			);
+			name = Association;
+			sourceTree = "<group>";
+		};
+		E119D0811E49F5C500C10A64 /* Association */ = {
+			isa = PBXGroup;
+			children = (
+				E119D0821E49F5D800C10A64 /* AssociationHeaderCell.swift */,
+				E119D0871E4A02BD00C10A64 /* AssociationPostsCell.swift */,
+				E119D08D1E4A408000C10A64 /* AssociationEventsCell.swift */,
+				E12E45821E4A5A0B004D0C44 /* AssociationDescriptionCell.swift */,
+				E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */,
+				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
+			);
+			name = Association;
+			sourceTree = "<group>";
+		};
+		E119D0841E49FBE500C10A64 /* Association */ = {
+			isa = PBXGroup;
+			children = (
+				E119D07F1E49F3CB00C10A64 /* AssociationHeaderCell.xib */,
+				E119D0851E49FBFC00C10A64 /* AssociationPostsCell.xib */,
+				E119D0891E4A08AB00C10A64 /* ImagePostCell.xib */,
+				E119D08B1E4A3F1100C10A64 /* AssociationEventsCell.xib */,
+				E12E45841E4A5A13004D0C44 /* AssociationDescriptionCell.xib */,
+				E12E45861E4AFDFF004D0C44 /* AssociationContactCell.xib */,
+				E12E458A1E4B0205004D0C44 /* AssociationCell.xib */,
+			);
+			name = Association;
+			sourceTree = "<group>";
+		};
+		E12E458C1E4BAF7E004D0C44 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E12E458D1E4BAF87004D0C44 /* UserEventsCell.xib */,
+				E193DD871D9E73B700478B52 /* UserCell.xib */,
+				E1CBCF6F1E4C695F006253ED /* UserDescriptionCell.xib */,
+				E1F96D1C1E4DBECB0050C1F8 /* UserBarCodeCell.xib */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		E12E458F1E4BB066004D0C44 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E1CBCF6A1E4C5C56006253ED /* UserEventsCell.swift */,
+				E1CBCF711E4C6989006253ED /* UserDescriptionCell.swift */,
+				E1F96D1E1E4DBEE40050C1F8 /* UserBarCodeCell.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		E1C3F9CE1D87F802006A66CF /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,18 +428,13 @@
 		E1C3F9D31D88037A006A66CF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E1CBCF6E1E4C621C006253ED /* User */,
+				E119D07E1E49F34A00C10A64 /* Association */,
+				E119D0731E4880F600C10A64 /* Event */,
 				7D09F78E1E0C5DEC00B93A6E /* Search */,
 				E1C3F9D11D87FC07006A66CF /* SplashScreenViewController.swift */,
-				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
-				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
-				E1C3F9D81D8837E7006A66CF /* EditUserViewController.swift */,
-				E1C3F9DA1D8855F8006A66CF /* AssociationCollectionViewController.swift */,
-				E1C3F9DC1D8874EA006A66CF /* AssociationViewController.swift */,
-				E1C3F9DE1D8940D8006A66CF /* EventViewController.swift */,
-				E1C3F9E81D894E40006A66CF /* EventTableViewController.swift */,
 				E1C3F9EF1D897142006A66CF /* NewsViewController.swift */,
 				E19F7CC91D8AC1D700B9F517 /* CommentViewController.swift */,
-				E19F7CD71D8C198D00B9F517 /* EventListViewController.swift */,
 				E192C1E81D9119C900355512 /* TutorialPageViewController.swift */,
 				E192C1EA1D911A2F00355512 /* TutorialViewController.swift */,
 				E192C1EC1D93C98C00355512 /* CreditViewController.swift */,
@@ -311,16 +462,17 @@
 		E1C3F9E71D894C00006A66CF /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				E12E458C1E4BAF7E004D0C44 /* User */,
+				E119D0841E49FBE500C10A64 /* Association */,
+				E119D06F1E487DBF00C10A64 /* Event */,
 				7D7468901E0A8EC800F2FD53 /* Search */,
 				E1DC7F0D1D86E2C900284222 /* Main.storyboard */,
 				E1DC7F151D86E2C900284222 /* LaunchScreen.storyboard */,
-				E1C3F9EA1D895008006A66CF /* EventCell.xib */,
 				E1C3F9F71D89831E006A66CF /* PostCell.xib */,
 				E19F7CCB1D8AC37800B9F517 /* CommentCell.xib */,
 				E19F7CCF1D8AD09500B9F517 /* CommentView.xib */,
-				E181C7051D8DA02D00CE3D5B /* EventListCell.xib */,
-				E193DD871D9E73B700478B52 /* UserCell.xib */,
 				E11EE8371DA245C20029C051 /* NotificationCell.xib */,
+				E1F96D201E4DC9870050C1F8 /* LoadingCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -328,17 +480,30 @@
 		E1C3F9EC1D8951CC006A66CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E12E458F1E4BB066004D0C44 /* User */,
+				E119D0811E49F5C500C10A64 /* Association */,
+				E119D0701E487F8900C10A64 /* Event */,
 				7D09F78D1E0C5DC900B93A6E /* Search */,
-				E1C3F9ED1D8951D7006A66CF /* EventCell.swift */,
 				E1C3F9F91D8A88D0006A66CF /* PostCell.swift */,
 				E19F7CCD1D8AC4C600B9F517 /* CommentCell.swift */,
 				E19F7CD11D8AD1A200B9F517 /* CommentView.swift */,
-				E181C7071D8DA11100CE3D5B /* EventListCell.swift */,
-				E181C70F1D8DBC6A00CE3D5B /* AssociationCell.swift */,
 				E193DD891D9E745400478B52 /* UserCell.swift */,
 				E11EE8391DA246A30029C051 /* NotificationCell.swift */,
+				E1F96D221E4DC9B70050C1F8 /* LoadingCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		E1CBCF6E1E4C621C006253ED /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E1C3F9D81D8837E7006A66CF /* EditUserViewController.swift */,
+				E1C3F9D61D88365D006A66CF /* EditUserTableViewController.swift */,
+				E1C3F9D41D8803D2006A66CF /* UserViewController.swift */,
+				E1CBCF6C1E4C6218006253ED /* UserEventListViewController.swift */,
+				E1F96D1A1E4DB8810050C1F8 /* BarCodeViewController.swift */,
+			);
+			name = User;
 			sourceTree = "<group>";
 		};
 		E1DC7EFD1D86E2C900284222 = {
@@ -474,23 +639,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E119D08C1E4A3F1100C10A64 /* AssociationEventsCell.xib in Resources */,
 				E11EE8381DA245C20029C051 /* NotificationCell.xib in Resources */,
+				E119D0861E49FBFC00C10A64 /* AssociationPostsCell.xib in Resources */,
 				E181C7061D8DA02D00CE3D5B /* EventListCell.xib in Resources */,
+				E119D08A1E4A08AB00C10A64 /* ImagePostCell.xib in Resources */,
+				E12E45871E4AFDFF004D0C44 /* AssociationContactCell.xib in Resources */,
 				7D128FE81DEB894A00BD3661 /* SearchAssociationCell.xib in Resources */,
+				E119D06E1E487DBB00C10A64 /* EventHeaderCell.xib in Resources */,
 				E1C3F9EB1D895008006A66CF /* EventCell.xib in Resources */,
+				E1F96D1D1E4DBECB0050C1F8 /* UserBarCodeCell.xib in Resources */,
 				7DBEFCBB1DD1CCFE00BDA8A1 /* SearchPostCell.xib in Resources */,
 				E192C1EF1D9427AE00355512 /* GoogleService-Info.plist in Resources */,
+				E119D07B1E49B6E100C10A64 /* EventCommentCell.xib in Resources */,
 				E1DC7F171D86E2C900284222 /* LaunchScreen.storyboard in Resources */,
 				7D0C40D01DEAECE3005FE515 /* SearchUserCell.xib in Resources */,
 				E193DD881D9E73B700478B52 /* UserCell.xib in Resources */,
 				E1C3F9F81D89831E006A66CF /* PostCell.xib in Resources */,
 				E19F7CD01D8AD09500B9F517 /* CommentView.xib in Resources */,
+				E12E458E1E4BAF87004D0C44 /* UserEventsCell.xib in Resources */,
 				E19F7CCC1D8AC37800B9F517 /* CommentCell.xib in Resources */,
+				E1CBCF701E4C695F006253ED /* UserDescriptionCell.xib in Resources */,
 				E1DC7F141D86E2C900284222 /* Assets.xcassets in Resources */,
+				E12E45851E4A5A13004D0C44 /* AssociationDescriptionCell.xib in Resources */,
 				7D0F88431DEDCC3E00E740F2 /* AssociationSearchCell.xib in Resources */,
+				E12E458B1E4B0205004D0C44 /* AssociationCell.xib in Resources */,
+				E119D0771E48BEBF00C10A64 /* EventDescriptionCell.xib in Resources */,
 				7D1591861DE49E44001F949E /* SearchEventCell.xib in Resources */,
+				E119D0801E49F3CB00C10A64 /* AssociationHeaderCell.xib in Resources */,
 				E1DC7F0F1D86E2C900284222 /* Main.storyboard in Resources */,
 				7D9D50EC1DF40837002AC837 /* SeeMoreCell.xib in Resources */,
+				E1F96D211E4DC9870050C1F8 /* LoadingCell.xib in Resources */,
+				E119D06C1E4879F600C10A64 /* EventTabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,20 +754,24 @@
 				E1C3F9DF1D8940D8006A66CF /* EventViewController.swift in Sources */,
 				E1C3F9F51D897609006A66CF /* Post+CoreDataClass.swift in Sources */,
 				7D128FEA1DEB899100BD3661 /* SearchAssociationCell.swift in Sources */,
+				E119D0791E48BFC300C10A64 /* EventDescriptionCell.swift in Sources */,
 				E1DC7F661D86FBAB00284222 /* User+CoreDataProperties.swift in Sources */,
 				E11EE8401DA24C960029C051 /* NotificationViewController.swift in Sources */,
+				E1F96D1B1E4DB8810050C1F8 /* BarCodeViewController.swift in Sources */,
 				E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */,
 				E19F7CCE1D8AC4C600B9F517 /* CommentCell.swift in Sources */,
 				E11EE8361DA173C40029C051 /* CommentTag+CoreDataProperties.swift in Sources */,
 				7D0C40D21DEAEDDC005FE515 /* SearchUserCell.swift in Sources */,
-				E19F7CD81D8C198D00B9F517 /* EventListViewController.swift in Sources */,
 				E1C3F9E61D894BDB006A66CF /* Extension.swift in Sources */,
 				7D051D8B1DCB8B1500DED954 /* UniversalSearchViewController.swift in Sources */,
+				E119D08E1E4A408000C10A64 /* AssociationEventsCell.swift in Sources */,
+				E1CBCF721E4C6989006253ED /* UserDescriptionCell.swift in Sources */,
 				E1DC7F671D86FBAB00284222 /* Association+CoreDataClass.swift in Sources */,
 				E193DD8A1D9E745400478B52 /* UserCell.swift in Sources */,
 				7D1591881DE49EB0001F949E /* SearchEventCell.swift in Sources */,
 				E1C3F9EE1D8951D7006A66CF /* EventCell.swift in Sources */,
 				E181C70C1D8DB44E00CE3D5B /* Image+CoreDataProperties.swift in Sources */,
+				E119D0881E4A02BD00C10A64 /* AssociationPostsCell.swift in Sources */,
 				E1C3F9F01D897142006A66CF /* NewsViewController.swift in Sources */,
 				7D7468921E0A911000F2FD53 /* SeeMoreViewController.swift in Sources */,
 				E1DC7F121D86E2C900284222 /* Insapp.xcdatamodeld in Sources */,
@@ -596,25 +780,33 @@
 				7DBEFCBD1DD1D49F00BDA8A1 /* SearchPostCell.swift in Sources */,
 				E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */,
 				E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */,
+				E1CBCF6D1E4C6218006253ED /* UserEventListViewController.swift in Sources */,
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,
 				7D9D50EE1DF40875002AC837 /* SeeMoreCell.swift in Sources */,
+				E119D07D1E49B7BF00C10A64 /* EventCommentCell.swift in Sources */,
 				E1DC7F681D86FBAB00284222 /* Association+CoreDataProperties.swift in Sources */,
 				E1C3F9D91D8837E7006A66CF /* EditUserViewController.swift in Sources */,
 				E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */,
+				E12E45831E4A5A0B004D0C44 /* AssociationDescriptionCell.swift in Sources */,
 				E1C3F9E91D894E40006A66CF /* EventTableViewController.swift in Sources */,
 				E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */,
 				E181C7081D8DA11100CE3D5B /* EventListCell.swift in Sources */,
 				E1C3F9E11D8946C8006A66CF /* APIManager+Event.swift in Sources */,
 				E1C3F9CD1D87F7E0006A66CF /* APIManager+Login.swift in Sources */,
+				E119D0721E487FA300C10A64 /* EventHeaderCell.swift in Sources */,
+				E1CBCF6B1E4C5C56006253ED /* UserEventsCell.swift in Sources */,
 				E1C3F9DB1D8855F8006A66CF /* AssociationCollectionViewController.swift in Sources */,
+				E119D0831E49F5D800C10A64 /* AssociationHeaderCell.swift in Sources */,
 				E1DC7F6C1D86FBAB00284222 /* Event+CoreDataProperties.swift in Sources */,
 				E1DC7F5C1D86F52700284222 /* APIManager.swift in Sources */,
 				E1DC7F0A1D86E2C900284222 /* AppDelegate.swift in Sources */,
 				E193DD861D9E72EF00478B52 /* ListUserViewController.swift in Sources */,
 				E192C1EB1D911A2F00355512 /* TutorialViewController.swift in Sources */,
 				E192C1E41D90131500355512 /* Constant.swift in Sources */,
+				E1F96D1F1E4DBEE40050C1F8 /* UserBarCodeCell.swift in Sources */,
 				7D051D8D1DCB909300DED954 /* APIManager+Search.swift in Sources */,
+				E12E45891E4AFE89004D0C44 /* AssociationContactCell.swift in Sources */,
 				E1DC7F651D86FBAB00284222 /* User+CoreDataClass.swift in Sources */,
 				E11EE82A1DA147D40029C051 /* AttendesViewController.swift in Sources */,
 				E1C3F9F61D897609006A66CF /* Post+CoreDataProperties.swift in Sources */,
@@ -623,11 +815,13 @@
 				E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */,
 				E192C1E61D90277000355512 /* APIManager+Notification.swift in Sources */,
 				E1C3F9D01D87F817006A66CF /* APIManager+User.swift in Sources */,
+				E1F96D231E4DC9B70050C1F8 /* LoadingCell.swift in Sources */,
 				E192C1ED1D93C98C00355512 /* CreditViewController.swift in Sources */,
 				E192C1E91D9119C900355512 /* TutorialPageViewController.swift in Sources */,
 				E11EE83D1DA247DD0029C051 /* Notification+CoreDataClass.swift in Sources */,
 				E19F7CD21D8AD1A200B9F517 /* CommentView.swift in Sources */,
 				E11EE83E1DA247DD0029C051 /* Notification+CoreDataProperties.swift in Sources */,
+				E119D0751E48BA3D00C10A64 /* EventTabView.swift in Sources */,
 				E19F7CCA1D8AC1D700B9F517 /* CommentViewController.swift in Sources */,
 				E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */,
 			);
@@ -761,11 +955,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -785,11 +981,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9JPSY4Q8SW;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Insapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thomasmorel.insapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Insapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -823,9 +1022,11 @@
 		E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */,
+				E153883C1E507C46007DF493 /* Insapp_2.xcdatamodel */,
 				E1DC7F111D86E2C900284222 /* Insapp.xcdatamodel */,
 			);
-			currentVersion = E1DC7F111D86E2C900284222 /* Insapp.xcdatamodel */;
+			currentVersion = E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */;
 			path = Insapp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

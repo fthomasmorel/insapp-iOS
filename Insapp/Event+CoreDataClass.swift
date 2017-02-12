@@ -20,13 +20,16 @@ public class Event: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
-    init(event_id: String, name: String, association: String, attendes: [String], dateStart: NSDate, dateEnd: NSDate, fgColor: String, bgColor: String, photoURL: String, description: String){
+    init(event_id: String, name: String, association: String, attendes: [String], maybe: [String], notgoing: [String], dateStart: NSDate, dateEnd: NSDate, fgColor: String, bgColor: String, photoURL: String, description: String){
         super.init(entity: Event.entityDescription!, insertInto: Event.managedContext)
         self.id = event_id
         self.name = name
         self.desc = description
         self.association = association
         self.attendees = attendes
+        self.maybe = maybe
+        self.notgoing = notgoing
+        self.comments = []
         self.dateStart = dateStart
         self.dateEnd = dateEnd
         self.photoURL = photoURL
@@ -48,15 +51,24 @@ public class Event: NSManagedObject {
         guard let dateStart = dateStartStr.dateFromISO8601           else { return .none }
         guard let dateEnd = dateEndStr.dateFromISO8601               else { return .none }
         
-        let event = Event(event_id: id, name: name, association: association, attendes: [], dateStart: dateStart, dateEnd: dateEnd, fgColor: fgColor, bgColor: bgColor, photoURL: photoURL, description: desc)
+        let event = Event(event_id: id, name: name, association: association, attendes: [], maybe: [], notgoing: [], dateStart: dateStart, dateEnd: dateEnd, fgColor: fgColor, bgColor: bgColor, photoURL: photoURL, description: desc)
         
         if let attendees = json[kEventAttendees] as? [String] {
             event.attendees = attendees
         }
+        if let maybe = json[kEventMaybe] as? [String] {
+            event.maybe = maybe
+        }
+        if let notgoing = json[kEventNotGoing] as? [String] {
+            event.notgoing = notgoing
+        }
         if let status = json[kEventStatus] as? String {
             event.status = status
         }
-        
+        if let commentsJson  = json[kEventComments] as? [Dictionary<String, AnyObject>] {
+            let comments = Comment.parseJsonArray(commentsJson as [Dictionary<String, AnyObject>])
+            event.comments = comments
+        }
         return event
     }
     
@@ -85,6 +97,12 @@ public class Event: NSManagedObject {
     static func filter(events: [Event]) -> [Event] {
         return events.filter({ (event) -> Bool in
             return event.dateEnd!.timeIntervalSinceNow > 0
+        })
+    }
+    
+    static func filterPast(events: [Event]) -> [Event] {
+        return events.filter({ (event) -> Bool in
+            return event.dateEnd!.timeIntervalSinceNow < 0
         })
     }
     

@@ -14,7 +14,7 @@ class SearchPostCell: UITableViewCell, UICollectionViewDataSource, UICollectionV
     
     var delegate: PostCellDelegate?
     var posts: [Post] = []
-    var parent: UniversalSearchViewController!
+    var parent: UIViewController!
     var more = 0
     
     override func awakeFromNib() {

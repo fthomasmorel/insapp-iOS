@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A313a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Association" representedClassName=".Association" syncable="YES">
+        <attribute name="bgColor" attributeType="String" syncable="YES"/>
+        <attribute name="coverPhotoURL" attributeType="String" syncable="YES"/>
+        <attribute name="desc" attributeType="String" syncable="YES"/>
+        <attribute name="email" attributeType="String" syncable="YES"/>
+        <attribute name="events" attributeType="Transformable" customClassName="Array&lt;Event&gt;" syncable="YES"/>
+        <attribute name="fgColor" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="posts" attributeType="Transformable" customClassName="Array&lt;Post&gt;" syncable="YES"/>
+        <attribute name="profilePhotoURL" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Comment" representedClassName=".Comment" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" attributeType="Transformable" customClassName="[CommentTag]" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CommentTag" representedClassName=".CommentTag" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Credentials" representedClassName=".Credentials" syncable="YES">
+        <attribute name="authToken" attributeType="String" syncable="YES"/>
+        <attribute name="userId" attributeType="String" syncable="YES"/>
+        <attribute name="username" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName=".Event" syncable="YES">
+        <attribute name="association" attributeType="String" syncable="YES"/>
+        <attribute name="attendees" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="bgColor" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="Transformable" customClassName="[Comment]" syncable="YES"/>
+        <attribute name="dateEnd" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateStart" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" attributeType="String" syncable="YES"/>
+        <attribute name="fgColor" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="maybe" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="notgoing" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="photoURL" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName=".Image" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="lastUsed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Notification" representedClassName=".Notification" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="Transformable" customClassName="Comment" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiver" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seen" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post" representedClassName=".Post" syncable="YES">
+        <attribute name="association" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="Transformable" customClassName="[Comment]" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageSize" attributeType="Transformable" customClassName="Dictionary&lt;String,CGFloat&gt;" syncable="YES"/>
+        <attribute name="likes" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="photourl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="events" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="isEmailPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="promotion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Association" positionX="18" positionY="135" width="119" height="195"/>
+        <element name="Comment" positionX="-180" positionY="63" width="128" height="118"/>
+        <element name="CommentTag" positionX="-171" positionY="63" width="128" height="75"/>
+        <element name="Credentials" positionX="25" positionY="-27" width="128" height="90"/>
+        <element name="Event" positionX="-369" positionY="114" width="128" height="255"/>
+        <element name="Image" positionX="-189" positionY="-63" width="128" height="90"/>
+        <element name="Notification" positionX="-162" positionY="72" width="128" height="180"/>
+        <element name="Post" positionX="-126" positionY="177" width="128" height="178"/>
+        <element name="User" positionX="-333" positionY="-90" width="128" height="180"/>
+    </elements>
+</model>
