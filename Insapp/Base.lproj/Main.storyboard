@@ -135,7 +135,7 @@
                                             <action selector="optionAction:" destination="19i-yd-wvY" eventType="touchUpInside" id="gkx-11-MFq"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@fthomasm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZu-Zl-oqi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZu-Zl-oqi">
                                         <rect key="frame" x="66" y="34" width="251" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="ZRM-zh-mnq"/>
