@@ -137,7 +137,7 @@ class EditUserTableViewController: UITableViewController, UIPickerViewDataSource
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 9 {
+        if indexPath.row == 10 {
             let alert = Alert.create(alert: .deleteUser, completion: { (success) in
                 if success {
                     self.deleteUser()

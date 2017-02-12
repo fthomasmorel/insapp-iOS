@@ -171,6 +171,8 @@
 		E12E45881E4AFE89004D0C44 /* AssociationContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationContactCell.swift; sourceTree = "<group>"; };
 		E12E458A1E4B0205004D0C44 /* AssociationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssociationCell.xib; sourceTree = "<group>"; };
 		E12E458D1E4BAF87004D0C44 /* UserEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserEventsCell.xib; sourceTree = "<group>"; };
+		E153883C1E507C46007DF493 /* Insapp_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Insapp_2.xcdatamodel; sourceTree = "<group>"; };
+		E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Insapp 2.xcdatamodel"; sourceTree = "<group>"; };
 		E181C7051D8DA02D00CE3D5B /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		E181C7071D8DA11100CE3D5B /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		E181C7091D8DB44E00CE3D5B /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1020,9 +1022,11 @@
 		E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */,
+				E153883C1E507C46007DF493 /* Insapp_2.xcdatamodel */,
 				E1DC7F111D86E2C900284222 /* Insapp.xcdatamodel */,
 			);
-			currentVersion = E1DC7F111D86E2C900284222 /* Insapp.xcdatamodel */;
+			currentVersion = E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */;
 			path = Insapp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

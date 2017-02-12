@@ -9,6 +9,7 @@
         <attribute name="fgColor" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="posts" optional="YES" attributeType="Transformable" customClassName="Array&lt;Post&gt;" syncable="YES"/>
         <attribute name="profilePhotoURL" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName=".Comment" syncable="YES">
@@ -31,12 +32,15 @@
         <attribute name="association" attributeType="String" syncable="YES"/>
         <attribute name="attendees" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
         <attribute name="bgColor" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="Transformable" customClassName="[Comment]" syncable="YES"/>
         <attribute name="dateEnd" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dateStart" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="desc" attributeType="String" syncable="YES"/>
         <attribute name="fgColor" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="maybe" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="notgoing" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
         <attribute name="photoURL" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
     </entity>
@@ -79,11 +83,11 @@
         <attribute name="username" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Association" positionX="18" positionY="135" width="119" height="178"/>
+        <element name="Association" positionX="18" positionY="135" width="119" height="195"/>
         <element name="Comment" positionX="-180" positionY="63" width="128" height="118"/>
         <element name="CommentTag" positionX="-171" positionY="63" width="128" height="75"/>
         <element name="Credentials" positionX="25" positionY="-27" width="128" height="90"/>
-        <element name="Event" positionX="-369" positionY="114" width="128" height="208"/>
+        <element name="Event" positionX="-369" positionY="114" width="128" height="30"/>
         <element name="Image" positionX="-189" positionY="-63" width="128" height="90"/>
         <element name="Notification" positionX="-162" positionY="72" width="128" height="180"/>
         <element name="Post" positionX="-126" positionY="177" width="128" height="178"/>
