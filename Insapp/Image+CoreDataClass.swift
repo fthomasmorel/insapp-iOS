@@ -39,9 +39,10 @@ public class Image: NSManagedObject {
             var image:UIImage?
             if link.hasSuffix(".gif") {
                 image = UIImage.gifImageWithData(data: data as NSData)
+                ImageCacheManager.sharedInstance().store(gif: data, forUrl: link)
             }else{
                 image = UIImage(data: data)
-//                Image.store(image: image!, forUrl: link)
+                ImageCacheManager.sharedInstance().store(image: image!, forUrl: link)
             }
             completion(image!)
         }.resume()

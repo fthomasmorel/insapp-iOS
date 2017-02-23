@@ -114,8 +114,7 @@ extension UIImage{
 extension UIImageView {
     
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, animated: Bool = true, completion: Optional<() -> ()> = nil ){
-        
-        guard let url = URL(string: link) else { return }
+
         contentMode = mode
         
         if let image = ImageCacheManager.sharedInstance().fetchImage(url: link){
@@ -132,21 +131,9 @@ extension UIImageView {
             }
         }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-                let data = data , error == nil
-                else { return }
-            var image:UIImage?
-            if link.hasSuffix(".gif") {
-                image = UIImage.gifImageWithData(data: data as NSData)
-            }else{
-                image = UIImage(data: data)
-                ImageCacheManager.sharedInstance().store(image: image!, forUrl: link)
-            }
-            self.displayImage(image!, animated: animated, completion: completion)
-        }.resume()
+        Image.download(link: link) { (image) in
+            self.displayImage(image, animated: animated, completion: completion)
+        }
     }
     
     func displayImage(_ image: UIImage, animated: Bool, completion: Optional<() -> ()> = nil){

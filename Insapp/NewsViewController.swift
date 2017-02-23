@@ -98,7 +98,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.posts = [post]
                 DispatchQueue.global(qos: .default).async {
                     self.computeSizes()
-                    self.fetchImages()
+//                    self.fetchImages()
                     self.fetchAssocations()
                 }
             }else{
@@ -115,28 +115,28 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func fetchImages(){
-        for post in self.posts{
-            self.group.enter()
-            let link = kCDNHostname + post.photourl!
-            if let image = ImageCacheManager.sharedInstance().fetchImage(url: link) {
-                self.images[post.photourl!] = image
-                self.group.leave()
-            }else{
-                Image.download(link: link, completion: { (image) in
-                    self.images[post.photourl!] = image
-                    self.group.leave()
-                })
-            }
-        }
-    }
+//    func fetchImages(){
+//        for post in self.posts{
+//            self.group.enter()
+//            let link = kCDNHostname + post.photourl!
+//            if let image = ImageCacheManager.sharedInstance().fetchImage(url: link) {
+//                self.images[post.photourl!] = image
+//                self.group.leave()
+//            }else{
+//                Image.download(link: link, completion: { (image) in
+//                    self.images[post.photourl!] = image
+//                    self.group.leave()
+//                })
+//            }
+//        }
+//    }
     
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
             self.posts = posts
             DispatchQueue.global(qos: .default).async {
                 self.computeSizes()
-                self.fetchImages()
+//                self.fetchImages()
                 self.fetchAssocations()
             }
         })
@@ -175,11 +175,10 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = self.posts[indexPath.row]
         let association = self.associations[post.association!]!
-        let image = self.images[post.photourl!]
         let cell = tableView.dequeueReusableCell(withIdentifier: kPostCell, for: indexPath) as! PostCell
         cell.parent = self
         cell.delegate = self
-        cell.loadPost(post, forAssociation: association, withImage: image!)
+        cell.loadPost(post, forAssociation: association)
         return cell
     }
     

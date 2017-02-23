@@ -25,6 +25,10 @@ class ImageCacheManager: AnyObject {
         instance = ImageCacheManager()
     }
     
+    static func isGif(_ link: String) -> Bool {
+        return link.contains(".gif")
+    }
+    
     init() {
         self.cache = [:]
         let images = try! Image.managedContext.fetch(Image.fetchRequest()) as! [Image]
@@ -36,6 +40,9 @@ class ImageCacheManager: AnyObject {
     func fetchImage(url:String) -> UIImage? {
         if let image = self.cache[url]{
             image.lastUsed = NSDate()
+            if ImageCacheManager.isGif(url){
+                return UIImage.gifImageWithData(data: image.data as! Data as NSData)
+            }
             return UIImage(data: image.data as! Data, scale: 1.0)
         }
         return .none
@@ -45,6 +52,11 @@ class ImageCacheManager: AnyObject {
         let width = UIScreen.main.bounds.size.width
         let data = UIImageJPEGRepresentation(image.resize(width:  width), 0)
         let image = Image(data: data!, url: url)
+        self.cache[url] = image
+    }
+    
+    func store(gif data: Data, forUrl url: String){
+        let image = Image(data: data, url: url)
         self.cache[url] = image
     }
     
