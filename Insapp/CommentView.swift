@@ -34,7 +34,6 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
         self.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (kCommentEmptyTextViewHeight + kCommentViewEmptyHeight) + 1, width: keyboardFrame.width, height: kCommentEmptyTextViewHeight + kCommentViewEmptyHeight)
         self.checkTextView()
         self.invalidateIntrinsicContentSize()
-        self.textView.autocorrectionType = .no
     }
 
     
@@ -98,7 +97,6 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     func searchForUser(){
         let words = self.textView.attributedText.string.components(separatedBy: " ")
         if let word = words.last, word.hasPrefix("@") {
-            print("\(self.textView.selectedRange.location):\(self.textView.selectedRange.length)")
             self.delegate?.searchForUser(word.replacingOccurrences(of: "@", with: ""))
         }else{
             self.delegate?.searchForUser("")

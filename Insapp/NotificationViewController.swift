@@ -19,18 +19,24 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     var tableViewController = UITableViewController()
     var refreshControl: UIRefreshControl!
-    var notifications:[Notification] = []
+    var notifications:[Notification]!
     
-    var events:[String: Event] = [:]
-    var associations:[String: Association] = [:]
-    var users:[String: User] = [:]
-    var posts:[String: Post] = [:]
+    var events:[String: Event]!
+    var associations:[String: Association]!
+    var users:[String: User]!
+    var posts:[String: Post]!
     
     let group = DispatchGroup()
     let queue = DispatchQueue.global(qos: .background)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.posts = [:]
+        self.users = [:]
+        self.events = [:]
+        self.associations = [:]
+        self.notifications = []
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: kNotificationCell)

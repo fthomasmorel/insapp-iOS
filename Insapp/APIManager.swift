@@ -51,7 +51,7 @@ class APIManager: AnyObject{
     }
     
     static func requestWithToken(url:String, method: HTTPMethod, parameters: [String:AnyObject], completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
-        let token = APIManager.token!
+        guard let token = APIManager.token else { errorBlock("", 0) ; return }
         let url = URL(string: "\(kAPIHostname)\(url)?token=\(token)")!
         var req = URLRequest(url: url)
         
@@ -63,7 +63,7 @@ class APIManager: AnyObject{
     }
     
     static func requestWithToken(url:String, method: HTTPMethod, completion: @escaping (Optional<AnyObject>) -> (), errorBlock:@escaping (String, Int) -> (Bool)){
-        let token = APIManager.token!
+        guard let token = APIManager.token else { errorBlock("", 0) ; return }
         let url = URL(string: "\(kAPIHostname)\(url)?token=\(token)")!
         var req = URLRequest(url: url)
         

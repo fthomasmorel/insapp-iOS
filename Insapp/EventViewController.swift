@@ -67,7 +67,7 @@ class EventViewController: UIViewController, EKEventEditViewDelegate, UITableVie
             self.darkStatusBar()
         }
         self.eventNameLabel.textColor = UIColor.hexToRGB(self.event.fgColor!)
-        self.view.backgroundColor = UIColor.hexToRGB(self.event.bgColor!)
+        self.coverImageView.backgroundColor = UIColor.hexToRGB(self.event.bgColor!)
         self.fetchUsers()
     }
     

@@ -28,11 +28,14 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var activePost: Post?
     var activeAssociation: Association?
     var posts:[Post]! = []
+    var sizes:[CGFloat] = []
+    var images:[String: UIImage] = [:]
     var associations:[String:Association] = [:]
     var canReturn = false
     var canRefresh = true
     var canSearch = true
     var backgroundSearchView : UIView!
+    var group = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +96,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         DispatchQueue.global().async {
             if let post = self.activePost{
                 self.posts = [post]
-                self.fetchAssocations()
+                DispatchQueue.global(qos: .default).async {
+                    self.computeSizes()
+                    self.fetchImages()
+                    self.fetchAssocations()
+                }
             }else{
                 self.fetchPosts()
             }
@@ -101,36 +108,60 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.backgroundSearchView.frame = self.postTableView.frame
     }
     
+    func computeSizes(){
+        for post in self.posts{
+            let ratio = self.view.frame.size.width/post.imageSize!["width"]!
+            self.sizes.append(post.imageSize!["height"]! * ratio + kPostCellEmptyHeight)
+        }
+    }
+    
+    func fetchImages(){
+        for post in self.posts{
+            self.group.enter()
+            let link = kCDNHostname + post.photourl!
+            if let image = ImageCacheManager.sharedInstance().fetchImage(url: link) {
+                self.images[post.photourl!] = image
+                self.group.leave()
+            }else{
+                Image.download(link: link, completion: { (image) in
+                    self.images[post.photourl!] = image
+                    self.group.leave()
+                })
+            }
+        }
+    }
+    
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
             self.posts = posts
-            self.fetchAssocations()
+            DispatchQueue.global(qos: .default).async {
+                self.computeSizes()
+                self.fetchImages()
+                self.fetchAssocations()
+            }
         })
     }
     
     func fetchAssocations(){
-        let group = DispatchGroup()
         for post in self.posts{
             if self.associations[post.association!] == nil {
-                group.enter()
+                self.group.enter()
                 APIManager.fetchAssociation(association_id: post.association!, controller: self, completion: { (opt_asso) in
                     guard let association = opt_asso else { return }
                     self.associations[association.id!] = association
-                    group.leave()
+                    self.group.leave()
                 })
             }
         }
         
-        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+        self.group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
             self.refreshControl?.endRefreshing()
             self.refreshUI()
         }))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let post = self.posts[indexPath.row]
-        let ratio = self.view.frame.size.width/post.imageSize!["width"]!
-        return post.imageSize!["height"]! * ratio + kPostCellEmptyHeight
+        return self.sizes[indexPath.row]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -144,10 +175,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = self.posts[indexPath.row]
         let association = self.associations[post.association!]!
+        let image = self.images[post.photourl!]
         let cell = tableView.dequeueReusableCell(withIdentifier: kPostCell, for: indexPath) as! PostCell
         cell.parent = self
         cell.delegate = self
-        cell.loadPost(post, forAssociation: association)
+        cell.loadPost(post, forAssociation: association, withImage: image!)
         return cell
     }
     

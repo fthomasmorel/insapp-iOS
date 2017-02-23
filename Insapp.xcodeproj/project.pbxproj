@@ -74,6 +74,7 @@
 		E19F7CD51D8B0A4200B9F517 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */; };
 		E19F7CD61D8B0A4200B9F517 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */; };
 		E1B600181DAFC57A0082BBB4 /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */; };
+		E1BBE6331E5F4816005F8930 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BBE6321E5F4816005F8930 /* ImageCacheManager.swift */; };
 		E1BDEBB21D9A6C8F006EB340 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */; };
 		E1C3F9C91D87E8BD006A66CF /* Credentials+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */; };
 		E1C3F9CB1D87F7B2006A66CF /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */; };
@@ -197,6 +198,8 @@
 		E19F7CD31D8B0A4200B9F517 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E19F7CD41D8B0A4200B9F517 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1B600171DAFC57A0082BBB4 /* LegalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
+		E1BBE6321E5F4816005F8930 /* ImageCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		E1BBE6341E5F4DD8005F8930 /* Insapp 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Insapp 3.xcdatamodel"; sourceTree = "<group>"; };
 		E1BDEBB11D9A6C8F006EB340 /* CASViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		E1C3F9C81D87E8BD006A66CF /* Credentials+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Credentials+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1C3F9CA1D87F7B2006A66CF /* ErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 				E192C1E31D90131500355512 /* Constant.swift */,
 				E1E01CD31DA8EDE20082E88A /* Alert.swift */,
 				E1CEB4881E3D02F500F84CB1 /* GifSupport.swift */,
+				E1BBE6321E5F4816005F8930 /* ImageCacheManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -781,6 +785,7 @@
 				E1E01CD41DA8EDE20082E88A /* Alert.swift in Sources */,
 				E181C70B1D8DB44E00CE3D5B /* Image+CoreDataClass.swift in Sources */,
 				E1CBCF6D1E4C6218006253ED /* UserEventListViewController.swift in Sources */,
+				E1BBE6331E5F4816005F8930 /* ImageCacheManager.swift in Sources */,
 				E1DC7F6B1D86FBAB00284222 /* Event+CoreDataClass.swift in Sources */,
 				E1C3F9DD1D8874EA006A66CF /* AssociationViewController.swift in Sources */,
 				7D9D50EE1DF40875002AC837 /* SeeMoreCell.swift in Sources */,
@@ -1022,6 +1027,7 @@
 		E1DC7F101D86E2C900284222 /* Insapp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E1BBE6341E5F4DD8005F8930 /* Insapp 3.xcdatamodel */,
 				E153883F1E5093EC007DF493 /* Insapp 2.xcdatamodel */,
 				E153883C1E507C46007DF493 /* Insapp_2.xcdatamodel */,
 				E1DC7F111D86E2C900284222 /* Insapp.xcdatamodel */,

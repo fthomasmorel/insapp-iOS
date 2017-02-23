@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="432"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AOg-P5-dbI" id="CSS-YU-nuV">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="431"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="431.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AWT-dF-cCB">
@@ -47,7 +47,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-O7-Es1">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-O7-Es1">
                         <rect key="frame" x="0.0" y="56" width="375" height="250"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="250" id="yoa-iD-Bar"/>

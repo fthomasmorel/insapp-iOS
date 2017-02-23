@@ -153,10 +153,11 @@ class EventTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = self.events[indexPath.section][indexPath.row]
-        let association = self.associations[event.association!]
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventCell, for: indexPath) as! EventCell
         cell.parent = self
-        cell.loadEvent(event, forAssociation: association!)
+        if let association = self.associations[event.association!]{
+            cell.loadEvent(event, forAssociation: association)
+        }
         return cell
     }
     

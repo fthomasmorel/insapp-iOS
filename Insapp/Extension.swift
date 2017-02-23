@@ -114,6 +114,15 @@ extension UIImage{
 extension UIImageView {
     
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFill, animated: Bool = true, completion: Optional<() -> ()> = nil ){
+        
+        guard let url = URL(string: link) else { return }
+        contentMode = mode
+        
+        if let image = ImageCacheManager.sharedInstance().fetchImage(url: link){
+            self.displayImage(image, animated: animated, completion: completion)
+            return
+        }
+        
         let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
         loader.startAnimating()
         loader.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
@@ -121,13 +130,6 @@ extension UIImageView {
             if self.image == nil {
                 self.addSubview(loader)
             }
-        }
-        guard let url = URL(string: link) else { return }
-        contentMode = mode
-        
-        if let image = Image.fetchImage(url: link){
-            self.displayImage(image, animated: animated, completion: completion)
-            return
         }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -141,10 +143,10 @@ extension UIImageView {
                 image = UIImage.gifImageWithData(data: data as NSData)
             }else{
                 image = UIImage(data: data)
-                Image.store(image: image!, forUrl: link)
+                ImageCacheManager.sharedInstance().store(image: image!, forUrl: link)
             }
             self.displayImage(image!, animated: animated, completion: completion)
-            }.resume()
+        }.resume()
     }
     
     func displayImage(_ image: UIImage, animated: Bool, completion: Optional<() -> ()> = nil){
@@ -226,18 +228,17 @@ extension NSDate {
     }
     
     func isToday() -> Bool {
-//        let calendar = NSCalendar.current
-//        let day = calendar.component(.day, from: self as Date)
-//        let month = calendar.component(.month, from: self as Date)
-//        let year = calendar.component(.year, from: self as Date)
-//        
-//        let today = NSDate()
-//        let todayDay = calendar.component(.day, from: today as Date)
-//        let todayMonth = calendar.component(.month, from: today as Date)
-//        let todayYear = calendar.component(.year, from: today as Date)
+        let calendar = NSCalendar.current
+        let day = calendar.component(.day, from: self as Date)
+        let month = calendar.component(.month, from: self as Date)
+        let year = calendar.component(.year, from: self as Date)
         
-        return self.timeIntervalSinceNow <= 0
-        //return todayDay >= day && todayMonth >= month && todayYear >= year ||
+        let today = NSDate()
+        let todayDay = calendar.component(.day, from: today as Date)
+        let todayMonth = calendar.component(.month, from: today as Date)
+        let todayYear = calendar.component(.year, from: today as Date)
+        
+        return todayDay == day && todayMonth == month && todayYear == year
     }
     
     func isThisWeek() -> Bool {

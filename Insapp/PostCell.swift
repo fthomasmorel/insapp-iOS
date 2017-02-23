@@ -43,7 +43,7 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
         self.likeButton.delegate = self
         self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
         self.associationImageView.layer.masksToBounds = true
-        self.postImageView.image = #imageLiteral(resourceName: "placeholder")
+        if self.postImageView.image == nil { self.postImageView.image = #imageLiteral(resourceName: "placeholder") }
         self.computeGradientView()
     }
     
@@ -52,6 +52,7 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
         self.likeButton.isSelected = post.likes!.contains(User.fetch()!.id!)
         self.association = association
         self.associationLabel.text = "@\(association.name!.lowercased())"
+        
         DispatchQueue.main.async {
             self.associationImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
             self.postImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
@@ -60,8 +61,23 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
         let height = post.imageSize!["height"]!
         let ratio = self.frame.size.width/post.imageSize!["width"]!
         self.postImageViewHeightConstraint.constant = ratio * height
-        self.updateConstraintsIfNeeded()
+        self.renderStaticData()
+    }
+    
+    func loadPost(_ post: Post, forAssociation association: Association, withImage image: UIImage){
+        self.post = post
+        self.likeButton.isSelected = post.likes!.contains(User.fetch()!.id!)
+        self.association = association
+        self.associationLabel.text = "@\(association.name!.lowercased())"
         
+        DispatchQueue.main.async {
+            self.associationImageView.downloadedFrom(link: kCDNHostname + association.profilePhotoURL!)
+            self.postImageView.image = image
+        }
+        
+        let height = post.imageSize!["height"]!
+        let ratio = self.frame.size.width/post.imageSize!["width"]!
+        self.postImageViewHeightConstraint.constant = ratio * height
         self.renderStaticData()
     }
     
