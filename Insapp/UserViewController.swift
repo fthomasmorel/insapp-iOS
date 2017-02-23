@@ -63,7 +63,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.notifyGoogleAnalytics()
         self.lightStatusBar()
         self.hideNavBar()
-        
+        self.hasLoaded = false
         self.initialBrightness = UIScreen.main.brightness
         
         self.editButton.isHidden = !self.isEditable

@@ -57,10 +57,13 @@ class UserEventsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSourc
         return 60
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let event = self.events[indexPath.row]
+        (cell as! EventListCell).load(event: event, withColor: .black)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kEventListCell, for: indexPath) as! EventListCell
-        cell.load(event: event, withColor: .black)
         return cell
     }
     

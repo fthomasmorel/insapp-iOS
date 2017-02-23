@@ -79,6 +79,15 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addSubview(self.backgroundSearchView)
         self.searchView.isHidden = true
         self.view.bringSubview(toFront: self.searchView)
+        
+        self.refreshUI(reload: true)
+        if let post = self.activePost{
+            self.posts = [post]
+            self.computeSizes()
+            self.fetchAssocations()
+        }else{
+            self.fetchPosts()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,19 +101,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     override func viewDidAppear(_ animated: Bool) {
-        self.refreshUI(reload: true)
-        DispatchQueue.global().async {
-            if let post = self.activePost{
-                self.posts = [post]
-                DispatchQueue.global(qos: .default).async {
-                    self.computeSizes()
-//                    self.fetchImages()
-                    self.fetchAssocations()
-                }
-            }else{
-                self.fetchPosts()
-            }
-        }
         self.backgroundSearchView.frame = self.postTableView.frame
     }
     
@@ -115,28 +111,28 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-//    func fetchImages(){
-//        for post in self.posts{
-//            self.group.enter()
-//            let link = kCDNHostname + post.photourl!
-//            if let image = ImageCacheManager.sharedInstance().fetchImage(url: link) {
-//                self.images[post.photourl!] = image
-//                self.group.leave()
-//            }else{
-//                Image.download(link: link, completion: { (image) in
-//                    self.images[post.photourl!] = image
-//                    self.group.leave()
-//                })
-//            }
-//        }
-//    }
+    func fetchImages(){
+        for post in self.posts{
+            self.group.enter()
+            let link = kCDNHostname + post.photourl!
+            if let image = ImageCacheManager.sharedInstance().fetchImage(url: link) {
+                self.images[post.photourl!] = image
+                self.group.leave()
+            }else{
+                Image.download(link: link, completion: { (image) in
+                    self.images[post.photourl!] = image
+                    self.group.leave()
+                })
+            }
+        }
+    }
     
     func fetchPosts(){
         APIManager.fetchLastestPosts(controller: self, completion: { (posts) in
             self.posts = posts
             DispatchQueue.global(qos: .default).async {
                 self.computeSizes()
-//                self.fetchImages()
+                self.fetchImages()
                 self.fetchAssocations()
             }
         })
@@ -173,13 +169,23 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = self.posts[indexPath.row]
-        let association = self.associations[post.association!]!
         let cell = tableView.dequeueReusableCell(withIdentifier: kPostCell, for: indexPath) as! PostCell
         cell.parent = self
         cell.delegate = self
+        
+        let post = self.posts[indexPath.row]
+        let image = self.images[post.photourl!]
+        let association = self.associations[post.association!]!
         cell.loadPost(post, forAssociation: association)
+        cell.postImageView.image = image
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = self.posts[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath)
+        self.commentAction(post: post, forCell: cell as! PostCell, showKeyboard: true)
     }
     
     func refreshUI(reload:Bool = false){

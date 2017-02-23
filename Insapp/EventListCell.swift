@@ -18,7 +18,7 @@ class EventListCell: UITableViewCell{
     
     
     func load(event: Event, withColor color: UIColor? = nil){
-        self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+        self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!, contentMode: .scaleToFill, animated: false, completion: nil)
         self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
         self.nameLabel.text = event.name
         self.backgroundColor = .clear

@@ -143,20 +143,16 @@ extension UIImageView {
                     subview.removeFromSuperview()
                 }
             }
-            if self.image == nil {
-                if let ack = completion { ack() }
-                if animated {
-                    self.alpha = 0
-                    self.image = image
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.alpha = 1
-                    })
-                }else{
-                    self.image = image
-                }
+            if let ack = completion { ack() }
+            if animated {
+                self.alpha = 0
+                self.image = image
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.alpha = 1
+                })
             }else{
                 self.image = image
-                if let ack = completion { ack() }
+                self.alpha = 1
             }
         }
     }

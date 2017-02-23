@@ -43,7 +43,7 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
         self.likeButton.delegate = self
         self.associationImageView.layer.cornerRadius = self.associationImageView.frame.width/2
         self.associationImageView.layer.masksToBounds = true
-        self.postImageView.image = #imageLiteral(resourceName: "placeholder")
+        if self.postImageView.image == nil { self.postImageView.image = #imageLiteral(resourceName: "placeholder") }
         self.computeGradientView()
     }
     
@@ -82,14 +82,7 @@ class PostCell: UITableViewCell, FaveButtonDelegate {
         
         //let like_image = (post.likes!.contains(User.fetch()!.id!) ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "like"))
         //self.likeButton.setImage(like_image, for: .normal)
-        
-        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
-        self.postImageView.isUserInteractionEnabled = true
-        self.postImageView.addGestureRecognizer(tapGesture1)
-        
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(PostCell.commentAction(_:)))
-        self.gradientView.addGestureRecognizer(tapGesture2)
-        
+                
         let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(PostCell.handleTapGesture))
         self.associationLabel.addGestureRecognizer(tapGesture3)
     }
