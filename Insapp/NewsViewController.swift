@@ -105,6 +105,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func computeSizes(){
+        self.sizes = []
         for post in self.posts{
             let ratio = self.view.frame.size.width/post.imageSize!["width"]!
             self.sizes.append(post.imageSize!["height"]! * ratio + kPostCellEmptyHeight)
