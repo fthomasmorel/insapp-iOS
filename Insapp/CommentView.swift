@@ -74,7 +74,7 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     }
     
     func checkTextView(){
-        let characters = NSCharacterSet.alphanumerics
+        let characters = CharacterSet.whitespacesAndNewlines.inverted
         if let text = textView.text {
             self.postButton.isEnabled = text.characters.count > 0 && textView.textColor != kDarkGreyColor && (text.rangeOfCharacter(from: characters) != nil)
         }else{
@@ -128,7 +128,7 @@ class CommentView: UIView, UITextViewDelegate, ListUserDelegate {
     }
     
     @IBAction func postAction(_ sender: AnyObject) {
-        let characters = NSCharacterSet.alphanumerics
+        let characters = CharacterSet.whitespacesAndNewlines.inverted
         if self.textView.attributedText.string.characters.count > 0, let _ = self.textView.attributedText.string.rangeOfCharacter(from: characters) {
             var text = self.textView.attributedText.string
             text.condenseNewLine()

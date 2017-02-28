@@ -144,11 +144,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func open(event: Event){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
-        vc.event = event
-        vc.association = self.associations[event.association!]!
-        self.navigationController?.pushViewController(vc, animated: true)
+        let completion:(Association) -> () = { assos in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+            vc.event = event
+            vc.association = assos
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if let assos = self.associations[event.association!]{
+            completion(assos)
+        }else{
+            APIManager.fetchAssociation(association_id: event.association!, controller: self) { (opt_assos) in
+                guard let assos = opt_assos else { return }
+                DispatchQueue.main.async {
+                    completion(assos)
+                }
+            }
+        }
     }
     
     func open(post: Post){

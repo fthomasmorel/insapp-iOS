@@ -50,16 +50,16 @@ class NotificationCell: UITableViewCell {
         self.load(notification: notification)
         self.event = event
         self.associationSender = sender
-        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!)
-        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!, contentMode: .scaleAspectFill, animated: false, completion: nil)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!, contentMode: .scaleAspectFill, animated: false, completion: nil)
     }
     
     func load(_ notification: Notification, withPost post: Post, withSender sender: Association){
         self.load(notification: notification)
         self.post = post
         self.associationSender = sender
-        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!)
-        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+        self.senderImageView.downloadedFrom(link: kCDNHostname + sender.profilePhotoURL!, contentMode: .scaleAspectFill, animated: false, completion: nil)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!, contentMode: .scaleAspectFill, animated: false, completion: nil)
     }
     
     func load(_ notification: Notification, withPost post: Post, withUser user: User){
@@ -67,7 +67,7 @@ class NotificationCell: UITableViewCell {
         self.post = post
         self.userSender = user
         self.senderImageView.image = user.avatar()
-        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + post.photourl!, contentMode: .scaleAspectFill, animated: false, completion: nil)
     }
     
     func load(_ notification: Notification, withEvent event: Event, withUser user: User){
@@ -75,7 +75,7 @@ class NotificationCell: UITableViewCell {
         self.event = event
         self.userSender = user
         self.senderImageView.image = user.avatar()
-        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+        self.contentImageView.downloadedFrom(link: kCDNHostname + event.photoURL!, contentMode: .scaleAspectFill, animated: false, completion: nil)
     }
     
     func load(notification: Notification){

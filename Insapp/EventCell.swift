@@ -20,7 +20,7 @@ class EventCell: UITableViewCell {
     var parent: UIViewController!
     
     func loadEvent(_ event: Event, forAssociation association: Association){
-        self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!)
+        self.eventImageView.downloadedFrom(link: kCDNHostname + event.photoURL!, contentMode: .scaleAspectFill, animated: false, completion: nil)
         self.associationLabel.text = "@\(association.name!.lowercased())"
         self.titleLabel.text = event.name
         self.dateLabel.text = NSDate.stringForInterval(start: event.dateStart!, end: event.dateEnd!, day: false)
